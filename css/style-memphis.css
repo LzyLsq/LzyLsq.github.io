@@ -1000,3 +1000,36 @@ html[data-style="memphis"] .article-container {
 /* ---------- 19c. 文章正文锚点偏移(兼容吸顶 header) ---------- */
 html[data-style="memphis"] .article-content :target { scroll-margin-top: 96px; }
 html[data-style="memphis"] .article-content h2 { scroll-margin-top: 96px; }
+
+/* ---------- 19d. 细节外观升级：侧栏头像横幅(孟菲斯渐变) + 章节标题色块 ---------- */
+
+/* 个人卡横幅：用波普四色渐变 + 细斜纹，替代默认蓝，风格更统一 */
+html[data-style="memphis"] .side-profile .profile-banner {
+  position: relative;
+  background: linear-gradient(120deg, var(--m-pink) 0%, var(--m-purple) 52%, var(--m-teal) 100%);
+  border-bottom: var(--m-border);
+  overflow: hidden;
+}
+html[data-style="memphis"] .side-profile .profile-banner::after {
+  content: "";
+  position: absolute; inset: 0;
+  background-image: repeating-linear-gradient(45deg, rgba(255,255,255,.16) 0 8px, transparent 8px 16px);
+  opacity: .5;
+}
+/* 头像底环用主题卡片色，压住渐变更干净 */
+html[data-style="memphis"] .side-profile .profile-avatar { border-color: var(--m-surface); }
+
+/* 章节标题：左侧硬色块强调，孟菲斯小几何点缀 */
+html[data-style="memphis"] .section-heading h2 {
+  position: relative;
+  padding-left: 16px;
+}
+html[data-style="memphis"] .section-heading h2::before {
+  content: "";
+  position: absolute;
+  left: 0; top: .16em; bottom: .16em;
+  width: 8px;
+  background: var(--m-pink);
+  border: 2px solid var(--m-shadow);
+  box-shadow: 2px 2px 0 var(--m-shadow);
+}
