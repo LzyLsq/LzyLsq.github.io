@@ -38,7 +38,7 @@
 *::after { box-sizing: border-box; }
 
 html {
-  scroll-behavior: smooth;
+  /* scroll-behavior: smooth 已移除：改用即时跳转(见 js/theme.js) */
   margin: 0 !important;
   padding: 0 !important;
   width: 100%;

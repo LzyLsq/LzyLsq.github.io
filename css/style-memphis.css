@@ -903,3 +903,100 @@ html[data-style="memphis"] .about-chips .about-chip:nth-of-type(3n+3) { backgrou
   html[data-style="memphis"] .about-card { padding: 16px; box-shadow: 6px 6px 0 var(--m-shadow); }
   html[data-style="memphis"] .project-actions .button { flex: 1; }
 }
+
+
+/* ============================================================
+   19. 多页站点增强（搜索状态 / 标签筛选 / 文章详情 / 私有仓库标注）
+   ============================================================ */
+
+/* 让 .post-card 在被搜索隐藏时真正消失（.post-card 自身是 grid，会盖掉 [hidden]） */
+html[data-style="memphis"] .post-card[hidden],
+html[data-style="memphis"] .post-stack .post-card[hidden] { display: none !important; }
+
+/* 顶部搜索结果状态条（孟菲斯便签） */
+html[data-style="memphis"] .search-status {
+  margin: 0 0 16px;
+  padding: 10px 14px;
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--heading);
+  background: var(--m-surface-2);
+  border: var(--m-border);
+  box-shadow: 5px 5px 0 var(--m-shadow);
+  display: inline-block;
+}
+html[data-style="memphis"] .search-status[hidden] { display: none !important; }
+
+/* 项目：私有仓库标注 */
+html[data-style="memphis"] .project-note {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--muted);
+  border: 2px dashed var(--border);
+  background: transparent;
+}
+
+/* 侧栏：最新文章容器 + 空态 + 变暗 */
+html[data-style="memphis"] .side-latest { margin-top: 14px; }
+html[data-style="memphis"] .side-empty {
+  margin-top: 14px;
+  font-size: 13px;
+  color: var(--muted-2);
+}
+html[data-style="memphis"] .side-list a.is-dimmed { opacity: .38; }
+html[data-style="memphis"] .side-list a { transition: opacity .15s ease; }
+
+/* 标签云可点击（筛选） */
+html[data-style="memphis"] .tag--cloud { cursor: pointer; }
+html[data-style="memphis"] .tag--cloud .tag-count {
+  display: inline-block;
+  margin-left: 6px;
+  font-size: 11px;
+  font-weight: 700;
+  opacity: .7;
+}
+
+/* 章节标题里的按钮垂直居中 */
+html[data-style="memphis"] .section-heading .button { align-self: center; }
+
+/* 文章详情页：示例内容提示条 */
+html[data-style="memphis"] .article-notice {
+  padding: 14px 16px;
+  margin: 0 0 22px;
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--heading);
+  background: var(--m-surface-2);
+  border: var(--m-border);
+  box-shadow: 6px 6px 0 var(--m-shadow);
+}
+html[data-style="memphis"] .article-notice code {
+  background: var(--m-bg);
+  border: 1px solid var(--border-soft);
+  padding: 1px 5px;
+  font-size: .92em;
+}
+
+/* 文章详情页英雄区（沿用孟菲斯硬边框） */
+html[data-style="memphis"] .page-banner-inner { padding-top: 40px; padding-bottom: 40px; }
+html[data-style="memphis"] .article-head-media { border-bottom: var(--m-border); }
+html[data-style="memphis"] .article-head-media img { height: 300px; object-fit: cover; width: 100%; }
+
+/* ---------- 19b. 文章详情页：正文与全站同宽居中 + 移动端单列 ---------- */
+html[data-style="memphis"] .article-container {
+  width: min(var(--max), calc(100% - 48px));
+  margin: 40px auto 0;
+  padding: 0;
+}
+@media (max-width: 992px) {
+  html[data-style="memphis"] .article-layout { grid-template-columns: 1fr; }
+  html[data-style="memphis"] .article-aside { position: static; order: -1; }
+}
+
+/* ---------- 19c. 文章正文锚点偏移(兼容吸顶 header) ---------- */
+html[data-style="memphis"] .article-content :target { scroll-margin-top: 96px; }
+html[data-style="memphis"] .article-content h2 { scroll-margin-top: 96px; }

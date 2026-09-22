@@ -99,67 +99,57 @@
                 <span class="brand-mark"></span>
                 <span class="brand-text">Ryan</span>
             </a>
-
             <button class="nav-toggle" type="button" aria-controls="site-nav" aria-expanded="false">
-                <span></span>
-                <span></span>
+                <span></span><span></span>
             </button>
-
             <nav class="site-nav" id="site-nav">
-                <a class="is-active" href="#top">首页</a>
-                <div class="nav-item ">
-                    <a class="nav-link" href="#projects">代码人生</a>
-                </div>
-                <div class="nav-item has-children">
-                    <a class="nav-link" href="#post-stream">运维菜鸟</a>
-                    <div class="nav-dropdown">
-                        <a href="#post-stream">Docker</a>
-                        <a href="#post-stream">Cloudflare</a>
-                    </div>
-                </div>
-                <div class="nav-item">
-                    <a class="nav-link" href="#about">关于我</a>
-                </div>
-                <div class="nav-item has-children nav-more">
-                    <span class="nav-link" tabindex="0" role="button" aria-haspopup="true">更多</span>
-                    <div class="nav-dropdown">
-                        <a href="https://github.com/LzyLsq" target="_blank" rel="noopener noreferrer">GitHub</a>
-                        <a href="#contact">时光机 · 归档</a>
-                    </div>
-                </div>
-                <a href="#contact">RSS</a>
+        <a class="is-active" href="index.html#top">首页</a>
+        <div class="nav-item">
+            <a class="nav-link" href="index.html#projects">代码人生</a>
+        </div>
+        <div class="nav-item">
+            <a class="nav-link" href="posts.html">文章</a>
+        </div>
+        <div class="nav-item">
+            <a class="nav-link" href="about.html">关于我</a>
+        </div>
+        <div class="nav-item has-children nav-more">
+            <span class="nav-link" tabindex="0" role="button" aria-haspopup="true">更多</span>
+            <div class="nav-dropdown">
+                <a href="https://github.com/LzyLsq" target="_blank" rel="noopener noreferrer">GitHub</a>
+                <a href="mailto:lzyryan5247@gmail.com">邮箱联系</a>
+            </div>
+        </div>
             </nav>
-
-                        <form class="search-box" action="#top" method="get" role="search">
+            <form class="search-box" action="#" method="get" role="search">
                 <button type="submit" class="search-icon-btn" aria-label="搜索">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
                 </button>
                 <input type="text" name="s" id="site-search-input" placeholder="搜索文章…" value="" autocomplete="off">
                 <kbd class="search-hint" aria-hidden="true"><span class="search-hint-mac">⌘</span><span class="search-hint-win">Ctrl</span>K</kbd>
             </form>
-
             <div class="header-actions">
                 <button type="button" class="header-action stats-toggle" id="stats-toggle" aria-label="站点统计" data-no-swup>
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3v18h18"/><path d="M7 14l4-4 4 4 5-5"/><circle cx="7" cy="14" r="1.5" fill="currentColor"/><circle cx="11" cy="10" r="1.5" fill="currentColor"/><circle cx="15" cy="14" r="1.5" fill="currentColor"/><circle cx="20" cy="9" r="1.5" fill="currentColor"/></svg>
                 </button>
                 <button type="button" class="header-action theme-toggle" id="theme-toggle" aria-label="切换明暗主题" data-no-swup>
                     <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-                    <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+                    <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34 1.41-1.41"/></svg>
                 </button>
             </div>
         </div>
     </header>
 <main class="site-main">
-            <section class="hero-section" id="top">
+<section class="hero-section" id="top">
             <div class="hero-carousel" data-hero-carousel>
                                     <article class="hero-slide is-active" data-hero-slide>
                         <div class="hero-media">
                             <!-- TODO: 换成你自己的封面图,或删掉这层用纯色背景 -->
                             <img
-                                src="https://picsum.photos/seed/hero1/1200/800"
+                                src="assets/images/hero-1.svg"
                                 alt=""
                                 loading="eager"
-                                onerror="this.onerror=null;this.src='assets/images/hero-tech.svg';"
+                                onerror="this.onerror=null;this.src='assets/images/hero-1.svg';"
                             >
                         </div>
                         <div class="hero-surface"></div>
@@ -167,10 +157,10 @@
                             <div class="hero-grid">
                                 <div class="hero-copy">
                                     <span class="eyebrow">// LATEST</span>
-                                    <h1><a href="#blog">文章标题一:一句话概括这篇文章的核心内容</a></h1>
+                                    <h1><a href="post.html">文章标题一:一句话概括这篇文章的核心内容</a></h1>
                                                                         <div class="hero-actions">
-                                        <a class="button button-primary" href="#blog">阅读全文 →</a>
-                                        <a class="button button-secondary" href="#blog">浏览文章</a>
+                                        <a class="button button-primary" href="post.html">阅读全文 →</a>
+                                        <a class="button button-secondary" href="posts.html">浏览文章</a>
                                     </div>
                                 </div>
 
@@ -198,10 +188,10 @@
                                     <article class="hero-slide " data-hero-slide>
                         <div class="hero-media">
                             <img
-                                src="https://picsum.photos/seed/hero2/1200/800"
+                                src="assets/images/hero-2.svg"
                                 alt=""
                                 loading="lazy"
-                                onerror="this.onerror=null;this.src='assets/images/hero-tech.svg';"
+                                onerror="this.onerror=null;this.src='assets/images/hero-1.svg';"
                             >
                         </div>
                         <div class="hero-surface"></div>
@@ -209,10 +199,10 @@
                             <div class="hero-grid">
                                 <div class="hero-copy">
                                     <span class="eyebrow">// LATEST</span>
-                                    <h1><a href="#blog">文章标题二:一句话概括这篇文章的核心内容</a></h1>
+                                    <h1><a href="post.html">文章标题二:一句话概括这篇文章的核心内容</a></h1>
                                                                         <div class="hero-actions">
-                                        <a class="button button-primary" href="#blog">阅读全文 →</a>
-                                        <a class="button button-secondary" href="#blog">浏览文章</a>
+                                        <a class="button button-primary" href="post.html">阅读全文 →</a>
+                                        <a class="button button-secondary" href="posts.html">浏览文章</a>
                                     </div>
                                 </div>
 
@@ -240,10 +230,10 @@
                                     <article class="hero-slide " data-hero-slide>
                         <div class="hero-media">
                             <img
-                                src="https://picsum.photos/seed/hero3/1200/800"
+                                src="assets/images/hero-3.svg"
                                 alt=""
                                 loading="lazy"
-                                onerror="this.onerror=null;this.src='assets/images/hero-tech.svg';"
+                                onerror="this.onerror=null;this.src='assets/images/hero-1.svg';"
                             >
                         </div>
                         <div class="hero-surface"></div>
@@ -251,10 +241,10 @@
                             <div class="hero-grid">
                                 <div class="hero-copy">
                                     <span class="eyebrow">// LATEST</span>
-                                    <h1><a href="#blog">文章标题三:一句话概括这篇文章的核心内容</a></h1>
+                                    <h1><a href="post.html">文章标题三:一句话概括这篇文章的核心内容</a></h1>
                                                                         <div class="hero-actions">
-                                        <a class="button button-primary" href="#blog">阅读全文 →</a>
-                                        <a class="button button-secondary" href="#blog">浏览文章</a>
+                                        <a class="button button-primary" href="post.html">阅读全文 →</a>
+                                        <a class="button button-secondary" href="posts.html">浏览文章</a>
                                     </div>
                                 </div>
 
@@ -282,10 +272,10 @@
                                     <article class="hero-slide " data-hero-slide>
                         <div class="hero-media">
                             <img
-                                src="https://picsum.photos/seed/hero4/1200/800"
+                                src="assets/images/hero-4.svg"
                                 alt=""
                                 loading="lazy"
-                                onerror="this.onerror=null;this.src='assets/images/hero-tech.svg';"
+                                onerror="this.onerror=null;this.src='assets/images/hero-1.svg';"
                             >
                         </div>
                         <div class="hero-surface"></div>
@@ -293,10 +283,10 @@
                             <div class="hero-grid">
                                 <div class="hero-copy">
                                     <span class="eyebrow">// LATEST</span>
-                                    <h1><a href="#blog">文章标题四:一句话概括这篇文章的核心内容</a></h1>
+                                    <h1><a href="post.html">文章标题四:一句话概括这篇文章的核心内容</a></h1>
                                                                         <div class="hero-actions">
-                                        <a class="button button-primary" href="#blog">阅读全文 →</a>
-                                        <a class="button button-secondary" href="#blog">浏览文章</a>
+                                        <a class="button button-primary" href="post.html">阅读全文 →</a>
+                                        <a class="button button-secondary" href="posts.html">浏览文章</a>
                                     </div>
                                 </div>
 
@@ -324,10 +314,10 @@
                                     <article class="hero-slide " data-hero-slide>
                         <div class="hero-media">
                             <img
-                                src="https://picsum.photos/seed/hero5/1200/800"
+                                src="assets/images/hero-5.svg"
                                 alt=""
                                 loading="lazy"
-                                onerror="this.onerror=null;this.src='assets/images/hero-tech.svg';"
+                                onerror="this.onerror=null;this.src='assets/images/hero-1.svg';"
                             >
                         </div>
                         <div class="hero-surface"></div>
@@ -335,10 +325,10 @@
                             <div class="hero-grid">
                                 <div class="hero-copy">
                                     <span class="eyebrow">// LATEST</span>
-                                    <h1><a href="#blog">文章标题五:一句话概括这篇文章的核心内容</a></h1>
+                                    <h1><a href="post.html">文章标题五:一句话概括这篇文章的核心内容</a></h1>
                                                                         <div class="hero-actions">
-                                        <a class="button button-primary" href="#blog">阅读全文 →</a>
-                                        <a class="button button-secondary" href="#blog">浏览文章</a>
+                                        <a class="button button-primary" href="post.html">阅读全文 →</a>
+                                        <a class="button button-secondary" href="posts.html">浏览文章</a>
                                     </div>
                                 </div>
 
@@ -381,11 +371,7 @@
                     </div>
                             </div>
         </section>
-    
-    
-
-    <!-- ================= 代码人生 / 项目 ================= -->
-    <section class="projects-section" id="projects">
+<section class="projects-section" id="projects">
         <div class="flux-container">
             <div class="section-heading">
                 <h2>代码人生</h2>
@@ -423,8 +409,9 @@
                         <span class="project-tag">ECharts</span>
                     </div>
                     <div class="project-actions">
-                        <a class="button button-primary" href="https://github.com/LzyLsq/Flume_Sqoop_Project" target="_blank" rel="noopener noreferrer">查看源码 →</a>
-                        <a class="button button-secondary" href="https://github.com/LzyLsq/Flume_Sqoop_Project#readme" target="_blank" rel="noopener noreferrer">README</a>
+                        <span class="project-note">🔒 私有仓库 · 暂未公开源码</span>
+                        <a class="button button-primary" href="mailto:lzyryan5247@gmail.com?subject=About%20your%20Flume_Sqoop_Project">邮件了解详情 →</a>
+                        <!-- 若日后开源，把上面按钮 href 换成仓库地址即可 -->
                     </div>
                 </article>
 
@@ -458,332 +445,119 @@
                         <span class="project-tag">MySQL</span>
                     </div>
                     <div class="project-actions">
-                        <a class="button button-primary" href="https://github.com/LzyLsq/design" target="_blank" rel="noopener noreferrer">查看源码 →</a>
-                        <a class="button button-secondary" href="https://github.com/LzyLsq/design#readme" target="_blank" rel="noopener noreferrer">README</a>
+                        <span class="project-note">🔒 私有仓库 · 暂未公开源码</span>
+                        <a class="button button-primary" href="mailto:lzyryan5247@gmail.com?subject=About%20your%20LawDesign%20project">邮件了解详情 →</a>
+                        <!-- 若日后开源，把上面按钮 href 换成仓库地址即可 -->
                     </div>
                 </article>
             </div>
         </div>
     </section>
-
-    <section class="stream-section" id="post-stream">
+    <section class="stream-section">
         <div class="flux-container">
-            <div class="home-grid">
-                <div class="home-main">
-                    <div class="section-heading">
-                        <h2>最新文章</h2>
-                        <p>持续记录与沉淀</p>
-                    </div>
-
-                                            <div class="post-stack">
-                                                                                                                                                            <article class="post-card">
-                                    <a class="post-card-media" href="#blog">
+            <div class="section-heading">
+                <h2>最新文章</h2>
+                <p>持续记录与沉淀</p>
+                <a class="button button-secondary" href="posts.html">查看全部 →</a>
+            </div>
+            <div class="post-stack" data-home-latest>
+<article class="post-card">
+                                    <a class="post-card-media" href="post.html">
                                         <img
-                                            src="https://picsum.photos/seed/p1/600/400"
+                                            src="assets/images/post-1.svg"
                                             alt="文章标题一"
                                             loading="lazy"
-                                            onerror="this.onerror=null;this.src='assets/images/hero-tech.svg';"
+                                            onerror="this.onerror=null;this.src='assets/images/post-1.svg';"
                                         >
                                     </a>
                                     <div class="post-card-body">
-                                        <h3><a href="#blog">文章标题一:一句话概括这篇文章的核心内容</a></h3>
+                                        <h3><a href="post.html">文章标题一:一句话概括这篇文章的核心内容</a></h3>
                                         <p>这里是文章摘要,用一两句话概括文章内容,吸引读者点击阅读全文。</p>
                                         <div class="card-meta">
                                             <div class="tags-list">
-                                                <a href="#blog">代码人生</a>                                            </div>
+                                                <a href="posts.html#post-list" data-tag="代码人生">代码人生</a>                                            </div>
                                             <span>
                                                 2026.09.22                                                · 0 评论                                                                                                                                            </span>
                                         </div>
                                     </div>
                                 </article>
-                                                                                                                                                            <article class="post-card">
-                                    <a class="post-card-media" href="#blog">
+<article class="post-card">
+                                    <a class="post-card-media" href="post.html">
                                         <img
-                                            src="https://picsum.photos/seed/p2/600/400"
+                                            src="assets/images/post-2.svg"
                                             alt="文章标题二"
                                             loading="lazy"
-                                            onerror="this.onerror=null;this.src='assets/images/hero-tech.svg';"
+                                            onerror="this.onerror=null;this.src='assets/images/post-1.svg';"
                                         >
                                     </a>
                                     <div class="post-card-body">
-                                        <h3><a href="#blog">文章标题二:一句话概括这篇文章的核心内容</a></h3>
+                                        <h3><a href="post.html">文章标题二:一句话概括这篇文章的核心内容</a></h3>
                                         <p>这里是文章摘要,用一两句话概括文章内容,吸引读者点击阅读全文。</p>
                                         <div class="card-meta">
                                             <div class="tags-list">
-                                                <a href="#blog">运维菜鸟</a>                                            </div>
+                                                <a href="posts.html#post-list" data-tag="运维菜鸟">开发菜鸟</a>                                            </div>
                                             <span>
                                                 2026.09.15                                                · 0 评论                                                                                                                                            </span>
                                         </div>
                                     </div>
                                 </article>
-                                                                                                                                                            <article class="post-card">
-                                    <a class="post-card-media" href="#blog">
+<article class="post-card">
+                                    <a class="post-card-media" href="post.html">
                                         <img
-                                            src="https://picsum.photos/seed/p3/600/400"
+                                            src="assets/images/post-3.svg"
                                             alt="文章标题三"
                                             loading="lazy"
-                                            onerror="this.onerror=null;this.src='assets/images/hero-tech.svg';"
+                                            onerror="this.onerror=null;this.src='assets/images/post-1.svg';"
                                         >
                                     </a>
                                     <div class="post-card-body">
-                                        <h3><a href="#blog">文章标题三:一句话概括这篇文章的核心内容</a></h3>
+                                        <h3><a href="post.html">文章标题三:一句话概括这篇文章的核心内容</a></h3>
                                         <p>这里是文章摘要,用一两句话概括文章内容,吸引读者点击阅读全文。</p>
                                         <div class="card-meta">
                                             <div class="tags-list">
-                                                <a href="#blog">Docker</a>                                            </div>
+                                                <a href="posts.html#post-list" data-tag="Docker">Docker</a>                                            </div>
                                             <span>
                                                 2026.09.01                                                · 0 评论                                                                                                                                            </span>
                                         </div>
                                     </div>
                                 </article>
-                                                                                                                                                            <article class="post-card">
-                                    <a class="post-card-media" href="#blog">
-                                        <img
-                                            src="https://picsum.photos/seed/p4/600/400"
-                                            alt="文章标题四"
-                                            loading="lazy"
-                                            onerror="this.onerror=null;this.src='assets/images/hero-tech.svg';"
-                                        >
-                                    </a>
-                                    <div class="post-card-body">
-                                        <h3><a href="#blog">文章标题四:一句话概括这篇文章的核心内容</a></h3>
-                                        <p>这里是文章摘要,用一两句话概括文章内容,吸引读者点击阅读全文。</p>
-                                        <div class="card-meta">
-                                            <div class="tags-list">
-                                                <a href="#blog">代码人生</a>                                            </div>
-                                            <span>
-                                                2026.08.20                                                · 0 评论                                                                                                                                            </span>
-                                        </div>
-                                    </div>
-                                </article>
-                                                                                                                                                            <article class="post-card">
-                                    <a class="post-card-media" href="#blog">
-                                        <img
-                                            src="https://picsum.photos/seed/p5/600/400"
-                                            alt="文章标题五"
-                                            loading="lazy"
-                                            onerror="this.onerror=null;this.src='assets/images/hero-tech.svg';"
-                                        >
-                                    </a>
-                                    <div class="post-card-body">
-                                        <h3><a href="#blog">文章标题五:一句话概括这篇文章的核心内容</a></h3>
-                                        <p>这里是文章摘要,用一两句话概括文章内容,吸引读者点击阅读全文。</p>
-                                        <div class="card-meta">
-                                            <div class="tags-list">
-                                                <a href="#blog">Cloudflare</a>                                            </div>
-                                            <span>
-                                                2026.08.01                                                · 0 评论                                                                                                                                            </span>
-                                        </div>
-                                    </div>
-                                </article>
-                                                                                                                                                            <article class="post-card">
-                                    <a class="post-card-media" href="#blog">
-                                        <img
-                                            src="https://picsum.photos/seed/p6/600/400"
-                                            alt="文章标题六"
-                                            loading="lazy"
-                                            onerror="this.onerror=null;this.src='assets/images/hero-tech.svg';"
-                                        >
-                                    </a>
-                                    <div class="post-card-body">
-                                        <h3><a href="#blog">文章标题六:一句话概括这篇文章的核心内容</a></h3>
-                                        <p>这里是文章摘要,用一两句话概括文章内容,吸引读者点击阅读全文。</p>
-                                        <div class="card-meta">
-                                            <div class="tags-list">
-                                                <a href="#blog">水城杂类</a>                                            </div>
-                                            <span>
-                                                2026.07.15                                                · 0 评论                                                                                                                                            </span>
-                                        </div>
-                                    </div>
-                                </article>
-                                                                                                                                                        </div>
-                                    </div>
-
-                                <aside class="sidebar">
-                                        <div class="side-card side-profile">
-                        <div class="profile-banner"></div>
-                        <div class="profile-body">
-                                                            <!-- TODO: 换成你的头像 assets/avatar.png -->
-                                                            <img class="profile-avatar" src="assets/avatar.png" alt="Ryan" onerror="this.onerror=null;this.src='assets/images/avatar-fallback.svg';">
-                                                        <div class="profile-name">Ryan</div>
-                            <div class="profile-bio">iOS 开发<br>写代码，也写点记录。</div>
-                            <div class="profile-stats">
-                                <div class="profile-stat">
-                                    <strong>6</strong>
-                                    <span>文章</span>
-                                </div>
-                                <div class="profile-stat">
-                                    <strong>3</strong>
-                                    <span>分类</span>
-                                </div>
-                                <div class="profile-stat">
-                                    <strong>2</strong>
-                                    <span>项目</span>
-                                </div>
-                            </div>
-                                                            <div class="profile-social">
-                                                                            <a
-                                            href="https://github.com/LzyLsq"
-                                            aria-label="github"
-                                            title="github"
-                                            rel="noopener noreferrer me"
-                                            target="_blank"
-                                        ><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg></a>
-                                                                            <a
-                                            href="mailto:lzyryan5247@gmail.com"
-                                            aria-label="mail"
-                                            title="mail"
-                                            rel="noopener noreferrer me"
-                                        ><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg></a>
-                                                                    </div>
-                                                    </div>
-                    </div>
-                                            <div class="side-card">
-                            <h3>标签</h3>
-                            <div class="tag-cloud">
-                                                                    <a class="tag tag--cloud" data-heat="5" href="#blog" title="AI · 5 篇">AI<span class="tag-count">5</span></a>
-                                                                    <a class="tag tag--cloud" data-heat="3" href="#blog" title="Docker · 3 篇">Docker<span class="tag-count">3</span></a>
-                                                                    <a class="tag tag--cloud" data-heat="3" href="#blog" title="K8s · 3 篇">K8s<span class="tag-count">3</span></a>
-                                                                    <a class="tag tag--cloud" data-heat="3" href="#blog" title="Linux · 3 篇">Linux<span class="tag-count">3</span></a>
-                                                                    <a class="tag tag--cloud" data-heat="2" href="#blog" title="Python · 2 篇">Python<span class="tag-count">2</span></a>
-                                                                    <a class="tag tag--cloud" data-heat="2" href="#blog" title="SSH · 2 篇">SSH<span class="tag-count">2</span></a>
-                                                                    <a class="tag tag--cloud" data-heat="2" href="#blog" title="数据库 · 2 篇">数据库<span class="tag-count">2</span></a>
-                                                                    <a class="tag tag--cloud" data-heat="1" href="#blog" title="随笔 · 1 篇">随笔<span class="tag-count">1</span></a>
-                                                            </div>
-                        </div>
-                                            <div class="side-card">
-                            <h3>最新文章</h3>
-                            <ul class="side-list" style="margin-top: 14px;">
-                                                                    <li>
-                                        <a href="#blog">
-                                            <strong>文章标题一:一句话概括这篇文章的核心内容</strong>
-                                            <span>2026.09.22</span>
-                                        </a>
-                                    </li>
-                                                                    <li>
-                                        <a href="#blog">
-                                            <strong>文章标题二:一句话概括这篇文章的核心内容</strong>
-                                            <span>2026.09.15</span>
-                                        </a>
-                                    </li>
-                                                                    <li>
-                                        <a href="#blog">
-                                            <strong>文章标题三:一句话概括这篇文章的核心内容</strong>
-                                            <span>2026.09.01</span>
-                                        </a>
-                                    </li>
-                                                                    <li>
-                                        <a href="#blog">
-                                            <strong>文章标题四:一句话概括这篇文章的核心内容</strong>
-                                            <span>2026.08.20</span>
-                                        </a>
-                                    </li>
-                                                                    <li>
-                                        <a href="#blog">
-                                            <strong>文章标题五:一句话概括这篇文章的核心内容</strong>
-                                            <span>2026.08.01</span>
-                                        </a>
-                                    </li>
-                                                            </ul>
-                        </div>
-                    <div class="side-card">
-                        <h3>订阅</h3>
-                        <p>通过 RSS 获取最新文章更新。</p>
-                        <a class="button button-primary" style="margin-top: 14px; width: 100%;" href="#contact">RSS 订阅</a>
-                                            </div>
-                </aside>
             </div>
         </div>
     </section>
-
-    <!-- ================= 关于我 ================= -->
-    <section class="about-section" id="about">
+    <section class="about-section">
         <div class="flux-container">
             <div class="section-heading">
                 <h2>关于我</h2>
-                <p>iOS 开发 · 偶尔折腾大数据</p>
+                <p>一句话认识一下</p>
             </div>
-
             <div class="about-grid">
                 <div class="about-card about-intro">
                     <h3>你好，我是 Ryan 👋</h3>
-                    <p>
-                        一名 <strong>iOS 开发</strong>。日常以 Swift / Objective-C 为主，
-                        也喜欢折腾后端与大数据：Kafka、Spark、Flume、Sqoop 这套离线 + 实时链路都完整跑通过，
-                        做过订单实时分析推荐平台和法律智能体平台。
-                    </p>
-                    <p>
-                        这个站点用来沉淀项目复盘和技术笔记，不追热点，只记自己踩过的坑。
-                    </p>
-                    <div class="about-contact" id="contact">
-                        <a class="about-contact-item" href="mailto:lzyryan5247@gmail.com">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg>
-                            <span><b>Gmail</b>lzyryan5247@gmail.com</span>
-                        </a>
-                        <a class="about-contact-item" href="https://github.com/LzyLsq" target="_blank" rel="noopener noreferrer">
-                            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5C5.73.5.5 5.73.5 12a11.5 11.5 0 0 0 7.86 10.92c.58.1.79-.25.79-.55v-2.1c-3.2.7-3.88-1.4-3.88-1.4-.53-1.34-1.29-1.7-1.29-1.7-1.05-.72.08-.7.08-.7 1.16.08 1.78 1.2 1.78 1.2 1.04 1.78 2.72 1.27 3.38.97.1-.75.4-1.27.73-1.56-2.55-.29-5.24-1.28-5.24-5.7 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .96-.3 3.15 1.18a10.9 10.9 0 0 1 5.74 0c2.18-1.48 3.14-1.18 3.14-1.18.63 1.59.23 2.76.12 3.05.74.81 1.18 1.84 1.18 3.1 0 4.43-2.69 5.4-5.25 5.69.41.36.78 1.06.78 2.14v3.17c0 .31.2.66.8.55A11.5 11.5 0 0 0 23.5 12C23.5 5.73 18.27.5 12 .5z"/></svg>
-                            <span><b>GitHub</b>github.com/LzyLsq</span>
-                        </a>
-                    </div>
-                </div>
-
-                <div class="about-card about-stack">
-                    <h3>技术栈</h3>
-                    <div class="about-stack-group">
-                        <span class="about-stack-label">移动端</span>
-                        <div class="about-chips">
-                            <span class="about-chip">Swift</span>
-                            <span class="about-chip">Objective-C</span>
-                            <span class="about-chip">SwiftUI</span>
-                            <span class="about-chip">UIKit</span>
-                        </div>
-                    </div>
-                    <div class="about-stack-group">
-                        <span class="about-stack-label">后端 / 数据</span>
-                        <div class="about-chips">
-                            <span class="about-chip">Python</span>
-                            <span class="about-chip">Flask</span>
-                            <span class="about-chip">FastAPI</span>
-                            <span class="about-chip">Kafka</span>
-                            <span class="about-chip">Spark</span>
-                            <span class="about-chip">Flume</span>
-                            <span class="about-chip">Sqoop</span>
-                            <span class="about-chip">Hive</span>
-                            <span class="about-chip">MySQL</span>
-                        </div>
-                    </div>
-                    <div class="about-stack-group">
-                        <span class="about-stack-label">工具 / 其他</span>
-                        <div class="about-chips">
-                            <span class="about-chip">Docker</span>
-                            <span class="about-chip">Git</span>
-                            <span class="about-chip">Vite</span>
-                            <span class="about-chip">Nginx</span>
-                        </div>
-                    </div>
+                    <p>一名 iOS 开发工程师，日常以 Swift / Objective-C 为主，也喜欢折腾后端与大数据。目前正在系统学习全栈开发。</p>
+                    <p>这个站点用来沉淀项目复盘和技术笔记，不追热点，只记自己踩过的坑。</p>
+                    <a class="button button-primary" style="margin-top:16px;display:inline-flex;" href="about.html">了解更多 →</a>
                 </div>
             </div>
         </div>
     </section>
-    </main>
-
+</main>
     <footer class="site-footer">
         <div class="flux-container footer-inner">
             <div class="footer-copy">
                 <span class="footer-title">© <span id="year">2026</span> Ryan.</span>
-                <span>iOS 开发 · 一个混迹在 IT 行业的小菜鸟</span>
+                <span>iOS 开发 · 正在学习全栈 · 一个混迹在 IT 行业的小菜鸟</span>
             </div>
             <div class="footer-meta">
-                <a href="#top">首页</a>
-                <a href="#projects">代码人生</a>
-                <a href="#about">关于我</a>
-                <a href="#contact">联系方式</a>
+                <a href="index.html#top">首页</a>
+                <a href="index.html#projects">代码人生</a>
+                <a href="posts.html">文章</a>
+                <a href="about.html">关于我</a>
             </div>
         </div>
-                    <div class="flux-container footer-legal">
-                                    <span>已稳定运行 <span id="site-days">1</span> 天</span>
-                            </div>
-            </footer>
+        <div class="flux-container footer-legal">
+            <span>已稳定运行 <span id="site-days">1</span> 天</span>
+        </div>
+    </footer>
 </div>
 <div class="pjax-progress-bar" id="pjax-progress" aria-hidden="true"></div>
 <button type="button" class="back-to-top" id="back-to-top" aria-label="回到顶部" data-no-swup>
