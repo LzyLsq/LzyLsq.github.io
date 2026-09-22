@@ -161,6 +161,8 @@ html.is-animating .site-main { opacity: 0; }
   .list-wrap .list-item,
   .featured-grid .featured-card,
   .sidebar .side-card,
+  .project-grid .project-card,
+  .about-grid .about-card,
   .empty-panel,
   .pagination-wrap,
   .article-toc-panel,

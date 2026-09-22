@@ -608,3 +608,298 @@ html[data-style="memphis"] .stats-heat[data-level="4"] { background: var(--m-yel
 
 /* modal 打开时锁滚动 */
 html[data-style="memphis"] body.has-modal-open { overflow: hidden; }
+
+/* ============================================================
+   16. 代码人生（项目卡片）
+   ============================================================ */
+html[data-style="memphis"] .projects-section { padding: 40px 0 10px; }
+
+html[data-style="memphis"] .project-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 28px;
+  align-items: start;
+}
+
+html[data-style="memphis"] .project-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 22px 22px 20px;
+  background: var(--m-surface);
+  border: var(--m-border);
+  border-radius: 0;
+  box-shadow: 8px 8px 0 var(--m-shadow);
+  transition: transform .15s ease, box-shadow .15s ease;
+}
+/* 第二张换色 + 反向微旋转，和文章卡片的错落感区分开 */
+html[data-style="memphis"] .project-card:nth-child(2) {
+  transform: rotate(.6deg);
+  box-shadow: 8px 8px 0 var(--m-pink);
+}
+html[data-style="memphis"] .project-card:hover {
+  transform: rotate(0) translate(-3px, -3px);
+  box-shadow: 12px 12px 0 var(--m-shadow);
+}
+
+html[data-style="memphis"] .project-top {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+html[data-style="memphis"] .project-index {
+  font-family: var(--font-display);
+  font-size: 13px;
+  line-height: 1;
+  padding: 5px 9px;
+  color: #111;
+  background: var(--m-yellow);
+  border: 2px solid var(--m-ink);
+  box-shadow: 3px 3px 0 var(--m-shadow);
+}
+html[data-style="memphis"] .project-card:nth-child(2) .project-index { background: var(--m-teal); }
+html[data-style="memphis"] .project-kind {
+  font-family: var(--font-display);
+  font-size: 11px;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--m-ink);
+  padding: 4px 8px;
+  border: 2px dashed var(--border-soft);
+}
+
+html[data-style="memphis"] .project-title {
+  margin: 0 0 10px;
+  font-family: var(--font-display);
+  font-size: 19px;
+  line-height: 1.3;
+  color: var(--m-ink);
+}
+
+html[data-style="memphis"] .project-desc {
+  margin: 0 0 14px;
+  font-size: 13.5px;
+  line-height: 1.75;
+  color: var(--body);
+}
+html[data-style="memphis"] .project-desc code {
+  font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 12px;
+  padding: 1px 5px;
+  color: #111;
+  background: var(--m-yellow);
+  border: 1px solid var(--m-ink);
+}
+
+html[data-style="memphis"] .project-points {
+  margin: 0 0 16px;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 8px;
+}
+html[data-style="memphis"] .project-points li {
+  position: relative;
+  padding-left: 18px;
+  font-size: 12.5px;
+  line-height: 1.65;
+  color: var(--muted);
+}
+/* 小方块当项目符号（孟菲斯几何语言） */
+html[data-style="memphis"] .project-points li::before {
+  content: '';
+  position: absolute;
+  left: 2px;
+  top: 7px;
+  width: 6px;
+  height: 6px;
+  background: var(--m-pink);
+  border: 1px solid var(--m-ink);
+}
+html[data-style="memphis"] .project-card:nth-child(2) .project-points li:nth-child(2n)::before { background: var(--m-teal); }
+
+html[data-style="memphis"] .project-stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: auto;
+  padding-top: 4px;
+}
+html[data-style="memphis"] .project-tag {
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1.6;
+  padding: 2px 8px;
+  color: var(--m-ink);
+  background: var(--m-surface-2);
+  border: 2px solid var(--m-ink);
+  border-radius: 0;
+}
+
+html[data-style="memphis"] .project-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 18px;
+  padding-top: 16px;
+  border-top: 2px dashed var(--border-soft);
+}
+html[data-style="memphis"] .project-actions .button {
+  height: 38px;
+  padding: 0 16px;
+  border: 2px solid var(--m-ink);
+  border-radius: 0;
+  font-family: var(--font-display);
+  font-size: 12.5px;
+  letter-spacing: .02em;
+  box-shadow: 4px 4px 0 var(--m-shadow);
+}
+html[data-style="memphis"] .project-actions .button-primary {
+  background: var(--m-yellow);
+  color: #111;
+  border-color: var(--m-ink);
+}
+html[data-style="memphis"] .project-actions .button-primary:hover {
+  background: var(--m-pink);
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0 var(--m-shadow);
+}
+html[data-style="memphis"] .project-actions .button-secondary {
+  background: var(--m-surface-2);
+  color: var(--m-ink);
+}
+html[data-style="memphis"] .project-actions .button-secondary:hover {
+  background: var(--m-teal);
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0 var(--m-shadow);
+}
+
+/* ============================================================
+   17. 关于我
+   ============================================================ */
+html[data-style="memphis"] .about-section { padding: 40px 0 60px; }
+
+html[data-style="memphis"] .about-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+  gap: 28px;
+  align-items: start;
+}
+
+html[data-style="memphis"] .about-card {
+  padding: 22px;
+  background: var(--m-surface);
+  border: var(--m-border);
+  border-radius: 0;
+  box-shadow: 8px 8px 0 var(--m-shadow);
+}
+html[data-style="memphis"] .about-intro { box-shadow: 8px 8px 0 var(--m-teal); }
+html[data-style="memphis"] .about-stack { box-shadow: 8px 8px 0 var(--m-purple); }
+
+html[data-style="memphis"] .about-card h3 {
+  margin: 0 0 14px;
+  font-family: var(--font-display);
+  font-size: 18px;
+  color: var(--m-ink);
+}
+html[data-style="memphis"] .about-intro p {
+  margin: 0 0 12px;
+  font-size: 13.5px;
+  line-height: 1.85;
+  color: var(--body);
+}
+html[data-style="memphis"] .about-intro strong {
+  background: var(--m-yellow);
+  color: #111;
+  padding: 0 4px;
+  border: 1px solid var(--m-ink);
+  font-weight: 700;
+}
+
+html[data-style="memphis"] .about-contact {
+  display: grid;
+  gap: 10px;
+  margin-top: 18px;
+  padding-top: 16px;
+  border-top: 2px dashed var(--border-soft);
+}
+html[data-style="memphis"] .about-contact-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  text-decoration: none;
+  color: var(--m-ink);
+  background: var(--m-surface-2);
+  border: 2px solid var(--m-ink);
+  box-shadow: 4px 4px 0 var(--m-shadow);
+  transition: transform .12s ease, box-shadow .12s ease, background .12s ease;
+}
+html[data-style="memphis"] .about-contact-item:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0 var(--m-shadow);
+  background: var(--m-yellow);
+  color: #111;
+}
+html[data-style="memphis"] .about-contact-item:nth-child(2):hover { background: var(--m-pink); }
+html[data-style="memphis"] .about-contact-item svg {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+html[data-style="memphis"] .about-contact-item span {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  font-size: 12.5px;
+}
+html[data-style="memphis"] .about-contact-item b {
+  font-family: var(--font-display);
+  font-size: 10px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  opacity: .7;
+}
+html[data-style="memphis"] .about-contact-item span > :not(b) {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+html[data-style="memphis"] .about-stack-group + .about-stack-group { margin-top: 16px; }
+html[data-style="memphis"] .about-stack-label {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 11px;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  color: var(--m-ink);
+  margin-bottom: 8px;
+}
+html[data-style="memphis"] .about-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+html[data-style="memphis"] .about-chip {
+  font-size: 11.5px;
+  font-weight: 700;
+  padding: 3px 9px;
+  color: #111;
+  background: var(--m-yellow);
+  border: 2px solid var(--m-ink);
+  box-shadow: 3px 3px 0 var(--m-shadow);
+}
+html[data-style="memphis"] .about-chips .about-chip:nth-of-type(3n+2) { background: var(--m-pink); }
+html[data-style="memphis"] .about-chips .about-chip:nth-of-type(3n+3) { background: var(--m-teal); }
+
+/* ============================================================
+   18. 响应式收尾
+   ============================================================ */
+@media (max-width: 980px) {
+  html[data-style="memphis"] .project-grid,
+  html[data-style="memphis"] .about-grid { grid-template-columns: 1fr; }
+  html[data-style="memphis"] .project-card:nth-child(2) { transform: none; }
+}
+@media (max-width: 560px) {
+  html[data-style="memphis"] .project-card,
+  html[data-style="memphis"] .about-card { padding: 16px; box-shadow: 6px 6px 0 var(--m-shadow); }
+  html[data-style="memphis"] .project-actions .button { flex: 1; }
+}

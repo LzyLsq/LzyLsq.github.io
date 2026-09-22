@@ -190,6 +190,8 @@
     var selector = [
       '.home-grid .post-card',
       '.home-grid .side-card',
+      '.project-grid .project-card',
+      '.about-grid .about-card',
       '.section-heading'
     ].join(', ');
     var targets = document.querySelectorAll(selector);
@@ -201,10 +203,15 @@
     }
 
     var observer = new IntersectionObserver(function (entries) {
+      var batch = [];
       entries.forEach(function (entry) {
         if (!entry.isIntersecting) { return; }
-        entry.target.classList.add('is-visible');
+        batch.push(entry.target);
         observer.unobserve(entry.target);
+      });
+      // 同一批进入视口的元素按顺序错落进场（最多级联 6 个）
+      batch.forEach(function (el, idx) {
+        window.setTimeout(function () { el.classList.add('is-visible'); }, Math.min(idx, 6) * 60);
       });
     }, { rootMargin: '0px 0px -40px 0px', threshold: 0.05 });
 
