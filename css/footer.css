@@ -1,0 +1,166 @@
+/* ============ Related ============ */
+.featured-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.featured-card {
+  background: rgba(17, 24, 39, 0.72);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+  box-shadow: none;
+  transition: .2s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.featured-card:hover {
+  border-color: var(--blue);
+  transform: translateY(-2px);
+}
+
+.featured-card h3 {
+  margin: 0;
+  font-size: 16px;
+  color: var(--heading);
+  line-height: 1.4;
+  font-weight: 700;
+}
+
+.featured-card h3 a { color: inherit; }
+.featured-card h3 a:hover { color: var(--blue-light); }
+
+.featured-card p {
+  color: var(--muted);
+  font-size: 14px;
+  margin: 0;
+  line-height: 1.6;
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+}
+
+/* ============ Empty / error ============ */
+.empty-panel {
+  padding: 40px;
+  border-radius: var(--radius);
+  background: rgba(17, 24, 39, 0.72);
+  border: 1px solid var(--border);
+  text-align: center;
+  box-shadow: none;
+}
+
+.empty-panel h3 { margin: 0 0 8px; color: var(--heading); }
+.empty-panel p { color: var(--muted); margin: 0; }
+
+.error-banner {
+  min-height: calc(100vh - 220px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 0;
+  text-align: center;
+}
+
+/* ============ Footer ============ */
+.site-footer {
+  margin-top: 40px;
+  padding: 0;
+}
+
+.footer-inner {
+  padding: 28px 0;
+  color: var(--muted-2);
+  font-size: 13px;
+  display: flex;
+  justify-content: space-between;
+  border-top: 1px solid var(--border);
+  gap: 16px;
+  flex-wrap: wrap;
+  background: transparent;
+  border-radius: 0;
+  color: var(--muted-2);
+}
+
+.footer-copy {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.footer-title {
+  color: var(--heading);
+  font-weight: 700;
+  margin: 0;
+  font-size: 14px;
+}
+
+.footer-meta {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  color: var(--muted-2);
+}
+
+.footer-meta a,
+.footer-meta a:hover { color: var(--blue-light); }
+
+
+/* ============ 页脚 · 友情链接 ============ */
+.footer-friends {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  flex-wrap: wrap;
+  padding: 0 0 20px;
+  font-size: 13px;
+  color: var(--muted-2);
+}
+
+.footer-friends-label {
+  flex-shrink: 0;
+  color: var(--muted);
+  font-weight: 600;
+}
+
+.footer-friends-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 18px;
+  min-width: 0;
+}
+
+.footer-friends-list a {
+  color: var(--muted-2);
+  transition: color .15s ease;
+}
+
+.footer-friends-list a:hover { color: var(--blue-light); }
+
+/* ============ 页脚 · 备案 / 运行天数 ============ */
+.footer-legal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px 20px;
+  flex-wrap: wrap;
+  padding: 0 0 26px;
+  font-size: 12px;
+  color: var(--muted-2);
+  text-align: center;
+}
+
+.footer-legal a {
+  color: var(--muted-2);
+  transition: color .15s ease;
+}
+
+.footer-legal a:hover { color: var(--blue-light); }
+
+html[data-theme="light"] .footer-friends-list a:hover,
+html[data-theme="light"] .footer-legal a:hover { color: var(--blue-2); }
