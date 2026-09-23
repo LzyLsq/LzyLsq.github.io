@@ -11,7 +11,8 @@
     { path: 'projects.html', type: '项目总览' },
     { path: 'data-pipeline.html', type: '项目记录' },
     { path: 'law-design.html', type: '项目记录' },
-    { path: 'about.html', type: '个人介绍' }
+    { path: 'about.html', type: '个人介绍' },
+    { path: 'learning.html', type: '学习进度' }
   ];
   var normalize = function (text) { return (text || '').replace(/\s+/g, ' ').trim(); };
   var extract = function (doc) {
@@ -49,6 +50,18 @@
       return href ? { href: href, type: '文章', title: normalize(link.textContent),
         description: normalize((card.querySelector('p') || {}).textContent), segments: [normalize(card.textContent)], content: normalize(card.textContent) } : null;
     }).filter(Boolean);
+  }), fetch('data/learning.json').then(function (response) {
+    if (!response.ok) { throw new Error('学习记录读取失败'); }
+    return response.json();
+  }).then(function (data) {
+    if (!data || !Array.isArray(data.entries)) { throw new Error('学习记录格式错误'); }
+    return data.entries.filter(function (entry) {
+      return entry && typeof entry.title === 'string' && typeof entry.progress === 'string' && typeof entry.reflection === 'string';
+    }).map(function (entry) {
+      var summary = normalize(entry.progress + ' ' + entry.reflection);
+      return { href: 'learning.html', type: '学习记录', title: normalize(entry.title),
+        description: normalize(entry.topic + ' · ' + entry.date), segments: [summary], content: summary };
+    });
   }))).then(function (settled) {
     var items = [], failed = 0;
     settled.forEach(function (entry) {

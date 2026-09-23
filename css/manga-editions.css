@@ -1,0 +1,116 @@
+@charset "UTF-8";
+/* One story, two print runs: unprinted ink on paper / cel-colored anime panels.
+   All artwork here is CSS-built; no external image or fabricated content. */
+html[data-style="memphis"] {
+  --panel-ink: #171717;
+  --panel-paper: #faf9f5;
+  --panel-tone: #d9d9d5;
+  --panel-pop: #fff;
+}
+html[data-style="memphis"][data-ink="color"] {
+  --panel-ink: #1d2c49;
+  --panel-paper: #fffaf0;
+  --panel-tone: #4ab9c6;
+  --panel-pop: #ef5c73;
+}
+/* Screen-tone and speed lines live in the gutters, away from reading text. */
+html[data-style="memphis"][data-ink="mono"] body {
+  background: radial-gradient(circle at center,rgba(255,255,255,.065) 1px,transparent 1.5px) 0 0/12px 12px,
+    linear-gradient(151deg,transparent 0 65%,rgba(255,255,255,.035) 65% 65.3%,transparent 65.4% 100%),#1e1e1e;
+}
+html[data-style="memphis"][data-ink="color"] body {
+  background: radial-gradient(circle at center,rgba(39,77,115,.095) 1px,transparent 1.5px) 0 0/17px 17px,
+    linear-gradient(135deg,#fff8e9 0%,#e7f9fa 45%,#fff0f2 100%);
+}
+html[data-style="memphis"] .section-heading :is(h1,h2) { text-wrap: balance; }
+html[data-style="memphis"][data-ink="mono"] :is(.home-destinations,.posts-section,.project-detail-section) {
+  background: repeating-linear-gradient(-16deg,transparent 0 116px,rgba(255,255,255,.055) 117px 118px,transparent 119px 160px);
+}
+html[data-style="memphis"][data-ink="color"] :is(.home-destinations,.posts-section,.project-detail-section) {
+  background: repeating-linear-gradient(-16deg,transparent 0 116px,rgba(23,49,86,.06) 117px 118px,transparent 119px 160px);
+}
+/* Home chapters: speech-panel cutouts, with a different ink treatment per edition. */
+html[data-style="memphis"] .destination-card {
+  position: relative; isolation: isolate;
+  border: 3px solid var(--panel-ink) !important;
+  border-radius: 0 !important;
+  clip-path: polygon(0 0,91% 0,100% 10%,100% 100%,0 100%);
+  overflow: hidden;
+}
+html[data-style="memphis"] .destination-card::before {
+  content: ""; position: absolute; right: 0; top: 0; width: min(40%,145px); height: 84px;
+  background: radial-gradient(circle,var(--panel-ink) 1.35px,transparent 1.65px) 0 0/8px 8px;
+  opacity: .22; transform: skewX(-18deg) translateX(20px); pointer-events: none;
+}
+html[data-style="memphis"] .destination-card::after {
+  content: ""; position: absolute; right: 0; bottom: 0; width: 66px; height: 65px;
+  background: var(--panel-ink); clip-path: polygon(100% 0,100% 100%,0 100%); opacity: .85; pointer-events: none;
+}
+html[data-style="memphis"][data-ink="mono"] .destination-card {
+  --heading:#171717; --body:#333; --muted:#444; --notebook-tint:#e5e5e2;
+  --m-surface:#faf9f5; --comic-ink:#171717;
+  background:#faf9f5 !important; box-shadow:8px 8px 0 #0e0e0e !important;
+}
+html[data-style="memphis"][data-ink="mono"] .destination-card:nth-child(2) { background:#ededeb !important; }
+html[data-style="memphis"][data-ink="mono"] .destination-card:nth-child(3) { background:#fff !important; }
+html[data-style="memphis"][data-ink="mono"] .destination-card .button-primary { background:#171717 !important; color:#fff !important; }
+html[data-style="memphis"][data-ink="mono"] .destination-card .button-secondary { background:#fff !important; color:#171717 !important; }
+html[data-style="memphis"][data-ink="color"] .destination-card { box-shadow:8px 8px 0 var(--panel-ink) !important; }
+html[data-style="memphis"][data-ink="color"] .destination-card:nth-child(1) { background:#d9f4f4 !important; }
+html[data-style="memphis"][data-ink="color"] .destination-card:nth-child(2) { background:#ffe1e4 !important; }
+html[data-style="memphis"][data-ink="color"] .destination-card:nth-child(3) { background:#fff1c9 !important; }
+html[data-style="memphis"][data-ink="color"] .destination-card:nth-child(1) .destination-symbol { background:#33aebb !important; color:#122c43 !important; }
+html[data-style="memphis"][data-ink="color"] .destination-card:nth-child(2) .destination-symbol { background:#f17b8a !important; color:#262338 !important; }
+html[data-style="memphis"][data-ink="color"] .destination-card:nth-child(3) .destination-symbol { background:#f6c25a !important; color:#262338 !important; }
+/* Color is painted into the project frame, not applied as a full-page filter. */
+html[data-style="memphis"][data-ink="mono"] .project-overview-grid .project-card {
+  --m-surface:#f7f7f4; --heading:#171717; --body:#333; --muted:#444;
+  --notebook-tint:#dededb; --comic-ink:#111;
+  background:repeating-linear-gradient(127deg,#f7f7f4 0 55px,#e9e9e7 56px 58px,#f7f7f4 59px 80px) !important;
+  border-color:#111 !important; box-shadow:8px 8px 0 #101010 !important;
+}
+html[data-style="memphis"][data-ink="mono"] .project-overview-grid .project-card:nth-child(2) { background:#ededeb !important; }
+html[data-style="memphis"][data-ink="mono"] .project-overview-grid .project-card .button-primary { background:#171717 !important; color:#fff !important; }
+html[data-style="memphis"][data-ink="mono"] .project-overview-grid .project-card .button-secondary { background:#fff !important; color:#171717 !important; }
+html[data-style="memphis"][data-ink="color"] .project-overview-grid .project-card { background:linear-gradient(143deg,#fff 0 71%,#c8eff0 71% 100%) !important; border-color:#263751 !important; box-shadow:8px 8px 0 #263751 !important; }
+html[data-style="memphis"][data-ink="color"] .project-overview-grid .project-card:nth-child(2) { background:linear-gradient(143deg,#fff 0 71%,#ffd8de 71% 100%) !important; }
+html[data-style="memphis"][data-ink="color"] .project-overview-grid .project-card .project-index { background:#26a9b8 !important; color:#122941 !important; }
+html[data-style="memphis"][data-ink="color"] .project-overview-grid .project-card:nth-child(2) .project-index { background:#ec6980 !important; color:#182839 !important; }
+/* Even an empty publication page has a real panel, not a fake article list. */
+html[data-style="memphis"] .posts-layout .empty-publications {
+  min-height:370px; background:var(--panel-paper) !important; color:var(--panel-ink) !important;
+  border:5px solid var(--panel-ink) !important; border-radius:0 !important;
+  box-shadow:8px 8px 0 var(--panel-ink) !important;
+  clip-path:polygon(0 0,96% 0,100% 11%,100% 100%,0 100%) !important;
+}
+html[data-style="memphis"] .posts-layout .empty-publications::before {
+  content:""; display:block; position:absolute; z-index:0; top:0; right:0; width:44%; height:100%;
+  background:url('../assets/images/ryan-manga-eyes.svg') center/cover no-repeat;
+  clip-path:polygon(25% 0,100% 0,100% 100%,0 100%);
+}
+html[data-style="memphis"] .posts-layout .empty-publications > div { position:relative; z-index:1; max-width:46%; }
+html[data-style="memphis"] .posts-layout .empty-publications h2 { color:var(--panel-ink) !important; font-size:clamp(29px,3.1vw,44px); line-height:1.2; }
+html[data-style="memphis"] .posts-layout .empty-publications p { color:#343434 !important; }
+html[data-style="memphis"][data-ink="mono"] .posts-layout .empty-publications::before { filter:grayscale(1) contrast(1.35); }
+html[data-style="memphis"][data-ink="color"] .posts-layout .empty-publications { background:#fff3dd !important; }
+html[data-style="memphis"][data-ink="color"] .posts-layout .empty-publications::before { background:#f8c361 url('../assets/images/ryan-manga-eyes-color.svg') center/cover no-repeat; filter:none; }
+html[data-style="memphis"][data-ink="color"] .posts-layout .empty-publications h2 { text-decoration:underline; text-decoration-color:#f17489; text-decoration-thickness:6px; text-underline-offset:5px; }
+html[data-style="memphis"] .posts-layout .empty-publications .button-primary { background:var(--panel-ink) !important; color:#fff !important; }
+html[data-style="memphis"][data-ink="color"] .posts-layout .empty-publications .button-primary { background:#c63e5b !important; }
+html[data-style="memphis"] .posts-layout .empty-publications .button-secondary { background:#fff !important; color:#171717 !important; }
+html[data-style="memphis"] :is(.detail-panel,.about-next) { border-radius:0 !important; box-shadow:5px 5px 0 var(--panel-ink) !important; }
+html[data-style="memphis"][data-ink="mono"] .detail-panel { border-color:#555 !important; border-left-color:#fff !important; }
+html[data-style="memphis"][data-ink="color"] .detail-panel:nth-child(2n+1) { background:#e3f7f7; border-left-color:#2daaba !important; }
+html[data-style="memphis"][data-ink="color"] .detail-panel:nth-child(2n) { background:#fff0e2; border-left-color:#e55872 !important; }
+html[data-style="memphis"][data-ink="color"] .project-detail-intro { background:linear-gradient(135deg,#d9f3f4 0 70%,#f8bf65 70% 84%,#ef7586 84% 100%); }
+html[data-style="memphis"][data-ink="color"] .project-detail-intro :is(h1,p,.project-breadcrumb) { color:#182e46 !important; }
+html[data-style="memphis"][data-ink="mono"] .project-detail-intro { background:repeating-conic-gradient(from 15deg at 80% 55%,#202020 0deg 12deg,#272727 12.2deg 12.6deg,#202020 13deg 22deg); }
+@media(max-width:700px) {
+  html[data-style="memphis"] .posts-layout .empty-publications { padding:185px 22px 32px; min-height:0; }
+  html[data-style="memphis"] .posts-layout .empty-publications::before { width:100%; height:165px; background-size:cover; clip-path:polygon(0 0,100% 0,100% 75%,0 100%); }
+  html[data-style="memphis"] .posts-layout .empty-publications > div { max-width:100%; }
+  html[data-style="memphis"] .project-overview-grid .project-card { box-shadow:5px 5px 0 var(--panel-ink) !important; }
+}
+@media(prefers-reduced-motion:reduce) {
+  html[data-style="memphis"] .destination-card,html[data-style="memphis"] .project-overview-grid .project-card { transition:none !important; }
+}

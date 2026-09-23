@@ -14,18 +14,18 @@
     })();
     </script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>LawDesign · 法律智能体平台 · Ryan</title>
-    <meta name="description" content="Ryan 的 LawDesign 法律场景练习项目技术记录，包含 React、Flask、FastAPI、GraphRAG 与实时数据模块。">
-    <link rel="canonical" href="https://lzylsq.github.io/law-design.html">
+    <title>全栈学习进度 · Ryan</title>
+    <meta name="description" content="Ryan 的全栈学习进度：真实记录阶段进展与学习感悟。">
+    <link rel="canonical" href="https://lzylsq.github.io/learning.html">
     <meta property="og:type" content="website">
-    <meta property="og:title" content="LawDesign · 法律智能体平台 · Ryan">
-    <meta property="og:description" content="Ryan 的 LawDesign 法律场景练习项目技术记录，包含 React、Flask、FastAPI、GraphRAG 与实时数据模块。">
-    <meta property="og:url" content="https://lzylsq.github.io/law-design.html">
+    <meta property="og:title" content="Ryan · iOS 开发">
+    <meta property="og:description" content="iOS 开发，正在学习全栈">
+    <meta property="og:url" content="https://lzylsq.github.io/learning.html">
     <meta property="og:site_name" content="Ryan · iOS 开发">
     <meta property="og:locale" content="zh_CN">
     <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="LawDesign · 法律智能体平台 · Ryan">
-    <meta name="twitter:description" content="Ryan 的 LawDesign 法律场景练习项目技术记录，包含 React、Flask、FastAPI、GraphRAG 与实时数据模块。">
+    <meta name="twitter:title" content="Ryan · iOS 开发">
+    <meta name="twitter:description" content="iOS 开发，正在学习全栈">
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"Ryan · iOS 开发","url":"https://lzylsq.github.io/","description":"Ryan 的个人网站：iOS 开发，正在学习全栈；目前介绍两个项目，文章待更新。","potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://lzylsq.github.io/search.html?s={search_term_string}"},"query-input":"required name=search_term_string"}}</script>
         <link rel="icon" href="assets/favicon.svg">
     <link rel="shortcut icon" href="assets/favicon.svg">
@@ -52,7 +52,7 @@
     <link rel="stylesheet" href="css/style-comic.css">
     <link rel="stylesheet" href="css/style-comic-upgrade.css">
     <link rel="stylesheet" href="css/manga-editions.css">
-    <link rel="stylesheet" href="css/project-gallery.css">
+    <link rel="stylesheet" href="css/learning.css">
 </head>
 <body class="theme-fluxgrid">
 <a class="skip-link" href="#main-content">跳到主要内容</a>
@@ -69,14 +69,14 @@
             </button>
             <nav class="site-nav" id="site-nav" aria-label="主导航">
         <a class="" href="index.html">首页</a>
-        <div class="nav-item is-active">
-            <a class="nav-link is-active" href="projects.html">代码人生</a>
+        <div class="nav-item">
+            <a class="nav-link" href="projects.html">代码人生</a>
         </div>
         <div class="nav-item">
             <a class="nav-link" href="posts.html">文章</a>
         </div>
-        <div class="nav-item">
-            <a class="nav-link" href="learning.html">全栈学习进度</a>
+        <div class="nav-item is-active">
+            <a class="nav-link is-active" href="learning.html">全栈学习进度</a>
         </div>
         <div class="nav-item">
             <a class="nav-link" href="about.html">关于我</a>
@@ -102,23 +102,28 @@
             </div>
         </div>
     </header>
-<main class="site-main" id="main-content">
-      <section class="projects-intro project-detail-intro"><div class="flux-container">
-        <nav class="project-breadcrumb" aria-label="面包屑导航"><a href="projects.html">代码人生</a><span aria-hidden="true">/</span><span aria-current="page">LawDesign</span></nav>
-        <span class="eyebrow">// PROJECT NOTE</span>
-        <h1>LawDesign · 法律智能体平台</h1>
-        <p class="project-detail-lede">围绕法律问答、合同审查与文书草拟，尝试组织前端和多个后端服务。这是一份技术练习记录，不是对外提供的法律服务。</p>
-        <div class="project-detail-meta"><span>练习项目</span><span>GitHub 私有仓库</span><span>技术记录 · 非上线说明</span></div>
-      </div></section>
-      <section class="project-detail-section" aria-labelledby="path-heading"><div class="flux-container">
-        <div class="section-heading"><h2 id="path-heading">技术路径</h2><p>按代码中的模块整理，不代表所有环节都已经稳定运行。</p></div>
-        <div class="detail-route"><div class="route-label">问答与服务</div><ol class="route-steps"><li><strong>React 前端</strong><span>页面与交互</span></li><li><strong>Flask / FastAPI</strong><span>业务服务</span></li><li><strong>GraphRAG</strong><span>法律资料检索</span></li></ol><div class="route-label">风控链路</div><ol class="route-steps"><li><strong>Kafka</strong><span>数据入口</span></li><li><strong>Spark Streaming</strong><span>流处理</span></li><li><strong>风控看板</strong><span>结果展示</span></li></ol></div>
-        <div class="detail-grid"><article class="detail-panel"><span class="detail-number">01 / 结构</span><h3>多模块练习</h3><p>使用 monorepo 管理 React 前端、鉴权、合同数据、风险分析、诉讼文书与合同模板等服务。共用配置和服务脚手架整理在 shared 包中。</p></article><article class="detail-panel"><span class="detail-number">02 / 问答</span><h3>法律场景检索</h3><p>法律问答部分尝试以 FastAPI 提供 GraphRAG 检索接口；另外有案例分析模块，接入 Moonshot。它们是不同的练习模块，不等同于法律建议服务。</p></article><article class="detail-panel"><span class="detail-number">03 / 风控</span><h3>数据链路</h3><p>项目中还有 Kafka 生产者、Scala + Spark Streaming 流处理以及 Flask 风控看板模块，用来探索实时数据处理。</p></article><aside class="detail-panel detail-caveat"><span class="detail-number">说明</span><h3>当前状态</h3><p>这里介绍的是仓库的代码组织和技术方向。项目未作为公开服务提供；源码暂时没有开放。</p></aside></div>
-        <section class="project-gallery" aria-labelledby="gallery-heading"><div class="section-heading"><h2 id="gallery-heading">项目界面</h2><p>选自项目仓库 README 的实际界面截图；截图内数字是项目演示内容，不是本站实时统计。</p></div><div class="project-gallery-grid"><figure><button class="gallery-open" type="button" aria-label="放大查看法律功能入口"><img src="assets/images/project/home-overview.jpg" alt="LegalMind 应用首页界面" loading="lazy" width="1200" height="700"></button><figcaption>法律功能入口</figcaption></figure><figure><button class="gallery-open" type="button" aria-label="放大查看文书检查界面"><img src="assets/images/project/document-review.jpg" alt="法律文书智能检测界面" loading="lazy" width="1200" height="700"></button><figcaption>文书检查界面</figcaption></figure><figure><button class="gallery-open" type="button" aria-label="放大查看合同风险可视化"><img src="assets/images/project/risk-visualization-dashboard.jpg" alt="合同风险数据大屏界面" loading="lazy" width="1200" height="700"></button><figcaption>合同风险可视化</figcaption></figure></div></section>
-        <div class="detail-stack"><h2>涉及的技术</h2><div class="project-stack"><span class="project-tag">Python</span><span class="project-tag">Flask</span><span class="project-tag">FastAPI</span><span class="project-tag">React</span><span class="project-tag">TypeScript</span><span class="project-tag">GraphRAG</span><span class="project-tag">Kafka</span><span class="project-tag">Spark Streaming</span><span class="project-tag">MySQL</span></div></div>
-      </div></section>
-      <section class="project-outro"><div class="flux-container"><div class="project-outro-card"><div><h2>继续看看？</h2><p>仓库目前为私有，页面提供真实仓库入口；如果你对实现细节有兴趣，也可以发邮件交流。</p></div><div class="project-outro-actions"><a class="button button-primary" href="mailto:lzyryan5247@gmail.com?subject=LawDesign">邮件交流 →</a><a class="button button-secondary project-repo-link" href="https://github.com/LzyLsq/legalDesign" target="_blank" rel="noopener noreferrer">GitHub 仓库（私有）↗</a><a class="button button-secondary" href="data-pipeline.html">看数据项目 →</a><a class="button button-secondary" href="projects.html">返回项目总览 →</a></div></div></div></section>
-    </main>
+<main class="site-main learning-page" id="main-content">
+  <section class="learning-hero" aria-labelledby="learning-heading">
+    <div class="flux-container learning-hero-grid">
+      <div class="learning-hero-copy">
+        <span class="learning-kicker">FIELD NOTES / 学习手记</span>
+        <h1 id="learning-heading">全栈学习<span>进度</span></h1>
+        <p>从 iOS 出发，慢慢补上前端、后端与工程实践。这里只展示我自己正式发布的记录；不预设完成率，也不编造打卡天数。</p>
+        <a class="button button-secondary" href="projects.html">先看看项目 →</a>
+      </div>
+      <div class="learning-hero-art" aria-hidden="true"><div class="learning-code-window"><span>RYAN / WORK IN PROGRESS</span><b>{ 继续学习 }</b><i>↗</i></div><div class="learning-art-note">下一格，写下真实进展。</div></div>
+    </div>
+  </section>
+  <section class="learning-content" aria-labelledby="learning-list-heading">
+    <div class="flux-container">
+      <div class="section-heading"><h2 id="learning-list-heading">学习记录</h2><p>按发布日期排列；每条都是后来实际写下的内容。</p></div>
+      <p class="learning-load" data-learning-status role="status" aria-live="polite">正在读取记录…</p>
+      <div class="learning-timeline" data-learning-list></div>
+      <div class="learning-empty" data-learning-empty hidden><span class="learning-empty-mark" aria-hidden="true">✳</span><h3>这一页还在等第一笔。</h3><p>暂时没有公开的学习记录。等我真正写下阶段进展和感悟，再把它放在这里。</p></div>
+      <div class="learning-owner"><div><span>写给未来的自己</span><h2>准备记下一次学习进展？</h2><p>记录先留在浏览器本机；只有把生成的内容提交到 GitHub，访客才会看到。</p></div><a class="button button-primary" href="learning-editor.html">打开记录工具 →</a></div>
+    </div>
+  </section>
+</main>
     <footer class="site-footer">
         <div class="flux-container footer-inner">
             <div class="footer-copy">
@@ -143,6 +148,6 @@
 <script src="js/theme.js"></script>
 <script src="js/site-stats.js"></script>
 <script src="js/comic-mode.js"></script>
-<script src="js/project-gallery.js"></script>
+<script src="js/learning.js"></script>
 </body>
 </html>

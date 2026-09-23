@@ -21,7 +21,7 @@
     '<header class="inventory-heading"><div><span class="inventory-kicker">RYAN / SITE INDEX</span><h2 id="inventory-title">本站数据</h2><p>这里展示本站公开内容的实时清单，不是访问量统计。</p></div>' +
     '<button class="inventory-close" type="button" data-close aria-label="关闭本站数据">×</button></header>' +
     '<div class="inventory-content"><p class="inventory-status" role="status" aria-live="polite">正在读取站点内容…</p></div>' +
-    '<footer class="inventory-footnote">数据来自本站的项目页与文章页；没有接入访客追踪，也不会估算阅读量。</footer>' +
+    '<footer class="inventory-footnote">数据来自本站的项目页、文章页及公开学习记录；没有接入访客追踪，也不会估算阅读量。</footer>' +
     '</section>';
   document.body.appendChild(modal);
   var dialog = modal.querySelector('.inventory-dialog');
@@ -36,7 +36,11 @@
     }).then(function (html) { return new DOMParser().parseFromString(html, 'text/html'); });
   }
   function readInventory() {
-    return Promise.all([getDoc('projects.html'), getDoc('posts.html')]).then(function (docs) {
+    return Promise.all([getDoc('projects.html'), getDoc('posts.html'), fetch('data/learning.json', { cache: 'no-cache' }).then(function (res) {
+      if (!res.ok) { throw new Error('HTTP ' + res.status); }
+      return res.json();
+    })]).then(function (docs) {
+      if (!docs[2] || !Array.isArray(docs[2].entries)) { throw new Error('学习记录格式错误'); }
       var projectCards = Array.from(docs[0].querySelectorAll('.project-overview-grid .project-card'));
       var postCards = Array.from(docs[1].querySelectorAll('[data-post-list] .post-card'));
       var routes = Array.from(docs[0].querySelectorAll('.project-overview-grid .project-route span'))
@@ -46,7 +50,7 @@
         return { label: '项目 ' + String(index + 1).padStart(2, '0'), title: title ? title.textContent.trim() : '项目',
           count: card.querySelectorAll('.project-route span').length };
       });
-      return { projects: projectCards.length, posts: postCards.length,
+      return { projects: projectCards.length, posts: postCards.length, learning: docs[2].entries.length,
         routes: Array.from(new Set(routes)), projectRoutes: projectRoutes };
     });
   }
@@ -66,15 +70,15 @@
       if (text !== undefined) { node.textContent = text; }
       return node;
     }
-    var chart = svgNode('svg', { class: 'inventory-chart', viewBox: '0 0 440 188', role: 'img',
+    var chart = svgNode('svg', { class: 'inventory-chart', viewBox: '0 0 440 ' + Math.max(188, entries.length * 63 + 55), role: 'img',
       'aria-label': title + '：' + entries.map(function (entry) { return entry.label + ' ' + entry.value; }).join('，') });
     var max = Math.max(1, ...entries.map(function (entry) { return entry.value; }));
     var scale = Math.max(2, max);
     var plotX = 114, plotWidth = 294;
     [0, .5, 1].forEach(function (t) {
       var x = plotX + plotWidth * t;
-      chart.append(svgNode('line', { x1: x, x2: x, y1: 18, y2: 137, class: 'inventory-chart-grid' }));
-      chart.append(svgNode('text', { x: x, y: 163, class: 'inventory-chart-tick', 'text-anchor': 'middle' }, String(Math.round(scale * t))));
+      chart.append(svgNode('line', { x1: x, x2: x, y1: 18, y2: entries.length * 63 + 20, class: 'inventory-chart-grid' }));
+      chart.append(svgNode('text', { x: x, y: entries.length * 63 + 45, class: 'inventory-chart-tick', 'text-anchor': 'middle' }, String(Math.round(scale * t))));
     });
     entries.forEach(function (entry, index) {
       var y = 24 + index * 63;
@@ -98,7 +102,7 @@
   function render(data) {
     content.replaceChildren();
     var counts = element('div', 'inventory-counts', '');
-    [['项目记录', data.projects, 'projects.html'], ['正式文章', data.posts, 'posts.html']].forEach(function (entry) {
+    [['项目记录', data.projects, 'projects.html'], ['正式文章', data.posts, 'posts.html'], ['学习记录', data.learning, 'learning.html']].forEach(function (entry) {
       var card = document.createElement('a');
       card.className = 'inventory-count'; card.href = entry[2];
       card.append(element('span', 'inventory-count-number', String(entry[1])), element('span', 'inventory-count-label', entry[0] + ' ↗'));
@@ -107,8 +111,8 @@
     content.append(counts);
     /* Graphs use only counts derived from the currently published pages. */
     content.append(makeChart('公开内容数量', [
-      { label: '项目记录', value: data.projects }, { label: '正式文章', value: data.posts }
-    ], '项目页与文章页的实际卡片数量；0 表示当前没有正式文章。'));
+      { label: '项目记录', value: data.projects }, { label: '正式文章', value: data.posts }, { label: '学习记录', value: data.learning }
+    ], '项目页与文章页的实际卡片数，以及已公开的学习记录数；没有发布则为 0。'));
     if (data.projectRoutes.length) {
       content.append(makeChart('项目流程节点', data.projectRoutes.map(function (route) {
         return { label: route.label, value: route.count, title: route.title };
@@ -142,7 +146,7 @@
       if (!modal.hidden && thisRequest === requestId) { render(data); }
     }).catch(function () {
       if (!modal.hidden && thisRequest === requestId) {
-        content.replaceChildren(element('p', 'inventory-error', '暂时无法读取项目或文章页面。请检查网络后重试。'));
+        content.replaceChildren(element('p', 'inventory-error', '暂时无法读取项目、文章或学习记录。请检查网络后重试。'));
       }
     });
   }

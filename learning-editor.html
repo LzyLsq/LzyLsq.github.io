@@ -13,20 +13,11 @@
       document.querySelector('meta[name="theme-color"]').content = ink === 'color' ? '#f5faff' : '#202020';
     })();
     </script>
+    <meta name="robots" content="noindex,follow">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>文章 · Ryan</title>
-    <meta name="description" content="Ryan 的文章页：正式文章发布后会在这里汇总，目前尚无已发布文章。">
-    <link rel="canonical" href="https://lzylsq.github.io/posts.html">
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="文章 · Ryan">
-    <meta property="og:description" content="正式文章发布后会在这里汇总，目前尚无已发布文章。">
-    <meta property="og:url" content="https://lzylsq.github.io/posts.html">
-    <meta property="og:site_name" content="Ryan · iOS 开发">
-    <meta property="og:locale" content="zh_CN">
-    <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="文章 · Ryan">
-    <meta name="twitter:description" content="正式文章发布后会在这里汇总，目前尚无已发布文章。">
-    <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"Ryan · iOS 开发","url":"https://lzylsq.github.io/","description":"Ryan 的个人网站：iOS 开发，正在学习全栈；目前介绍两个项目，文章待更新。","potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://lzylsq.github.io/search.html?s={search_term_string}"},"query-input":"required name=search_term_string"}}</script>
+    <title>记录工具 · Ryan</title>
+    <meta name="description" content="Ryan 的全栈学习进度：真实记录阶段进展与学习感悟。">
+    
         <link rel="icon" href="assets/favicon.svg">
     <link rel="shortcut icon" href="assets/favicon.svg">
     <link rel="apple-touch-icon" href="assets/favicon.svg">
@@ -52,6 +43,7 @@
     <link rel="stylesheet" href="css/style-comic.css">
     <link rel="stylesheet" href="css/style-comic-upgrade.css">
     <link rel="stylesheet" href="css/manga-editions.css">
+    <link rel="stylesheet" href="css/learning.css">
 </head>
 <body class="theme-fluxgrid">
 <a class="skip-link" href="#main-content">跳到主要内容</a>
@@ -71,11 +63,11 @@
         <div class="nav-item">
             <a class="nav-link" href="projects.html">代码人生</a>
         </div>
-        <div class="nav-item is-active">
-            <a class="nav-link is-active" href="posts.html">文章</a>
-        </div>
         <div class="nav-item">
-            <a class="nav-link" href="learning.html">全栈学习进度</a>
+            <a class="nav-link" href="posts.html">文章</a>
+        </div>
+        <div class="nav-item is-active">
+            <a class="nav-link is-active" href="learning.html">全栈学习进度</a>
         </div>
         <div class="nav-item">
             <a class="nav-link" href="about.html">关于我</a>
@@ -101,42 +93,24 @@
             </div>
         </div>
     </header>
-<main class="site-main" id="main-content">
-    <section class="stream-section" id="posts">
-        <div class="flux-container">
-            <div class="section-heading">
-                <h1>文章</h1>
-                <p>目前还没有正式发布的文章。这里会在写好后更新。</p>
-            </div>
-            <p class="search-status" data-search-status role="status" aria-live="polite" hidden></p>
-            <div class="home-grid posts-layout">
-                <div class="home-main">
-                    <div class="post-stack" id="post-list" data-post-list></div>
-                    <div class="empty-publications" data-empty-publications>
-                        <span class="empty-sticker" aria-hidden="true">✎</span>
-                        <div>
-                            <h2>这一格，暂时留白</h2>
-                            <p>还没有正式发布的文章。我会先把内容写好；现在可以看看两份练习项目，或搜索站内已有页面。</p>
-                            <div class="empty-actions">
-                                <a class="button button-primary" href="projects.html">查看项目记录 →</a>
-                                <a class="button button-secondary" href="search.html">站内搜索 →</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <aside class="sidebar" aria-label="文章导航">
-                    <div class="side-card">
-                        <h3>文章标签</h3>
-                        <div class="tag-cloud" data-tag-cloud></div>
-                    </div>
-                    <div class="side-card">
-                        <h3>最近发布</h3>
-                        <div class="side-latest" data-side-latest></div>
-                    </div>
-                </aside>
-            </div>
-        </div>
-    </section>
+<main class="site-main learning-page" id="main-content">
+  <section class="learning-content learning-editor-section"><div class="flux-container">
+    <a class="learning-back" href="learning.html">← 返回公开的学习进度</a>
+    <div class="section-heading"><h1>写下一条学习记录</h1><p>这是本机写作工具，不是自动发布后台。任何访客都能填写草稿，但只有仓库所有者提交文件后，记录才会公开。</p></div>
+    <div class="learning-editor-grid">
+      <form class="learning-form" data-learning-form>
+        <label>记录日期 <input name="date" type="date" required></label>
+        <label>学习方向 <input name="topic" type="text" maxlength="40" required placeholder="例如：前端 / 后端 / 工程实践"></label>
+        <label>这一阶段做了什么 <input name="title" type="text" maxlength="80" required placeholder="用自己的话写标题"></label>
+        <label>具体进展 <textarea name="progress" rows="4" maxlength="1200" required placeholder="写下实际学到或做过的事情"></textarea></label>
+        <label>感悟 / 待改进 <textarea name="reflection" rows="4" maxlength="1200" required placeholder="哪些地方还没弄懂，下一步想怎么做"></textarea></label>
+        <button class="button button-primary" type="submit">生成待发布内容 →</button>
+        <p class="learning-helper" data-editor-status role="status" aria-live="polite">输入会暂存于这台设备，不会自动公开。</p>
+      </form>
+      <aside class="learning-publish-guide"><span class="learning-kicker">HOW TO PUBLISH</span><h2>发布给所有人看</h2><ol><li>填写左侧并点击“生成待发布内容”。</li><li>复制生成的完整 JSON，或下载文件备份。</li><li>以仓库所有者身份打开 GitHub 编辑页，用完整 JSON 替换文件内容并提交到 main。</li><li>等待 GitHub Pages 部署，刷新公开页确认记录已经出现。</li></ol><p>不要把密码、令牌或尚未准备公开的私人信息写进记录。</p><a href="https://github.com/LzyLsq/LzyLsq.github.io/edit/main/data/learning.json" target="_blank" rel="noopener noreferrer">打开 GitHub 文件编辑页 ↗</a></aside>
+    </div>
+    <div class="learning-output" data-learning-output hidden><h2>待发布的完整文件</h2><p>这里包含仓库已发布的记录及刚写的这一条。复制全部内容替换 <code>data/learning.json</code>，不要只粘贴新的一条。</p><textarea data-learning-json readonly rows="12" aria-label="完整的学习记录 JSON"></textarea><div class="learning-output-actions"><button type="button" class="button button-primary" data-learning-copy>复制完整 JSON</button><button type="button" class="button button-secondary" data-learning-download>下载 learning.json</button></div></div>
+  </div></section>
 </main>
     <footer class="site-footer">
         <div class="flux-container footer-inner">
@@ -162,5 +136,7 @@
 <script src="js/theme.js"></script>
 <script src="js/site-stats.js"></script>
 <script src="js/comic-mode.js"></script>
+<script src="js/learning.js"></script>
+<script src="js/learning-editor.js"></script>
 </body>
 </html>
