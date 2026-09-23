@@ -17,19 +17,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- ========== TODO: 改成你的网站信息 ========== -->
     <title>文章 · Ryan</title>
-    <meta name="description" content="Ryan · iOS 开发。记录 iOS / 大数据 / 全栈项目实践与技术笔记。">
+    <meta name="description" content="Ryan 的个人网站：iOS 开发，正在学习全栈；目前介绍两个项目，文章待更新。">
     <!-- ============================================ -->
     <link rel="canonical" href="https://lzylsq.github.io/posts.html">
     <meta property="og:type" content="website">
     <meta property="og:title" content="Ryan · iOS 开发">
-    <meta property="og:description" content="一名持续学习中的开发菜鸟">
+    <meta property="og:description" content="iOS 开发，正在学习全栈">
     <meta property="og:url" content="https://lzylsq.github.io/posts.html">
     <meta property="og:site_name" content="Ryan · iOS 开发">
     <meta property="og:locale" content="zh_CN">
-    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:card" content="summary">
     <meta name="twitter:title" content="Ryan · iOS 开发">
-    <meta name="twitter:description" content="一名持续学习中的开发菜鸟">
-    <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"Ryan · iOS 开发","url":"https://lzylsq.github.io/","description":"Ryan · iOS 开发。记录 iOS / 大数据 / 全栈项目实践与技术笔记。","potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://lzylsq.github.io/posts.html?s={search_term_string}"},"query-input":"required name=search_term_string"}}</script>
+    <meta name="twitter:description" content="iOS 开发，正在学习全栈">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"Ryan · iOS 开发","url":"https://lzylsq.github.io/","description":"Ryan 的个人网站：iOS 开发，正在学习全栈；目前介绍两个项目，文章待更新。","potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://lzylsq.github.io/posts.html?s={search_term_string}"},"query-input":"required name=search_term_string"}}</script>
         <link rel="icon" href="assets/favicon.svg">
     <link rel="shortcut icon" href="assets/favicon.svg">
     <link rel="apple-touch-icon" href="assets/favicon.svg">
@@ -85,7 +85,6 @@
     <link rel="stylesheet" href="css/shortcodes.css">
     <link rel="stylesheet" href="css/github.css">
     <link rel="stylesheet" href="css/lock.css">
-    <link rel="stylesheet" href="css/stats.css">
     <link rel="stylesheet" href="css/music.css">
     <link rel="stylesheet" href="css/sticky.css">
     <link rel="stylesheet" href="css/style-memphis.css">
@@ -100,7 +99,7 @@
                 <span class="brand-mark"></span>
                 <span class="brand-text">Ryan</span>
             </a>
-            <button class="nav-toggle" type="button" aria-controls="site-nav" aria-expanded="false">
+            <button class="nav-toggle" type="button" aria-label="打开菜单" aria-controls="site-nav" aria-expanded="false">
                 <span></span><span></span>
             </button>
             <nav class="site-nav" id="site-nav" aria-label="主导航">
@@ -115,8 +114,8 @@
             <a class="nav-link" href="about.html">关于我</a>
         </div>
         <div class="nav-item has-children nav-more">
-            <span class="nav-link" tabindex="0" role="button" aria-haspopup="true">更多</span>
-            <div class="nav-dropdown">
+            <button type="button" class="nav-link" aria-controls="more-menu" aria-haspopup="true" aria-expanded="false">更多</button>
+            <div class="nav-dropdown" id="more-menu">
                 <a href="https://github.com/LzyLsq" target="_blank" rel="noopener noreferrer">GitHub</a>
                 <a href="mailto:lzyryan5247@gmail.com">邮箱联系</a>
             </div>
@@ -130,9 +129,7 @@
                 <kbd class="search-hint" aria-hidden="true"><span class="search-hint-mac">⌘</span><span class="search-hint-win">Ctrl</span>K</kbd>
             </form>
             <div class="header-actions">
-                <button type="button" class="header-action stats-toggle" id="stats-toggle" aria-label="站点统计" data-no-swup>
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3v18h18"/><path d="M7 14l4-4 4 4 5-5"/><circle cx="7" cy="14" r="1.5" fill="currentColor"/><circle cx="11" cy="10" r="1.5" fill="currentColor"/><circle cx="15" cy="14" r="1.5" fill="currentColor"/><circle cx="20" cy="9" r="1.5" fill="currentColor"/></svg>
-                </button>
+                <a class="header-action" href="mailto:lzyryan5247@gmail.com" aria-label="邮件联系 Ryan" title="邮件联系"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg></a>
                 <button type="button" class="header-action theme-toggle" id="theme-toggle" aria-label="切换明暗主题" data-no-swup>
                     <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
                     <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34 1.41-1.41"/></svg>
@@ -144,136 +141,19 @@
     <section class="stream-section" id="posts">
         <div class="flux-container">
             <div class="section-heading">
-                <h2>全部文章</h2>
-                <p>共 6 篇 · 示例内容，后续替换为你的真实发布</p>
+                <h2>文章</h2>
+                <p>目前还没有正式发布的文章。这里会在写好后更新。</p>
             </div>
             <p class="search-status" data-search-status role="status" aria-live="polite" hidden></p>
             <div class="home-grid">
                 <div class="home-main">
-                    <div class="post-stack" id="post-list" data-post-list>
-<article class="post-card">
-                                    <a class="post-card-media" href="post.html">
-                                        <img
-                                            src="assets/images/post-1.svg"
-                                            alt="文章标题一"
-                                            loading="lazy"
-                                            onerror="this.onerror=null;this.src='assets/images/post-1.svg';"
-                                        >
-                                    </a>
-                                    <div class="post-card-body">
-                                        <h3><a href="post.html">文章标题一:一句话概括这篇文章的核心内容</a></h3>
-                                        <p>这里是文章摘要,用一两句话概括文章内容,吸引读者点击阅读全文。</p>
-                                        <div class="card-meta">
-                                            <div class="tags-list">
-                                                <a href="posts.html#post-list" data-tag="代码人生">代码人生</a>                                            </div>
-                                            <span>
-                                                2026.09.22                                                                                                                                            </span>
-                                        </div>
-                                    </div>
-                                </article>
-<article class="post-card">
-                                    <a class="post-card-media" href="post.html">
-                                        <img
-                                            src="assets/images/post-2.svg"
-                                            alt="文章标题二"
-                                            loading="lazy"
-                                            onerror="this.onerror=null;this.src='assets/images/post-1.svg';"
-                                        >
-                                    </a>
-                                    <div class="post-card-body">
-                                        <h3><a href="post.html">文章标题二:一句话概括这篇文章的核心内容</a></h3>
-                                        <p>这里是文章摘要,用一两句话概括文章内容,吸引读者点击阅读全文。</p>
-                                        <div class="card-meta">
-                                            <div class="tags-list">
-                                                <a href="posts.html#post-list" data-tag="运维菜鸟">开发菜鸟</a>                                            </div>
-                                            <span>
-                                                2026.09.15                                                                                                                                            </span>
-                                        </div>
-                                    </div>
-                                </article>
-<article class="post-card">
-                                    <a class="post-card-media" href="post.html">
-                                        <img
-                                            src="assets/images/post-3.svg"
-                                            alt="文章标题三"
-                                            loading="lazy"
-                                            onerror="this.onerror=null;this.src='assets/images/post-1.svg';"
-                                        >
-                                    </a>
-                                    <div class="post-card-body">
-                                        <h3><a href="post.html">文章标题三:一句话概括这篇文章的核心内容</a></h3>
-                                        <p>这里是文章摘要,用一两句话概括文章内容,吸引读者点击阅读全文。</p>
-                                        <div class="card-meta">
-                                            <div class="tags-list">
-                                                <a href="posts.html#post-list" data-tag="Docker">Docker</a>                                            </div>
-                                            <span>
-                                                2026.09.01                                                                                                                                            </span>
-                                        </div>
-                                    </div>
-                                </article>
-<article class="post-card">
-                                    <a class="post-card-media" href="post.html">
-                                        <img
-                                            src="assets/images/post-4.svg"
-                                            alt="文章标题四"
-                                            loading="lazy"
-                                            onerror="this.onerror=null;this.src='assets/images/post-1.svg';"
-                                        >
-                                    </a>
-                                    <div class="post-card-body">
-                                        <h3><a href="post.html">文章标题四:一句话概括这篇文章的核心内容</a></h3>
-                                        <p>这里是文章摘要,用一两句话概括文章内容,吸引读者点击阅读全文。</p>
-                                        <div class="card-meta">
-                                            <div class="tags-list">
-                                                <a href="posts.html#post-list" data-tag="代码人生">代码人生</a>                                            </div>
-                                            <span>
-                                                2026.08.20                                                                                                                                            </span>
-                                        </div>
-                                    </div>
-                                </article>
-<article class="post-card">
-                                    <a class="post-card-media" href="post.html">
-                                        <img
-                                            src="assets/images/post-5.svg"
-                                            alt="文章标题五"
-                                            loading="lazy"
-                                            onerror="this.onerror=null;this.src='assets/images/post-1.svg';"
-                                        >
-                                    </a>
-                                    <div class="post-card-body">
-                                        <h3><a href="post.html">文章标题五:一句话概括这篇文章的核心内容</a></h3>
-                                        <p>这里是文章摘要,用一两句话概括文章内容,吸引读者点击阅读全文。</p>
-                                        <div class="card-meta">
-                                            <div class="tags-list">
-                                                <a href="posts.html#post-list" data-tag="Cloudflare">Cloudflare</a>                                            </div>
-                                            <span>
-                                                2026.08.01                                                                                                                                            </span>
-                                        </div>
-                                    </div>
-                                </article>
-<article class="post-card">
-                                    <a class="post-card-media" href="post.html">
-                                        <img
-                                            src="assets/images/post-6.svg"
-                                            alt="文章标题六"
-                                            loading="lazy"
-                                            onerror="this.onerror=null;this.src='assets/images/post-1.svg';"
-                                        >
-                                    </a>
-                                    <div class="post-card-body">
-                                        <h3><a href="post.html">文章标题六:一句话概括这篇文章的核心内容</a></h3>
-                                        <p>这里是文章摘要,用一两句话概括文章内容,吸引读者点击阅读全文。</p>
-                                        <div class="card-meta">
-                                            <div class="tags-list">
-                                                <a href="posts.html#post-list" data-tag="水城杂类">水城杂类</a>                                            </div>
-                                            <span>
-                                                2026.07.15                                                                                                                                            </span>
-                                        </div>
-                                    </div>
-                                </article>
-                    </div>
-                </div>
-<aside class="sidebar">
+                    <div class="post-stack" id="post-list" data-post-list></div>
+  <div class="empty-publications" data-empty-publications>
+    <span class="empty-sticker" aria-hidden="true">✎</span>
+    <div><h3>第一篇还在路上</h3><p>写好的内容才会出现在文章列表里。搜索功能已准备好，等文章发布后就能按标题、摘要和标签查找。</p>
+    <a class="button button-primary" href="post.html">先看排版示例 →</a></div>
+  </div>
+</div><aside class="sidebar">
                                         <div class="side-card side-profile">
                         <div class="profile-banner"></div>
                         <div class="profile-body">
@@ -300,16 +180,16 @@
                                                     </div>
                     </div>
                                             <div class="side-card">
-                            <h3>标签</h3>
+                            <h3>文章标签</h3>
                             <div class="tag-cloud" data-tag-cloud></div>
                         </div>
                                             <div class="side-card">
-                            <h3>最新文章</h3>
+                            <h3>最近发布</h3>
             <div class="side-latest" data-side-latest></div>
                         </div>
                     <div class="side-card">
                         <h3>保持联系</h3>
-                        <p>想交流技术或了解项目，欢迎直接邮件联系。</p>
+                        <p>如果你想交流技术或了解项目，欢迎发邮件给我。</p>
                         <a class="button button-primary" style="margin-top:14px;width:100%;" href="mailto:lzyryan5247@gmail.com">邮件联系</a>
                                             </div>
                 </aside>
@@ -321,7 +201,7 @@
         <div class="flux-container footer-inner">
             <div class="footer-copy">
                 <span class="footer-title">© <span id="year">2026</span> Ryan.</span>
-                <span>iOS 开发 · 正在学习全栈 · 一名持续学习中的开发菜鸟</span>
+                <span>iOS 开发 · 正在学习全栈</span>
             </div>
             <div class="footer-meta">
                 <a href="index.html#top">首页</a>
@@ -330,48 +210,13 @@
                 <a href="about.html">关于我</a>
             </div>
         </div>
-        <div class="flux-container footer-legal">
-            <span>已稳定运行 <span id="site-days">1</span> 天</span>
-        </div>
+        <div class="flux-container footer-legal"><span>谢谢你来看看，这里会慢慢更新。</span></div>
     </footer>
 </div>
 <div class="pjax-progress-bar" id="pjax-progress" aria-hidden="true"></div>
 <button type="button" class="back-to-top" id="back-to-top" aria-label="回到顶部" data-no-swup>
     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 15l-6-6-6 6"/></svg>
 </button>
-<div class="stats-modal" id="stats-modal" role="dialog" aria-modal="true" aria-labelledby="stats-modal-title" hidden>
-    <div class="stats-modal-backdrop" data-stats-close></div>
-    <div class="stats-modal-dialog">
-        <div class="stats-modal-header">
-            <h2 id="stats-modal-title">站点统计</h2>
-            <button type="button" class="stats-modal-close" data-stats-close aria-label="关闭">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-            </button>
-        </div>
-        <div class="stats-modal-body">
-            <div class="stats-card stats-card--full">
-                <h3>动态日历 — 近 10 个月活动</h3>
-                <div class="stats-chart" id="stats-chart-heatmap"></div>
-            </div>
-            <div class="stats-card">
-                <h3>分类雷达图</h3>
-                <div class="stats-chart" id="stats-chart-radar"></div>
-            </div>
-            <div class="stats-card">
-                <h3>发布统计 — 月度</h3>
-                <div class="stats-chart" id="stats-chart-monthly"></div>
-            </div>
-            <div class="stats-card">
-                <h3>分类统计</h3>
-                <div class="stats-chart" id="stats-chart-categories"></div>
-            </div>
-            <div class="stats-card">
-                <h3>标签 TOP 20</h3>
-                <div class="stats-chart" id="stats-chart-tags"></div>
-            </div>
-        </div>
-    </div>
-</div>
 <script src="js/theme.js"></script>
 </body>
 </html>

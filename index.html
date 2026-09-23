@@ -17,19 +17,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- ========== TODO: 改成你的网站信息 ========== -->
     <title>Ryan · iOS 开发</title>
-    <meta name="description" content="Ryan · iOS 开发。记录 iOS / 大数据 / 全栈项目实践与技术笔记。">
+    <meta name="description" content="Ryan 的个人网站：iOS 开发，正在学习全栈；目前介绍两个项目，文章待更新。">
     <!-- ============================================ -->
     <link rel="canonical" href="https://lzylsq.github.io/">
     <meta property="og:type" content="website">
     <meta property="og:title" content="Ryan · iOS 开发">
-    <meta property="og:description" content="一名持续学习中的开发菜鸟">
+    <meta property="og:description" content="iOS 开发，正在学习全栈">
     <meta property="og:url" content="https://lzylsq.github.io/">
     <meta property="og:site_name" content="Ryan · iOS 开发">
     <meta property="og:locale" content="zh_CN">
-    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:card" content="summary">
     <meta name="twitter:title" content="Ryan · iOS 开发">
-    <meta name="twitter:description" content="一名持续学习中的开发菜鸟">
-    <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"Ryan · iOS 开发","url":"https://lzylsq.github.io/","description":"Ryan · iOS 开发。记录 iOS / 大数据 / 全栈项目实践与技术笔记。","potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://lzylsq.github.io/posts.html?s={search_term_string}"},"query-input":"required name=search_term_string"}}</script>
+    <meta name="twitter:description" content="iOS 开发，正在学习全栈">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"Ryan · iOS 开发","url":"https://lzylsq.github.io/","description":"Ryan 的个人网站：iOS 开发，正在学习全栈；目前介绍两个项目，文章待更新。","potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://lzylsq.github.io/posts.html?s={search_term_string}"},"query-input":"required name=search_term_string"}}</script>
         <link rel="icon" href="assets/favicon.svg">
     <link rel="shortcut icon" href="assets/favicon.svg">
     <link rel="apple-touch-icon" href="assets/favicon.svg">
@@ -85,7 +85,6 @@
     <link rel="stylesheet" href="css/shortcodes.css">
     <link rel="stylesheet" href="css/github.css">
     <link rel="stylesheet" href="css/lock.css">
-    <link rel="stylesheet" href="css/stats.css">
     <link rel="stylesheet" href="css/music.css">
     <link rel="stylesheet" href="css/sticky.css">
     <link rel="stylesheet" href="css/style-memphis.css">
@@ -100,7 +99,7 @@
                 <span class="brand-mark"></span>
                 <span class="brand-text">Ryan</span>
             </a>
-            <button class="nav-toggle" type="button" aria-controls="site-nav" aria-expanded="false">
+            <button class="nav-toggle" type="button" aria-label="打开菜单" aria-controls="site-nav" aria-expanded="false">
                 <span></span><span></span>
             </button>
             <nav class="site-nav" id="site-nav" aria-label="主导航">
@@ -115,8 +114,8 @@
             <a class="nav-link" href="about.html">关于我</a>
         </div>
         <div class="nav-item has-children nav-more">
-            <span class="nav-link" tabindex="0" role="button" aria-haspopup="true">更多</span>
-            <div class="nav-dropdown">
+            <button type="button" class="nav-link" aria-controls="more-menu" aria-haspopup="true" aria-expanded="false">更多</button>
+            <div class="nav-dropdown" id="more-menu">
                 <a href="https://github.com/LzyLsq" target="_blank" rel="noopener noreferrer">GitHub</a>
                 <a href="mailto:lzyryan5247@gmail.com">邮箱联系</a>
             </div>
@@ -130,9 +129,7 @@
                 <kbd class="search-hint" aria-hidden="true"><span class="search-hint-mac">⌘</span><span class="search-hint-win">Ctrl</span>K</kbd>
             </form>
             <div class="header-actions">
-                <button type="button" class="header-action stats-toggle" id="stats-toggle" aria-label="站点统计" data-no-swup>
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3v18h18"/><path d="M7 14l4-4 4 4 5-5"/><circle cx="7" cy="14" r="1.5" fill="currentColor"/><circle cx="11" cy="10" r="1.5" fill="currentColor"/><circle cx="15" cy="14" r="1.5" fill="currentColor"/><circle cx="20" cy="9" r="1.5" fill="currentColor"/></svg>
-                </button>
+                <a class="header-action" href="mailto:lzyryan5247@gmail.com" aria-label="邮件联系 Ryan" title="邮件联系"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg></a>
                 <button type="button" class="header-action theme-toggle" id="theme-toggle" aria-label="切换明暗主题" data-no-swup>
                     <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
                     <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34 1.41-1.41"/></svg>
@@ -141,242 +138,64 @@
         </div>
     </header>
 <main class="site-main" id="main-content">
-<section class="hero-section" id="top">
-            <div class="hero-carousel" data-hero-carousel>
-                                    <article class="hero-slide is-active" data-hero-slide>
-                        <div class="hero-media">
-                            <!-- TODO: 换成你自己的封面图,或删掉这层用纯色背景 -->
-                            <img
-                                src="assets/images/hero-1.svg"
-                                alt=""
-                                loading="eager"
-                                onerror="this.onerror=null;this.src='assets/images/hero-1.svg';"
-                            >
-                        </div>
-                        <div class="hero-surface"></div>
-                        <div class="flux-container">
-                            <div class="hero-grid">
-                                <div class="hero-copy">
-                                    <span class="eyebrow">// LATEST</span>
-                                    <h1><a href="post.html">文章标题一:一句话概括这篇文章的核心内容</a></h1>
-                                                                        <div class="hero-actions">
-                                        <a class="button button-primary" href="post.html">阅读全文 →</a>
-                                        <a class="button button-secondary" href="posts.html">浏览文章</a>
-                                    </div>
-                                </div>
-
-                                <div class="hero-side-visual">
-                                    <div class="code-window">
-                                        <div class="code-window-top">
-                                            <span class="code-dot"></span>
-                                            <span class="code-dot"></span>
-                                            <span class="code-dot"></span>
-                                        </div>
-<pre><span class="cw-kw">const</span> blog = {
-  title: <span class="cw-str">'Ryan'</span>,
-  focus: <span class="cw-str">'LATEST'</span>,
-  updated: <span class="cw-str">'2026.09.22'</span>
-}
-
-<span class="cw-kw">function</span> <span class="cw-fn">latest</span>() {
-  <span class="cw-kw">return</span> <span class="cw-str">'文章标题一'</span>
-}</pre>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </article>
-                                    <article class="hero-slide " data-hero-slide>
-                        <div class="hero-media">
-                            <img
-                                src="assets/images/hero-2.svg"
-                                alt=""
-                                loading="lazy"
-                                onerror="this.onerror=null;this.src='assets/images/hero-1.svg';"
-                            >
-                        </div>
-                        <div class="hero-surface"></div>
-                        <div class="flux-container">
-                            <div class="hero-grid">
-                                <div class="hero-copy">
-                                    <span class="eyebrow">// LATEST</span>
-                                    <h1><a href="post.html">文章标题二:一句话概括这篇文章的核心内容</a></h1>
-                                                                        <div class="hero-actions">
-                                        <a class="button button-primary" href="post.html">阅读全文 →</a>
-                                        <a class="button button-secondary" href="posts.html">浏览文章</a>
-                                    </div>
-                                </div>
-
-                                <div class="hero-side-visual">
-                                    <div class="code-window">
-                                        <div class="code-window-top">
-                                            <span class="code-dot"></span>
-                                            <span class="code-dot"></span>
-                                            <span class="code-dot"></span>
-                                        </div>
-<pre><span class="cw-kw">const</span> blog = {
-  title: <span class="cw-str">'Ryan'</span>,
-  focus: <span class="cw-str">'LATEST'</span>,
-  updated: <span class="cw-str">'2026.09.15'</span>
-}
-
-<span class="cw-kw">function</span> <span class="cw-fn">latest</span>() {
-  <span class="cw-kw">return</span> <span class="cw-str">'文章标题二'</span>
-}</pre>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </article>
-                                    <article class="hero-slide " data-hero-slide>
-                        <div class="hero-media">
-                            <img
-                                src="assets/images/hero-3.svg"
-                                alt=""
-                                loading="lazy"
-                                onerror="this.onerror=null;this.src='assets/images/hero-1.svg';"
-                            >
-                        </div>
-                        <div class="hero-surface"></div>
-                        <div class="flux-container">
-                            <div class="hero-grid">
-                                <div class="hero-copy">
-                                    <span class="eyebrow">// LATEST</span>
-                                    <h1><a href="post.html">文章标题三:一句话概括这篇文章的核心内容</a></h1>
-                                                                        <div class="hero-actions">
-                                        <a class="button button-primary" href="post.html">阅读全文 →</a>
-                                        <a class="button button-secondary" href="posts.html">浏览文章</a>
-                                    </div>
-                                </div>
-
-                                <div class="hero-side-visual">
-                                    <div class="code-window">
-                                        <div class="code-window-top">
-                                            <span class="code-dot"></span>
-                                            <span class="code-dot"></span>
-                                            <span class="code-dot"></span>
-                                        </div>
-<pre><span class="cw-kw">const</span> blog = {
-  title: <span class="cw-str">'Ryan'</span>,
-  focus: <span class="cw-str">'LATEST'</span>,
-  updated: <span class="cw-str">'2026.09.01'</span>
-}
-
-<span class="cw-kw">function</span> <span class="cw-fn">latest</span>() {
-  <span class="cw-kw">return</span> <span class="cw-str">'文章标题三'</span>
-}</pre>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </article>
-                                    <article class="hero-slide " data-hero-slide>
-                        <div class="hero-media">
-                            <img
-                                src="assets/images/hero-4.svg"
-                                alt=""
-                                loading="lazy"
-                                onerror="this.onerror=null;this.src='assets/images/hero-1.svg';"
-                            >
-                        </div>
-                        <div class="hero-surface"></div>
-                        <div class="flux-container">
-                            <div class="hero-grid">
-                                <div class="hero-copy">
-                                    <span class="eyebrow">// LATEST</span>
-                                    <h1><a href="post.html">文章标题四:一句话概括这篇文章的核心内容</a></h1>
-                                                                        <div class="hero-actions">
-                                        <a class="button button-primary" href="post.html">阅读全文 →</a>
-                                        <a class="button button-secondary" href="posts.html">浏览文章</a>
-                                    </div>
-                                </div>
-
-                                <div class="hero-side-visual">
-                                    <div class="code-window">
-                                        <div class="code-window-top">
-                                            <span class="code-dot"></span>
-                                            <span class="code-dot"></span>
-                                            <span class="code-dot"></span>
-                                        </div>
-<pre><span class="cw-kw">const</span> blog = {
-  title: <span class="cw-str">'Ryan'</span>,
-  focus: <span class="cw-str">'LATEST'</span>,
-  updated: <span class="cw-str">'2026.08.20'</span>
-}
-
-<span class="cw-kw">function</span> <span class="cw-fn">latest</span>() {
-  <span class="cw-kw">return</span> <span class="cw-str">'文章标题四'</span>
-}</pre>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </article>
-                                    <article class="hero-slide " data-hero-slide>
-                        <div class="hero-media">
-                            <img
-                                src="assets/images/hero-5.svg"
-                                alt=""
-                                loading="lazy"
-                                onerror="this.onerror=null;this.src='assets/images/hero-1.svg';"
-                            >
-                        </div>
-                        <div class="hero-surface"></div>
-                        <div class="flux-container">
-                            <div class="hero-grid">
-                                <div class="hero-copy">
-                                    <span class="eyebrow">// LATEST</span>
-                                    <h1><a href="post.html">文章标题五:一句话概括这篇文章的核心内容</a></h1>
-                                                                        <div class="hero-actions">
-                                        <a class="button button-primary" href="post.html">阅读全文 →</a>
-                                        <a class="button button-secondary" href="posts.html">浏览文章</a>
-                                    </div>
-                                </div>
-
-                                <div class="hero-side-visual">
-                                    <div class="code-window">
-                                        <div class="code-window-top">
-                                            <span class="code-dot"></span>
-                                            <span class="code-dot"></span>
-                                            <span class="code-dot"></span>
-                                        </div>
-<pre><span class="cw-kw">const</span> blog = {
-  title: <span class="cw-str">'Ryan'</span>,
-  focus: <span class="cw-str">'LATEST'</span>,
-  updated: <span class="cw-str">'2026.08.01'</span>
-}
-
-<span class="cw-kw">function</span> <span class="cw-fn">latest</span>() {
-  <span class="cw-kw">return</span> <span class="cw-str">'文章标题五'</span>
-}</pre>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </article>
-                
-                                    <div class="hero-controls">
-                        <button class="hero-arrow hero-arrow--prev" type="button" data-hero-prev aria-label="上一张">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 6 9 12 15 18"/></svg>
-                        </button>
-                        <button class="hero-arrow hero-arrow--next" type="button" data-hero-next aria-label="下一张">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 6 15 12 9 18"/></svg>
-                        </button>
-                        <div class="hero-dots">
-                                                            <button class="hero-dot is-active" type="button" data-hero-dot="0" aria-label="切换到第 1 张"></button>
-                                                            <button class="hero-dot " type="button" data-hero-dot="1" aria-label="切换到第 2 张"></button>
-                                                            <button class="hero-dot " type="button" data-hero-dot="2" aria-label="切换到第 3 张"></button>
-                                                            <button class="hero-dot " type="button" data-hero-dot="3" aria-label="切换到第 4 张"></button>
-                                                            <button class="hero-dot " type="button" data-hero-dot="4" aria-label="切换到第 5 张"></button>
-                                                    </div>
-                    </div>
-                            </div>
-        </section>
+<section class="hero-section" id="top"><div class="hero-carousel" data-hero-carousel><article class="hero-slide is-active" data-hero-slide>
+    <div class="hero-media"><img src="assets/images/hero-1.svg" alt="" loading="eager"></div>
+    <div class="hero-surface"></div>
+    <div class="flux-container"><div class="hero-grid">
+      <div class="hero-copy">
+        <span class="eyebrow">// HELLO</span>
+        <h1><a href="about.html">你好，我是 Ryan</a></h1>
+        <p>我从事 iOS 开发，正在学习全栈。这里会慢慢整理项目、学习过程和写下来的笔记。</p>
+        <div class="hero-actions"><a class="button button-primary" href="about.html">认识我 →</a><a class="button button-secondary" href="index.html#projects">看看项目</a></div>
+      </div>
+      <div class="hero-side-visual"><div class="code-window"><div class="code-window-top"><span class="code-dot"></span><span class="code-dot"></span><span class="code-dot"></span></div><pre>const ryan = {
+  work: 'iOS 开发',
+  learning: '全栈',
+  here: '记录与分享'
+}</pre></div></div>
+    </div></div>
+  </article><article class="hero-slide" data-hero-slide>
+    <div class="hero-media"><img src="assets/images/hero-2.svg" alt="" loading="lazy"></div>
+    <div class="hero-surface"></div>
+    <div class="flux-container"><div class="hero-grid">
+      <div class="hero-copy">
+        <span class="eyebrow">// PROJECT · DATA</span>
+        <h1><a href="index.html#projects">从数据链路开始</a></h1>
+        <p>订单分析与推荐平台：尝试把采集、实时计算、离线处理和展示串成一条可追踪的流程。</p>
+        <div class="hero-actions"><a class="button button-primary" href="index.html#projects">查看项目 →</a><a class="button button-secondary" href="mailto:lzyryan5247@gmail.com?subject=Flume_Sqoop_Project">邮件交流</a></div>
+      </div>
+      <div class="hero-side-visual"><div class="code-window"><div class="code-window-top"><span class="code-dot"></span><span class="code-dot"></span><span class="code-dot"></span></div><pre>const pipeline = [
+  'Kafka → Spark Streaming',
+  'Flume → HDFS',
+  'Sqoop → Hive'
+]</pre></div></div>
+    </div></div>
+  </article><article class="hero-slide" data-hero-slide>
+    <div class="hero-media"><img src="assets/images/hero-3.svg" alt="" loading="lazy"></div>
+    <div class="hero-surface"></div>
+    <div class="flux-container"><div class="hero-grid">
+      <div class="hero-copy">
+        <span class="eyebrow">// PROJECT · AI</span>
+        <h1><a href="index.html#projects">也在探索 AI 应用</a></h1>
+        <p>LawDesign 是法律场景的智能体平台项目。我还在持续整理和完善，欢迎交流思路。</p>
+        <div class="hero-actions"><a class="button button-primary" href="index.html#projects">查看项目 →</a><a class="button button-secondary" href="mailto:lzyryan5247@gmail.com?subject=LawDesign">邮件交流</a></div>
+      </div>
+      <div class="hero-side-visual"><div class="code-window"><div class="code-window-top"><span class="code-dot"></span><span class="code-dot"></span><span class="code-dot"></span></div><pre>const interests = [
+  'iOS',
+  '后端与数据',
+  'AI 应用'
+]</pre></div></div>
+    </div></div>
+  </article><div class="hero-controls">
+  <button class="hero-arrow hero-arrow--prev" type="button" data-hero-prev aria-label="上一张"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 6 9 12 15 18"/></svg></button>
+  <button class="hero-arrow hero-arrow--next" type="button" data-hero-next aria-label="下一张"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 6 15 12 9 18"/></svg></button>
+  <div class="hero-dots"><button class="hero-dot is-active" type="button" data-hero-dot="0" aria-label="切换到第 1 张"></button><button class="hero-dot" type="button" data-hero-dot="1" aria-label="切换到第 2 张"></button><button class="hero-dot" type="button" data-hero-dot="2" aria-label="切换到第 3 张"></button></div>
+</div></div></section>
 <section class="projects-section" id="projects">
         <div class="flux-container">
             <div class="section-heading">
                 <h2>代码人生</h2>
-                <p>两个完整跑通的项目 · 从实时数仓到法律智能体</p>
+                <p>两个项目 · 从数据处理到 AI 应用</p>
             </div>
 
             <div class="project-grid">
@@ -388,7 +207,7 @@
                     </div>
                     <h3 class="project-title">实时订单数据分析与推荐平台</h3>
                     <p class="project-desc">
-                        完整覆盖大数据离线 + 实时两条链路：Python 模拟订单数据源，经 Kafka 上报；
+                        尝试串起大数据离线与实时两条链路：Python 模拟订单数据源，经 Kafka 上报；
                         Spark Streaming 做窗口聚合，Flume 自定义 Source 落盘 HDFS，
                         Sqoop 把 MySQL 业务库同步进 Hive 中央仓库，最后 Flask + WebSocket + ECharts 实时可视化。
                     </p>
@@ -424,12 +243,12 @@
                     </div>
                     <h3 class="project-title">LawDesign · 法律智能体平台</h3>
                     <p class="project-desc">
-                        基于大模型的法律咨询 / 合同审查 / 诉讼文书生成一体化平台。
-                        monorepo 结构：20+ 个可独立启动的微服务 + React 前端 + Scala 实时风控流处理，
+                        围绕法律咨询、合同审查和诉讼文书草拟展开的练习项目。
+                        monorepo 结构：多个服务模块 + React 前端 + Scala 实时风控流处理，
                         公共能力抽到 <code>shared/</code> 包统一复用。
                     </p>
                     <ul class="project-points">
-                        <li>微服务集群：鉴权 / 合规审查 / 合同数据 / 风险分析 / 诉讼文书 / 合同模板等 20+ 服务</li>
+                        <li>服务模块：鉴权 / 合规审查 / 合同数据 / 风险分析 / 诉讼文书 / 合同模板等</li>
                         <li>GraphRAG 法律问答：FastAPI 检索服务 + graphrag 知识图谱，Moonshot 案例分析</li>
                         <li>实时风控：Kafka → Spark Streaming → 风控看板</li>
                         <li>前端：React + TypeScript + antd(Vite)，shared 包统一 Flask / FastAPI 脚手架</li>
@@ -457,74 +276,15 @@
     <section class="stream-section">
         <div class="flux-container">
             <div class="section-heading">
-                <h2>最新文章</h2>
-                <p>持续记录与沉淀</p>
-                <a class="button button-secondary" href="posts.html">查看全部 →</a>
+                <h2>写作计划</h2>
+                <p>文章还在准备中，先看看排版示例</p>
+                <a class="button button-secondary" href="posts.html">浏览文章页 →</a>
             </div>
-            <div class="post-stack" data-home-latest>
-<article class="post-card">
-                                    <a class="post-card-media" href="post.html">
-                                        <img
-                                            src="assets/images/post-1.svg"
-                                            alt="文章标题一"
-                                            loading="lazy"
-                                            onerror="this.onerror=null;this.src='assets/images/post-1.svg';"
-                                        >
-                                    </a>
-                                    <div class="post-card-body">
-                                        <h3><a href="post.html">文章标题一:一句话概括这篇文章的核心内容</a></h3>
-                                        <p>这里是文章摘要,用一两句话概括文章内容,吸引读者点击阅读全文。</p>
-                                        <div class="card-meta">
-                                            <div class="tags-list">
-                                                <a href="posts.html#post-list" data-tag="代码人生">代码人生</a>                                            </div>
-                                            <span>
-                                                2026.09.22                                                                                                                                            </span>
-                                        </div>
-                                    </div>
-                                </article>
-<article class="post-card">
-                                    <a class="post-card-media" href="post.html">
-                                        <img
-                                            src="assets/images/post-2.svg"
-                                            alt="文章标题二"
-                                            loading="lazy"
-                                            onerror="this.onerror=null;this.src='assets/images/post-1.svg';"
-                                        >
-                                    </a>
-                                    <div class="post-card-body">
-                                        <h3><a href="post.html">文章标题二:一句话概括这篇文章的核心内容</a></h3>
-                                        <p>这里是文章摘要,用一两句话概括文章内容,吸引读者点击阅读全文。</p>
-                                        <div class="card-meta">
-                                            <div class="tags-list">
-                                                <a href="posts.html#post-list" data-tag="运维菜鸟">开发菜鸟</a>                                            </div>
-                                            <span>
-                                                2026.09.15                                                                                                                                            </span>
-                                        </div>
-                                    </div>
-                                </article>
-<article class="post-card">
-                                    <a class="post-card-media" href="post.html">
-                                        <img
-                                            src="assets/images/post-3.svg"
-                                            alt="文章标题三"
-                                            loading="lazy"
-                                            onerror="this.onerror=null;this.src='assets/images/post-1.svg';"
-                                        >
-                                    </a>
-                                    <div class="post-card-body">
-                                        <h3><a href="post.html">文章标题三:一句话概括这篇文章的核心内容</a></h3>
-                                        <p>这里是文章摘要,用一两句话概括文章内容,吸引读者点击阅读全文。</p>
-                                        <div class="card-meta">
-                                            <div class="tags-list">
-                                                <a href="posts.html#post-list" data-tag="Docker">Docker</a>                                            </div>
-                                            <span>
-                                                2026.09.01                                                                                                                                            </span>
-                                        </div>
-                                    </div>
-                                </article>
-            </div>
-        </div>
-    </section>
+            <div class="empty-publications">
+  <span class="empty-sticker" aria-hidden="true">✎</span>
+  <div><h3>还没有正式发布的文章</h3><p>项目笔记会在整理好以后放到这里。现在可以先看文章页的排版示例，或者直接看看项目。</p>
+  <div class="empty-actions"><a class="button button-primary" href="post.html">查看排版示例 →</a><a class="button button-secondary" href="index.html#projects">浏览项目</a></div></div>
+</div></div></section>
     <section class="about-section">
         <div class="flux-container">
             <div class="section-heading">
@@ -535,7 +295,7 @@
                 <div class="about-card about-intro">
                     <h3>你好，我是 Ryan 👋</h3>
                     <p>一名 iOS 开发工程师，日常以 Swift / Objective-C 为主，也喜欢钻研后端与大数据。目前正在系统学习全栈开发。</p>
-                    <p>这个站点用来沉淀项目复盘和技术笔记，不追热点，只记自己踩过的坑。</p>
+                    <p>这个小站会用来整理项目过程和学习笔记。我想把遇到的问题、尝试过的方法慢慢记清楚。</p>
                     <a class="button button-primary" style="margin-top:16px;display:inline-flex;" href="about.html">了解更多 →</a>
                 </div>
             </div>
@@ -546,7 +306,7 @@
         <div class="flux-container footer-inner">
             <div class="footer-copy">
                 <span class="footer-title">© <span id="year">2026</span> Ryan.</span>
-                <span>iOS 开发 · 正在学习全栈 · 一名持续学习中的开发菜鸟</span>
+                <span>iOS 开发 · 正在学习全栈</span>
             </div>
             <div class="footer-meta">
                 <a href="index.html#top">首页</a>
@@ -555,48 +315,13 @@
                 <a href="about.html">关于我</a>
             </div>
         </div>
-        <div class="flux-container footer-legal">
-            <span>已稳定运行 <span id="site-days">1</span> 天</span>
-        </div>
+        <div class="flux-container footer-legal"><span>谢谢你来看看，这里会慢慢更新。</span></div>
     </footer>
 </div>
 <div class="pjax-progress-bar" id="pjax-progress" aria-hidden="true"></div>
 <button type="button" class="back-to-top" id="back-to-top" aria-label="回到顶部" data-no-swup>
     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 15l-6-6-6 6"/></svg>
 </button>
-<div class="stats-modal" id="stats-modal" role="dialog" aria-modal="true" aria-labelledby="stats-modal-title" hidden>
-    <div class="stats-modal-backdrop" data-stats-close></div>
-    <div class="stats-modal-dialog">
-        <div class="stats-modal-header">
-            <h2 id="stats-modal-title">站点统计</h2>
-            <button type="button" class="stats-modal-close" data-stats-close aria-label="关闭">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-            </button>
-        </div>
-        <div class="stats-modal-body">
-            <div class="stats-card stats-card--full">
-                <h3>动态日历 — 近 10 个月活动</h3>
-                <div class="stats-chart" id="stats-chart-heatmap"></div>
-            </div>
-            <div class="stats-card">
-                <h3>分类雷达图</h3>
-                <div class="stats-chart" id="stats-chart-radar"></div>
-            </div>
-            <div class="stats-card">
-                <h3>发布统计 — 月度</h3>
-                <div class="stats-chart" id="stats-chart-monthly"></div>
-            </div>
-            <div class="stats-card">
-                <h3>分类统计</h3>
-                <div class="stats-chart" id="stats-chart-categories"></div>
-            </div>
-            <div class="stats-card">
-                <h3>标签 TOP 20</h3>
-                <div class="stats-chart" id="stats-chart-tags"></div>
-            </div>
-        </div>
-    </div>
-</div>
 <script src="js/theme.js"></script>
 </body>
 </html>
