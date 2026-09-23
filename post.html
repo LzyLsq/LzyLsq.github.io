@@ -30,7 +30,7 @@
     <meta name="twitter:card" content="summary">
     <meta name="twitter:title" content="Ryan · iOS 开发">
     <meta name="twitter:description" content="iOS 开发，正在学习全栈">
-    <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"Ryan · iOS 开发","url":"https://lzylsq.github.io/","description":"Ryan 的个人网站：iOS 开发，正在学习全栈；目前介绍两个项目，文章待更新。","potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://lzylsq.github.io/posts.html?s={search_term_string}"},"query-input":"required name=search_term_string"}}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"Ryan · iOS 开发","url":"https://lzylsq.github.io/","description":"Ryan 的个人网站：iOS 开发，正在学习全栈；目前介绍两个项目，文章待更新。","potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://lzylsq.github.io/search.html?s={search_term_string}"},"query-input":"required name=search_term_string"}}</script>
         <link rel="icon" href="assets/favicon.svg">
     <link rel="shortcut icon" href="assets/favicon.svg">
     <link rel="apple-touch-icon" href="assets/favicon.svg">
@@ -85,11 +85,11 @@
             </div>
         </div>
             </nav>
-            <form class="search-box" action="posts.html" method="get" role="search" aria-label="文章搜索">
+            <form class="search-box" id="site-search-form" action="search.html" method="get" role="search" aria-label="站内搜索">
                 <button type="submit" class="search-icon-btn" aria-label="搜索">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
                 </button>
-                <input type="text" name="s" id="site-search-input" placeholder="搜索文章…" value="" autocomplete="off">
+                <input type="text" name="s" id="site-search-input" placeholder="搜索站点…" value="" autocomplete="off">
                 <kbd class="search-hint" aria-hidden="true"><span class="search-hint-mac">⌘</span><span class="search-hint-win">Ctrl</span>K</kbd>
             </form>
             <div class="header-actions">

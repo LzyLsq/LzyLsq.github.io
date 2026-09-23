@@ -222,37 +222,62 @@
       if (updateUrl) { syncQueryUrl(original); }
     };
 
-    var goToPosts = function (raw) {
+    var goToSearch = function (raw) {
       var q = (raw || '').trim();
-      window.location.href = 'posts.html' + (q ? '?s=' + encodeURIComponent(q) : '');
+      window.location.href = 'search.html' + (q ? '?s=' + encodeURIComponent(q) : '');
     };
 
-    var debounce;
-    on(input, 'input', function () {
-      if (!isPostsPage) { return; }
-      window.clearTimeout(debounce);
-      debounce = window.setTimeout(function () { run(input.value, false); }, 120);
+    /* 手机端搜索按需展开；无 JS 时原有表单仍然可见。 */
+    var header = document.getElementById('site-header');
+    var actions = header && $('.header-actions', header);
+    var toggle = null;
+    if (actions) {
+      toggle = document.createElement('button');
+      toggle.type = 'button';
+      toggle.className = 'header-action search-toggle';
+      toggle.setAttribute('aria-label', '打开站内搜索');
+      toggle.setAttribute('aria-expanded', 'false');
+      toggle.setAttribute('aria-controls', 'site-search-form');
+      toggle.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>';
+      actions.insertBefore(toggle, actions.firstChild);
+      document.documentElement.classList.add('has-enhanced-search');
+    }
+    var setOpen = function (open, focusInput) {
+      if (!toggle || !header) { return; }
+      if (open) {
+        var navToggle = $('.nav-toggle', header);
+        if (navToggle && navToggle.getAttribute('aria-expanded') === 'true') { navToggle.click(); }
+      }
+      header.classList.toggle('is-search-open', open);
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      toggle.setAttribute('aria-label', open ? '关闭站内搜索' : '打开站内搜索');
+      if (focusInput) { input.focus(); }
+    };
+    on(toggle, 'click', function () {
+      var next = !header.classList.contains('is-search-open');
+      setOpen(next, next);
     });
+    on($('.nav-toggle', header), 'click', function () { if (header.classList.contains('is-search-open')) { setOpen(false); } });
+    on(document, 'click', function (e) {
+      if (header && header.classList.contains('is-search-open') && !form.contains(e.target) && !toggle.contains(e.target)) { setOpen(false); }
+    });
+    on(window, 'resize', function () { if (window.innerWidth > 820) { setOpen(false); } });
 
     on(form, 'submit', function (e) {
       e.preventDefault();
-      if (!isPostsPage) { goToPosts(input.value); return; }
-      run(input.value, true);
-      var first = cards().filter(function (c) { return !c.hidden; })[0];
-      if (first) { jumpTo(first); }
-      else if (input.value.trim()) { jumpTo(ensureStatus()); }
+      goToSearch(input.value);
     });
 
     on(document, 'keydown', function (e) {
       if (e.key === 'Escape' && document.activeElement === input) {
-        input.value = '';
-        if (isPostsPage) { run('', true); }
-        input.blur();
+        if (header && header.classList.contains('is-search-open')) { setOpen(false); toggle.focus(); }
+        else { input.value = ''; input.blur(); }
       }
       if ((e.metaKey || e.ctrlKey) && (e.key === 'k' || e.key === 'K')) {
         e.preventDefault();
-        input.focus();
-        input.select();
+        var mainInput = document.getElementById('main-search-input');
+        if (mainInput) { mainInput.focus(); mainInput.select(); }
+        else { if (window.innerWidth <= 820) { setOpen(true); } input.focus(); input.select(); }
       }
     });
 
@@ -262,7 +287,7 @@
       var tag = (a.getAttribute('data-tag') || '').trim();
       if (!tag) { return; }
       e.preventDefault();
-      if (!isPostsPage) { goToPosts(tag); return; }
+      if (!isPostsPage) { goToSearch(tag); return; }
       input.value = tag;
       run(tag, true);
       jumpTo(listRoot);

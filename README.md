@@ -10,19 +10,20 @@ iOS 开发的静态个人网站，使用 HTML、CSS 和原生 JavaScript，无�
 | --- | --- |
 | `index.html` | 首页导览、轮播入口与写作空状态 |
 | `projects.html` | 两个练习项目的总览与独立详情入口 |
+| `search.html` | 搜索站内实际页面及已发布文章（不收录排版示例） |
 | `data-pipeline.html` | 订单数据分析与推荐练习的技术路径 |
 | `law-design.html` | LawDesign 练习的技术路径 |
 | `posts.html` | 文章列表／搜索；目前诚实显示空状态 |
 | `about.html` | 个人简介、接触过的技术、邮箱与 GitHub |
 | `post.html` | **未发布**的文章排版示例，已设置 `noindex` |
 
-主导航的首页、代码人生、文章、关于我分别跳转独立页面；项目总览的入口分别进入独立的技术记录页。旧的 `projects.html#data-pipeline`、`projects.html#law-design` 链接仍可定位到对应总览卡片；旧的 `index.html#projects` 链接会自动转到项目页。关于页可复制邮箱、分享页面链接（系统分享不可用时使用剪贴板）；不支持剪贴板时会明确提示。首页轮播支持箭头、圆点、手机左右划动，并在悬停、聚焦、页面隐藏或系统要求减少动效时停止自动轮播。明暗主题按系统偏好初始化并记住选择。搜索有无 JavaScript 的表单回退，`Ctrl/⌘+K` 聚焦、`Esc` 清空；正式文章发布后可按卡片内容和标签筛选。文章详情提供阅读进度、目录高亮和代码复制。
+主导航的首页、代码人生、文章、关于我分别跳转独立页面；项目总览的入口分别进入独立的技术记录页。旧的 `projects.html#data-pipeline`、`projects.html#law-design` 链接仍可定位到对应总览卡片；旧的 `index.html#projects` 链接会自动转到项目页。关于页可复制邮箱、分享页面链接（系统分享不可用时使用剪贴板）；不支持剪贴板时会明确提示。首页轮播支持箭头、圆点、手机左右划动，并在悬停、聚焦、页面隐藏或系统要求减少动效时停止自动轮播。明暗主题按系统偏好初始化并记住选择。搜索在站内已存在的项目记录、个人介绍及正式发布的文章卡片中查找（不把排版示例算作文章），`Ctrl/⌘+K` 聚焦、手机点放大镜展开；搜索需要 JavaScript，关闭时页面明确提示并提供直接入口。文章页的旧 `?s=` 查询和文章标签筛选仍可使用。文章详情提供阅读进度、目录高亮和代码复制。
 
 ## 发布第一篇文章
 
 1. 复制 `post.html` 为一个新文件；建议先把新文件放在网站根目录。若放进子目录（例如 `posts/my-first-note.html`），需把 CSS、JS、图片及站内链接的相对路径对应改为 `../`。
 2. 修改标题、描述、HTML 正文、实际发布日期和分类；**从正式文章删掉** `<meta name="robots" content="noindex,follow">`。不要再沿用“排版示例”字样。
-3. 在 `posts.html` 的 `<div class="post-stack" id="post-list" data-post-list>` 中加入一张真实文章卡。标题、摘要、分类、日期及目标链接都填真实信息；若没有真实封面，可以继续使用几何装饰图，但不要把它当作项目截图；标签链接可写作 `<a href="posts.html#post-list" data-tag="Swift">Swift</a>`。页面侧栏的「最近发布」与「文章标签」会按卡片自动生成。
+3. 在 `posts.html` 的 `<div class="post-stack" id="post-list" data-post-list>` 中加入一张真实文章卡。标题、摘要、分类、日期及目标链接都填真实信息；若没有真实封面，可以继续使用几何装饰图，但不要把它当作项目截图；标签链接可写作 `<a href="posts.html#post-list" data-tag="Swift">Swift</a>`。页面侧栏的「最近发布」与「文章标签」会按卡片自动生成；站内搜索也会从真实文章卡片提取索引。
 卡片骨架（放进 `data-post-list` 容器；以下只是填写格式，不是已发布内容）：
 
 ```html
@@ -51,7 +52,7 @@ iOS 开发的静态个人网站，使用 HTML、CSS 和原生 JavaScript，无�
 - 主配色：`css/style-memphis.css` 的第 21 节集中覆盖粉、黄、青、紫四种点缀色与深色底色；调整时兼顾亮色主题与文字对比度。
 - 个人资料：`index.html`、`about.html`、`posts.html`、`projects.html` 及各页页脚；联系方式还在导航的「更多」菜单及页眉邮件入口。
 - 图片：`assets/images/` 中的几何图是装饰素材，并非真实项目截图；要展示项目实际画面请自行替换。
-- 页面交互：`js/theme.js`；无外部 JavaScript 依赖。
+- 页面交互：`js/theme.js`；站内搜索索引：`js/site-search.js`。无外部 JavaScript 依赖。
 
 本地预览：
 

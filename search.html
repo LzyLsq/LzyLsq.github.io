@@ -15,18 +15,18 @@
     })();
     </script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>LawDesign · 法律智能体平台 · Ryan</title>
-    <meta name="description" content="Ryan 的 LawDesign 法律场景练习项目技术记录，包含 React、Flask、FastAPI、GraphRAG 与实时数据模块。">
-    <link rel="canonical" href="https://lzylsq.github.io/law-design.html">
+    <title>站内搜索 · Ryan</title>
+    <meta name="description" content="搜索 Ryan 网站的项目记录、个人介绍和已发布文章。">
+    <meta name="robots" content="noindex,follow">
     <meta property="og:type" content="website">
-    <meta property="og:title" content="LawDesign · 法律智能体平台 · Ryan">
-    <meta property="og:description" content="Ryan 的 LawDesign 法律场景练习项目技术记录，包含 React、Flask、FastAPI、GraphRAG 与实时数据模块。">
-    <meta property="og:url" content="https://lzylsq.github.io/law-design.html">
+    <meta property="og:title" content="站内搜索 · Ryan">
+    <meta property="og:description" content="iOS 开发，正在学习全栈">
+    <meta property="og:url" content="https://lzylsq.github.io/search.html">
     <meta property="og:site_name" content="Ryan · iOS 开发">
     <meta property="og:locale" content="zh_CN">
     <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="LawDesign · 法律智能体平台 · Ryan">
-    <meta name="twitter:description" content="Ryan 的 LawDesign 法律场景练习项目技术记录，包含 React、Flask、FastAPI、GraphRAG 与实时数据模块。">
+    <meta name="twitter:title" content="Ryan · iOS 开发">
+    <meta name="twitter:description" content="iOS 开发，正在学习全栈">
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"Ryan · iOS 开发","url":"https://lzylsq.github.io/","description":"Ryan 的个人网站：iOS 开发，正在学习全栈；目前介绍两个项目，文章待更新。","potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://lzylsq.github.io/search.html?s={search_term_string}"},"query-input":"required name=search_term_string"}}</script>
         <link rel="icon" href="assets/favicon.svg">
     <link rel="shortcut icon" href="assets/favicon.svg">
@@ -65,8 +65,8 @@
             </button>
             <nav class="site-nav" id="site-nav" aria-label="主导航">
         <a class="" href="index.html">首页</a>
-        <div class="nav-item is-active">
-            <a class="nav-link is-active" href="projects.html">代码人生</a>
+        <div class="nav-item">
+            <a class="nav-link" href="projects.html">代码人生</a>
         </div>
         <div class="nav-item">
             <a class="nav-link" href="posts.html">文章</a>
@@ -99,21 +99,23 @@
         </div>
     </header>
 <main class="site-main" id="main-content">
-      <section class="projects-intro project-detail-intro"><div class="flux-container">
-        <nav class="project-breadcrumb" aria-label="面包屑导航"><a href="projects.html">代码人生</a><span aria-hidden="true">/</span><span aria-current="page">LawDesign</span></nav>
-        <span class="eyebrow">// PROJECT NOTE</span>
-        <h1>LawDesign · 法律智能体平台</h1>
-        <p class="project-detail-lede">围绕法律问答、合同审查与文书草拟，尝试组织前端和多个后端服务。这是一份技术练习记录，不是对外提供的法律服务。</p>
-        <div class="project-detail-meta"><span>练习项目</span><span>源码暂未公开</span><span>技术记录 · 非上线说明</span></div>
-      </div></section>
-      <section class="project-detail-section" aria-labelledby="path-heading"><div class="flux-container">
-        <div class="section-heading"><h2 id="path-heading">技术路径</h2><p>按代码中的模块整理，不代表所有环节都已经稳定运行。</p></div>
-        <div class="detail-route"><div class="route-label">问答与服务</div><ol class="route-steps"><li><strong>React 前端</strong><span>页面与交互</span></li><li><strong>Flask / FastAPI</strong><span>业务服务</span></li><li><strong>GraphRAG</strong><span>法律资料检索</span></li></ol><div class="route-label">风控链路</div><ol class="route-steps"><li><strong>Kafka</strong><span>数据入口</span></li><li><strong>Spark Streaming</strong><span>流处理</span></li><li><strong>风控看板</strong><span>结果展示</span></li></ol></div>
-        <div class="detail-grid"><article class="detail-panel"><span class="detail-number">01 / 结构</span><h3>多模块练习</h3><p>使用 monorepo 管理 React 前端、鉴权、合同数据、风险分析、诉讼文书与合同模板等服务。共用配置和服务脚手架整理在 shared 包中。</p></article><article class="detail-panel"><span class="detail-number">02 / 问答</span><h3>法律场景检索</h3><p>法律问答部分尝试以 FastAPI 提供 GraphRAG 检索接口；另外有案例分析模块，接入 Moonshot。它们是不同的练习模块，不等同于法律建议服务。</p></article><article class="detail-panel"><span class="detail-number">03 / 风控</span><h3>数据链路</h3><p>项目中还有 Kafka 生产者、Scala + Spark Streaming 流处理以及 Flask 风控看板模块，用来探索实时数据处理。</p></article><aside class="detail-panel detail-caveat"><span class="detail-number">说明</span><h3>当前状态</h3><p>这里介绍的是仓库的代码组织和技术方向。项目未作为公开服务提供；源码暂时没有开放。</p></aside></div>
-        <div class="detail-stack"><h2>涉及的技术</h2><div class="project-stack"><span class="project-tag">Python</span><span class="project-tag">Flask</span><span class="project-tag">FastAPI</span><span class="project-tag">React</span><span class="project-tag">TypeScript</span><span class="project-tag">GraphRAG</span><span class="project-tag">Kafka</span><span class="project-tag">Spark Streaming</span><span class="project-tag">MySQL</span></div></div>
-      </div></section>
-      <section class="project-outro"><div class="flux-container"><div class="project-outro-card"><div><h2>继续看看？</h2><p>仓库目前是私有的。如果你对实现细节有兴趣，可以发邮件交流。</p></div><div class="project-outro-actions"><a class="button button-primary" href="mailto:lzyryan5247@gmail.com?subject=LawDesign">邮件交流 →</a><a class="button button-secondary" href="data-pipeline.html">看数据项目 →</a><a class="button button-secondary" href="projects.html">返回项目总览 →</a></div></div></div></section>
-    </main>
+  <section class="projects-intro search-intro"><div class="flux-container">
+    <span class="eyebrow">// FIND YOUR WAY</span>
+    <h1>站内搜索</h1>
+    <p>查找项目的技术记录、个人介绍和已正式发布的文章。排版示例不会当作已发布内容显示。</p>
+    <form class="site-search-main" action="search.html" method="get" role="search" aria-label="搜索站内内容">
+      <label for="main-search-input">想找什么？</label>
+      <div class="site-search-controls"><input id="main-search-input" name="s" type="search" placeholder="试试 Kafka、iOS 或 GraphRAG" autocomplete="off"><button class="button button-primary" type="submit">搜索 →</button></div>
+    </form>
+  </div></section>
+  <section class="search-results-section" aria-labelledby="results-heading"><div class="flux-container">
+    <div class="search-results-heading"><h2 id="results-heading">搜索结果</h2><p data-site-search-status role="status" aria-live="polite">需要启用 JavaScript 才能搜索本站内容。也可以直接使用下面的页面入口。</p></div>
+    <div class="site-search-results" data-site-search-results></div>
+    <div class="site-search-suggestions" data-site-search-suggestions>
+      <p>也可以直接前往：</p><div><a href="projects.html">项目总览 →</a><a href="data-pipeline.html">数据项目 →</a><a href="law-design.html">LawDesign →</a><a href="about.html">关于我 →</a><a href="posts.html">文章页 →</a></div>
+    </div>
+  </div></section>
+</main>
     <footer class="site-footer">
         <div class="flux-container footer-inner">
             <div class="footer-copy">
@@ -135,5 +137,6 @@
     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 15l-6-6-6 6"/></svg>
 </button>
 <script src="js/theme.js"></script>
+<script src="js/site-search.js"></script>
 </body>
 </html>
