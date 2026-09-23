@@ -51,6 +51,7 @@
     <link rel="stylesheet" href="css/style-notebook.css">
     <link rel="stylesheet" href="css/style-comic.css">
     <link rel="stylesheet" href="css/style-comic-upgrade.css">
+    <link rel="stylesheet" href="css/project-gallery.css">
 </head>
 <body class="theme-fluxgrid">
 <a class="skip-link" href="#main-content">跳到主要内容</a>
@@ -76,6 +77,7 @@
         <div class="nav-item">
             <a class="nav-link" href="about.html">关于我</a>
         </div>
+        <div class="nav-item"><a class="nav-link" href="habits.html">好习惯</a></div>
         <div class="nav-item has-children nav-more">
             <button type="button" class="nav-link" aria-controls="more-menu" aria-haspopup="true" aria-expanded="false">更多</button>
             <div class="nav-dropdown" id="more-menu">
@@ -109,6 +111,7 @@
         <div class="section-heading"><h2 id="path-heading">技术路径</h2><p>按代码中的模块整理，不代表所有环节都已经稳定运行。</p></div>
         <div class="detail-route"><div class="route-label">问答与服务</div><ol class="route-steps"><li><strong>React 前端</strong><span>页面与交互</span></li><li><strong>Flask / FastAPI</strong><span>业务服务</span></li><li><strong>GraphRAG</strong><span>法律资料检索</span></li></ol><div class="route-label">风控链路</div><ol class="route-steps"><li><strong>Kafka</strong><span>数据入口</span></li><li><strong>Spark Streaming</strong><span>流处理</span></li><li><strong>风控看板</strong><span>结果展示</span></li></ol></div>
         <div class="detail-grid"><article class="detail-panel"><span class="detail-number">01 / 结构</span><h3>多模块练习</h3><p>使用 monorepo 管理 React 前端、鉴权、合同数据、风险分析、诉讼文书与合同模板等服务。共用配置和服务脚手架整理在 shared 包中。</p></article><article class="detail-panel"><span class="detail-number">02 / 问答</span><h3>法律场景检索</h3><p>法律问答部分尝试以 FastAPI 提供 GraphRAG 检索接口；另外有案例分析模块，接入 Moonshot。它们是不同的练习模块，不等同于法律建议服务。</p></article><article class="detail-panel"><span class="detail-number">03 / 风控</span><h3>数据链路</h3><p>项目中还有 Kafka 生产者、Scala + Spark Streaming 流处理以及 Flask 风控看板模块，用来探索实时数据处理。</p></article><aside class="detail-panel detail-caveat"><span class="detail-number">说明</span><h3>当前状态</h3><p>这里介绍的是仓库的代码组织和技术方向。项目未作为公开服务提供；源码暂时没有开放。</p></aside></div>
+        <section class="project-gallery" aria-labelledby="gallery-heading"><div class="section-heading"><h2 id="gallery-heading">项目界面</h2><p>选自项目仓库 README 的实际界面截图；截图内数字是项目演示内容，不是本站实时统计。</p></div><div class="project-gallery-grid"><figure><img src="assets/images/project/home-overview.jpg" alt="LegalMind 应用首页界面" loading="lazy" width="1200" height="700"><figcaption>法律功能入口</figcaption></figure><figure><img src="assets/images/project/document-review.jpg" alt="法律文书智能检测界面" loading="lazy" width="1200" height="700"><figcaption>文书检查界面</figcaption></figure><figure><img src="assets/images/project/risk-visualization-dashboard.jpg" alt="合同风险数据大屏界面" loading="lazy" width="1200" height="700"><figcaption>合同风险可视化</figcaption></figure></div></section>
         <div class="detail-stack"><h2>涉及的技术</h2><div class="project-stack"><span class="project-tag">Python</span><span class="project-tag">Flask</span><span class="project-tag">FastAPI</span><span class="project-tag">React</span><span class="project-tag">TypeScript</span><span class="project-tag">GraphRAG</span><span class="project-tag">Kafka</span><span class="project-tag">Spark Streaming</span><span class="project-tag">MySQL</span></div></div>
       </div></section>
       <section class="project-outro"><div class="flux-container"><div class="project-outro-card"><div><h2>继续看看？</h2><p>仓库目前为私有，页面提供真实仓库入口；如果你对实现细节有兴趣，也可以发邮件交流。</p></div><div class="project-outro-actions"><a class="button button-primary" href="mailto:lzyryan5247@gmail.com?subject=LawDesign">邮件交流 →</a><a class="button button-secondary project-repo-link" href="https://github.com/LzyLsq/legalDesign" target="_blank" rel="noopener noreferrer">GitHub 仓库（私有）↗</a><a class="button button-secondary" href="data-pipeline.html">看数据项目 →</a><a class="button button-secondary" href="projects.html">返回项目总览 →</a></div></div></div></section>
@@ -124,6 +127,7 @@
                 <a href="projects.html">代码人生</a>
                 <a href="posts.html">文章</a>
                 <a href="about.html">关于我</a>
+                <a href="habits.html">好习惯</a>
             </div>
         </div>
         <div class="flux-container footer-legal"><span>谢谢你来看看，这里会慢慢更新。</span></div>

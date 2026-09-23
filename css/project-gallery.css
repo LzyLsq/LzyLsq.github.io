@@ -1,0 +1,19 @@
+/* Project screenshots are evidence, not stock illustration. */
+html[data-style="memphis"] .project-card-shot { margin: 18px 0; border: 2px solid var(--heading); background: var(--m-bg); overflow: hidden; }
+html[data-style="memphis"] .project-card-shot img { display: block; width: 100%; height: clamp(150px, 17vw, 220px); object-fit: cover; object-position: top center; }
+html[data-style="memphis"] .project-card-shot figcaption { padding: 6px 10px; font-size: .75rem; font-weight: 700; color: var(--heading); }
+html[data-style="memphis"] .project-gallery { margin: 44px 0 38px; }
+html[data-style="memphis"] .project-gallery-grid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 14px; }
+html[data-style="memphis"] .project-gallery figure { min-width: 0; margin: 0; border: 2px solid var(--heading); background: var(--m-surface); box-shadow: 4px 4px 0 var(--heading); }
+html[data-style="memphis"] .project-gallery img { display: block; width: 100%; height: clamp(155px,18vw,235px); object-fit: cover; object-position: top center; }
+html[data-style="memphis"] .project-gallery figcaption { padding: 10px 12px; color: var(--heading); font-weight: 700; }
+html[data-style="memphis"][data-ink="mono"] .project-gallery img,
+html[data-style="memphis"][data-ink="mono"] .project-card-shot img { filter: grayscale(1) contrast(1.05); }
+@media (max-width:760px) { html[data-style="memphis"] .project-gallery-grid { grid-template-columns: 1fr; } html[data-style="memphis"] .project-gallery img { height: auto; max-height: 300px; object-fit: contain; } }
+/* The overview uses actual interface fragments instead of an unrelated portrait. */
+html[data-style="memphis"] .project-preview-strip { display: flex; gap: 7px; padding: 14px; align-items: center; }
+html[data-style="memphis"] .project-preview-strip img,
+html[data-style="memphis"][data-ink="color"] .project-preview-strip img { flex: 1 1 0; min-width: 0; width: 50%; height: 76%; border: 2px solid var(--heading); object-fit: cover; object-position: 30% top; clip-path: none; filter: grayscale(1) contrast(1.1); }
+html[data-style="memphis"][data-ink="color"] .project-preview-strip img { filter: none; }
+html[data-style="memphis"] .project-preview-strip img:first-child { transform: rotate(-5deg) translateY(9px); }
+html[data-style="memphis"] .project-preview-strip img:last-child { transform: rotate(5deg) translateY(-8px); }

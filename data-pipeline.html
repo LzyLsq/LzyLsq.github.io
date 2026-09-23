@@ -51,6 +51,7 @@
     <link rel="stylesheet" href="css/style-notebook.css">
     <link rel="stylesheet" href="css/style-comic.css">
     <link rel="stylesheet" href="css/style-comic-upgrade.css">
+    <link rel="stylesheet" href="css/project-gallery.css">
 </head>
 <body class="theme-fluxgrid">
 <a class="skip-link" href="#main-content">跳到主要内容</a>
@@ -76,6 +77,7 @@
         <div class="nav-item">
             <a class="nav-link" href="about.html">关于我</a>
         </div>
+        <div class="nav-item"><a class="nav-link" href="habits.html">好习惯</a></div>
         <div class="nav-item has-children nav-more">
             <button type="button" class="nav-link" aria-controls="more-menu" aria-haspopup="true" aria-expanded="false">更多</button>
             <div class="nav-dropdown" id="more-menu">
@@ -109,6 +111,7 @@
         <div class="section-heading"><h2 id="path-heading">技术路径</h2><p>按代码中的模块整理，不代表所有环节都已经稳定运行。</p></div>
         <div class="detail-route"><div class="route-label">实时处理</div><ol class="route-steps"><li><strong>模拟订单</strong><span>Python 生成数据</span></li><li><strong>Kafka</strong><span>消息上报</span></li><li><strong>Spark Streaming</strong><span>窗口聚合</span></li><li><strong>可视化</strong><span>WebSocket / ECharts</span></li></ol><div class="route-label">离线处理</div><ol class="route-steps"><li><strong>Kafka</strong><span>采集来源</span></li><li><strong>Flume → HDFS</strong><span>写入文件存储</span></li><li><strong>MySQL → Hive</strong><span>Sqoop 同步业务数据</span></li></ol></div>
         <div class="detail-grid"><article class="detail-panel"><span class="detail-number">01 / 实时</span><h3>订单数据与实时展示</h3><p>使用 Python 模拟订单，经 Kafka 传递；Spark Streaming 对数据做窗口聚合，再将结果经 Kafka 发送给 Flask / WebSocket 展示层。ECharts 用来呈现图表。</p></article><article class="detail-panel"><span class="detail-number">02 / 离线</span><h3>采集与入仓</h3><p>自定义 Flume PollableSource 从 Kafka 读取并处理数据后写入 HDFS；Sqoop 将 MySQL 业务数据同步到 Hive，尝试用 Spark SQL / RDD 统计。</p></article><article class="detail-panel"><span class="detail-number">03 / 推荐</span><h3>推荐方法尝试</h3><p>练习 Item-Based 和 User-Based 协同过滤，使用余弦相似度 UDF，并在结果写入时考虑幂等 upsert。</p></article><aside class="detail-panel detail-caveat"><span class="detail-number">说明</span><h3>当前状态</h3><p>这是项目代码和思路的记录，不是线上产品。源码暂时未公开，也不把设计中的链路当作已验证的运行成果。</p></aside></div>
+        <section class="project-gallery" aria-labelledby="gallery-heading"><div class="section-heading"><h2 id="gallery-heading">项目界面</h2><p>选自项目仓库 README 的实际界面截图；截图内数字是项目演示内容，不是本站实时统计。</p></div><div class="project-gallery-grid"><figure><img src="assets/images/project/real-time-dashboard.jpg" alt="实时订单统计界面" loading="lazy" width="1200" height="700"><figcaption>实时订单统计看板</figcaption></figure><figure><img src="assets/images/project/order-trends.jpg" alt="订单趋势图表界面" loading="lazy" width="1200" height="700"><figcaption>订单趋势展示</figcaption></figure><figure><img src="assets/images/project/recommendation-and-category-search.jpg" alt="推荐与分类查询界面" loading="lazy" width="1200" height="700"><figcaption>推荐与分类检索</figcaption></figure></div></section>
         <div class="detail-stack"><h2>涉及的技术</h2><div class="project-stack"><span class="project-tag">Python</span><span class="project-tag">Kafka</span><span class="project-tag">Spark Streaming</span><span class="project-tag">Scala</span><span class="project-tag">Flume</span><span class="project-tag">Sqoop</span><span class="project-tag">Hive</span><span class="project-tag">HDFS</span><span class="project-tag">Flask</span><span class="project-tag">ECharts</span></div></div>
       </div></section>
       <section class="project-outro"><div class="flux-container"><div class="project-outro-card"><div><h2>继续看看？</h2><p>仓库目前为私有，页面提供真实仓库入口；如果你对实现细节有兴趣，也可以发邮件交流。</p></div><div class="project-outro-actions"><a class="button button-primary" href="mailto:lzyryan5247@gmail.com?subject=Flume_Sqoop_Project">邮件交流 →</a><a class="button button-secondary project-repo-link" href="https://github.com/LzyLsq/Flume_Sqoop_Project" target="_blank" rel="noopener noreferrer">GitHub 仓库（私有）↗</a><a class="button button-secondary" href="law-design.html">看LawDesign →</a><a class="button button-secondary" href="projects.html">返回项目总览 →</a></div></div></div></section>
@@ -124,6 +127,7 @@
                 <a href="projects.html">代码人生</a>
                 <a href="posts.html">文章</a>
                 <a href="about.html">关于我</a>
+                <a href="habits.html">好习惯</a>
             </div>
         </div>
         <div class="flux-container footer-legal"><span>谢谢你来看看，这里会慢慢更新。</span></div>

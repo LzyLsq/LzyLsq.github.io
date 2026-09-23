@@ -232,7 +232,7 @@ html[data-style="memphis"][data-ink="mono"][data-theme="light"] .article-head-su
 }
 /* Opposite editorial editions: color is a complete printed issue, not a tint. */
 html[data-style="memphis"][data-ink="mono"] .header-actions .ink-toggle {
-  background: conic-gradient(from 25deg,var(--edition-coral),var(--edition-gold),var(--edition-teal),var(--edition-indigo),var(--edition-coral)) !important;
+  background: conic-gradient(from -45deg,var(--edition-coral) 0 25%,var(--edition-gold) 25% 50%,var(--edition-teal) 50% 75%,var(--edition-indigo) 75% 100%) !important;
   color: #111 !important; border-color: #111 !important; box-shadow: 2px 2px 0 #111 !important;
 }
 html[data-style="memphis"][data-ink="mono"] .header-actions .ink-toggle svg { background: #fff; border-radius: 50%; padding: 2px; width: 23px; height: 23px; }
@@ -242,6 +242,8 @@ html[data-style="memphis"][data-ink="color"] .header-actions .ink-toggle {
 }
 html[data-style="memphis"][data-ink="color"] .header-actions .ink-toggle svg { background: #111; color: #fff; border-radius: 50%; padding: 2px; width: 23px; height: 23px; }
 html[data-style="memphis"] .ink-toggle.is-morphing svg { animation: ink-switch-spin var(--ink-wave-time) var(--ink-wave-ease) both; }
+html[data-style="memphis"].ink-retracting .ink-toggle.is-morphing svg { animation-name: ink-switch-gather; }
+@keyframes ink-switch-gather { from { transform: rotate(0deg) scale(1); } to { transform: rotate(-330deg) scale(.78); } }
 @keyframes ink-switch-spin { from { transform: rotate(-290deg) scale(.8); } to { transform: rotate(0) scale(1); } }
 /* The wave and the page reveal share the same radius and easing. The narrow,
    imperfect ink edge travels with the color instead of jumping ahead of it. */
@@ -253,8 +255,9 @@ html[data-style="memphis"] {
 .ink-splash {
   position: fixed; z-index: 10000; left: 0; top: 0;
   width: 0; height: 0; box-sizing: border-box; pointer-events: none;
-  border: 7px solid rgba(221,70,100,.56);
-  box-shadow: 0 0 0 8px rgba(245,190,83,.38),0 0 0 19px rgba(71,179,192,.27),0 0 24px 25px rgba(237,101,126,.16);
+  border: 7px solid var(--edition-coral);
+  box-shadow: 0 0 0 8px var(--edition-gold),0 0 0 18px var(--edition-teal),0 0 0 26px var(--edition-indigo);
+  opacity: .46;
   border-radius: 51% 49% 53% 47% / 48% 52% 46% 54%;
   filter: blur(1.5px);
   transform: translate(-50%,-50%) rotate(0deg);
@@ -263,7 +266,18 @@ html[data-style="memphis"] {
 @keyframes ink-splash-out {
   0% { width: 0; height: 0; opacity: .7; transform: translate(-50%,-50%) rotate(0deg); }
   75% { opacity: .65; }
-  100% { width: 300vmax; height: 300vmax; opacity: 0; transform: translate(-50%,-50%) rotate(28deg); }
+  100% { width: calc(var(--ink-radius) + var(--ink-radius)); height: calc(var(--ink-radius) + var(--ink-radius)); opacity: 0; transform: translate(-50%,-50%) rotate(28deg); }
+}
+/* The colored old frame must sit ABOVE the new monochrome frame while
+   shrinking; otherwise the new opaque frame covers the gathering animation. */
+html.ink-retracting::view-transition-old(root) { z-index: 2; }
+html.ink-retracting::view-transition-new(root) { z-index: 1; }
+.ink-splash--in { animation: ink-splash-in var(--ink-retract-time) var(--ink-wave-ease) both; }
+@keyframes ink-splash-in {
+  0% { width: calc(var(--ink-radius) + var(--ink-radius)); height: calc(var(--ink-radius) + var(--ink-radius)); opacity: 0; transform: translate(-50%,-50%) rotate(-35deg); }
+  40% { opacity: .35; }
+  95% { opacity: .6; }
+  100% { width: 0; height: 0; opacity: 0; transform: translate(-50%,-50%) rotate(115deg); }
 }
 @keyframes ink-reveal { from { clip-path: circle(0 at var(--ink-x) var(--ink-y)); } to { clip-path: circle(var(--ink-radius) at var(--ink-x) var(--ink-y)); } }
 @keyframes ink-gather { from { clip-path: circle(var(--ink-radius) at var(--ink-x) var(--ink-y)); } to { clip-path: circle(0 at var(--ink-x) var(--ink-y)); } }
@@ -407,7 +421,7 @@ html[data-style="memphis"][data-ink="color"] .site-header::after {
   background: linear-gradient(90deg,var(--edition-coral),var(--edition-gold),var(--edition-teal),var(--edition-indigo));
 }
 html[data-style="memphis"][data-ink="mono"] .header-actions .ink-toggle:hover {
-  background: conic-gradient(from 25deg,var(--edition-coral),var(--edition-gold),var(--edition-teal),var(--edition-indigo),var(--edition-coral)) !important;
+  background: conic-gradient(from -45deg,var(--edition-coral) 0 25%,var(--edition-gold) 25% 50%,var(--edition-teal) 50% 75%,var(--edition-indigo) 75% 100%) !important;
 }
 html[data-style="memphis"] .header-actions .ink-toggle {
   width: 44px; min-width: 44px; padding: 0 !important; flex: 0 0 44px;
@@ -440,3 +454,11 @@ html[data-style="memphis"][data-ink="color"] ::selection { color: #142438; backg
     background: var(--m-surface); z-index: 1;
   }
 }
+/* A private diary gets a clear entry without inventing public metrics. */
+html[data-style="memphis"] .habit-home-link { display:flex; align-items:center; gap:18px; margin-top:35px; padding:17px 22px; border:2px solid var(--heading); background:var(--m-surface); box-shadow:5px 5px 0 var(--heading); }
+html[data-style="memphis"] .habit-home-link > span { font-size:2rem; color:var(--heading); }
+html[data-style="memphis"][data-ink="color"] .habit-home-link > span { color:#c83f59; }
+html[data-style="memphis"] .habit-home-link > div { flex:1; }
+html[data-style="memphis"] .habit-home-link strong { color:var(--heading); font-size:1.12rem; }
+html[data-style="memphis"] .habit-home-link p { margin:3px 0 0; color:var(--muted); }
+@media(max-width:600px){ html[data-style="memphis"] .habit-home-link { flex-wrap:wrap; gap:10px; } html[data-style="memphis"] .habit-home-link > div { flex-basis:calc(100% - 60px); } }

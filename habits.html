@@ -14,18 +14,18 @@
     })();
     </script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>文章 · Ryan</title>
-    <meta name="description" content="Ryan 的文章页：正式文章发布后会在这里汇总，目前尚无已发布文章。">
-    <link rel="canonical" href="https://lzylsq.github.io/posts.html">
+    <title>好习惯小记 · Ryan</title>
+    <meta name="description" content="Ryan 的个人习惯记录：目标、睡眠与健身打卡。仅保存在当前浏览器，不公开、不跨设备同步。">
+    <link rel="canonical" href="https://lzylsq.github.io/habits.html">
     <meta property="og:type" content="website">
-    <meta property="og:title" content="文章 · Ryan">
-    <meta property="og:description" content="正式文章发布后会在这里汇总，目前尚无已发布文章。">
-    <meta property="og:url" content="https://lzylsq.github.io/posts.html">
+    <meta property="og:title" content="好习惯小记 · Ryan">
+    <meta property="og:description" content="iOS 开发，正在学习全栈">
+    <meta property="og:url" content="https://lzylsq.github.io/habits.html">
     <meta property="og:site_name" content="Ryan · iOS 开发">
     <meta property="og:locale" content="zh_CN">
     <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="文章 · Ryan">
-    <meta name="twitter:description" content="正式文章发布后会在这里汇总，目前尚无已发布文章。">
+    <meta name="twitter:title" content="Ryan · iOS 开发">
+    <meta name="twitter:description" content="iOS 开发，正在学习全栈">
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"Ryan · iOS 开发","url":"https://lzylsq.github.io/","description":"Ryan 的个人网站：iOS 开发，正在学习全栈；目前介绍两个项目，文章待更新。","potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://lzylsq.github.io/search.html?s={search_term_string}"},"query-input":"required name=search_term_string"}}</script>
         <link rel="icon" href="assets/favicon.svg">
     <link rel="shortcut icon" href="assets/favicon.svg">
@@ -51,6 +51,7 @@
     <link rel="stylesheet" href="css/style-notebook.css">
     <link rel="stylesheet" href="css/style-comic.css">
     <link rel="stylesheet" href="css/style-comic-upgrade.css">
+    <link rel="stylesheet" href="css/habits.css">
 </head>
 <body class="theme-fluxgrid">
 <a class="skip-link" href="#main-content">跳到主要内容</a>
@@ -70,13 +71,13 @@
         <div class="nav-item">
             <a class="nav-link" href="projects.html">代码人生</a>
         </div>
-        <div class="nav-item is-active">
-            <a class="nav-link is-active" href="posts.html">文章</a>
+        <div class="nav-item">
+            <a class="nav-link" href="posts.html">文章</a>
         </div>
         <div class="nav-item">
             <a class="nav-link" href="about.html">关于我</a>
         </div>
-        <div class="nav-item"><a class="nav-link" href="habits.html">好习惯</a></div>
+        <div class="nav-item is-active"><a class="nav-link is-active" href="habits.html">好习惯</a></div>
         <div class="nav-item has-children nav-more">
             <button type="button" class="nav-link" aria-controls="more-menu" aria-haspopup="true" aria-expanded="false">更多</button>
             <div class="nav-dropdown" id="more-menu">
@@ -98,42 +99,35 @@
             </div>
         </div>
     </header>
-<main class="site-main" id="main-content">
-    <section class="stream-section" id="posts">
-        <div class="flux-container">
-            <div class="section-heading">
-                <h1>文章</h1>
-                <p>目前还没有正式发布的文章。这里会在写好后更新。</p>
-            </div>
-            <p class="search-status" data-search-status role="status" aria-live="polite" hidden></p>
-            <div class="home-grid posts-layout">
-                <div class="home-main">
-                    <div class="post-stack" id="post-list" data-post-list></div>
-                    <div class="empty-publications" data-empty-publications>
-                        <span class="empty-sticker" aria-hidden="true">✎</span>
-                        <div>
-                            <h2>这一格，暂时留白</h2>
-                            <p>还没有正式发布的文章。我会先把内容写好；现在可以看看两份练习项目，或搜索站内已有页面。</p>
-                            <div class="empty-actions">
-                                <a class="button button-primary" href="projects.html">查看项目记录 →</a>
-                                <a class="button button-secondary" href="search.html">站内搜索 →</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <aside class="sidebar" aria-label="文章导航">
-                    <div class="side-card">
-                        <h3>文章标签</h3>
-                        <div class="tag-cloud" data-tag-cloud></div>
-                    </div>
-                    <div class="side-card">
-                        <h3>最近发布</h3>
-                        <div class="side-latest" data-side-latest></div>
-                    </div>
-                </aside>
-            </div>
-        </div>
+<main class="site-main habit-page" id="main-content">
+  <div class="flux-container habit-wrap">
+    <header class="habit-cover">
+      <div class="habit-cover-copy"><span class="eyebrow">// SIDE STORY · 好习惯小记</span><h1>慢慢来，<br><em>每天留一笔。</em></h1><p>把目标写下来，记一次运动，也记下昨晚几点睡、今天几点醒。不用追求每天都完美，记录真实的就好。</p>
+        <p class="habit-privacy">◉ 这是你的私人小记：只存于当前浏览器，不上传网站、GitHub 或其他设备。清理浏览器数据可能会删除记录，请定期导出备份。</p></div>
+      <div class="habit-cover-art" aria-hidden="true"><span>今日<br>一格</span><i>✦</i></div>
+    </header>
+    <p class="habit-message" role="status" aria-live="polite" id="habit-message">还没有记录，从今天开始就好。</p>
+    <section class="habit-panel habit-chart-panel" aria-labelledby="sleep-chart-title">
+      <div class="habit-section-head"><div><span class="habit-kicker">SLEEP / 最近七天</span><h2 id="sleep-chart-title">睡眠时间线</h2><p>按起床日期归档；横条表示实际睡眠时长，文字显示入睡与起床时间。</p></div><a href="#sleep-form" class="habit-shortcut">记一次睡眠 ↘</a></div>
+      <div class="habit-chart" id="habit-chart" role="img" aria-label="最近七天睡眠时长图，尚未记录"></div>
+      <p class="habit-chart-note" id="habit-chart-note">以真实打卡生成；没有记录的日期留空。</p>
     </section>
+    <div class="habit-columns">
+      <section class="habit-panel" aria-labelledby="sleep-title"><div class="habit-section-head"><div><span class="habit-kicker">01 / 休息</span><h2 id="sleep-title">睡眠打卡</h2></div></div>
+        <form id="sleep-form" class="habit-form"><div class="habit-fields"><label>入睡时间<input name="bed" type="datetime-local" required></label><label>起床时间<input name="wake" type="datetime-local" required></label></div><p class="habit-help">跨午夜直接选择实际日期和时间；同一天只记录一次起床。当前不支持小米手环直连，也不会自动读取你的健康数据。</p><div class="habit-form-actions"><button class="habit-button habit-button-primary" type="submit" data-save>保存睡眠记录</button><button class="habit-button habit-button-plain" type="button" data-cancel hidden>取消编辑</button></div></form>
+        <div class="habit-list" id="sleep-list" aria-live="polite"></div>
+      </section>
+      <section class="habit-panel" aria-labelledby="workout-title"><div class="habit-section-head"><div><span class="habit-kicker">02 / 动一动</span><h2 id="workout-title">健身打卡</h2></div></div>
+        <form id="workout-form" class="habit-form"><div class="habit-fields"><label>运动日期<input name="date" type="date" required></label><label>时长（分钟，可选）<input name="minutes" type="number" min="1" max="1440" step="1" placeholder="不填也可以"></label></div><label>备注（可选）<input name="note" type="text" maxlength="120" placeholder="今天做了什么"></label><div class="habit-form-actions"><button class="habit-button habit-button-primary" type="submit" data-save>保存健身打卡</button><button class="habit-button habit-button-plain" type="button" data-cancel hidden>取消编辑</button></div></form>
+        <div class="habit-list" id="workout-list" aria-live="polite"></div>
+      </section>
+    </div>
+    <section class="habit-panel habit-goals" aria-labelledby="goals-title"><div class="habit-section-head"><div><span class="habit-kicker">03 / 下一步</span><h2 id="goals-title">我的目标 <small id="goal-count"></small></h2><p>只写自己想做的事。完成以后，给它一个小小的勾。</p></div></div>
+      <form id="goal-form" class="habit-form"><div class="habit-fields habit-goal-fields"><label>目标内容<input name="title" type="text" maxlength="100" required placeholder="例如：每周规律运动"></label><label>目标日期（可选）<input name="due" type="date"></label></div><div class="habit-form-actions"><button class="habit-button habit-button-primary" type="submit" data-save>添加目标</button><button class="habit-button habit-button-plain" type="button" data-cancel hidden>取消编辑</button></div></form>
+      <div class="habit-list" id="goal-list" aria-live="polite"></div>
+    </section>
+    <section class="habit-panel habit-backup" aria-labelledby="backup-title"><div><span class="habit-kicker">BACKUP / 留一份</span><h2 id="backup-title">备份小记</h2><p>导出 JSON 文件可以自己保管；导入会覆盖此浏览器的所有习惯记录，操作前请先导出。</p></div><div class="habit-form-actions"><button type="button" class="habit-button habit-button-plain" id="export-habits">导出备份 ↓</button><button type="button" class="habit-button habit-button-plain" id="import-habits">导入备份 ↑</button><input type="file" id="import-file" accept=".json,application/json" hidden></div></section>
+  </div>
 </main>
     <footer class="site-footer">
         <div class="flux-container footer-inner">
@@ -159,5 +153,6 @@
 <script src="js/theme.js"></script>
 <script src="js/site-stats.js"></script>
 <script src="js/comic-mode.js"></script>
+<script defer src="js/habits.js"></script>
 </body>
 </html>

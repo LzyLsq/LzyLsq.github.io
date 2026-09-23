@@ -11,7 +11,8 @@
     { path: 'projects.html', type: '项目总览' },
     { path: 'data-pipeline.html', type: '项目记录' },
     { path: 'law-design.html', type: '项目记录' },
-    { path: 'about.html', type: '个人介绍' }
+    { path: 'about.html', type: '个人介绍' },
+    { path: 'habits.html', type: '工具页面' }
   ];
   var normalize = function (text) { return (text || '').replace(/\s+/g, ' ').trim(); };
   var extract = function (doc) {

@@ -20,15 +20,15 @@
     try { localStorage.setItem('ryan-comic-ink', value); } catch (e) {}
     sync();
   }
-  function splash(rect) {
+  function splash(rect, retracting) {
     var ring = document.createElement('span');
-    ring.className = 'ink-splash';
+    ring.className = 'ink-splash' + (retracting ? ' ink-splash--in' : '');
     ring.style.left = (rect.left + rect.width / 2) + 'px';
     ring.style.top = (rect.top + rect.height / 2) + 'px';
     ring.setAttribute('aria-hidden', 'true');
     document.body.appendChild(ring);
     ring.addEventListener('animationend', function () { ring.remove(); }, { once: true });
-    window.setTimeout(function () { ring.remove(); }, 1600);
+    window.setTimeout(function () { ring.remove(); }, 1800);
   }
   sync();
   toggle.addEventListener('click', function () {
@@ -51,7 +51,7 @@
     root.classList.toggle('ink-retracting', !toColor);
     root.classList.toggle('ink-expanding', toColor);
     toggle.classList.add('is-morphing');
-    if (toColor) { splash(rect); }
+    splash(rect, !toColor);
     try {
       var transition = document.startViewTransition(function () { setInk(next); });
       transition.finished.catch(function () {}).finally(function () {
