@@ -16,15 +16,14 @@
     </script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- ========== TODO: 改成你的网站信息 ========== -->
-    <title>文章排版示例（未发布） · Ryan</title>
-    <meta name="robots" content="noindex,follow">
-    <meta name="description" content="Ryan 的个人网站：iOS 开发，正在学习全栈；目前介绍两个项目，文章待更新。">
+    <title>代码人生 · Ryan</title>
+    <meta name="description" content="Ryan 的两份练习项目：订单数据分析与推荐平台，以及 LawDesign 法律场景 AI 应用。源码暂未公开。">
     <!-- ============================================ -->
-    <link rel="canonical" href="https://lzylsq.github.io/post.html">
+    <link rel="canonical" href="https://lzylsq.github.io/projects.html">
     <meta property="og:type" content="website">
-    <meta property="og:title" content="Ryan · iOS 开发">
+    <meta property="og:title" content="代码人生 · Ryan">
     <meta property="og:description" content="iOS 开发，正在学习全栈">
-    <meta property="og:url" content="https://lzylsq.github.io/post.html">
+    <meta property="og:url" content="https://lzylsq.github.io/projects.html">
     <meta property="og:site_name" content="Ryan · iOS 开发">
     <meta property="og:locale" content="zh_CN">
     <meta name="twitter:card" content="summary">
@@ -68,8 +67,8 @@
             </button>
             <nav class="site-nav" id="site-nav" aria-label="主导航">
         <a class="" href="index.html">首页</a>
-        <div class="nav-item">
-            <a class="nav-link" href="projects.html">代码人生</a>
+        <div class="nav-item is-active">
+            <a class="nav-link is-active" href="projects.html">代码人生</a>
         </div>
         <div class="nav-item">
             <a class="nav-link" href="posts.html">文章</a>
@@ -102,67 +101,100 @@
         </div>
     </header>
 <main class="site-main" id="main-content">
-    <article class="article">
-        <div class="article-head">
-            <div class="article-head-media">
-                <img src="assets/images/post-1.svg" alt="" loading="eager" onerror="this.onerror=null;this.src='assets/images/post-1.svg';">
+  <section class="projects-intro">
+    <div class="flux-container">
+      <span class="eyebrow">// PROJECTS</span>
+      <h1>代码人生</h1>
+      <p>目前整理了两个练习项目。下面记录做过的技术尝试，不代表已经对外提供产品或服务；仓库暂时是私有的。</p>
+      <div class="project-jump" aria-label="选择项目">
+        <a class="button button-primary" href="#data-pipeline">订单数据分析与推荐 ↓</a>
+        <a class="button button-secondary" href="#law-design">LawDesign ↓</a>
+      </div>
+    </div>
+  </section>
+<section class="projects-section" id="projects">
+        <div class="flux-container">
+            <div class="section-heading">
+                <h2>两个项目</h2>
+                <p>这两份练习的技术路径和内容；源码目前没有对外开放。</p>
             </div>
-            <div class="article-head-surface"></div>
-            <div class="flux-container">
-                <div class="page-banner-inner">
-                    <h1>文章排版示例</h1>
-                    <p>这是文章详情页骨架。真正发布时，把下面的示例正文换成自己的内容即可；如果用 Markdown 写作，需要先转换成 HTML。</p>
-                    <div class="article-meta">
-                        <span>排版示例 · 未发布</span>
-                        <span>分类 · 示例</span>
-                        <span>仅供预览</span>
+
+            <div class="project-grid">
+                <!-- ========== 项目 1 ========== -->
+                <article class="project-card" id="data-pipeline">
+                    <div class="project-top">
+                        <span class="project-index">01</span>
+                        <span class="project-kind">大数据 · 实时数仓</span>
                     </div>
-                </div>
+                    <h3 class="project-title">实时订单数据分析与推荐平台</h3>
+                    <p class="project-desc">
+                        尝试串起大数据离线与实时两条链路：Python 模拟订单数据源，经 Kafka 上报；
+                        Spark Streaming 做窗口聚合，Flume 自定义 Source 落盘 HDFS，
+                        Sqoop 把 MySQL 业务库同步进 Hive 中央仓库，最后 Flask + WebSocket + ECharts 实时可视化。
+                    </p>
+                    <ul class="project-points">
+                        <li>实时链路：Kafka → Spark Streaming(5s 批间隔)→ Kafka → WebSocket 推送</li>
+                        <li>采集链路：自定义 Flume <code>PollableSource</code> 消费 Kafka 并扁平化拆解后写 HDFS</li>
+                        <li>离线链路：Sqoop MySQL → Hive，Spark SQL / RDD 双实现统计口径</li>
+                        <li>推荐算法：Item-Based / User-Based 协同过滤 + 余弦相似度 UDF，幂等 upsert 落库</li>
+                    </ul>
+                    <div class="project-stack">
+                        <span class="project-tag">Kafka</span>
+                        <span class="project-tag">Spark Streaming</span>
+                        <span class="project-tag">Scala</span>
+                        <span class="project-tag">Flume</span>
+                        <span class="project-tag">Sqoop</span>
+                        <span class="project-tag">Hive</span>
+                        <span class="project-tag">HDFS</span>
+                        <span class="project-tag">Flask</span>
+                        <span class="project-tag">ECharts</span>
+                    </div>
+                    <div class="project-actions">
+                        <span class="project-note">🔒 私有仓库 · 暂未公开源码</span>
+                        <a class="button button-primary" href="mailto:lzyryan5247@gmail.com?subject=About%20your%20Flume_Sqoop_Project">邮件了解详情 →</a>
+                        <a class="button button-secondary" href="about.html#contact">其他联系方法 →</a>
+                    </div>
+                </article>
+
+                <!-- ========== 项目 2 ========== -->
+                <article class="project-card" id="law-design">
+                    <div class="project-top">
+                        <span class="project-index">02</span>
+                        <span class="project-kind">AI · 法律智能体</span>
+                    </div>
+                    <h3 class="project-title">LawDesign · 法律智能体平台</h3>
+                    <p class="project-desc">
+                        围绕法律咨询、合同审查和诉讼文书草拟展开的练习项目。
+                        monorepo 结构：多个服务模块 + React 前端 + Scala 实时风控流处理，
+                        公共能力抽到 <code>shared/</code> 包统一复用。
+                    </p>
+                    <ul class="project-points">
+                        <li>服务模块：鉴权 / 合规审查 / 合同数据 / 风险分析 / 诉讼文书 / 合同模板等</li>
+                        <li>GraphRAG 法律问答：FastAPI 检索服务 + graphrag 知识图谱，Moonshot 案例分析</li>
+                        <li>实时风控：Kafka → Spark Streaming → 风控看板</li>
+                        <li>前端：React + TypeScript + antd(Vite)，shared 包统一 Flask / FastAPI 脚手架</li>
+                    </ul>
+                    <div class="project-stack">
+                        <span class="project-tag">Python</span>
+                        <span class="project-tag">Flask</span>
+                        <span class="project-tag">FastAPI</span>
+                        <span class="project-tag">React</span>
+                        <span class="project-tag">TypeScript</span>
+                        <span class="project-tag">GraphRAG</span>
+                        <span class="project-tag">Kafka</span>
+                        <span class="project-tag">Spark</span>
+                        <span class="project-tag">MySQL</span>
+                    </div>
+                    <div class="project-actions">
+                        <span class="project-note">🔒 私有仓库 · 暂未公开源码</span>
+                        <a class="button button-primary" href="mailto:lzyryan5247@gmail.com?subject=About%20your%20LawDesign%20project">邮件了解详情 →</a>
+                        <a class="button button-secondary" href="about.html#contact">其他联系方法 →</a>
+                    </div>
+                </article>
             </div>
         </div>
-        <div class="article-container">
-            <div class="article-layout">
-                <div class="article-main">
-                    <div class="article-content">
-                        <div class="article-notice">
-                            <b>这是文章骨架页。</b>它演示正文的排版（标题 / 列表 / 引用 / 代码块）。发布真实内容时，直接替换 <code>.article-content</code> 里的 HTML 即可。
-                        </div>
-                        <h2 id="sec-1">小节标题一</h2>
-                        <p>正文示例段落。你可以在这里写背景、思路、踩坑与结论。</p>
-                        <ul>
-                            <li>要点一：用简洁的短句把事情讲清楚。</li>
-                            <li>要点二：给关键步骤配上代码或截图。</li>
-                        </ul>
-                        <blockquote>一句值得被引用的话，或者一个重要的提醒。</blockquote>
-                        <h2 id="sec-2">小节标题二</h2>
-                        <p>代码块支持常见的语法高亮样式：</p>
-                        <pre><code data-lang="Swift">func greet(_ name: String) -&gt; String {
-    return "Hello, \(name)!"
-}</code></pre>
-                        <h2 id="sec-3">小结</h2>
-                        <p>把结论和下一步计划放在结尾，方便回顾。</p>
-                    </div>
-                    <a class="button button-secondary" style="margin-top:24px;display:inline-flex;" href="posts.html">← 返回文章列表</a>
-                </div>
-                <aside class="article-aside">
-                    <div class="article-info">
-                        <h3>文章信息</h3>
-                        <div class="info-row"><span>作者</span><b>Ryan</b></div>
-                        <div class="info-row"><span>状态</span><b>排版示例 · 未发布</b></div>
-                        <div class="info-row"><span>分类</span><b>示例</b></div>
-                    </div>
-                    <div class="article-toc-panel">
-                        <h3>目录</h3>
-                        <ul class="article-toc">
-                            <li><a href="#sec-1">小节标题一</a></li>
-                            <li><a href="#sec-2">小节标题二</a></li>
-                            <li><a href="#sec-3">小结</a></li>
-                        </ul>
-                    </div>
-                </aside>
-            </div>
-        </div>
-    </article>
+    </section>
+  <section class="project-outro"><div class="flux-container"><div class="project-outro-card"><div><h2>想交流项目？</h2><p>源码还没有公开。如果你想了解其中的做法，可以发邮件给我；也欢迎提出建议。</p></div><div class="project-outro-actions"><a class="button button-primary" href="mailto:lzyryan5247@gmail.com?subject=Project%20discussion">写邮件给 Ryan →</a><a class="button button-secondary" href="about.html">认识我 →</a></div></div></div></section>
 </main>
     <footer class="site-footer">
         <div class="flux-container footer-inner">

@@ -103,9 +103,9 @@
                 <span></span><span></span>
             </button>
             <nav class="site-nav" id="site-nav" aria-label="主导航">
-        <a class="is-active" href="index.html#top">首页</a>
+        <a class="is-active" href="index.html">首页</a>
         <div class="nav-item">
-            <a class="nav-link" href="index.html#projects">代码人生</a>
+            <a class="nav-link" href="projects.html">代码人生</a>
         </div>
         <div class="nav-item">
             <a class="nav-link" href="posts.html">文章</a>
@@ -146,7 +146,7 @@
         <span class="eyebrow">// HELLO</span>
         <h1><a href="about.html">你好，我是 Ryan</a></h1>
         <p>我从事 iOS 开发，正在学习全栈。这里会慢慢整理项目、学习过程和写下来的笔记。</p>
-        <div class="hero-actions"><a class="button button-primary" href="about.html">认识我 →</a><a class="button button-secondary" href="index.html#projects">看看项目</a></div>
+        <div class="hero-actions"><a class="button button-primary" href="about.html">认识我 →</a><a class="button button-secondary" href="projects.html">看看项目</a></div>
       </div>
       <div class="hero-side-visual"><div class="code-window"><div class="code-window-top"><span class="code-dot"></span><span class="code-dot"></span><span class="code-dot"></span></div><pre>const ryan = {
   work: 'iOS 开发',
@@ -160,9 +160,9 @@
     <div class="flux-container"><div class="hero-grid">
       <div class="hero-copy">
         <span class="eyebrow">// PROJECT · DATA</span>
-        <h1><a href="index.html#projects">从数据链路开始</a></h1>
+        <h1><a href="projects.html#data-pipeline">从数据链路开始</a></h1>
         <p>订单分析与推荐平台：尝试把采集、实时计算、离线处理和展示串成一条可追踪的流程。</p>
-        <div class="hero-actions"><a class="button button-primary" href="index.html#projects">查看项目 →</a><a class="button button-secondary" href="mailto:lzyryan5247@gmail.com?subject=Flume_Sqoop_Project">邮件交流</a></div>
+        <div class="hero-actions"><a class="button button-primary" href="projects.html#data-pipeline">查看项目 →</a><a class="button button-secondary" href="mailto:lzyryan5247@gmail.com?subject=Flume_Sqoop_Project">邮件交流</a></div>
       </div>
       <div class="hero-side-visual"><div class="code-window"><div class="code-window-top"><span class="code-dot"></span><span class="code-dot"></span><span class="code-dot"></span></div><pre>const pipeline = [
   'Kafka → Spark Streaming',
@@ -176,9 +176,9 @@
     <div class="flux-container"><div class="hero-grid">
       <div class="hero-copy">
         <span class="eyebrow">// PROJECT · AI</span>
-        <h1><a href="index.html#projects">也在探索 AI 应用</a></h1>
+        <h1><a href="projects.html#law-design">也在探索 AI 应用</a></h1>
         <p>LawDesign 是法律场景的智能体平台项目。我还在持续整理和完善，欢迎交流思路。</p>
-        <div class="hero-actions"><a class="button button-primary" href="index.html#projects">查看项目 →</a><a class="button button-secondary" href="mailto:lzyryan5247@gmail.com?subject=LawDesign">邮件交流</a></div>
+        <div class="hero-actions"><a class="button button-primary" href="projects.html#law-design">查看项目 →</a><a class="button button-secondary" href="mailto:lzyryan5247@gmail.com?subject=LawDesign">邮件交流</a></div>
       </div>
       <div class="hero-side-visual"><div class="code-window"><div class="code-window-top"><span class="code-dot"></span><span class="code-dot"></span><span class="code-dot"></span></div><pre>const interests = [
   'iOS',
@@ -191,88 +191,16 @@
   <button class="hero-arrow hero-arrow--next" type="button" data-hero-next aria-label="下一张"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 6 15 12 9 18"/></svg></button>
   <div class="hero-dots"><button class="hero-dot is-active" type="button" data-hero-dot="0" aria-label="切换到第 1 张"></button><button class="hero-dot" type="button" data-hero-dot="1" aria-label="切换到第 2 张"></button><button class="hero-dot" type="button" data-hero-dot="2" aria-label="切换到第 3 张"></button></div>
 </div></div></section>
-<section class="projects-section" id="projects">
-        <div class="flux-container">
-            <div class="section-heading">
-                <h2>代码人生</h2>
-                <p>两个项目 · 从数据处理到 AI 应用</p>
-            </div>
-
-            <div class="project-grid">
-                <!-- ========== 项目 1 ========== -->
-                <article class="project-card">
-                    <div class="project-top">
-                        <span class="project-index">01</span>
-                        <span class="project-kind">大数据 · 实时数仓</span>
-                    </div>
-                    <h3 class="project-title">实时订单数据分析与推荐平台</h3>
-                    <p class="project-desc">
-                        尝试串起大数据离线与实时两条链路：Python 模拟订单数据源，经 Kafka 上报；
-                        Spark Streaming 做窗口聚合，Flume 自定义 Source 落盘 HDFS，
-                        Sqoop 把 MySQL 业务库同步进 Hive 中央仓库，最后 Flask + WebSocket + ECharts 实时可视化。
-                    </p>
-                    <ul class="project-points">
-                        <li>实时链路：Kafka → Spark Streaming(5s 批间隔)→ Kafka → WebSocket 推送</li>
-                        <li>采集链路：自定义 Flume <code>PollableSource</code> 消费 Kafka 并扁平化拆解后写 HDFS</li>
-                        <li>离线链路：Sqoop MySQL → Hive，Spark SQL / RDD 双实现统计口径</li>
-                        <li>推荐算法：Item-Based / User-Based 协同过滤 + 余弦相似度 UDF，幂等 upsert 落库</li>
-                    </ul>
-                    <div class="project-stack">
-                        <span class="project-tag">Kafka</span>
-                        <span class="project-tag">Spark Streaming</span>
-                        <span class="project-tag">Scala</span>
-                        <span class="project-tag">Flume</span>
-                        <span class="project-tag">Sqoop</span>
-                        <span class="project-tag">Hive</span>
-                        <span class="project-tag">HDFS</span>
-                        <span class="project-tag">Flask</span>
-                        <span class="project-tag">ECharts</span>
-                    </div>
-                    <div class="project-actions">
-                        <span class="project-note">🔒 私有仓库 · 暂未公开源码</span>
-                        <a class="button button-primary" href="mailto:lzyryan5247@gmail.com?subject=About%20your%20Flume_Sqoop_Project">邮件了解详情 →</a>
-                        <!-- 若日后开源，把上面按钮 href 换成仓库地址即可 -->
-                    </div>
-                </article>
-
-                <!-- ========== 项目 2 ========== -->
-                <article class="project-card">
-                    <div class="project-top">
-                        <span class="project-index">02</span>
-                        <span class="project-kind">AI · 法律智能体</span>
-                    </div>
-                    <h3 class="project-title">LawDesign · 法律智能体平台</h3>
-                    <p class="project-desc">
-                        围绕法律咨询、合同审查和诉讼文书草拟展开的练习项目。
-                        monorepo 结构：多个服务模块 + React 前端 + Scala 实时风控流处理，
-                        公共能力抽到 <code>shared/</code> 包统一复用。
-                    </p>
-                    <ul class="project-points">
-                        <li>服务模块：鉴权 / 合规审查 / 合同数据 / 风险分析 / 诉讼文书 / 合同模板等</li>
-                        <li>GraphRAG 法律问答：FastAPI 检索服务 + graphrag 知识图谱，Moonshot 案例分析</li>
-                        <li>实时风控：Kafka → Spark Streaming → 风控看板</li>
-                        <li>前端：React + TypeScript + antd(Vite)，shared 包统一 Flask / FastAPI 脚手架</li>
-                    </ul>
-                    <div class="project-stack">
-                        <span class="project-tag">Python</span>
-                        <span class="project-tag">Flask</span>
-                        <span class="project-tag">FastAPI</span>
-                        <span class="project-tag">React</span>
-                        <span class="project-tag">TypeScript</span>
-                        <span class="project-tag">GraphRAG</span>
-                        <span class="project-tag">Kafka</span>
-                        <span class="project-tag">Spark</span>
-                        <span class="project-tag">MySQL</span>
-                    </div>
-                    <div class="project-actions">
-                        <span class="project-note">🔒 私有仓库 · 暂未公开源码</span>
-                        <a class="button button-primary" href="mailto:lzyryan5247@gmail.com?subject=About%20your%20LawDesign%20project">邮件了解详情 →</a>
-                        <!-- 若日后开源，把上面按钮 href 换成仓库地址即可 -->
-                    </div>
-                </article>
-            </div>
-        </div>
-    </section>
+<section class="home-destinations" aria-labelledby="explore-title">
+  <div class="flux-container">
+    <div class="section-heading"><h2 id="explore-title">从这里开始</h2><p>项目、文字和个人介绍分别放在独立页面。</p></div>
+    <div class="destination-grid">
+      <article class="destination-card"><span class="destination-symbol" aria-hidden="true">⌘</span><h3>代码人生</h3><p>两份练习项目：数据链路与法律场景的 AI 应用。可以先看技术路径。</p><a class="button button-primary" href="projects.html">查看两个项目 →</a></article>
+      <article class="destination-card"><span class="destination-symbol" aria-hidden="true">✎</span><h3>文章</h3><p>暂时没有正式文章。写好后会在这里发布；现在可先看排版示例。</p><a class="button button-secondary" href="posts.html">前往文章页 →</a></article>
+      <article class="destination-card"><span class="destination-symbol" aria-hidden="true">◌</span><h3>认识 Ryan</h3><p>iOS 开发，正在学习全栈。个人介绍和联系方式都在这里。</p><a class="button button-secondary" href="about.html">打开关于页 →</a></article>
+    </div>
+  </div>
+</section>
     <section class="stream-section">
         <div class="flux-container">
             <div class="section-heading">
@@ -283,24 +211,8 @@
             <div class="empty-publications">
   <span class="empty-sticker" aria-hidden="true">✎</span>
   <div><h3>还没有正式发布的文章</h3><p>项目笔记会在整理好以后放到这里。现在可以先看文章页的排版示例，或者直接看看项目。</p>
-  <div class="empty-actions"><a class="button button-primary" href="post.html">查看排版示例 →</a><a class="button button-secondary" href="index.html#projects">浏览项目</a></div></div>
+  <div class="empty-actions"><a class="button button-primary" href="post.html">查看排版示例 →</a><a class="button button-secondary" href="projects.html">浏览项目</a></div></div>
 </div></div></section>
-    <section class="about-section">
-        <div class="flux-container">
-            <div class="section-heading">
-                <h2>关于我</h2>
-                <p>一句话认识一下</p>
-            </div>
-            <div class="about-grid">
-                <div class="about-card about-intro">
-                    <h3>你好，我是 Ryan 👋</h3>
-                    <p>一名 iOS 开发工程师，日常以 Swift / Objective-C 为主，也喜欢钻研后端与大数据。目前正在系统学习全栈开发。</p>
-                    <p>这个小站会用来整理项目过程和学习笔记。我想把遇到的问题、尝试过的方法慢慢记清楚。</p>
-                    <a class="button button-primary" style="margin-top:16px;display:inline-flex;" href="about.html">了解更多 →</a>
-                </div>
-            </div>
-        </div>
-    </section>
 </main>
     <footer class="site-footer">
         <div class="flux-container footer-inner">
@@ -309,8 +221,8 @@
                 <span>iOS 开发 · 正在学习全栈</span>
             </div>
             <div class="footer-meta">
-                <a href="index.html#top">首页</a>
-                <a href="index.html#projects">代码人生</a>
+                <a href="index.html">首页</a>
+                <a href="projects.html">代码人生</a>
                 <a href="posts.html">文章</a>
                 <a href="about.html">关于我</a>
             </div>

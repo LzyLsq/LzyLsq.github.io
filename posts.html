@@ -37,43 +37,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.loli.net/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
         <link href="https://fonts.loli.net/css2?family=Archivo+Black&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
-    <script>
-    /* 孟菲斯:给 hero 轮播标题尾部一段套色块(仿 Demo 的 hl-pink/hl-yellow) */
-    (function () {
-      if (document.documentElement.getAttribute('data-style') !== 'memphis') return;
-      var COLORS = ['', 'm-hl--pink', 'm-hl--teal']; // '' = 默认黄
-      function pickSeg(raw) {
-        var text = String(raw).trim();
-        if (text.length <= 2) return ['', text, ''];
-        if (/\s/.test(text)) {
-          var parts = text.split(/\s+/);
-          var n = parts.length >= 4 ? 2 : 1;
-          var head = parts.slice(0, parts.length - n).join(' ');
-          return [head ? head + ' ' : '', parts.slice(parts.length - n).join(' '), ''];
-        }
-        var segLen = Math.min(6, Math.max(2, Math.ceil(text.length * 0.4)));
-        var cut = text.length - segLen;
-        return [text.slice(0, cut), text.slice(cut), ''];
-      }
-      function wrap(a, colorClass) {
-        if (!a || a.querySelector('.m-hl')) return;
-        var seg = pickSeg(a.textContent);
-        a.textContent = '';
-        if (seg[0]) a.appendChild(document.createTextNode(seg[0]));
-        var span = document.createElement('span');
-        span.className = 'm-hl' + (colorClass ? ' ' + colorClass : '');
-        span.textContent = seg[1];
-        a.appendChild(span);
-        if (seg[2]) a.appendChild(document.createTextNode(seg[2]));
-      }
-      function run() {
-        var links = document.querySelectorAll('[data-hero-slide] .hero-copy h1 a');
-        Array.prototype.forEach.call(links, function (a, i) { wrap(a, COLORS[i % COLORS.length]); });
-      }
-      if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', run);
-      else run();
-    })();
-    </script>
         <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/layout.css">
     <link rel="stylesheet" href="css/pages.css">
@@ -103,9 +66,9 @@
                 <span></span><span></span>
             </button>
             <nav class="site-nav" id="site-nav" aria-label="主导航">
-        <a class="" href="index.html#top">首页</a>
+        <a class="" href="index.html">首页</a>
         <div class="nav-item">
-            <a class="nav-link" href="index.html#projects">代码人生</a>
+            <a class="nav-link" href="projects.html">代码人生</a>
         </div>
         <div class="nav-item is-active">
             <a class="nav-link is-active" href="posts.html">文章</a>
@@ -141,7 +104,7 @@
     <section class="stream-section" id="posts">
         <div class="flux-container">
             <div class="section-heading">
-                <h2>文章</h2>
+                <h1>文章</h1>
                 <p>目前还没有正式发布的文章。这里会在写好后更新。</p>
             </div>
             <p class="search-status" data-search-status role="status" aria-live="polite" hidden></p>
@@ -151,7 +114,7 @@
   <div class="empty-publications" data-empty-publications>
     <span class="empty-sticker" aria-hidden="true">✎</span>
     <div><h3>第一篇还在路上</h3><p>写好的内容才会出现在文章列表里。搜索功能已准备好，等文章发布后就能按标题、摘要和标签查找。</p>
-    <a class="button button-primary" href="post.html">先看排版示例 →</a></div>
+    <div class="empty-actions"><a class="button button-primary" href="post.html">先看排版示例 →</a><a class="button button-secondary" href="projects.html">看看项目 →</a></div></div>
   </div>
 </div><aside class="sidebar">
                                         <div class="side-card side-profile">
@@ -204,8 +167,8 @@
                 <span>iOS 开发 · 正在学习全栈</span>
             </div>
             <div class="footer-meta">
-                <a href="index.html#top">首页</a>
-                <a href="index.html#projects">代码人生</a>
+                <a href="index.html">首页</a>
+                <a href="projects.html">代码人生</a>
                 <a href="posts.html">文章</a>
                 <a href="about.html">关于我</a>
             </div>

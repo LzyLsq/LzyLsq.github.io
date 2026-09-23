@@ -1336,3 +1336,60 @@ html[data-style="memphis"] .search-clear:hover { background: var(--m-teal); }
 /* 黄色章节签在暗色主题下仍保持深色文字，避免浅字压浅底 */
 html[data-style="memphis"] .section-heading h2,
 html[data-style="memphis"] .section-heading p { color: #111; }
+
+/* ---------- 22. 独立页面与首页导览 ---------- */
+html[data-style="memphis"] .home-destinations { padding: clamp(32px, 5vw, 64px) 0 28px; }
+html[data-style="memphis"] .destination-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
+html[data-style="memphis"] .destination-card {
+  min-width: 0; display: flex; flex-direction: column; align-items: flex-start;
+  padding: clamp(20px, 3vw, 30px); background: var(--m-surface); border: var(--m-border);
+  box-shadow: 7px 7px 0 var(--m-shadow);
+}
+html[data-style="memphis"] .destination-card:nth-child(2) { box-shadow: 7px 7px 0 var(--m-pink); }
+html[data-style="memphis"] .destination-card:nth-child(3) { box-shadow: 7px 7px 0 var(--m-teal); }
+html[data-style="memphis"] .destination-symbol {
+  width: 42px; height: 42px; display: grid; place-items: center; font-size: 23px;
+  color: #111; background: var(--m-yellow); border: 2px solid var(--m-ink);
+}
+html[data-style="memphis"] .destination-card:nth-child(2) .destination-symbol { background: var(--m-pink); }
+html[data-style="memphis"] .destination-card:nth-child(3) .destination-symbol { background: var(--m-teal); }
+html[data-style="memphis"] .destination-card h3 { margin: 20px 0 8px; font-size: clamp(20px, 2vw, 27px); color: var(--heading); }
+html[data-style="memphis"] .destination-card p { line-height: 1.75; color: var(--body); margin: 0 0 24px; }
+html[data-style="memphis"] .destination-card .button { margin-top: auto; }
+html[data-style="memphis"] .projects-intro { padding: clamp(38px, 6vw, 72px) 0 16px; }
+html[data-style="memphis"] .projects-intro h1 { font-size: clamp(40px, 6vw, 76px); color: var(--heading); margin: 16px 0; }
+html[data-style="memphis"] .projects-intro p { max-width: 64ch; line-height: 1.8; color: var(--body); margin: 0 0 24px; }
+html[data-style="memphis"] .project-jump,
+html[data-style="memphis"] .project-outro-actions,
+html[data-style="memphis"] .about-utilities,
+html[data-style="memphis"] .about-next { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; }
+html[data-style="memphis"] .projects-section .section-heading { margin-bottom: 28px; }
+html[data-style="memphis"] .project-card[id] { scroll-margin-top: 130px; }
+html[data-style="memphis"] .project-outro { padding: 52px 0 76px; }
+html[data-style="memphis"] .project-outro-card {
+  display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 22px;
+  padding: clamp(24px, 4vw, 38px); background: var(--m-surface); border: var(--m-border);
+  box-shadow: 8px 8px 0 var(--m-teal);
+}
+html[data-style="memphis"] .project-outro h2 { color: var(--heading); margin: 0 0 12px; }
+html[data-style="memphis"] .project-outro p { color: var(--body); line-height: 1.7; max-width: 52ch; margin: 0; }
+html[data-style="memphis"] .about-utilities { margin-top: 20px; }
+html[data-style="memphis"] .about-utilities button { cursor: pointer; font: inherit; font-weight: 700; }
+html[data-style="memphis"] .utility-status { min-height: 1.6em; font-size: 13px; color: var(--body); margin: 10px 0 0 !important; }
+html[data-style="memphis"] .about-next { margin-top: 34px; padding: 24px; border: var(--m-border); background: var(--m-surface); box-shadow: 6px 6px 0 var(--m-teal); }
+html[data-style="memphis"] .about-next p { flex: 1 1 18rem; margin: 0; color: var(--body); line-height: 1.6; }
+html[data-style="memphis"] .about-contact-item span { overflow-wrap: anywhere; }
+@media (max-width: 980px) {
+  html[data-style="memphis"] .destination-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 640px) {
+  html[data-style="memphis"] .destination-grid { grid-template-columns: 1fr; }
+  html[data-style="memphis"] .project-jump .button,
+  html[data-style="memphis"] .project-outro-actions .button { width: 100%; text-align: center; }
+  html[data-style="memphis"] .about-utilities .button { flex: 1 1 130px; }
+  html[data-style="memphis"] .about-next .button { flex: 1 1 120px; text-align: center; }
+}
+
+html[data-style="memphis"] .about-section .section-heading h1,
+html[data-style="memphis"] .stream-section .section-heading h1 { color: #111; font-size: clamp(22px, 3vw, 34px); margin: 0; }
+html[data-style="memphis"] #contact { scroll-margin-top: 140px; }

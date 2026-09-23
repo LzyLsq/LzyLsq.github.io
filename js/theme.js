@@ -45,6 +45,10 @@
 
   /* ============ 导航(移动端菜单 / 当前页高亮 / 平滑→即时跳转) ============ */
   function initNav() {
+    if ((location.pathname.split('/').pop() || 'index.html') === 'index.html' && location.hash === '#projects') {
+      location.replace('projects.html');
+      return;
+    }
     var toggle = document.querySelector('.nav-toggle');
     var nav = document.getElementById('site-nav');
     if (toggle && nav) {
@@ -97,18 +101,12 @@
     /* 当前页高亮：按文件名匹配，比写死 class 更可靠 */
     var updateCurrentNav = function () {
       var here = (location.pathname.split('/').pop() || 'index.html');
-      var currentHash = location.hash || '#top';
       $$('#site-nav a[href]').forEach(function (a) {
         var href = a.getAttribute('href') || '';
-        if (href.charAt(0) === '#' || /^(https?:|mailto:)/.test(href)) { return; }
-        var parts = href.split('#');
-        var file = parts[0] || 'index.html';
-        var hash = parts[1] ? '#' + parts[1] : '';
+        if (/^(https?:|mailto:|#)/.test(href)) { return; }
+        var file = href.split('#')[0].split('?')[0] || 'index.html';
         var match = file === here;
-        if (here === 'index.html' && file === 'index.html' && hash) {
-          match = hash === currentHash;
-        }
-        a.classList.toggle('is-active', !!match);
+        a.classList.toggle('is-active', match);
         if (match) { a.setAttribute('aria-current', 'page'); }
         else { a.removeAttribute('aria-current'); }
       });
@@ -278,6 +276,38 @@
         run(initial, false);
       }
     }
+  }
+
+  /* 真正可用的分享／复制：失败时给出反馈，不伪称已复制。 */
+  function initShareTools() {
+    var status = $('[data-utility-status]');
+    var report = function (message) { if (status) { status.textContent = message; } };
+    var copy = function (value, success) {
+      if (!navigator.clipboard || !navigator.clipboard.writeText) {
+        report('当前浏览器不支持一键复制，请长按邮箱地址或从地址栏复制链接。');
+        return;
+      }
+      navigator.clipboard.writeText(value).then(function () { report(success); }, function () {
+        report('复制没有成功，请手动选择邮箱地址或从地址栏复制链接。');
+      });
+    };
+    $$('[data-copy-email]').forEach(function (button) {
+      on(button, 'click', function () { copy(button.getAttribute('data-copy-email'), '邮箱地址已复制。'); });
+    });
+    $$('[data-share-page]').forEach(function (button) {
+      on(button, 'click', function () {
+        var url = window.location.href.split('#')[0];
+        if (navigator.share) {
+          report('正在打开系统分享…');
+          navigator.share({ title: document.title, url: url }).then(function () {
+            report('已打开分享。');
+          }).catch(function (error) {
+            if (error.name === 'AbortError') { report('分享已取消。'); }
+            else { copy(url, '页面链接已复制。'); }
+          });
+        } else { copy(url, '页面链接已复制。'); }
+      });
+    });
   }
 
   /* ============ Hero 轮播 ============ */
@@ -519,6 +549,7 @@
   function boot() {
     initNav();
     initTheme();
+    initShareTools();
     initHeaderScroll();
     initBackToTop();
     initDerivedPanels();
