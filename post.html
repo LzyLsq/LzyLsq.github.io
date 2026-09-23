@@ -22,14 +22,14 @@
     <link rel="canonical" href="https://lzylsq.github.io/post.html">
     <meta property="og:type" content="website">
     <meta property="og:title" content="Ryan · iOS 开发">
-    <meta property="og:description" content="一个混迹在 IT 行业的小菜鸟">
+    <meta property="og:description" content="一名持续学习中的开发菜鸟">
     <meta property="og:url" content="https://lzylsq.github.io/post.html">
     <meta property="og:site_name" content="Ryan · iOS 开发">
     <meta property="og:locale" content="zh_CN">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Ryan · iOS 开发">
-    <meta name="twitter:description" content="一个混迹在 IT 行业的小菜鸟">
-    <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"Ryan · iOS 开发","url":"https://lzylsq.github.io/","description":"Ryan · iOS 开发。记录 iOS / 大数据 / 全栈项目实践与技术笔记。","potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://lzylsq.github.io/?s={search_term_string}"},"query-input":"required name=search_term_string"}}</script>
+    <meta name="twitter:description" content="一名持续学习中的开发菜鸟">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"Ryan · iOS 开发","url":"https://lzylsq.github.io/","description":"Ryan · iOS 开发。记录 iOS / 大数据 / 全栈项目实践与技术笔记。","potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://lzylsq.github.io/posts.html?s={search_term_string}"},"query-input":"required name=search_term_string"}}</script>
         <link rel="icon" href="assets/favicon.svg">
     <link rel="shortcut icon" href="assets/favicon.svg">
     <link rel="apple-touch-icon" href="assets/favicon.svg">
@@ -91,6 +91,7 @@
     <link rel="stylesheet" href="css/style-memphis.css">
 </head>
 <body class="theme-fluxgrid">
+<a class="skip-link" href="#main-content">跳到主要内容</a>
 <canvas id="particle-bg" aria-hidden="true"></canvas>
 <div class="site-shell">
     <header class="site-header" id="site-header">
@@ -102,7 +103,7 @@
             <button class="nav-toggle" type="button" aria-controls="site-nav" aria-expanded="false">
                 <span></span><span></span>
             </button>
-            <nav class="site-nav" id="site-nav">
+            <nav class="site-nav" id="site-nav" aria-label="主导航">
         <a class="" href="index.html#top">首页</a>
         <div class="nav-item">
             <a class="nav-link" href="index.html#projects">代码人生</a>
@@ -121,7 +122,7 @@
             </div>
         </div>
             </nav>
-            <form class="search-box" action="#" method="get" role="search">
+            <form class="search-box" action="posts.html" method="get" role="search" aria-label="文章搜索">
                 <button type="submit" class="search-icon-btn" aria-label="搜索">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
                 </button>
@@ -139,7 +140,7 @@
             </div>
         </div>
     </header>
-<main class="site-main">
+<main class="site-main" id="main-content">
     <article class="article">
         <div class="article-head">
             <div class="article-head-media">
@@ -174,7 +175,7 @@
                         <blockquote>一句值得被引用的话，或者一个重要的提醒。</blockquote>
                         <h2 id="sec-2">小节标题二</h2>
                         <p>代码块支持常见的语法高亮样式：</p>
-                        <pre><code>func greet(_ name: String) -&gt; String {
+                        <pre><code data-lang="Swift">func greet(_ name: String) -&gt; String {
     return "Hello, \(name)!"
 }</code></pre>
                         <h2 id="sec-3">小结</h2>
@@ -206,7 +207,7 @@
         <div class="flux-container footer-inner">
             <div class="footer-copy">
                 <span class="footer-title">© <span id="year">2026</span> Ryan.</span>
-                <span>iOS 开发 · 正在学习全栈 · 一个混迹在 IT 行业的小菜鸟</span>
+                <span>iOS 开发 · 正在学习全栈 · 一名持续学习中的开发菜鸟</span>
             </div>
             <div class="footer-meta">
                 <a href="index.html#top">首页</a>

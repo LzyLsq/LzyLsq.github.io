@@ -78,12 +78,20 @@
 
     /* 当前页高亮：按文件名匹配，比写死 class 更可靠 */
     var here = (location.pathname.split('/').pop() || 'index.html');
+    var currentHash = location.hash || '#top';
     $$('#site-nav a[href]').forEach(function (a) {
       var href = a.getAttribute('href') || '';
       if (href.charAt(0) === '#') { return; }
-      var file = href.split('#')[0];
-      var match = (file === here) || (file === '' && here === 'index.html') || (file === 'index.html' && here === '');
+      var parts = href.split('#');
+      var file = parts[0] || 'index.html';
+      var hash = parts[1] ? '#' + parts[1] : '';
+      var match = file === here;
+      if (here === 'index.html' && file === 'index.html' && hash) {
+        match = hash === currentHash;
+      }
       a.classList.toggle('is-active', !!match);
+      if (match) { a.setAttribute('aria-current', 'page'); }
+      else { a.removeAttribute('aria-current'); }
     });
 
     /* 站内锚点：即时跳转(不做平滑滚动)，并手工补一次高度补偿 */
@@ -131,15 +139,13 @@
   function initSearch() {
     var form = document.querySelector('.search-box');
     var input = document.getElementById('site-search-input');
-    if (!input) { return; }
+    if (!input || !form) { return; }
 
-    var cards = function () {
-      // 首页用 .home-main 的卡片，文章页用整页卡片
-      var scope = document.querySelector('[data-post-list]') || document.querySelector('.home-main') || document.body;
-      return $$('.post-card', scope);
-    };
-
+    var listRoot = document.querySelector('[data-post-list]');
+    var isPostsPage = !!listRoot;
+    var cards = function () { return listRoot ? $$('.post-card', listRoot) : []; };
     var status = document.querySelector('[data-search-status]') || $('#search-status');
+
     var ensureStatus = function () {
       if (status && document.contains(status)) { return status; }
       status = document.createElement('p');
@@ -147,18 +153,22 @@
       status.className = 'search-status';
       status.setAttribute('role', 'status');
       status.setAttribute('aria-live', 'polite');
-      var main = document.querySelector('.site-main');
-      if (main) {
-        var anchor = main.querySelector('section') || main.firstChild;
-        main.insertBefore(status, anchor);
-      } else if (form && form.parentNode) {
-        form.parentNode.insertBefore(status, form.nextSibling);
-      }
+      if (listRoot && listRoot.parentNode) { listRoot.parentNode.insertBefore(status, listRoot); }
       return status;
     };
 
-    var run = function (raw) {
-      var q = (raw || '').trim().toLowerCase();
+    var syncQueryUrl = function (raw) {
+      if (!isPostsPage || !history.replaceState) { return; }
+      var url = new URL(window.location.href);
+      var q = (raw || '').trim();
+      if (q) { url.searchParams.set('s', q); }
+      else { url.searchParams.delete('s'); }
+      history.replaceState(null, '', url.pathname + url.search + url.hash);
+    };
+
+    var run = function (raw, updateUrl) {
+      var original = (raw || '').trim();
+      var q = original.toLowerCase();
       var list = cards();
       var shown = 0;
       list.forEach(function (card) {
@@ -168,64 +178,76 @@
         if (hit) { shown++; }
         card.classList.add('is-visible');
       });
-      // 同步侧栏「最新文章」高亮
       $$('[data-side-latest] a').forEach(function (a) {
         var key = (a.getAttribute('data-title') || '').toLowerCase();
         a.classList.toggle('is-dimmed', !!q && key.indexOf(q) === -1);
       });
       if (!q) {
         if (status) { status.textContent = ''; status.hidden = true; }
-        return;
+      } else {
+        var el = ensureStatus();
+        el.hidden = false;
+        el.textContent = shown
+          ? '「' + original + '」找到 ' + shown + ' 篇文章'
+          : '「' + original + '」没有匹配的文章，请换一个关键词';
       }
-      var el = ensureStatus();
-      el.hidden = false;
-      el.textContent = shown
-        ? '「' + raw.trim() + '」找到 ' + shown + ' 篇文章'
-        : '「' + raw.trim() + '」没有匹配的文章';
+      if (updateUrl) { syncQueryUrl(original); }
+    };
+
+    var goToPosts = function (raw) {
+      var q = (raw || '').trim();
+      window.location.href = 'posts.html' + (q ? '?s=' + encodeURIComponent(q) : '');
     };
 
     var debounce;
     on(input, 'input', function () {
+      if (!isPostsPage) { return; }
       window.clearTimeout(debounce);
-      debounce = window.setTimeout(function () { run(input.value); }, 120);
+      debounce = window.setTimeout(function () { run(input.value, false); }, 120);
     });
 
     on(form, 'submit', function (e) {
-      e.preventDefault();          // 不做页面跳转，直接过滤
-      run(input.value);
+      e.preventDefault();
+      if (!isPostsPage) { goToPosts(input.value); return; }
+      run(input.value, true);
       var first = cards().filter(function (c) { return !c.hidden; })[0];
-      if (first) { jumpTo(first); } else if (input.value.trim()) { jumpTo(ensureStatus()); }
+      if (first) { jumpTo(first); }
+      else if (input.value.trim()) { jumpTo(ensureStatus()); }
     });
 
     on(document, 'keydown', function (e) {
       if (e.key === 'Escape' && document.activeElement === input) {
         input.value = '';
-        run('');
+        if (isPostsPage) { run('', true); }
         input.blur();
+      }
+      if ((e.metaKey || e.ctrlKey) && (e.key === 'k' || e.key === 'K')) {
+        e.preventDefault();
+        input.focus();
+        input.select();
       }
     });
 
-    // ⌘K / Ctrl+K 聚焦搜索框
-    on(document, 'keydown', function (e) {
-      if (!(e.metaKey || e.ctrlKey)) { return; }
-      if (e.key !== 'k' && e.key !== 'K') { return; }
-      e.preventDefault();
-      input.focus();
-      input.select();
-    });
-
-    // 点击标签(分类 / 标签云)：按该标签过滤文章列表
     on(document, 'click', function (e) {
       var a = (e.target && e.target.closest) ? e.target.closest('a[data-tag]') : null;
       if (!a) { return; }
       var tag = (a.getAttribute('data-tag') || '').trim();
       if (!tag) { return; }
       e.preventDefault();
+      if (!isPostsPage) { goToPosts(tag); return; }
       input.value = tag;
-      run(tag);
-      var list = document.querySelector('[data-post-list]');
-      if (list) { jumpTo(list); }
+      run(tag, true);
+      jumpTo(listRoot);
     });
+
+    if (isPostsPage) {
+      var initial = '';
+      try { initial = new URL(window.location.href).searchParams.get('s') || ''; } catch (e) {}
+      if (initial) {
+        input.value = initial;
+        run(initial, false);
+      }
+    }
   }
 
   /* ============ Hero 轮播 ============ */
@@ -316,6 +338,94 @@
               esc(n) + ' · ' + counts[n] + ' 篇">' + esc(n) + '<span class="tag-count">' + counts[n] + '</span></a>';
           }).join('')
         : '<p class="side-empty">暂无标签</p>';
+    }
+  }
+
+  /* ============ 文章阅读增强：进度 / 目录高亮 / 代码复制 ============ */
+  function initArticleTools() {
+    var content = document.querySelector('.article-content');
+    if (!content) { return; }
+
+    var header = document.getElementById('site-header');
+    var progress = document.createElement('div');
+    progress.className = 'reading-progress';
+    progress.setAttribute('role', 'progressbar');
+    progress.setAttribute('aria-label', '文章阅读进度');
+    progress.setAttribute('aria-valuemin', '0');
+    progress.setAttribute('aria-valuemax', '100');
+    progress.innerHTML = '<span></span>';
+    document.body.appendChild(progress);
+    var progressBar = $('span', progress);
+
+    var updateProgress = function () {
+      var headerHeight = header ? header.getBoundingClientRect().height : 0;
+      progress.style.setProperty('--reading-progress-top', Math.round(headerHeight) + 'px');
+      var rect = content.getBoundingClientRect();
+      var start = window.pageYOffset + rect.top - headerHeight;
+      var end = start + content.offsetHeight - window.innerHeight + headerHeight;
+      var ratio = end > start ? (window.pageYOffset - start) / (end - start) : 1;
+      ratio = Math.max(0, Math.min(1, ratio));
+      progressBar.style.transform = 'scaleX(' + ratio + ')';
+      progress.setAttribute('aria-valuenow', String(Math.round(ratio * 100)));
+    };
+    updateProgress();
+    on(window, 'scroll', updateProgress, { passive: true });
+    on(window, 'resize', updateProgress);
+
+    var tocLinks = $$('.article-toc a[href^="#"]');
+    var tocItems = tocLinks.map(function (link) {
+      return { link: link, target: document.getElementById((link.getAttribute('href') || '').slice(1)) };
+    }).filter(function (item) { return !!item.target; });
+    var updateToc = function () {
+      if (!tocItems.length) { return; }
+      var headerHeight = header ? header.getBoundingClientRect().height : 0;
+      var active = tocItems[0];
+      tocItems.forEach(function (item) {
+        if (item.target.getBoundingClientRect().top <= headerHeight + 120) { active = item; }
+      });
+      tocItems.forEach(function (item) {
+        var selected = item === active;
+        item.link.classList.toggle('is-active', selected);
+        if (selected) { item.link.setAttribute('aria-current', 'location'); }
+        else { item.link.removeAttribute('aria-current'); }
+      });
+    };
+    updateToc();
+    on(window, 'scroll', updateToc, { passive: true });
+
+    $$('pre', content).forEach(function (pre) {
+      if ($('.code-bar', pre)) { return; }
+      var code = $('code', pre);
+      if (!code) { return; }
+      var language = code.getAttribute('data-lang') || ((code.className || '').match(/language-([\w-]+)/) || [])[1] || '代码';
+      var bar = document.createElement('div');
+      bar.className = 'code-bar';
+      bar.innerHTML = '<span class="code-bar-left"><span class="code-bar-dots" aria-hidden="true"><i class="code-dot"></i><i class="code-dot"></i><i class="code-dot"></i></span><span class="code-lang">' + esc(language) + '</span></span><button type="button" class="code-copy">复制</button>';
+      pre.insertBefore(bar, pre.firstChild);
+      var button = $('.code-copy', bar);
+      on(button, 'click', function () {
+        var text = code.textContent || '';
+        var done = function () {
+          button.textContent = '已复制';
+          button.classList.add('is-copied');
+          window.setTimeout(function () { button.textContent = '复制'; button.classList.remove('is-copied'); }, 1600);
+        };
+        if (navigator.clipboard && window.isSecureContext) {
+          navigator.clipboard.writeText(text).then(done).catch(function () { fallbackCopy(text, done); });
+        } else { fallbackCopy(text, done); }
+      });
+    });
+
+    function fallbackCopy(text, done) {
+      var area = document.createElement('textarea');
+      area.value = text;
+      area.setAttribute('readonly', '');
+      area.style.position = 'fixed';
+      area.style.opacity = '0';
+      document.body.appendChild(area);
+      area.select();
+      try { document.execCommand('copy'); done(); } catch (e) {}
+      document.body.removeChild(area);
     }
   }
 
@@ -432,9 +542,10 @@
     initTheme();
     initHeaderScroll();
     initBackToTop();
+    initDerivedPanels();
     initSearch();
     initHeroCarousel();
-    initDerivedPanels();
+    initArticleTools();
     initRevealOnScroll();
     initFooterMeta();
     initStatsModal();

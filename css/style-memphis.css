@@ -1033,3 +1033,175 @@ html[data-style="memphis"] .section-heading h2::before {
   border: 2px solid var(--m-shadow);
   box-shadow: 2px 2px 0 var(--m-shadow);
 }
+
+/* ============================================================
+   20. 可用性与阅读体验升级（响应式搜索 / 无障碍 / 文章工具）
+   ============================================================ */
+
+/* 键盘用户可以直接越过导航；常态不占布局 */
+html[data-style="memphis"] .skip-link {
+  position: fixed;
+  top: 10px;
+  left: 12px;
+  z-index: 10000;
+  padding: 9px 13px;
+  color: #111;
+  background: var(--m-yellow);
+  border: var(--m-border);
+  box-shadow: 4px 4px 0 var(--m-shadow);
+  font-family: var(--font-display);
+  font-size: 12px;
+  transform: translateY(-180%);
+  transition: transform .12s ease;
+}
+html[data-style="memphis"] .skip-link:focus { transform: translateY(0); }
+
+/* 当前导航项的状态由 JS 同步到 aria-current，视觉与无障碍语义一致 */
+html[data-style="memphis"] .site-nav a[aria-current="page"] {
+  color: var(--heading);
+  border-bottom-color: var(--m-pink);
+}
+
+/* 阅读进度：只在文章详情页由 JS 创建 */
+html[data-style="memphis"] .reading-progress {
+  position: fixed;
+  z-index: 45;
+  top: var(--reading-progress-top, 76px);
+  left: 0;
+  width: 100%;
+  height: 6px;
+  pointer-events: none;
+  background: transparent;
+}
+html[data-style="memphis"] .reading-progress > span {
+  display: block;
+  width: 100%;
+  height: 100%;
+  transform: scaleX(0);
+  transform-origin: left center;
+  background: linear-gradient(90deg, var(--m-pink), var(--m-yellow), var(--m-teal));
+  border-bottom: 2px solid var(--m-shadow);
+  transition: transform .06s linear;
+}
+
+/* 目录高亮更清晰，但不增加无意义动画 */
+html[data-style="memphis"] .article-toc a.is-active,
+html[data-style="memphis"] .article-toc a[aria-current="location"] {
+  color: #111;
+  background: var(--m-yellow);
+  border-left-color: var(--m-shadow);
+  font-weight: 700;
+  padding-left: 10px;
+}
+
+/* 文章正文排版：限制舒适行长，长英文/链接不撑破卡片 */
+html[data-style="memphis"] .article-content > p,
+html[data-style="memphis"] .article-content > ul,
+html[data-style="memphis"] .article-content > ol,
+html[data-style="memphis"] .article-content > blockquote {
+  max-width: 74ch;
+}
+html[data-style="memphis"] .article-content,
+html[data-style="memphis"] .post-card-body { overflow-wrap: anywhere; }
+
+/* 平板仍保留搜索，不再直接丢失功能 */
+@media (min-width: 821px) and (max-width: 1060px) {
+  html[data-style="memphis"] .header-inner { gap: 14px; }
+  html[data-style="memphis"] .site-nav { gap: 15px; }
+  html[data-style="memphis"] .search-box {
+    display: flex;
+    width: clamp(150px, 19vw, 205px);
+    min-width: 150px;
+  }
+  html[data-style="memphis"] .search-hint { display: none; }
+}
+
+/* 手机：顶部两行布局，第二行是完整可用的站内搜索 */
+@media (max-width: 820px) {
+  html[data-style="memphis"] .header-inner {
+    height: auto;
+    padding: 10px 0 12px;
+    display: flex;
+    flex-wrap: wrap;
+    row-gap: 10px;
+  }
+  html[data-style="memphis"] .brand { order: 0; }
+  html[data-style="memphis"] .nav-toggle { order: 1; }
+  html[data-style="memphis"] .header-actions { order: 2; }
+  html[data-style="memphis"] .search-box {
+    display: flex;
+    order: 10;
+    flex: 1 0 100%;
+    width: 100%;
+    min-width: 0;
+    height: 42px;
+    box-shadow: 4px 4px 0 var(--m-shadow) !important;
+  }
+
+  /* 移动菜单也沿用同一套孟菲斯视觉，而不是回退到普通圆角菜单 */
+  html[data-style="memphis"] .site-nav {
+    top: calc(100% + 3px);
+    margin-top: 0;
+    padding: 10px;
+    gap: 4px;
+    background: var(--m-surface) !important;
+    border: var(--m-border) !important;
+    border-radius: 0 !important;
+    box-shadow: 7px 7px 0 var(--m-shadow) !important;
+  }
+  html[data-style="memphis"] .site-nav > a,
+  html[data-style="memphis"] .site-nav .nav-link {
+    padding: 10px 12px;
+    border-radius: 0;
+  }
+  html[data-style="memphis"] .site-nav > a:hover,
+  html[data-style="memphis"] .site-nav > a.is-active,
+  html[data-style="memphis"] .site-nav .nav-link:hover,
+  html[data-style="memphis"] .site-nav .nav-link.is-active {
+    color: #111;
+    background: var(--m-yellow);
+  }
+  html[data-style="memphis"] .nav-dropdown { padding-left: 10px; }
+  html[data-style="memphis"] .nav-dropdown a { border-radius: 0; }
+
+  html[data-style="memphis"] .nav-toggle {
+    display: inline-flex;
+    width: 36px;
+    height: 36px;
+    color: #111;
+    background: var(--m-yellow);
+    border: 2px solid var(--m-shadow);
+    border-radius: 0;
+    box-shadow: 3px 3px 0 var(--m-shadow);
+  }
+  html[data-style="memphis"] .nav-toggle:hover { color: #111; transform: translate(-1px, -1px); }
+  html[data-style="memphis"] .nav-toggle[aria-expanded="true"] span:first-child { transform: translateY(3.5px) rotate(45deg); }
+  html[data-style="memphis"] .nav-toggle[aria-expanded="true"] span:last-child { transform: translateY(-3.5px) rotate(-45deg); }
+
+  /* 小屏卡片取消旋转，保留硬投影，阅读顺序更稳定 */
+  html[data-style="memphis"] .post-stack .post-card,
+  html[data-style="memphis"] .post-stack .post-card:nth-child(2n),
+  html[data-style="memphis"] .post-stack .post-card:nth-child(3n) {
+    transform: none;
+  }
+  html[data-style="memphis"] .post-stack { gap: 22px; }
+  html[data-style="memphis"] .post-card { padding: 14px; gap: 14px; }
+  html[data-style="memphis"] .post-card h3 { font-size: 17px; }
+  html[data-style="memphis"] .post-card-media { aspect-ratio: 16 / 8.5; }
+  html[data-style="memphis"] .stream-section { padding-top: 28px; }
+  html[data-style="memphis"] .article-content pre { padding-left: 14px; padding-right: 14px; }
+}
+
+@media (max-width: 430px) {
+  html[data-style="memphis"] .search-hint { display: none; }
+  html[data-style="memphis"] .header-actions { gap: 5px; }
+  html[data-style="memphis"] .section-heading h2 { font-size: 20px; }
+  html[data-style="memphis"] .section-heading p { font-size: 12.5px; line-height: 1.5; }
+  html[data-style="memphis"] .article-content { padding: 18px 15px; }
+  html[data-style="memphis"] .article-content h2 { font-size: 1.35rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html[data-style="memphis"] .reading-progress > span,
+  html[data-style="memphis"] .skip-link { transition: none; }
+}
