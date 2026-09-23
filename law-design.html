@@ -15,18 +15,18 @@
     })();
     </script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>代码人生 · Ryan</title>
-    <meta name="description" content="Ryan 的两份练习项目：订单数据分析与推荐平台，以及 LawDesign 法律场景 AI 应用。源码暂未公开。">
-    <link rel="canonical" href="https://lzylsq.github.io/projects.html">
+    <title>LawDesign · 法律智能体平台 · Ryan</title>
+    <meta name="description" content="Ryan 的 LawDesign 法律场景练习项目技术记录，包含 React、Flask、FastAPI、GraphRAG 与实时数据模块。">
+    <link rel="canonical" href="https://lzylsq.github.io/law-design.html">
     <meta property="og:type" content="website">
-    <meta property="og:title" content="代码人生 · Ryan">
-    <meta property="og:description" content="iOS 开发，正在学习全栈">
-    <meta property="og:url" content="https://lzylsq.github.io/projects.html">
+    <meta property="og:title" content="LawDesign · 法律智能体平台 · Ryan">
+    <meta property="og:description" content="Ryan 的 LawDesign 法律场景练习项目技术记录，包含 React、Flask、FastAPI、GraphRAG 与实时数据模块。">
+    <meta property="og:url" content="https://lzylsq.github.io/law-design.html">
     <meta property="og:site_name" content="Ryan · iOS 开发">
     <meta property="og:locale" content="zh_CN">
     <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="Ryan · iOS 开发">
-    <meta name="twitter:description" content="iOS 开发，正在学习全栈">
+    <meta name="twitter:title" content="LawDesign · 法律智能体平台 · Ryan">
+    <meta name="twitter:description" content="Ryan 的 LawDesign 法律场景练习项目技术记录，包含 React、Flask、FastAPI、GraphRAG 与实时数据模块。">
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"Ryan · iOS 开发","url":"https://lzylsq.github.io/","description":"Ryan 的个人网站：iOS 开发，正在学习全栈；目前介绍两个项目，文章待更新。","potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://lzylsq.github.io/posts.html?s={search_term_string}"},"query-input":"required name=search_term_string"}}</script>
         <link rel="icon" href="assets/favicon.svg">
     <link rel="shortcut icon" href="assets/favicon.svg">
@@ -99,47 +99,21 @@
         </div>
     </header>
 <main class="site-main" id="main-content">
-  <section class="projects-intro">
-    <div class="flux-container">
-      <span class="eyebrow">// PROJECTS</span>
-      <h1>代码人生</h1>
-      <p>目前整理了两份练习项目：一份围绕数据链路，一份探索法律场景应用。点开项目可查看技术记录；源码暂未对外公开。</p>
-      <nav class="project-jump" aria-label="项目入口">
-        <a class="button button-primary" href="data-pipeline.html">看数据项目 →</a>
-        <a class="button button-secondary" href="law-design.html">看 LawDesign →</a>
-      </nav>
-    </div>
-  </section>
-  <section class="projects-section" id="projects" aria-labelledby="projects-heading">
-    <div class="flux-container">
-      <div class="section-heading"><h2 id="projects-heading">项目总览</h2><p>选一个方向，继续读具体做法。</p></div>
-      <div class="project-grid project-overview-grid">
-        <article class="project-card" id="data-pipeline">
-          <div class="project-top"><span class="project-index">01</span><span class="project-kind">数据链路 · 练习项目</span></div>
-          <h3 class="project-title"><a href="data-pipeline.html">实时订单数据分析与推荐平台</a></h3>
-          <p class="project-desc">尝试连接模拟订单、实时处理、离线入仓与数据展示；记录了不同组件之间如何传递数据。</p>
-          <div class="project-route" aria-label="项目流程：模拟订单到 Kafka，到 Spark Streaming，再到可视化">
-            <span>模拟订单</span><span>Kafka</span><span>Spark Streaming</span><span>可视化</span>
-          </div>
-          <p class="project-summary">另有 Flume → HDFS、Sqoop → Hive 两条离线处理路径。</p>
-          <div class="project-actions"><a class="button button-primary" href="data-pipeline.html">查看技术记录 →</a></div>
-        </article>
-        <article class="project-card" id="law-design">
-          <div class="project-top"><span class="project-index">02</span><span class="project-kind">法律场景 · 练习项目</span></div>
-          <h3 class="project-title"><a href="law-design.html">LawDesign · 法律智能体平台</a></h3>
-          <p class="project-desc">围绕法律问答、合同审查与文书草拟做技术练习；把前端、多个服务和公共能力组织在一个仓库。</p>
-          <div class="project-route" aria-label="项目结构：React 前端，到后端服务，再到 GraphRAG 问答">
-            <span>React 前端</span><span>服务模块</span><span>GraphRAG 问答</span>
-          </div>
-          <p class="project-summary">还包含 Kafka / Spark Streaming 风控数据链路。</p>
-          <div class="project-actions"><a class="button button-primary" href="law-design.html">查看技术记录 →</a></div>
-        </article>
-      </div>
-      <p class="projects-disclosure">这些是项目代码与技术路径的整理，不代表产品已上线或提供服务。仓库目前是私有的。</p>
-    </div>
-  </section>
-  <section class="project-outro"><div class="flux-container"><div class="project-outro-card"><div><h2>想交流项目？</h2><p>如果想了解其中的做法或给些建议，欢迎发邮件给我。</p></div><div class="project-outro-actions"><a class="button button-primary" href="mailto:lzyryan5247@gmail.com?subject=Project%20discussion">写邮件给 Ryan →</a><a class="button button-secondary" href="about.html">认识我 →</a></div></div></div></section>
-</main>
+      <section class="projects-intro project-detail-intro"><div class="flux-container">
+        <nav class="project-breadcrumb" aria-label="面包屑导航"><a href="projects.html">代码人生</a><span aria-hidden="true">/</span><span aria-current="page">LawDesign</span></nav>
+        <span class="eyebrow">// PROJECT NOTE</span>
+        <h1>LawDesign · 法律智能体平台</h1>
+        <p class="project-detail-lede">围绕法律问答、合同审查与文书草拟，尝试组织前端和多个后端服务。这是一份技术练习记录，不是对外提供的法律服务。</p>
+        <div class="project-detail-meta"><span>练习项目</span><span>源码暂未公开</span><span>技术记录 · 非上线说明</span></div>
+      </div></section>
+      <section class="project-detail-section" aria-labelledby="path-heading"><div class="flux-container">
+        <div class="section-heading"><h2 id="path-heading">技术路径</h2><p>按代码中的模块整理，不代表所有环节都已经稳定运行。</p></div>
+        <div class="detail-route"><div class="route-label">问答与服务</div><ol class="route-steps"><li><strong>React 前端</strong><span>页面与交互</span></li><li><strong>Flask / FastAPI</strong><span>业务服务</span></li><li><strong>GraphRAG</strong><span>法律资料检索</span></li></ol><div class="route-label">风控链路</div><ol class="route-steps"><li><strong>Kafka</strong><span>数据入口</span></li><li><strong>Spark Streaming</strong><span>流处理</span></li><li><strong>风控看板</strong><span>结果展示</span></li></ol></div>
+        <div class="detail-grid"><article class="detail-panel"><span class="detail-number">01 / 结构</span><h3>多模块练习</h3><p>使用 monorepo 管理 React 前端、鉴权、合同数据、风险分析、诉讼文书与合同模板等服务。共用配置和服务脚手架整理在 shared 包中。</p></article><article class="detail-panel"><span class="detail-number">02 / 问答</span><h3>法律场景检索</h3><p>法律问答部分尝试以 FastAPI 提供 GraphRAG 检索接口；另外有案例分析模块，接入 Moonshot。它们是不同的练习模块，不等同于法律建议服务。</p></article><article class="detail-panel"><span class="detail-number">03 / 风控</span><h3>数据链路</h3><p>项目中还有 Kafka 生产者、Scala + Spark Streaming 流处理以及 Flask 风控看板模块，用来探索实时数据处理。</p></article><aside class="detail-panel detail-caveat"><span class="detail-number">说明</span><h3>当前状态</h3><p>这里介绍的是仓库的代码组织和技术方向。项目未作为公开服务提供；源码暂时没有开放。</p></aside></div>
+        <div class="detail-stack"><h2>涉及的技术</h2><div class="project-stack"><span class="project-tag">Python</span><span class="project-tag">Flask</span><span class="project-tag">FastAPI</span><span class="project-tag">React</span><span class="project-tag">TypeScript</span><span class="project-tag">GraphRAG</span><span class="project-tag">Kafka</span><span class="project-tag">Spark Streaming</span><span class="project-tag">MySQL</span></div></div>
+      </div></section>
+      <section class="project-outro"><div class="flux-container"><div class="project-outro-card"><div><h2>继续看看？</h2><p>仓库目前是私有的。如果你对实现细节有兴趣，可以发邮件交流。</p></div><div class="project-outro-actions"><a class="button button-primary" href="mailto:lzyryan5247@gmail.com?subject=LawDesign">邮件交流 →</a><a class="button button-secondary" href="data-pipeline.html">看数据项目 →</a><a class="button button-secondary" href="projects.html">返回项目总览 →</a></div></div></div></section>
+    </main>
     <footer class="site-footer">
         <div class="flux-container footer-inner">
             <div class="footer-copy">

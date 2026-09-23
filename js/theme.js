@@ -105,7 +105,7 @@
         var href = a.getAttribute('href') || '';
         if (/^(https?:|mailto:|#)/.test(href)) { return; }
         var file = href.split('#')[0].split('?')[0] || 'index.html';
-        var match = file === here;
+        var match = file === here || (file === 'projects.html' && (here === 'data-pipeline.html' || here === 'law-design.html'));
         a.classList.toggle('is-active', match);
         if (match) { a.setAttribute('aria-current', 'page'); }
         else { a.removeAttribute('aria-current'); }

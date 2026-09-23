@@ -15,18 +15,18 @@
     })();
     </script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>代码人生 · Ryan</title>
-    <meta name="description" content="Ryan 的两份练习项目：订单数据分析与推荐平台，以及 LawDesign 法律场景 AI 应用。源码暂未公开。">
-    <link rel="canonical" href="https://lzylsq.github.io/projects.html">
+    <title>实时订单数据分析与推荐平台 · Ryan</title>
+    <meta name="description" content="Ryan 的订单数据链路练习项目技术记录，涵盖 Kafka、Spark Streaming、Flume、Sqoop 与 Hive。">
+    <link rel="canonical" href="https://lzylsq.github.io/data-pipeline.html">
     <meta property="og:type" content="website">
-    <meta property="og:title" content="代码人生 · Ryan">
-    <meta property="og:description" content="iOS 开发，正在学习全栈">
-    <meta property="og:url" content="https://lzylsq.github.io/projects.html">
+    <meta property="og:title" content="实时订单数据分析与推荐平台 · Ryan">
+    <meta property="og:description" content="Ryan 的订单数据链路练习项目技术记录，涵盖 Kafka、Spark Streaming、Flume、Sqoop 与 Hive。">
+    <meta property="og:url" content="https://lzylsq.github.io/data-pipeline.html">
     <meta property="og:site_name" content="Ryan · iOS 开发">
     <meta property="og:locale" content="zh_CN">
     <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="Ryan · iOS 开发">
-    <meta name="twitter:description" content="iOS 开发，正在学习全栈">
+    <meta name="twitter:title" content="实时订单数据分析与推荐平台 · Ryan">
+    <meta name="twitter:description" content="Ryan 的订单数据链路练习项目技术记录，涵盖 Kafka、Spark Streaming、Flume、Sqoop 与 Hive。">
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"Ryan · iOS 开发","url":"https://lzylsq.github.io/","description":"Ryan 的个人网站：iOS 开发，正在学习全栈；目前介绍两个项目，文章待更新。","potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://lzylsq.github.io/posts.html?s={search_term_string}"},"query-input":"required name=search_term_string"}}</script>
         <link rel="icon" href="assets/favicon.svg">
     <link rel="shortcut icon" href="assets/favicon.svg">
@@ -99,47 +99,21 @@
         </div>
     </header>
 <main class="site-main" id="main-content">
-  <section class="projects-intro">
-    <div class="flux-container">
-      <span class="eyebrow">// PROJECTS</span>
-      <h1>代码人生</h1>
-      <p>目前整理了两份练习项目：一份围绕数据链路，一份探索法律场景应用。点开项目可查看技术记录；源码暂未对外公开。</p>
-      <nav class="project-jump" aria-label="项目入口">
-        <a class="button button-primary" href="data-pipeline.html">看数据项目 →</a>
-        <a class="button button-secondary" href="law-design.html">看 LawDesign →</a>
-      </nav>
-    </div>
-  </section>
-  <section class="projects-section" id="projects" aria-labelledby="projects-heading">
-    <div class="flux-container">
-      <div class="section-heading"><h2 id="projects-heading">项目总览</h2><p>选一个方向，继续读具体做法。</p></div>
-      <div class="project-grid project-overview-grid">
-        <article class="project-card" id="data-pipeline">
-          <div class="project-top"><span class="project-index">01</span><span class="project-kind">数据链路 · 练习项目</span></div>
-          <h3 class="project-title"><a href="data-pipeline.html">实时订单数据分析与推荐平台</a></h3>
-          <p class="project-desc">尝试连接模拟订单、实时处理、离线入仓与数据展示；记录了不同组件之间如何传递数据。</p>
-          <div class="project-route" aria-label="项目流程：模拟订单到 Kafka，到 Spark Streaming，再到可视化">
-            <span>模拟订单</span><span>Kafka</span><span>Spark Streaming</span><span>可视化</span>
-          </div>
-          <p class="project-summary">另有 Flume → HDFS、Sqoop → Hive 两条离线处理路径。</p>
-          <div class="project-actions"><a class="button button-primary" href="data-pipeline.html">查看技术记录 →</a></div>
-        </article>
-        <article class="project-card" id="law-design">
-          <div class="project-top"><span class="project-index">02</span><span class="project-kind">法律场景 · 练习项目</span></div>
-          <h3 class="project-title"><a href="law-design.html">LawDesign · 法律智能体平台</a></h3>
-          <p class="project-desc">围绕法律问答、合同审查与文书草拟做技术练习；把前端、多个服务和公共能力组织在一个仓库。</p>
-          <div class="project-route" aria-label="项目结构：React 前端，到后端服务，再到 GraphRAG 问答">
-            <span>React 前端</span><span>服务模块</span><span>GraphRAG 问答</span>
-          </div>
-          <p class="project-summary">还包含 Kafka / Spark Streaming 风控数据链路。</p>
-          <div class="project-actions"><a class="button button-primary" href="law-design.html">查看技术记录 →</a></div>
-        </article>
-      </div>
-      <p class="projects-disclosure">这些是项目代码与技术路径的整理，不代表产品已上线或提供服务。仓库目前是私有的。</p>
-    </div>
-  </section>
-  <section class="project-outro"><div class="flux-container"><div class="project-outro-card"><div><h2>想交流项目？</h2><p>如果想了解其中的做法或给些建议，欢迎发邮件给我。</p></div><div class="project-outro-actions"><a class="button button-primary" href="mailto:lzyryan5247@gmail.com?subject=Project%20discussion">写邮件给 Ryan →</a><a class="button button-secondary" href="about.html">认识我 →</a></div></div></div></section>
-</main>
+      <section class="projects-intro project-detail-intro"><div class="flux-container">
+        <nav class="project-breadcrumb" aria-label="面包屑导航"><a href="projects.html">代码人生</a><span aria-hidden="true">/</span><span aria-current="page">数据项目</span></nav>
+        <span class="eyebrow">// PROJECT NOTE</span>
+        <h1>实时订单数据分析与推荐平台</h1>
+        <p class="project-detail-lede">围绕模拟订单，练习实时处理、离线采集与推荐方法。这里记录代码中的结构和尝试，不把它描述成已经上线的服务。</p>
+        <div class="project-detail-meta"><span>练习项目</span><span>源码暂未公开</span><span>技术记录 · 非上线说明</span></div>
+      </div></section>
+      <section class="project-detail-section" aria-labelledby="path-heading"><div class="flux-container">
+        <div class="section-heading"><h2 id="path-heading">技术路径</h2><p>按代码中的模块整理，不代表所有环节都已经稳定运行。</p></div>
+        <div class="detail-route"><div class="route-label">实时处理</div><ol class="route-steps"><li><strong>模拟订单</strong><span>Python 生成数据</span></li><li><strong>Kafka</strong><span>消息上报</span></li><li><strong>Spark Streaming</strong><span>窗口聚合</span></li><li><strong>可视化</strong><span>WebSocket / ECharts</span></li></ol><div class="route-label">离线处理</div><ol class="route-steps"><li><strong>Kafka</strong><span>采集来源</span></li><li><strong>Flume → HDFS</strong><span>写入文件存储</span></li><li><strong>MySQL → Hive</strong><span>Sqoop 同步业务数据</span></li></ol></div>
+        <div class="detail-grid"><article class="detail-panel"><span class="detail-number">01 / 实时</span><h3>订单数据与实时展示</h3><p>使用 Python 模拟订单，经 Kafka 传递；Spark Streaming 对数据做窗口聚合，再将结果经 Kafka 发送给 Flask / WebSocket 展示层。ECharts 用来呈现图表。</p></article><article class="detail-panel"><span class="detail-number">02 / 离线</span><h3>采集与入仓</h3><p>自定义 Flume PollableSource 从 Kafka 读取并处理数据后写入 HDFS；Sqoop 将 MySQL 业务数据同步到 Hive，尝试用 Spark SQL / RDD 统计。</p></article><article class="detail-panel"><span class="detail-number">03 / 推荐</span><h3>推荐方法尝试</h3><p>练习 Item-Based 和 User-Based 协同过滤，使用余弦相似度 UDF，并在结果写入时考虑幂等 upsert。</p></article><aside class="detail-panel detail-caveat"><span class="detail-number">说明</span><h3>当前状态</h3><p>这是项目代码和思路的记录，不是线上产品。源码暂时未公开，也不把设计中的链路当作已验证的运行成果。</p></aside></div>
+        <div class="detail-stack"><h2>涉及的技术</h2><div class="project-stack"><span class="project-tag">Python</span><span class="project-tag">Kafka</span><span class="project-tag">Spark Streaming</span><span class="project-tag">Scala</span><span class="project-tag">Flume</span><span class="project-tag">Sqoop</span><span class="project-tag">Hive</span><span class="project-tag">HDFS</span><span class="project-tag">Flask</span><span class="project-tag">ECharts</span></div></div>
+      </div></section>
+      <section class="project-outro"><div class="flux-container"><div class="project-outro-card"><div><h2>继续看看？</h2><p>仓库目前是私有的。如果你对实现细节有兴趣，可以发邮件交流。</p></div><div class="project-outro-actions"><a class="button button-primary" href="mailto:lzyryan5247@gmail.com?subject=Flume_Sqoop_Project">邮件交流 →</a><a class="button button-secondary" href="law-design.html">看LawDesign →</a><a class="button button-secondary" href="projects.html">返回项目总览 →</a></div></div></div></section>
+    </main>
     <footer class="site-footer">
         <div class="flux-container footer-inner">
             <div class="footer-copy">
