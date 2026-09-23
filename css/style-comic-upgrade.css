@@ -1,0 +1,183 @@
+@charset "UTF-8";
+/* Ryan / ink edition. Original radial line art; not the supplied reference image. */
+html[data-style="memphis"] {
+  --burst-image: url('../assets/images/ink-burst.svg');
+}
+/* The impression is ink on paper, never a texture behind long-form text. */
+html[data-style="memphis"] .manga-spread,
+html[data-style="memphis"][data-ink="color"] .manga-spread {
+  background: #fff;
+}
+html[data-style="memphis"] .manga-spread::before {
+  content: ""; position: absolute; inset: -12%; z-index: 0; pointer-events: none;
+  background: #111;
+  -webkit-mask: var(--burst-image) center / 100% 100% no-repeat;
+  mask: var(--burst-image) center / 100% 100% no-repeat;
+}
+html[data-style="memphis"][data-ink="color"] .manga-spread { background: #edf8f7; }
+html[data-style="memphis"][data-ink="color"] .manga-spread::before { background: #2d5e78; }
+html[data-style="memphis"] .manga-panel--burst,
+html[data-style="memphis"][data-ink="color"] .manga-panel--burst {
+  background: #fff;
+}
+html[data-style="memphis"] .manga-panel--burst::before {
+  content: ""; position: absolute; inset: -17%; background: #111;
+  -webkit-mask: var(--burst-image) center / 100% 100% no-repeat;
+  mask: var(--burst-image) center / 100% 100% no-repeat;
+}
+html[data-style="memphis"][data-ink="color"] .manga-panel--burst::before { background: #2d5e78; }
+html[data-style="memphis"] .manga-panel--burst span { color: #fff; -webkit-text-stroke: 3px #111; text-shadow: 6px 8px 0 #111; }
+html[data-style="memphis"][data-ink="color"] .manga-panel--burst { background: #e7f6f6; }
+html[data-style="memphis"][data-ink="color"] .manga-panel--burst span { color: #ef6674; -webkit-text-stroke-color: #18324d; text-shadow: 6px 8px 0 #18324d; }
+/* The project chapter becomes a diagonal action splash rather than another card. */
+html[data-style="memphis"] .projects-action-panel {
+  isolation: isolate; overflow: hidden; background: #fff;
+  clip-path: polygon(0 11%,100% 0,100% 82%,87% 100%,0 92%);
+}
+html[data-style="memphis"] .projects-action-panel::before {
+  content: ""; position: absolute; inset: -15%; z-index: -1; background: #111;
+  -webkit-mask: var(--burst-image) center / cover no-repeat;
+  mask: var(--burst-image) center / cover no-repeat;
+}
+html[data-style="memphis"] .projects-action-panel img { position: relative; z-index: 1; clip-path: polygon(17% 0,100% 0,100% 100%,0 100%); }
+html[data-style="memphis"][data-ink="color"] .projects-action-panel { background: #ecf8f6; }
+html[data-style="memphis"][data-ink="color"] .projects-action-panel::before { background: #2d5e78; }
+/* A cut-page chapter mark on interior pages; the safe area stays clean. */
+html[data-style="memphis"] :is(.about-section,.posts-section,.projects-overview-intro) .section-heading { position: relative; isolation: isolate; }
+html[data-style="memphis"] :is(.about-section,.posts-section) .section-heading::after {
+  content: ""; position: absolute; z-index: -1; right: 0; top: -18px;
+  width: clamp(110px,25vw,310px); height: 115%; opacity: .12; pointer-events: none;
+  background: var(--heading); -webkit-mask: var(--burst-image) center / cover no-repeat;
+  mask: var(--burst-image) center / cover no-repeat;
+}
+/* Paper strips in a staggered spread instead of a neat collection of boxes. */
+html[data-style="memphis"] .about-intro { border-top: 6px solid var(--heading) !important; clip-path: polygon(0 0,100% 0,100% 96%,96% 100%,0 100%); }
+html[data-style="memphis"] .about-stack { border-top: 6px solid var(--heading) !important; transform: translateY(22px) rotate(1deg); clip-path: polygon(3% 0,100% 0,100% 100%,0 100%,0 5%); }
+html[data-style="memphis"] .destination-card:nth-child(2) { transform: translateY(20px) rotate(1deg); }
+html[data-style="memphis"] .destination-card:nth-child(3) { transform: rotate(-1deg); }
+html[data-style="memphis"] .destination-card:nth-child(2):hover,
+html[data-style="memphis"] .destination-card:nth-child(3):hover { transform: translateY(-3px) rotate(0deg) !important; }
+html[data-style="memphis"] .project-switchboard { border-top: 5px solid var(--comic-ink) !important; }
+/* Every link that looks like a button has a real 44px target and keyboard focus. */
+html[data-style="memphis"] :is(.button,.hero-arrow,.header-action,.nav-toggle,.search-toggle,.stats-trigger,.ink-toggle,.project-switchboard a,.hero-dot) { min-height: 44px; }
+html[data-style="memphis"] :is(a,button,input):focus-visible { outline: 3px solid #df6070 !important; outline-offset: 4px; }
+html[data-style="memphis"] .hero-slide:first-child .hero-actions .button { padding: 10px 17px; }
+html[data-style="memphis"] .hero-actions { flex-wrap: wrap; }
+@media (max-width: 900px) {
+  html[data-style="memphis"] .about-stack { transform: none; }
+}
+@media (max-width: 560px) {
+  html[data-style="memphis"] .hero-slide:first-child .hero-copy h1 { font-size: clamp(33px, 9.5vw, 49px); }
+  html[data-style="memphis"] .hero-slide:first-child .hero-copy,
+  html[data-style="memphis"] .hero-slide:not(:first-child) .hero-copy { padding: 24px max(18px,5vw) 30px; }
+  html[data-style="memphis"] .hero-slide:first-child .hero-actions .button,
+  html[data-style="memphis"] .hero-slide:not(:first-child) .hero-actions .button { min-height: 44px; padding: 10px 14px; }
+  html[data-style="memphis"] .project-switchboard { width: 100%; margin: -23px 0 0; padding: 14px !important; transform: rotate(0deg); }
+  html[data-style="memphis"] .project-switchboard a { min-height: 66px; gap: 9px; }
+  html[data-style="memphis"] .project-switchboard .switchboard-copy { min-width: 0; }
+  html[data-style="memphis"] .project-switchboard strong { overflow-wrap: anywhere; }
+  html[data-style="memphis"] .projects-action-panel { height: 230px; }
+  html[data-style="memphis"] .about-grid { gap: 19px; }
+  html[data-style="memphis"] .destination-card:nth-child(2),
+  html[data-style="memphis"] .destination-card:nth-child(3) { transform: none; }
+}
+/* Two spacious header tiers under narrow widths; no impossible 30px touch targets. */
+@media (max-width: 700px) {
+  html[data-style="memphis"].has-enhanced-search .site-header .header-inner {
+    flex-wrap: wrap; column-gap: 10px; row-gap: 7px; padding: 8px 0;
+  }
+  html[data-style="memphis"] .site-header .brand { order: 0; margin-right: auto; }
+  html[data-style="memphis"] .site-header .nav-toggle { order: 1; width: 44px; height: 44px; flex: none; }
+  html[data-style="memphis"] .site-header .header-actions {
+    order: 2; flex: 0 0 100%; justify-content: space-between; gap: 4px !important;
+    border-top: 1px solid var(--border); padding-top: 7px;
+  }
+  html[data-style="memphis"] .header-actions .header-action,
+  html[data-style="memphis"] .header-actions .stats-trigger,
+  html[data-style="memphis"] .header-actions .ink-toggle {
+    width: auto; min-width: 44px; height: 44px; padding: 0 9px;
+  }
+  html[data-style="memphis"] .header-actions .stats-trigger span { display: none; }
+  html[data-style="memphis"] .header-actions .stats-trigger svg { margin: 0; }
+  html[data-style="memphis"] .header-actions .ink-toggle span { font-size: 12px; }
+  html[data-style="memphis"] .site-header .search-box { order: 3; }
+}
+@media (max-width: 370px) {
+  html[data-style="memphis"] .brand-text { font-size: 18px; }
+  html[data-style="memphis"] .header-actions .header-action,
+  html[data-style="memphis"] .header-actions .stats-trigger,
+  html[data-style="memphis"] .header-actions .ink-toggle { width: auto; height: 44px; min-width: 44px; padding: 0 7px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html[data-style="memphis"] :is(.manga-spread,.manga-panel,.destination-card,.about-card,.button) { animation: none !important; transition-duration: 0.01ms !important; }
+}
+/* Same visual grammar for text CTAs, icon tools, index links and utility actions. */
+html[data-style="memphis"] :is(.button,.about-contact-item,.project-switchboard a) {
+  font-weight: 800; text-decoration: none; line-height: 1.35;
+  transition: transform .18s ease, background-color .18s ease, box-shadow .18s ease, border-color .18s ease;
+}
+html[data-style="memphis"] :is(.button-primary,.project-actions .button-primary) {
+  background: #171717 !important; border: 2px solid #171717 !important; color: #fff !important;
+}
+html[data-style="memphis"] :is(.button-secondary,.project-actions .button-secondary) {
+  border: 2px solid var(--heading) !important; background: var(--m-surface); color: var(--heading) !important;
+}
+html[data-style="memphis"][data-ink="color"] :is(.button-primary,.project-actions .button-primary) {
+  background: #bb314d !important; border-color: #19273d !important; color: #fff !important;
+}
+html[data-style="memphis"] :is(.header-actions .header-action,.nav-toggle,.hero-arrow) {
+  border: 2px solid var(--heading) !important; border-radius: 3px !important;
+  background: var(--m-surface) !important; color: var(--heading) !important;
+  box-shadow: 2px 2px 0 var(--heading) !important;
+  display: inline-flex; align-items: center; justify-content: center;
+  transition: transform .16s ease, background-color .16s ease, box-shadow .16s ease;
+}
+html[data-style="memphis"] :is(.header-actions .header-action,.nav-toggle,.hero-arrow):hover {
+  transform: translate(-1px,-1px); box-shadow: 3px 3px 0 var(--heading) !important;
+}
+html[data-style="memphis"] :is(.header-actions .header-action,.nav-toggle,.hero-arrow):active {
+  transform: translate(2px,2px); box-shadow: 0 0 0 var(--heading) !important;
+}
+html[data-style="memphis"] .header-actions .ink-toggle[aria-pressed="true"] { background: var(--heading) !important; color: var(--m-bg) !important; }
+html[data-style="memphis"] .project-switchboard a:hover,
+html[data-style="memphis"] .about-contact-item:hover { border-color: var(--heading) !important; transform: translate(-2px,-2px); box-shadow: 3px 3px 0 var(--heading); }
+/* Large invisible hit targets; small visible panel markers. */
+html[data-style="memphis"] .hero-dot,
+html[data-style="memphis"] .hero-dot.is-active {
+  position: relative; width: 44px; height: 44px; min-height: 44px; border: 0;
+  background: transparent; box-shadow: none;
+}
+html[data-style="memphis"] .hero-dot::after {
+  content: ""; position: absolute; inset: 15px; border: 2px solid #111;
+  background: #fff; transform: rotate(45deg); transition: transform .18s ease, background .18s ease;
+}
+html[data-style="memphis"] .hero-dot.is-active::after { background: #171717; transform: rotate(45deg) scale(1.25); }
+html[data-style="memphis"][data-ink="color"] .hero-dot.is-active::after { background: #db4c61; }
+@media (max-width: 700px) {
+  html[data-style="memphis"] .site-header .header-actions { padding-bottom: 3px; }
+  html[data-style="memphis"] .hero-dot { width: 44px !important; }
+  html[data-style="memphis"] .hero-actions .button,
+  html[data-style="memphis"] .about-utilities .button,
+  html[data-style="memphis"] .about-next .button,
+  html[data-style="memphis"] .empty-actions .button { min-width: 0; white-space: normal; text-align: center; }
+}
+html[data-style="memphis"] .hero-dots {
+  background: #fff; border: 2px solid #171717; border-radius: 3px;
+  box-shadow: 3px 3px 0 #171717; padding: 0 4px; gap: 0; backdrop-filter: none;
+}
+html[data-style="memphis"][data-ink="color"] .hero-dots { background: #eff8f8; }
+/* The compact menu and search launcher belong to the small-screen edition only. */
+@media (min-width: 821px) {
+  html[data-style="memphis"] .site-header .nav-toggle,
+  html[data-style="memphis"] .site-header .search-toggle { display: none !important; }
+}
+/* Let the reference's rush of ink cross the panel gutters, not the narration. */
+html[data-style="memphis"] .manga-spread::after {
+  content: ""; inset: 0; z-index: 4; opacity: .45; pointer-events: none;
+  background: #111; -webkit-mask: var(--burst-image) center / cover no-repeat;
+  mask: var(--burst-image) center / cover no-repeat;
+}
+html[data-style="memphis"][data-ink="color"] .manga-spread::after { background: #2d5e78; opacity: .35; }
+@media (max-width: 700px) {
+  html[data-style="memphis"] .manga-spread::after { opacity: .32; }
+}

@@ -2,7 +2,7 @@
 
 iOS 开发的静态个人网站，使用 HTML、CSS 和原生 JavaScript，无构建步骤，部署于 GitHub Pages：<https://lzylsq.github.io/>。
 
-网站默认采用原创黑白漫画分镜视觉（斜切画格、墨线、速度线、网点），可切换至冷白、深蓝、珊瑚红与浅青的彩色刊载版。两种漫画配色与明暗主题独立记忆；站内插画为本项目原创 SVG（`assets/images/ryan-manga-action*.svg` 为人物特写），不使用参考图或带水印的素材。**个人资料和项目文字独立撰写**。目前有两个项目介绍，**尚未正式发布文章**；文章页 `post.html` 只是排版示例，不计作已发布内容。
+网站默认采用原创黑白漫画分镜视觉（斜切画格、墨线、速度线、网点），可切换至冷白、深蓝、珊瑚红与浅青的彩色刊载版。两种漫画配色与明暗主题独立记忆；站内插画为本项目原创 SVG（`assets/images/ryan-manga-action*.svg` 为人物特写，`assets/images/ink-burst.svg` 为按固定随机种子生成的放射墨线），不使用参考图或带水印的素材。**个人资料和项目文字独立撰写**。目前有两个项目介绍，**尚未正式发布文章**；文章页 `post.html` 只是排版示例，不计作已发布内容。
 
 ## 页面
 
@@ -49,7 +49,7 @@ iOS 开发的静态个人网站，使用 HTML、CSS 和原生 JavaScript，无�
 
 ## 外观与维护
 
-- 漫画分镜与黑白／彩色配色：`css/style-comic.css`，由最后加载的样式层处理；切换逻辑在 `js/comic-mode.js`。明暗主题仍由 `js/theme.js` 独立处理。`css/style-memphis.css` 保留原有页面布局与兼容规则；修改时请同时检查亮／暗主题、桌面与手机对比度。
+- 漫画分镜与黑白／彩色配色：`css/style-comic.css`；放射墨线、按钮和窄屏触控优化：最后加载的 `css/style-comic-upgrade.css`。参考图只用于构图方向，没有作为网站素材；切换逻辑在 `js/comic-mode.js`。明暗主题仍由 `js/theme.js` 独立处理。`css/style-memphis.css` 保留原有页面布局与兼容规则；修改时请同时检查亮／暗主题、桌面与手机对比度。
 - 个人资料：`index.html`、`about.html`、`posts.html`、`projects.html` 及各页页脚；联系方式还在导航的「更多」菜单及页眉邮件入口。
 - 图片：`assets/images/` 中的几何图是装饰素材，并非真实项目截图；要展示项目实际画面请自行替换。
 - 页面交互：`js/theme.js`；本站数据：`js/site-stats.js`；站内搜索索引：`js/site-search.js`。无外部 JavaScript 依赖。
