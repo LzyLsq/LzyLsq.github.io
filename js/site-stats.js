@@ -41,7 +41,13 @@
       var postCards = Array.from(docs[1].querySelectorAll('[data-post-list] .post-card'));
       var routes = Array.from(docs[0].querySelectorAll('.project-overview-grid .project-route span'))
         .map(function (node) { return node.textContent.trim(); }).filter(Boolean);
-      return { projects: projectCards.length, posts: postCards.length, routes: Array.from(new Set(routes)) };
+      var projectRoutes = projectCards.map(function (card, index) {
+        var title = card.querySelector('.project-title');
+        return { label: '项目 ' + String(index + 1).padStart(2, '0'), title: title ? title.textContent.trim() : '项目',
+          count: card.querySelectorAll('.project-route span').length };
+      });
+      return { projects: projectCards.length, posts: postCards.length,
+        routes: Array.from(new Set(routes)), projectRoutes: projectRoutes };
     });
   }
   function element(tag, className, text) {
@@ -49,6 +55,45 @@
     el.className = className;
     el.textContent = text;
     return el;
+  }
+  function makeChart(title, entries, note) {
+    var section = element('section', 'inventory-section inventory-chart-section', '');
+    section.append(element('h3', '', title));
+    var ns = 'http://www.w3.org/2000/svg';
+    function svgNode(tag, attrs, text) {
+      var node = document.createElementNS(ns, tag);
+      Object.keys(attrs).forEach(function (key) { node.setAttribute(key, attrs[key]); });
+      if (text !== undefined) { node.textContent = text; }
+      return node;
+    }
+    var chart = svgNode('svg', { class: 'inventory-chart', viewBox: '0 0 440 188', role: 'img',
+      'aria-label': title + '：' + entries.map(function (entry) { return entry.label + ' ' + entry.value; }).join('，') });
+    var max = Math.max(1, ...entries.map(function (entry) { return entry.value; }));
+    var scale = Math.max(2, max);
+    var plotX = 114, plotWidth = 294;
+    [0, .5, 1].forEach(function (t) {
+      var x = plotX + plotWidth * t;
+      chart.append(svgNode('line', { x1: x, x2: x, y1: 18, y2: 137, class: 'inventory-chart-grid' }));
+      chart.append(svgNode('text', { x: x, y: 163, class: 'inventory-chart-tick', 'text-anchor': 'middle' }, String(Math.round(scale * t))));
+    });
+    entries.forEach(function (entry, index) {
+      var y = 24 + index * 63;
+      var group = svgNode('g', { class: 'inventory-chart-row' });
+      group.append(svgNode('title', {}, (entry.title || entry.label) + '：' + entry.value));
+      group.append(svgNode('text', { x: 4, y: y + 22, class: 'inventory-chart-label' }, entry.label));
+      group.append(svgNode('rect', { x: plotX, y: y, width: plotWidth, height: 31, class: 'inventory-chart-track' }));
+      if (entry.value > 0) {
+        group.append(svgNode('rect', { x: plotX, y: y, width: plotWidth * entry.value / scale,
+          height: 31, class: 'inventory-chart-fill inventory-chart-fill-' + (index % 2) }));
+      } else {
+        group.append(svgNode('line', { x1: plotX + 2, x2: plotX + 2, y1: y + 3, y2: y + 28,
+          class: 'inventory-chart-zero' }));
+      }
+      group.append(svgNode('text', { x: 432, y: y + 22, 'text-anchor': 'end', class: 'inventory-chart-value' }, String(entry.value)));
+      chart.append(group);
+    });
+    section.append(chart, element('p', 'inventory-chart-note', note));
+    return section;
   }
   function render(data) {
     content.replaceChildren();
@@ -60,19 +105,15 @@
       counts.append(card);
     });
     content.append(counts);
-    var section = element('section', 'inventory-section', '');
-    section.append(element('h3', '', '内容分布'));
-    var total = data.projects + data.posts;
-    [['项目记录', data.projects], ['正式文章', data.posts]].forEach(function (entry) {
-      var row = element('div', 'inventory-bar-row', '');
-      var label = element('div', 'inventory-bar-label', '');
-      label.append(element('span', '', entry[0]), element('strong', '', String(entry[1])));
-      var track = element('div', 'inventory-bar-track', '');
-      var fill = element('span', 'inventory-bar-fill', '');
-      fill.style.width = (total ? entry[1] / total * 100 : 0) + '%';
-      track.append(fill); row.append(label, track); section.append(row);
-    });
-    content.append(section);
+    /* Graphs use only counts derived from the currently published pages. */
+    content.append(makeChart('公开内容数量', [
+      { label: '项目记录', value: data.projects }, { label: '正式文章', value: data.posts }
+    ], '项目页与文章页的实际卡片数量；0 表示当前没有正式文章。'));
+    if (data.projectRoutes.length) {
+      content.append(makeChart('项目流程节点', data.projectRoutes.map(function (route) {
+        return { label: route.label, value: route.count, title: route.title };
+      }), '节点数只计算项目总览卡中的流程标签，不是工作量或访问量。'));
+    }
     var routeSection = element('section', 'inventory-section', '');
     routeSection.append(element('h3', '', '项目页提到的路径节点'));
     if (data.routes.length) {

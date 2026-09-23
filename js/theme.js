@@ -10,8 +10,6 @@
   'use strict';
 
   /* ============ 配置区 ============ */
-  // 主题记忆 key
-  var THEME_KEY = 'fluxgrid-theme';
   // 侧栏「最近发布」最多显示几篇
   var LATEST_LIMIT = 5;
 
@@ -26,21 +24,6 @@
   var ua = navigator.userAgent || '';
   if (/Mac|iPhone|iPad|iPod/i.test(navigator.platform || ua)) {
     document.documentElement.classList.add('is-mac');
-  }
-
-  /* ============ 主题(暗色 / 亮色) ============ */
-  function initTheme() {
-    var root = document.documentElement;
-    var toggle = document.getElementById('theme-toggle');
-    on(toggle, 'click', function () {
-      var next = root.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
-      applyTheme(next);
-    });
-  }
-  function applyTheme(theme) {
-    document.documentElement.setAttribute('data-theme', theme);
-    try { localStorage.setItem(THEME_KEY, theme); } catch (e) {}
-    document.dispatchEvent(new CustomEvent('fluxgrid:themechange', { detail: { theme: theme } }));
   }
 
   /* ============ 导航(移动端菜单 / 当前页高亮 / 平滑→即时跳转) ============ */
@@ -553,7 +536,6 @@
   /* ============ 启动 ============ */
   function boot() {
     initNav();
-    initTheme();
     initShareTools();
     initHeaderScroll();
     initBackToTop();

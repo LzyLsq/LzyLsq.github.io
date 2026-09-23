@@ -99,7 +99,6 @@ html[data-style="memphis"] .hero-actions { flex-wrap: wrap; }
   }
   html[data-style="memphis"] .header-actions .stats-trigger span { display: none; }
   html[data-style="memphis"] .header-actions .stats-trigger svg { margin: 0; }
-  html[data-style="memphis"] .header-actions .ink-toggle span { font-size: 12px; }
   html[data-style="memphis"] .site-header .search-box { order: 3; }
 }
 @media (max-width: 370px) {
@@ -180,4 +179,264 @@ html[data-style="memphis"] .manga-spread::after {
 html[data-style="memphis"][data-ink="color"] .manga-spread::after { background: #2d5e78; opacity: .35; }
 @media (max-width: 700px) {
   html[data-style="memphis"] .manga-spread::after { opacity: .32; }
+}
+/* The inherited notebook palette still contains a few blue-greys. Keep every
+   manuscript token neutral, including the search tool, focus ring and borders;
+   only the edition switch below is permitted to carry pigment. */
+html[data-style="memphis"][data-ink="mono"] {
+  --m-border: 1px solid #777;
+  --muted-2: #aaa;
+  --border-soft: rgba(120,120,120,.23);
+  --text: #eee;
+  --input-bg: var(--m-surface-2);
+}
+html[data-style="memphis"][data-ink="mono"][data-theme="light"] {
+  --m-border: 1px solid #d0d0d0;
+  --muted-2: #686868;
+  --border-soft: rgba(100,100,100,.16);
+  --text: #303030;
+  --input-bg: #fff;
+}
+html[data-style="memphis"][data-ink="mono"] :is(a,button,input):focus-visible {
+  outline-color: #555 !important;
+}
+html[data-style="memphis"][data-ink="mono"] .search-hint {
+  background: #303030;
+  border-color: #626262;
+  color: #aaa;
+}
+html[data-style="memphis"][data-ink="mono"][data-theme="light"] .search-hint {
+  background: #f3f3f3;
+  border-color: #e5e5e5;
+  color: #696969;
+}
+html[data-style="memphis"][data-ink="mono"] .site-header .search-icon-btn {
+  color: var(--muted-2);
+}
+html[data-style="memphis"][data-ink="mono"] .site-header .search-icon-btn:is(:hover,:focus-visible) {
+  color: var(--heading);
+  background: rgba(127,127,127,.16);
+}
+/* The unpublished article skeleton also follows the selected print edition. */
+html[data-style="memphis"][data-ink="mono"] .inventory-backdrop {
+  background: rgba(12,12,12,.68);
+}
+html[data-style="memphis"][data-ink="mono"] .article-head-media img {
+  filter: blur(14px) grayscale(1);
+}
+html[data-style="memphis"][data-ink="mono"] .article-head-surface {
+  background: linear-gradient(180deg,rgba(20,20,20,.28),rgba(20,20,20,.88));
+}
+html[data-style="memphis"][data-ink="mono"][data-theme="light"] .article-head-surface {
+  background: linear-gradient(180deg,rgba(245,245,245,.38),rgba(245,245,245,.94));
+}
+/* Opposite editorial editions: color is a complete printed issue, not a tint. */
+html[data-style="memphis"][data-ink="mono"] .header-actions .ink-toggle {
+  background: conic-gradient(from 25deg,var(--edition-coral),var(--edition-gold),var(--edition-teal),var(--edition-indigo),var(--edition-coral)) !important;
+  color: #111 !important; border-color: #111 !important; box-shadow: 2px 2px 0 #111 !important;
+}
+html[data-style="memphis"][data-ink="mono"] .header-actions .ink-toggle svg { background: #fff; border-radius: 50%; padding: 2px; width: 23px; height: 23px; }
+html[data-style="memphis"][data-ink="color"] .header-actions .ink-toggle {
+  background: #fff !important; color: #111 !important; border-color: #111 !important;
+  box-shadow: 2px 2px 0 #111 !important;
+}
+html[data-style="memphis"][data-ink="color"] .header-actions .ink-toggle svg { background: #111; color: #fff; border-radius: 50%; padding: 2px; width: 23px; height: 23px; }
+html[data-style="memphis"] .ink-toggle.is-morphing svg { animation: ink-switch-spin var(--ink-wave-time) var(--ink-wave-ease) both; }
+@keyframes ink-switch-spin { from { transform: rotate(-290deg) scale(.8); } to { transform: rotate(0) scale(1); } }
+/* The wave and the page reveal share the same radius and easing. The narrow,
+   imperfect ink edge travels with the color instead of jumping ahead of it. */
+:root { --ink-wave-time: 1050ms; --ink-retract-time: 950ms; --ink-wave-ease: cubic-bezier(.45,0,.22,1); }
+html[data-style="memphis"] {
+  --edition-coral: #d33756; --edition-gold: #f0a73e;
+  --edition-teal: #218da0; --edition-indigo: #344a8e;
+}
+.ink-splash {
+  position: fixed; z-index: 10000; left: 0; top: 0;
+  width: 0; height: 0; box-sizing: border-box; pointer-events: none;
+  border: 7px solid rgba(221,70,100,.56);
+  box-shadow: 0 0 0 8px rgba(245,190,83,.38),0 0 0 19px rgba(71,179,192,.27),0 0 24px 25px rgba(237,101,126,.16);
+  border-radius: 51% 49% 53% 47% / 48% 52% 46% 54%;
+  filter: blur(1.5px);
+  transform: translate(-50%,-50%) rotate(0deg);
+  animation: ink-splash-out var(--ink-wave-time) var(--ink-wave-ease) both;
+}
+@keyframes ink-splash-out {
+  0% { width: 0; height: 0; opacity: .7; transform: translate(-50%,-50%) rotate(0deg); }
+  75% { opacity: .65; }
+  100% { width: 300vmax; height: 300vmax; opacity: 0; transform: translate(-50%,-50%) rotate(28deg); }
+}
+@keyframes ink-reveal { from { clip-path: circle(0 at var(--ink-x) var(--ink-y)); } to { clip-path: circle(var(--ink-radius) at var(--ink-x) var(--ink-y)); } }
+@keyframes ink-gather { from { clip-path: circle(var(--ink-radius) at var(--ink-x) var(--ink-y)); } to { clip-path: circle(0 at var(--ink-x) var(--ink-y)); } }
+html.ink-expanding::view-transition-old(root),
+html.ink-retracting::view-transition-new(root) { animation: none; }
+html.ink-expanding::view-transition-new(root) { animation: ink-reveal var(--ink-wave-time) var(--ink-wave-ease) both; }
+html.ink-retracting::view-transition-old(root) { animation: ink-gather var(--ink-retract-time) var(--ink-wave-ease) both; }
+html[data-style="memphis"][data-ink="color"] .manga-spread { background: #f6d7d7; }
+html[data-style="memphis"][data-ink="color"] .manga-spread::before,
+html[data-style="memphis"][data-ink="color"] .manga-spread::after {
+  background: linear-gradient(120deg,var(--edition-coral) 0 30%,var(--edition-gold) 48%,var(--edition-teal) 75%,var(--edition-indigo));
+}
+html[data-style="memphis"][data-ink="color"] .manga-spread::after { opacity: .58; }
+html[data-style="memphis"][data-ink="color"] .manga-panel--eyes { background: #2b7896; }
+html[data-style="memphis"][data-ink="color"] .manga-panel--city { background: #f2c45c; }
+html[data-style="memphis"][data-ink="color"] .manga-panel--hands { background: #cc4e6b; }
+html[data-style="memphis"][data-ink="color"] :is(.manga-panel--eyes,.manga-panel--city,.manga-panel--hands) img { mix-blend-mode: multiply; }
+html[data-style="memphis"][data-ink="color"] .manga-panel--burst { background: #f5cb54; }
+html[data-style="memphis"][data-ink="color"] .manga-panel--burst::before { background: #c8425c; }
+html[data-style="memphis"][data-ink="color"] .projects-action-panel { background: #f1ba61; }
+html[data-style="memphis"][data-ink="color"] .projects-action-panel::before { background: linear-gradient(120deg,#df4d6c,#29abb8); }
+html[data-style="memphis"][data-ink="color"] .project-overview-grid .project-card:nth-child(1),
+html[data-style="memphis"][data-ink="color"] .destination-card:nth-child(1) { background: color-mix(in srgb, var(--m-surface) 82%, #54c0c4); }
+html[data-style="memphis"][data-ink="color"] .project-overview-grid .project-card:nth-child(2),
+html[data-style="memphis"][data-ink="color"] .destination-card:nth-child(2) { background: color-mix(in srgb, var(--m-surface) 82%, #f17489); }
+html[data-style="memphis"][data-ink="color"] .destination-card:nth-child(3) { background: color-mix(in srgb, var(--m-surface) 82%, #f3be55); }
+@media (prefers-reduced-motion: reduce) {
+  html.ink-expanding::view-transition-new(root),html.ink-retracting::view-transition-old(root),
+  html[data-style="memphis"] .ink-toggle.is-morphing svg { animation: none !important; }
+  .ink-splash { display: none; }
+}
+/* The color edition pours through the panel edges; the unprinted edition keeps
+   these graphics in true greyscale except for its invitation to add color. */
+html[data-style="memphis"][data-ink="color"] .hero-slide .hero-surface {
+  background: linear-gradient(117deg,#fff6e7 0 45%,#f5b75e 45% 59%,#e86478 59% 77%,#65b9c6 77%);
+}
+html[data-style="memphis"][data-ink="color"][data-theme="dark"] .hero-slide .hero-surface {
+  background: linear-gradient(117deg,#242638 0 45%,#87564a 45% 59%,#a94361 59% 77%,#246476 77%);
+}
+html[data-style="memphis"][data-ink="color"] .hero-slide:not(:first-child) .hero-side-visual {
+  background: repeating-conic-gradient(from 2deg at 68% 42%,#fff0d2 0 8deg,#d65272 8.1deg 8.4deg,#5bbbc4 8.5deg 17deg);
+}
+html[data-style="memphis"][data-ink="color"] .hero-slide:not(:first-child) .hero-copy { background: #fff3dd; }
+html[data-style="memphis"][data-ink="color"] .hero-slide:not(:first-child) .hero-copy .eyebrow { background: #aa3655; }
+html[data-style="memphis"][data-ink="color"] .brand-mark { background: #dd4e6c; }
+html[data-style="memphis"][data-ink="mono"] :is(.manga-panel img,.hero-side-visual img,.projects-action-panel img) { filter: grayscale(1); }
+
+/* A frame crosses the gutter first; its speech panel answers from the other
+   side. Animate only entrance transforms so a reader can still click normally. */
+@keyframes panel-enter-left {
+  from { opacity: .55; transform: translate3d(-7%,0,0) skewX(-2deg); }
+  to { opacity: 1; transform: translate3d(0,0,0) skewX(0); }
+}
+@keyframes bubble-enter-right {
+  from { opacity: .45; transform: translate3d(8%,0,0) rotate(1deg); }
+  to { opacity: 1; transform: translate3d(0,0,0) rotate(0); }
+}
+html[data-style="memphis"] .hero-slide.is-active .hero-side-visual {
+  animation: panel-enter-left .54s cubic-bezier(.12,.85,.18,1) both;
+}
+html[data-style="memphis"] .hero-slide.is-active .hero-copy {
+  animation: bubble-enter-right .58s .10s cubic-bezier(.12,.85,.18,1) both;
+}
+html[data-style="memphis"] .hero-slide.is-active .hero-actions {
+  animation: bubble-enter-right .4s .22s cubic-bezier(.12,.85,.18,1) both;
+}
+/* Do not re-animate every mode switch: the only moving element there is ink. */
+html.ink-expanding .hero-slide.is-active :is(.hero-side-visual,.hero-copy,.hero-actions),
+html.ink-retracting .hero-slide.is-active :is(.hero-side-visual,.hero-copy,.hero-actions) { animation: none; }
+
+/* The public-content chart is drawn from the two real page lists, never traffic. */
+html[data-style="memphis"] .inventory-dialog { border: 3px solid var(--heading); border-radius: 4px; box-shadow: 7px 7px 0 var(--heading); }
+html[data-style="memphis"] .inventory-count { border: 2px solid var(--heading); border-radius: 3px; box-shadow: 3px 3px 0 var(--heading); }
+.inventory-chart { display: block; width: 100%; max-width: 440px; height: auto; margin: 0 auto; overflow: visible; font-family: var(--mono),monospace; }
+.inventory-chart-grid { stroke: var(--border); stroke-width: 1; stroke-dasharray: 3 4; }
+.inventory-chart-track { fill: var(--notebook-tint); stroke: var(--border); stroke-width: 1; }
+.inventory-chart-fill { fill: var(--heading); }
+.inventory-chart-fill-1 { fill: var(--muted); }
+html[data-style="memphis"][data-ink="color"] .inventory-chart-fill-0 { fill: #d64b67; }
+html[data-style="memphis"][data-ink="color"] .inventory-chart-fill-1 { fill: #2d9aab; }
+.inventory-chart-label,.inventory-chart-value { fill: var(--heading); font-size: 13px; font-weight: 700; }
+.inventory-chart-value { font-size: 16px; }
+.inventory-chart-tick { fill: var(--muted); font-size: 11px; }
+.inventory-chart-zero { stroke: var(--heading); stroke-width: 2; }
+.inventory-chart-note { color: var(--muted); font-size: 12px; line-height: 1.6; margin: 3px 0 0; }
+@media (max-width: 560px) {
+  html[data-style="memphis"] .hero-slide:not(:first-child) .hero-copy { border-top-color: #111; }
+  html[data-style="memphis"][data-ink="color"] .hero-slide:not(:first-child) .hero-copy { border-top-color: #ae3856; }
+  .inventory-chart-label { font-size: 12px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html[data-style="memphis"] .hero-slide.is-active :is(.hero-side-visual,.hero-copy,.hero-actions) { animation: none !important; }
+}
+/* In the printed edition color reaches the controls too. The edition switch is
+   deliberately the one uncolored tool; in the manuscript the reverse is true. */
+html[data-style="memphis"][data-ink="color"] :is(.button-secondary,.project-actions .button-secondary) {
+  background: #c3eaeb !important; color: #142438 !important; border-color: #19273d !important;
+}
+html[data-style="memphis"][data-ink="color"] :is(.button-secondary,.project-actions .button-secondary):hover { background: #92d9dd !important; }
+html[data-style="memphis"][data-ink="color"] :is(.header-actions .stats-trigger,.site-header .search-toggle,.site-header .search-icon-btn) {
+  background: #aae1e4 !important; color: #142438 !important;
+}
+html[data-style="memphis"][data-ink="color"] .header-actions a.header-action,
+html[data-style="memphis"][data-ink="color"] .site-header .nav-toggle {
+  background: #f5c868 !important; color: #142438 !important;
+}
+html[data-style="memphis"][data-ink="color"] :is(.hero-arrow,.inventory-close) {
+  background: #f3adba !important; color: #142438 !important;
+}
+html[data-style="memphis"][data-ink="color"] .header-actions .ink-toggle,
+html[data-style="memphis"][data-ink="color"] .header-actions .ink-toggle:hover {
+  background: #fff !important; color: #111 !important;
+}
+html[data-style="memphis"][data-ink="color"] :is(.project-switchboard a,.about-contact-item) {
+  background: color-mix(in srgb,var(--m-surface) 82%,#9de3e6);
+}
+html[data-style="memphis"][data-ink="color"] :is(.project-switchboard a,.about-contact-item):hover {
+  background: color-mix(in srgb,var(--m-surface) 62%,#f3c16b);
+}
+
+/* One printing-press palette across the whole interface. The dark manuscript
+   is truly greyscale, including navigation, search, overlays and page edges;
+   its one colored control lives outside every filtered surface. */
+html[data-style="memphis"][data-ink="mono"] :is(.site-footer,.brand,.site-nav,.search-box,.nav-toggle,.header-actions > :not(.ink-toggle),.search-toggle,.inventory-modal,.back-to-top,.skip-link,.pjax-progress-bar) {
+  filter: grayscale(1);
+}
+html[data-style="memphis"][data-ink="mono"] .site-header {
+  background: #202020 !important;
+  border-bottom-color: #777 !important;
+}
+html[data-style="memphis"][data-ink="color"] .site-header {
+  background: #f5faff !important;
+  border-bottom-color: #97b7c8 !important;
+}
+html[data-style="memphis"] .site-header::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: 0;
+  height: 3px; pointer-events: none;
+  background: linear-gradient(90deg,#aaa,#555,#ddd,#888);
+}
+html[data-style="memphis"][data-ink="color"] .site-header::after {
+  background: linear-gradient(90deg,var(--edition-coral),var(--edition-gold),var(--edition-teal),var(--edition-indigo));
+}
+html[data-style="memphis"][data-ink="mono"] .header-actions .ink-toggle:hover {
+  background: conic-gradient(from 25deg,var(--edition-coral),var(--edition-gold),var(--edition-teal),var(--edition-indigo),var(--edition-coral)) !important;
+}
+html[data-style="memphis"] .header-actions .ink-toggle {
+  width: 44px; min-width: 44px; padding: 0 !important; flex: 0 0 44px;
+}
+html[data-style="memphis"][data-ink="color"] .brand-mark { background: var(--edition-coral); }
+html[data-style="memphis"][data-ink="color"] .site-nav :is(a,button):hover,
+html[data-style="memphis"][data-ink="color"] .site-nav :is(a.is-active,a[aria-current="page"]) {
+  border-bottom-color: var(--edition-coral) !important;
+}
+html[data-style="memphis"][data-ink="color"] .header-actions .stats-trigger { background: #a7dce3 !important; }
+html[data-style="memphis"][data-ink="color"] .header-actions a.header-action { background: #f4c565 !important; }
+@media (max-width: 820px) {
+  html[data-style="memphis"][data-ink="mono"] .site-nav { background: #242424 !important; }
+  html[data-style="memphis"][data-ink="color"] .site-nav { background: #f5faff !important; }
+}
+
+/* The browser's own controls and mobile address bar follow the same edition. */
+html[data-style="memphis"][data-ink="mono"] { color-scheme: dark; accent-color: #aaa; }
+html[data-style="memphis"][data-ink="color"] { color-scheme: light; accent-color: var(--edition-coral); }
+html[data-style="memphis"][data-ink="mono"] ::selection { color: #fff; background: #555; }
+html[data-style="memphis"][data-ink="color"] ::selection { color: #142438; background: #f4c565; }
+/* On phones the open search field takes its own real header row rather than
+   hovering transparently over the page heading. Both editions use the same
+   structure so the color change never moves the control unexpectedly. */
+@media (max-width: 820px) {
+  html[data-style="memphis"].has-enhanced-search .site-header .header-inner { flex-wrap: wrap; }
+  html[data-style="memphis"].has-enhanced-search .site-header.is-search-open .search-box {
+    position: relative; inset: auto; order: 10; flex: 1 0 100%;
+    width: 100%; height: 54px; margin: 0; padding: 3px 8px;
+    background: var(--m-surface); z-index: 1;
+  }
 }

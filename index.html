@@ -1,20 +1,18 @@
 <!DOCTYPE html>
-<html lang="zh-CN" data-style="memphis" data-theme="dark">
+<html lang="zh-CN" data-style="memphis" data-theme="dark" data-ink="mono">
 <head>
     <meta charset="UTF-8">
-    <!-- 首屏前确定明/暗主题，避免闪白（无 JS 时用 html 上的 data-theme="dark"） -->
+    <meta name="theme-color" content="#202020">
+    <!-- 首屏前确定唯一画风：黑白暗色，彩色明亮。 -->
     <script>
     (function () {
-      try {
-        var t = localStorage.getItem('fluxgrid-theme');
-        if (t !== 'light' && t !== 'dark') {
-          t = (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) ? 'light' : 'dark';
-        }
-        document.documentElement.setAttribute('data-theme', t);
-      } catch (e) {}
+      var ink = 'mono';
+      try { if (localStorage.getItem('ryan-comic-ink') === 'color') ink = 'color'; } catch (e) {}
+      document.documentElement.dataset.ink = ink;
+      document.documentElement.dataset.theme = ink === 'color' ? 'light' : 'dark';
+      document.querySelector('meta[name="theme-color"]').content = ink === 'color' ? '#f5faff' : '#202020';
     })();
     </script>
-    <script>try { document.documentElement.dataset.ink = localStorage.getItem("ryan-comic-ink") === "color" ? "color" : "mono"; } catch (e) { document.documentElement.dataset.ink = "mono"; }</script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Ryan · iOS 开发</title>
     <meta name="description" content="Ryan 的个人网站：iOS 开发，正在学习全栈；目前介绍两个项目，文章待更新。">
@@ -131,12 +129,8 @@
                 <kbd class="search-hint" aria-hidden="true"><span class="search-hint-mac">⌘</span><span class="search-hint-win">Ctrl</span>K</kbd>
             </form>
             <div class="header-actions">
-                <button type="button" class="header-action ink-toggle" data-ink-toggle aria-label="切换漫画配色" aria-pressed="false" title="切换漫画配色"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Z" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 2v20a10 10 0 0 0 0-20Z" fill="currentColor"/></svg><span data-ink-label>彩色</span></button>
+                <button type="button" class="header-action ink-toggle" data-ink-toggle aria-label="切换到彩色明亮版" aria-pressed="false" title="切换到彩色明亮版"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Z" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 2v20a10 10 0 0 0 0-20Z" fill="currentColor"/></svg></button>
                 <a class="header-action" href="mailto:lzyryan5247@gmail.com" aria-label="邮件联系 Ryan" title="邮件联系"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg></a>
-                <button type="button" class="header-action theme-toggle" id="theme-toggle" aria-label="切换明暗主题" data-no-swup>
-                    <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-                    <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34 1.41-1.41"/></svg>
-                </button>
             </div>
         </div>
     </header>
