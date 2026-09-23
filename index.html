@@ -14,11 +14,10 @@
       } catch (e) {}
     })();
     </script>
+    <script>try { document.documentElement.dataset.ink = localStorage.getItem("ryan-comic-ink") === "color" ? "color" : "mono"; } catch (e) { document.documentElement.dataset.ink = "mono"; }</script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- ========== TODO: 改成你的网站信息 ========== -->
     <title>Ryan · iOS 开发</title>
     <meta name="description" content="Ryan 的个人网站：iOS 开发，正在学习全栈；目前介绍两个项目，文章待更新。">
-    <!-- ============================================ -->
     <link rel="canonical" href="https://lzylsq.github.io/">
     <meta property="og:type" content="website">
     <meta property="og:title" content="Ryan · iOS 开发">
@@ -68,7 +67,7 @@
       }
       function run() {
         var links = document.querySelectorAll('[data-hero-slide] .hero-copy h1 a');
-        Array.prototype.forEach.call(links, function (a, i) { wrap(a, COLORS[i % COLORS.length]); });
+        Array.prototype.forEach.call(links, function (a, i) { if (i > 0) wrap(a, COLORS[i % COLORS.length]); });
       }
       if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', run);
       else run();
@@ -89,6 +88,7 @@
     <link rel="stylesheet" href="css/sticky.css">
     <link rel="stylesheet" href="css/style-memphis.css">
     <link rel="stylesheet" href="css/style-notebook.css">
+    <link rel="stylesheet" href="css/style-comic.css">
 </head>
 <body class="theme-fluxgrid is-home">
 <a class="skip-link" href="#main-content">跳到主要内容</a>
@@ -130,6 +130,7 @@
                 <kbd class="search-hint" aria-hidden="true"><span class="search-hint-mac">⌘</span><span class="search-hint-win">Ctrl</span>K</kbd>
             </form>
             <div class="header-actions">
+                <button type="button" class="header-action ink-toggle" data-ink-toggle aria-label="切换漫画配色" aria-pressed="false" title="切换漫画配色"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Z" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 2v20a10 10 0 0 0 0-20Z" fill="currentColor"/></svg><span data-ink-label>彩色</span></button>
                 <a class="header-action" href="mailto:lzyryan5247@gmail.com" aria-label="邮件联系 Ryan" title="邮件联系"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg></a>
                 <button type="button" class="header-action theme-toggle" id="theme-toggle" aria-label="切换明暗主题" data-no-swup>
                     <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
@@ -144,16 +145,21 @@
     <div class="hero-surface"></div>
     <div class="flux-container"><div class="hero-grid">
       <div class="hero-copy">
-        <span class="eyebrow">// HELLO</span>
-        <h1><a href="about.html">你好，我是 Ryan</a></h1>
-        <p>我从事 iOS 开发，正在学习全栈。这里会慢慢整理项目、学习过程和写下来的笔记。</p>
-        <div class="hero-actions"><a class="button button-primary" href="about.html">认识我 →</a><a class="button button-secondary" href="projects.html">看看项目</a></div>
+        <span class="eyebrow">RYAN / 开发日记</span>
+        <h1><a href="about.html"><span class="hero-title-intro">我是 Ryan。</span><strong>下一格，<br>继续写代码。</strong></a></h1>
+        <p>做 iOS 开发，也在学习全栈。这里先记录两份练习项目；文章会在写好后发布。</p>
+        <div class="hero-actions"><a class="button button-primary" href="about.html">翻到关于页 →</a><a class="button button-secondary" href="projects.html">看看项目</a></div>
       </div>
-      <div class="hero-side-visual"><div class="code-window"><div class="code-window-top"><span class="code-dot"></span><span class="code-dot"></span><span class="code-dot"></span></div><pre>const ryan = {
-  work: 'iOS 开发',
-  learning: '全栈',
-  here: '记录与分享'
-}</pre></div></div>
+      <div class="hero-side-visual hero-side-visual--cover" aria-hidden="true">
+        <div class="manga-spread">
+          <div class="manga-panel manga-panel--eyes"><img src="assets/images/ryan-manga-eyes.svg" alt="" width="500" height="260"></div>
+          <div class="manga-panel manga-panel--city"><img src="assets/images/ryan-manga-city.svg" alt="" width="420" height="330"></div>
+          <div class="manga-panel manga-panel--main"><img class="comic-cover-art comic-cover-art--mono" src="assets/images/ryan-manga-action.svg" alt="" width="920" height="680"><img class="comic-cover-art comic-cover-art--color" src="assets/images/ryan-manga-action-color.svg" alt="" width="920" height="680"></div>
+          <div class="manga-panel manga-panel--hands"><img src="assets/images/ryan-manga-hands.svg" alt="" width="560" height="340"></div>
+          <div class="manga-panel manga-panel--burst"><span>继续!</span></div>
+
+        </div>
+      </div>
     </div></div>
   </article><article class="hero-slide" data-hero-slide>
     <div class="hero-media"><img src="assets/images/hero-2.svg" alt="" loading="lazy"></div>
@@ -194,18 +200,18 @@
 </div></div></section>
 <section class="home-destinations" aria-labelledby="explore-title">
   <div class="flux-container">
-    <div class="section-heading"><h2 id="explore-title">从这里开始</h2><p>项目、文字和个人介绍分别放在独立页面。</p></div>
+    <div class="section-heading"><h2 id="explore-title">翻开这一页</h2><p>项目、文字和个人介绍分别放在独立页面。</p></div>
     <div class="destination-grid">
-      <article class="destination-card"><span class="destination-symbol" aria-hidden="true">⌘</span><h3>代码人生</h3><p>两份练习项目：数据链路与法律场景的 AI 应用。可以先看技术路径。</p><a class="button button-primary" href="projects.html">查看两个项目 →</a></article>
-      <article class="destination-card"><span class="destination-symbol" aria-hidden="true">✎</span><h3>文章</h3><p>暂时没有正式文章。写好后会在这里发布；现在可先看排版示例。</p><a class="button button-secondary" href="posts.html">前往文章页 →</a></article>
-      <article class="destination-card"><span class="destination-symbol" aria-hidden="true">◌</span><h3>认识 Ryan</h3><p>iOS 开发，正在学习全栈。个人介绍和联系方式都在这里。</p><a class="button button-secondary" href="about.html">打开关于页 →</a></article>
+      <article class="destination-card"><span class="destination-symbol" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8 2 12l4 4m12-8 4 4-4 4m-8 2 4-12"/></svg></span><h3>代码人生</h3><p>两份练习项目：数据链路与法律场景的 AI 应用。可以先看技术路径。</p><a class="button button-primary" href="projects.html">查看两个项目 →</a></article>
+      <article class="destination-card"><span class="destination-symbol" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m4 18 2-6 10-10 5 5-10 10-7 1Zm10-14 5 5M3 22h18"/></svg></span><h3>文章</h3><p>暂时没有正式文章。写好后会在这里发布；现在可先看排版示例。</p><a class="button button-secondary" href="posts.html">前往文章页 →</a></article>
+      <article class="destination-card"><span class="destination-symbol" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4h18v12H9l-5 4v-4H3zM7 9h10m-10 4h7"/></svg></span><h3>认识 Ryan</h3><p>iOS 开发，正在学习全栈。个人介绍和联系方式都在这里。</p><a class="button button-secondary" href="about.html">打开关于页 →</a></article>
     </div>
   </div>
 </section>
     <section class="stream-section">
         <div class="flux-container">
             <div class="section-heading">
-                <h2>写作计划</h2>
+                <h2>下一格，留给文章</h2>
                 <p>文章还在准备中，先看看排版示例</p>
                 <a class="button button-secondary" href="posts.html">浏览文章页 →</a>
             </div>
@@ -237,5 +243,6 @@
 </button>
 <script src="js/theme.js"></script>
 <script src="js/site-stats.js"></script>
+<script src="js/comic-mode.js"></script>
 </body>
 </html>

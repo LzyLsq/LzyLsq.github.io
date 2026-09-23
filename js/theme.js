@@ -343,11 +343,8 @@
       var prevButton = $('[data-hero-prev]', carousel);
       var nextButton = $('[data-hero-next]', carousel);
       var dots = $$('[data-hero-dot]', carousel);
-      var activeIndex = 0, timerId = null, INTERVAL = 8500;
-
-      var canAutoplay = function () {
-        return !prefersReduced() && !document.hidden && !carousel.matches(':hover') && !carousel.contains(document.activeElement);
-      };
+      var activeIndex = 0;
+      // Keep the opening manga cover still until the visitor chooses a page.
       var setActiveSlide = function (index) {
         activeIndex = (index + slides.length) % slides.length;
         slides.forEach(function (s, i) {
@@ -361,17 +358,10 @@
           d.setAttribute('aria-current', i === activeIndex ? 'true' : 'false');
         });
       };
-      var startAutoplay = function () {
-        window.clearInterval(timerId);
-        if (!canAutoplay()) { return; }
-        timerId = window.setInterval(function () { setActiveSlide(activeIndex + 1); }, INTERVAL);
-      };
-      var stopAutoplay = function () { window.clearInterval(timerId); };
-
-      on(prevButton, 'click', function () { setActiveSlide(activeIndex - 1); startAutoplay(); });
-      on(nextButton, 'click', function () { setActiveSlide(activeIndex + 1); startAutoplay(); });
+      on(prevButton, 'click', function () { setActiveSlide(activeIndex - 1); });
+      on(nextButton, 'click', function () { setActiveSlide(activeIndex + 1); });
       dots.forEach(function (dot) {
-        on(dot, 'click', function () { setActiveSlide(Number(dot.getAttribute('data-hero-dot'))); startAutoplay(); });
+        on(dot, 'click', function () { setActiveSlide(Number(dot.getAttribute('data-hero-dot'))); });
       });
       var touchStart = null;
       on(carousel, 'touchstart', function (e) {
@@ -384,19 +374,9 @@
         touchStart = null;
         if (Math.abs(distance) < 65 || Math.abs(distance) < Math.abs(vertical) * 1.2) { return; }
         setActiveSlide(activeIndex + (distance < 0 ? 1 : -1));
-        startAutoplay();
       }, { passive: true });
-      on(carousel, 'mouseenter', stopAutoplay);
-      on(carousel, 'mouseleave', startAutoplay);
-      on(carousel, 'focusin', stopAutoplay);
-      on(carousel, 'focusout', function (e) { if (!carousel.contains(e.relatedTarget)) { startAutoplay(); } });
-      on(reducedMotionQuery, 'change', startAutoplay);
-      on(document, 'visibilitychange', function () {
-        if (document.hidden) { stopAutoplay(); } else { startAutoplay(); }
-      });
 
       setActiveSlide(0);
-      startAutoplay();
     });
   }
 

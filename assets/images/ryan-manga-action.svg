@@ -1,0 +1,142 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 680" role="img" aria-labelledby="t"><title id="t">原创漫画画格：开发者的眼神和动作特写</title><defs>
+<pattern id="tone" width="9" height="9" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1.5" fill="#171717"/></pattern>
+<pattern id="fine" width="5" height="5" patternUnits="userSpaceOnUse" patternTransform="rotate(30)"><path d="M0 0v5" stroke="#111" stroke-width="1.4"/></pattern>
+<clipPath id="face"><path d="M310 85 C400 41 555 30 701 128 Q781 253 699 489 Q634 602 525 649 Q397 591 333 453 Q293 300 310 85Z"/></clipPath>
+<clipPath id="coat"><path d="M0 630 Q81 512 295 497 L406 514 568 565 780 498 920 594 920 680H0Z"/></clipPath>
+</defs><rect width="920" height="680" fill="#fafaf7"/>
+<!-- speed lines drawn behind the character -->
+<g stroke="#171717" stroke-linecap="round">
+<path d="M872.2 300.3 1374.2 300.3" stroke-width="1.4" opacity="0.44"/>
+<path d="M809.2 319.5 1525.9 367.4" stroke-width="5.3" opacity="0.77"/>
+<path d="M835.2 340.0 1501.5 429.6" stroke-width="2" opacity="0.47"/>
+<path d="M809.7 355.6 1441.9 484.1" stroke-width="3.2" opacity="0.35"/>
+<path d="M846.1 382.7 1547.4 574.8" stroke-width="1.2" opacity="0.47"/>
+<path d="M800.0 395.0 1313.4 573.3" stroke-width="5.3" opacity="0.42"/>
+<path d="M838.7 434.3 1366.4 658.0" stroke-width="1.2" opacity="0.65"/>
+<path d="M833.9 456.1 1330.3 706.9" stroke-width="2.4" opacity="0.60"/>
+<path d="M782.4 450.0 1320.0 768.4" stroke-width="5.3" opacity="0.63"/>
+<path d="M809.9 496.2 1196.7 761.7" stroke-width="1.4" opacity="0.30"/>
+<path d="M785.8 501.0 1273.4 886.0" stroke-width="2" opacity="0.78"/>
+<path d="M738.4 488.0 1186.8 893.5" stroke-width="1.4" opacity="0.59"/>
+<path d="M719.3 499.9 1194.3 991.0" stroke-width="1.2" opacity="0.37"/>
+<path d="M710.3 512.2 1158.0 1041.7" stroke-width="5.3" opacity="0.33"/>
+<path d="M697.2 532.4 1080.9 1053.2" stroke-width="5.3" opacity="0.39"/>
+<path d="M691.7 553.3 1096.6 1187.5" stroke-width="2" opacity="0.77"/>
+<path d="M695.4 598.5 958.7 1078.8" stroke-width="2.4" opacity="0.33"/>
+<path d="M654.9 570.6 962.3 1233.0" stroke-width="2.4" opacity="0.33"/>
+<path d="M644.8 609.2 821.5 1068.1" stroke-width="2.4" opacity="0.49"/>
+<path d="M615.7 583.1 809.2 1206.7" stroke-width="1.4" opacity="0.43"/>
+<path d="M597.5 589.0 757.0 1258.2" stroke-width="3.2" opacity="0.53"/>
+<path d="M584.0 628.7 704.9 1345.4" stroke-width="2.4" opacity="0.42"/>
+<path d="M558.6 616.4 615.2 1179.3" stroke-width="2" opacity="0.74"/>
+<path d="M537.8 644.0 556.4 1201.0" stroke-width="5.3" opacity="0.63"/>
+<path d="M519.7 650.9 498.2 1291.5" stroke-width="5.3" opacity="0.54"/>
+<path d="M498.0 582.6 420.7 1351.2" stroke-width="2" opacity="0.45"/>
+<path d="M481.8 579.1 388.1 1134.7" stroke-width="1.2" opacity="0.34"/>
+<path d="M461.1 571.8 287.2 1301.3" stroke-width="2.4" opacity="0.36"/>
+<path d="M434.8 615.6 242.3 1236.2" stroke-width="2" opacity="0.56"/>
+<path d="M415.8 606.8 218.0 1120.4" stroke-width="1.2" opacity="0.68"/>
+<path d="M407.6 551.0 127.6 1154.4" stroke-width="1.4" opacity="0.73"/>
+<path d="M383.9 565.9 99.3 1085.2" stroke-width="3.2" opacity="0.43"/>
+<path d="M360.8 557.2 -15.8 1147.1" stroke-width="5.3" opacity="0.75"/>
+<path d="M322.4 578.5 -20.9 1044.4" stroke-width="2" opacity="0.68"/>
+<path d="M327.3 543.3 -49.4 989.0" stroke-width="2.4" opacity="0.35"/>
+<path d="M325.3 512.8 -66.3 917.8" stroke-width="5.3" opacity="0.67"/>
+<path d="M298.6 506.2 -124.6 888.9" stroke-width="2" opacity="0.56"/>
+<path d="M300.3 478.6 -206.8 879.1" stroke-width="1.2" opacity="0.38"/>
+<path d="M282.0 471.6 -281.7 858.6" stroke-width="2" opacity="0.51"/>
+<path d="M292.7 442.7 -193.4 730.6" stroke-width="1.4" opacity="0.66"/>
+<path d="M215.0 459.4 -225.5 682.0" stroke-width="5.3" opacity="0.53"/>
+<path d="M251.2 415.9 -242.8 625.4" stroke-width="2" opacity="0.33"/>
+<path d="M261.2 388.4 -424.8 626.7" stroke-width="1.2" opacity="0.31"/>
+<path d="M201.7 390.7 -364.9 545.9" stroke-width="3.2" opacity="0.46"/>
+<path d="M215.5 366.3 -264.8 464.0" stroke-width="1.2" opacity="0.49"/>
+<path d="M252.0 338.1 -490.4 437.9" stroke-width="3.2" opacity="0.67"/>
+<path d="M221.0 321.3 -447.8 366.1" stroke-width="2.4" opacity="0.53"/>
+<path d="M177.3 300.2 -324.1 300.2" stroke-width="1.2" opacity="0.56"/>
+<path d="M178.2 276.9 -326.2 243.2" stroke-width="2" opacity="0.73"/>
+<path d="M181.0 255.9 -354.2 183.9" stroke-width="3.2" opacity="0.55"/>
+<path d="M245.7 238.3 -257.0 136.1" stroke-width="5.3" opacity="0.52"/>
+<path d="M245.7 222.4 -435.6 35.7" stroke-width="2" opacity="0.50"/>
+<path d="M265.6 207.4 -307.5 8.4" stroke-width="5.3" opacity="0.57"/>
+<path d="M211.9 165.3 -324.9 -62.3" stroke-width="2.4" opacity="0.64"/>
+<path d="M262.9 168.6 -353.6 -142.9" stroke-width="2" opacity="0.57"/>
+<path d="M291.8 157.1 -177.6 -121.0" stroke-width="1.4" opacity="0.54"/>
+<path d="M255.7 117.5 -202.5 -197.1" stroke-width="2" opacity="0.30"/>
+<path d="M283.9 105.5 -287.8 -346.0" stroke-width="3.2" opacity="0.42"/>
+<path d="M275.9 70.2 -155.2 -319.6" stroke-width="2" opacity="0.57"/>
+<path d="M318.2 88.3 -196.9 -444.4" stroke-width="3.2" opacity="0.60"/>
+<path d="M336.3 69.6 -153.3 -509.5" stroke-width="1.2" opacity="0.77"/>
+<path d="M330.5 30.2 -30.1 -459.1" stroke-width="5.3" opacity="0.73"/>
+<path d="M374.1 58.8 -26.8 -569.2" stroke-width="2" opacity="0.54"/>
+<path d="M367.8 3.1 77.5 -526.7" stroke-width="1.2" opacity="0.45"/>
+<path d="M416.4 51.3 184.5 -448.2" stroke-width="5.3" opacity="0.52"/>
+<path d="M425.2 24.0 242.3 -450.8" stroke-width="1.4" opacity="0.47"/>
+<path d="M437.9 -4.6 230.6 -673.0" stroke-width="1.2" opacity="0.50"/>
+<path d="M455.5 -19.9 322.7 -577.2" stroke-width="3.2" opacity="0.63"/>
+<path d="M475.9 1.3 357.4 -700.7" stroke-width="1.2" opacity="0.37"/>
+<path d="M499.1 -15.3 449.5 -508.9" stroke-width="1.4" opacity="0.59"/>
+<path d="M517.8 -19.7 497.9 -615.3" stroke-width="2" opacity="0.72"/>
+<path d="M535.9 15.3 561.2 -741.0" stroke-width="2" opacity="0.36"/>
+<path d="M564.8 -25.8 613.7 -512.0" stroke-width="1.2" opacity="0.32"/>
+<path d="M571.9 26.0 673.9 -578.8" stroke-width="1.2" opacity="0.64"/>
+<path d="M608.8 -43.9 745.4 -617.1" stroke-width="2.4" opacity="0.72"/>
+<path d="M615.6 5.9 825.8 -671.7" stroke-width="5.3" opacity="0.76"/>
+<path d="M650.0 -21.3 890.1 -644.6" stroke-width="5.3" opacity="0.34"/>
+<path d="M669.5 -11.4 937.4 -588.8" stroke-width="2.4" opacity="0.47"/>
+<path d="M684.5 22.1 918.9 -405.4" stroke-width="2.4" opacity="0.37"/>
+<path d="M692.2 43.9 997.5 -434.3" stroke-width="1.2" opacity="0.40"/>
+<path d="M693.8 78.6 1130.5 -514.1" stroke-width="2" opacity="0.58"/>
+<path d="M729.1 70.0 1173.4 -455.5" stroke-width="2.4" opacity="0.71"/>
+<path d="M766.7 53.5 1187.8 -382.0" stroke-width="5.3" opacity="0.34"/>
+<path d="M766.2 82.0 1272.3 -375.8" stroke-width="1.2" opacity="0.43"/>
+<path d="M800.3 90.4 1281.1 -289.3" stroke-width="5.3" opacity="0.47"/>
+<path d="M772.3 132.0 1221.4 -176.3" stroke-width="5.3" opacity="0.50"/>
+<path d="M819.4 127.4 1361.0 -193.4" stroke-width="2" opacity="0.75"/>
+<path d="M788.1 173.5 1270.8 -70.5" stroke-width="2.4" opacity="0.71"/>
+<path d="M844.1 167.8 1413.3 -73.6" stroke-width="5.3" opacity="0.64"/>
+<path d="M838.0 189.8 1465.3 -28.1" stroke-width="1.4" opacity="0.41"/>
+<path d="M853.7 211.3 1483.2 38.9" stroke-width="5.3" opacity="0.39"/>
+<path d="M800.4 244.1 1394.2 123.5" stroke-width="1.2" opacity="0.70"/>
+<path d="M821.5 256.3 1414.3 176.5" stroke-width="2.4" opacity="0.65"/>
+<path d="M836.1 280.0 1560.1 231.5" stroke-width="3.2" opacity="0.49"/>
+</g><path d="M0 0 430 0 0 390Z" fill="url(#tone)" opacity=".4"/><path d="m800 0 120 0v600L751 339Z" fill="#171717"/>
+<!-- hoodie body, ripped white edge and directional cloth hatching -->
+<path d="M-20 650 Q79 481 280 479 L399 510 579 547 762 476Q872 485 958 591L947 699H-20Z" fill="#171717" stroke="#111" stroke-width="9"/>
+<path d="M18 675q82-128 276-175l97 26 151 130-21 42H18Zm570-114 155-67q134 35 174 137l-66 69H584Z" fill="#fff" stroke="#111" stroke-width="10"/>
+<path d="M272 489 397 518 533 674 472 720 286 571 179 642Z" fill="url(#fine)" stroke="#111" stroke-width="7"/>
+<path d="m318 511 167 183m-150-168 138 156m-234-80 75-66m-105 101 78-89m453-39-103 152m142-139-92 157" fill="none" stroke="#111" stroke-width="4"/>
+<!-- neck and ear -->
+<path d="m440 466-52 83 109 84 129-114-25-120Z" fill="#fff" stroke="#111" stroke-width="9"/>
+<path d="m488 510 127-85-13 93-94 96Z" fill="url(#fine)" opacity=".6"/>
+<path d="M695 292q50-33 67 4 8 50-54 96l-32-29Z" fill="#fff" stroke="#111" stroke-width="8"/>
+<path d="m700 311 25-14 18 11-23 23-18 33m7-40 16 8" fill="none" stroke="#111" stroke-width="4"/>
+<!-- face shape, asymmetrical perspective -->
+<path d="M310 85 C400 41 555 30 701 128 Q781 253 699 489 Q634 602 525 649 Q397 591 333 453 Q293 300 310 85Z" fill="#fff" stroke="#0e0e0e" stroke-width="10"/>
+<g clip-path="url(#face)"><path d="M290 60 400 92 382 380l-49 143L260 361Z" fill="url(#fine)" opacity=".5"/>
+<path d="M661 153Q762 274 700 461l-108 150-36-22q140-180 90-436Z" fill="url(#tone)" opacity=".65"/>
+<path d="M612 128q126 120 62 352l-63 112 103-68 82-340Z" fill="url(#fine)" opacity=".5"/>
+<path d="M324 455 484 627l65 38-182-53Z" fill="url(#fine)"/></g>
+<!-- hair: overlapping flowing locks rather than a triangular mascot crown -->
+<path d="M233 337q20-124 46-216Q324 7 454-2 602-31 728 50q97 57 84 218l-67-72q8 103-38 164l-19-143-45-82q-58 96-170 139l47-95q-93 110-230 126l71-100q-70 64-128 132Z" fill="#0c0c0c" stroke="#0b0b0b" stroke-width="8"/>
+<path d="M239 197 193 79l115 79-25-161 121 93 24-122 76 87 90-87-6 98 154-53-78 78 142-10-107 84q-126 23-155 75l-98 33-183 25Z" fill="#0c0c0c" stroke="#0b0b0b" stroke-width="7" stroke-linejoin="round"/>
+<path d="M275 184q74-127 182-165-114 98-169 232m121-190Q328 159 304 267M559 20q-87 106-159 202m248-173q-50 112-192 172m240-88-173 108m231-126-113 97" fill="none" stroke="#fff" stroke-width="5" opacity=".92" stroke-linecap="round"/>
+<path d="M302 87q-36 68-44 145m158-201-76 104m208-130-62 116m179-78-97 117m144-35-67 61m-287 35 107-88" stroke="#fff" stroke-width="2" fill="none" opacity=".7"/>
+<!-- brows and eyes: heavy expressive ink upper lid -->
+<path d="M334 305q86-65 173-58l27 28q-89-13-179 50Zm224-18q71-61 136-45l20 32q-76-16-135 37Z" fill="#111"/>
+<path d="M337 340q80-70 164-32-27 78-139 84Z" fill="#fff" stroke="#111" stroke-width="8"/>
+<path d="M547 321q63-63 144-42 7 67-89 94Z" fill="#fff" stroke="#111" stroke-width="8"/>
+<path d="M347 338q79-66 156-30m45 13q68-58 144-43" stroke="#111" stroke-width="12" stroke-linecap="round" fill="none"/>
+<path d="M390 331q48-22 70 14 8 39-29 50-38 6-48-20Z" fill="#111"/>
+<path d="M594 309q47-24 69 9 7 38-26 51-37 6-51-21Z" fill="#111"/>
+<path d="M403 337q17-12 27 3l-1 15-23 6Z M605 315q15-12 27 1l-1 14-22 8Z" fill="#fff"/>
+<path d="m334 331-22-14m32 11-22-27m34 20-11-29m346-22 18-27m-3 32 25-18m-23 37 29-12" stroke="#111" fill="none" stroke-width="5" stroke-linecap="round"/>
+<!-- motion in face: cheek hatching, nose, focused mouth -->
+<path d="m384 414 72 14m-64-7 66 18m-50-5 43 15m171-58 52-37m-43 42 56-32m-52 36 47-26" stroke="#111" stroke-width="2.4" fill="none"/>
+<path d="M542 352q-27 80-39 108l35 13 38-11m-73 8 34 7" stroke="#111" stroke-width="5" fill="none" stroke-linecap="round"/>
+<path d="M477 536q70 16 127-26l-17 39q-51 35-111 9Z" fill="#111"/>
+<path d="m495 545 88-18m-49 43 49-15" stroke="#fff" stroke-width="3"/>
+<path d="m392 496 77 23m-67-8 60 23m-53-8 45 20m186-66 52-31m-45 45 39-24" stroke="#111" stroke-width="2" fill="none"/>
+<!-- ripped motion marks in foreground -->
+<path d="m18 31 199 99m-150-84 191 105M4 465l222-75m-203 113 201-76M860 390l57-15m-87 41 85-19" stroke="#111" stroke-width="4" fill="none"/>
+</svg>

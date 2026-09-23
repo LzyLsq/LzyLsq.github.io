@@ -14,12 +14,11 @@
       } catch (e) {}
     })();
     </script>
+    <script>try { document.documentElement.dataset.ink = localStorage.getItem("ryan-comic-ink") === "color" ? "color" : "mono"; } catch (e) { document.documentElement.dataset.ink = "mono"; }</script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- ========== TODO: 改成你的网站信息 ========== -->
     <title>文章排版示例（未发布） · Ryan</title>
     <meta name="robots" content="noindex,follow">
     <meta name="description" content="Ryan 的个人网站：iOS 开发，正在学习全栈；目前介绍两个项目，文章待更新。">
-    <!-- ============================================ -->
     <link rel="canonical" href="https://lzylsq.github.io/post.html">
     <meta property="og:type" content="website">
     <meta property="og:title" content="Ryan · iOS 开发">
@@ -53,6 +52,7 @@
     <link rel="stylesheet" href="css/sticky.css">
     <link rel="stylesheet" href="css/style-memphis.css">
     <link rel="stylesheet" href="css/style-notebook.css">
+    <link rel="stylesheet" href="css/style-comic.css">
 </head>
 <body class="theme-fluxgrid">
 <a class="skip-link" href="#main-content">跳到主要内容</a>
@@ -94,6 +94,7 @@
                 <kbd class="search-hint" aria-hidden="true"><span class="search-hint-mac">⌘</span><span class="search-hint-win">Ctrl</span>K</kbd>
             </form>
             <div class="header-actions">
+                <button type="button" class="header-action ink-toggle" data-ink-toggle aria-label="切换漫画配色" aria-pressed="false" title="切换漫画配色"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Z" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 2v20a10 10 0 0 0 0-20Z" fill="currentColor"/></svg><span data-ink-label>彩色</span></button>
                 <a class="header-action" href="mailto:lzyryan5247@gmail.com" aria-label="邮件联系 Ryan" title="邮件联系"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg></a>
                 <button type="button" class="header-action theme-toggle" id="theme-toggle" aria-label="切换明暗主题" data-no-swup>
                     <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
@@ -187,5 +188,6 @@
 </button>
 <script src="js/theme.js"></script>
 <script src="js/site-stats.js"></script>
+<script src="js/comic-mode.js"></script>
 </body>
 </html>
