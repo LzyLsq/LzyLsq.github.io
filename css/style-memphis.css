@@ -1529,3 +1529,12 @@ html[data-style="memphis"] .project-switchboard a > span:last-child { font-size:
   html[data-style="memphis"] .project-switchboard a { transition: none; }
   html[data-style="memphis"] .project-switchboard a:hover { transform: none; }
 }
+
+/* 文章列表还未发布内容时，不显示空侧栏，也不挤压空状态卡片。 */
+html[data-style="memphis"] .posts-layout:not(:has(.post-card)) { grid-template-columns: minmax(0, 1fr); }
+html[data-style="memphis"] .posts-layout:not(:has(.post-card)) .home-main { width: 100%; max-width: 940px; margin-inline: auto; }
+html[data-style="memphis"] .posts-layout:not(:has(.post-card)) .sidebar { display: none; }
+html[data-style="memphis"] .posts-layout .empty-publications { max-width: none; }
+html[data-style="memphis"] .posts-layout .empty-publications h2 {
+  color: var(--heading); font-size: clamp(21px, 2.8vw, 30px); line-height: 1.35; margin: 0 0 12px;
+}

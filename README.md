@@ -23,7 +23,7 @@ iOS 开发的静态个人网站，使用 HTML、CSS 和原生 JavaScript，无�
 
 1. 复制 `post.html` 为一个新文件；建议先把新文件放在网站根目录。若放进子目录（例如 `posts/my-first-note.html`），需把 CSS、JS、图片及站内链接的相对路径对应改为 `../`。
 2. 修改标题、描述、HTML 正文、实际发布日期和分类；**从正式文章删掉** `<meta name="robots" content="noindex,follow">`。不要再沿用“排版示例”字样。
-3. 在 `posts.html` 的 `<div class="post-stack" id="post-list" data-post-list>` 中加入一张真实文章卡。标题、摘要、分类、日期及目标链接都填真实信息；若没有真实封面，可以继续使用几何装饰图，但不要把它当作项目截图；标签链接可写作 `<a href="posts.html#post-list" data-tag="Swift">Swift</a>`。页面侧栏的「最近发布」与「文章标签」会按卡片自动生成；站内搜索也会从真实文章卡片提取索引。
+3. 在 `posts.html` 的 `<div class="post-stack" id="post-list" data-post-list>` 中加入一张真实文章卡。标题、摘要、分类、日期及目标链接都填真实信息；若没有真实封面，可以继续使用几何装饰图，但不要把它当作项目截图；标签链接可写作 `<a href="posts.html#post-list" data-tag="Swift">Swift</a>`。发布后文章页才显示「最近发布」与「文章标签」侧栏，两项内容会按卡片自动生成；站内搜索也会从真实文章卡片提取索引。
 卡片骨架（放进 `data-post-list` 容器；以下只是填写格式，不是已发布内容）：
 
 ```html
