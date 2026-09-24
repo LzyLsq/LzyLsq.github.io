@@ -17,13 +17,13 @@ html[data-style="memphis"][data-ink="color"] .learning-hero {
   background:repeating-conic-gradient(from -15deg at 79% 48%,#d7eef0 0 10deg,#b6e0e6 10deg 10.5deg,#d7eef0 11deg 18deg);
 }
 html[data-style="memphis"] .learning-hero-grid { display:grid; grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr); align-items:center; gap:clamp(25px,4vw,75px); }
-html[data-style="memphis"] .learning-hero-copy { position:relative; z-index:1; animation:learning-left .7s both cubic-bezier(.2,.8,.2,1); }
+html[data-style="memphis"] .learning-hero-copy { position:relative; z-index:1; }
 html[data-style="memphis"] .learning-kicker { font:800 .8rem/1.4 "JetBrains Mono",monospace; letter-spacing:.12em; text-transform:uppercase; }
 html[data-style="memphis"] .learning-hero h1 { color:var(--learn-ink); font-size:clamp(3.2rem,7.1vw,6.8rem); line-height:1.08; letter-spacing:-.02em; margin:18px 0 24px; text-shadow:5px 5px 0 var(--learn-shadow); }
 html[data-style="memphis"] .learning-hero h1 span { display:block; transform:skewX(-6deg); }
 html[data-style="memphis"][data-ink="color"] .learning-hero h1 span { color:#c63055; text-shadow:4px 4px 0 #ffd76e; }
 html[data-style="memphis"] .learning-hero-copy p { max-width:540px; font-size:1.1rem; line-height:1.85; color:var(--learn-ink); margin:0 0 26px; }
-html[data-style="memphis"] .learning-hero-art { min-height:320px; position:relative; display:grid; place-items:center; animation:learning-right .75s .08s both cubic-bezier(.2,.8,.2,1); }
+html[data-style="memphis"] .learning-hero-art { min-height:320px; position:relative; display:grid; place-items:center; }
 html[data-style="memphis"] .learning-code-window { position:relative; width:min(100%,420px); min-height:260px; display:flex; flex-direction:column; justify-content:space-between; padding:22px 25px; transform:rotate(6deg) skewY(-3deg); border:5px solid #f5f5f5; box-shadow:12px 14px 0 #050505; background:repeating-radial-gradient(circle at 50% 40%,#3d3d3d 0 2px,#292929 3px 9px); color:#fff; }
 html[data-style="memphis"] .learning-code-window span { font:700 .72rem "JetBrains Mono",monospace; letter-spacing:.08em; }
 html[data-style="memphis"] .learning-code-window b { font-size:clamp(2.2rem,4vw,4.4rem); line-height:1.1; text-shadow:4px 5px 0 #000; }
@@ -78,11 +78,8 @@ html[data-style="memphis"] .learning-publish-guide a { color:var(--learn-ink); f
 html[data-style="memphis"] .learning-output { margin-top:35px; }
 html[data-style="memphis"] .learning-output textarea { font:500 .82rem/1.6 "JetBrains Mono",monospace; }
 html[data-style="memphis"] .learning-output-actions { display:flex; flex-wrap:wrap; gap:12px; margin-top:18px; }
-@keyframes learning-left { from { opacity:0; transform:translateX(-55px) skewX(-3deg); } to { opacity:1; transform:none; } }
-@keyframes learning-right { from { opacity:0; transform:translateX(55px) skewX(3deg); } to { opacity:1; transform:none; } }
 @media(max-width:820px) { html[data-style="memphis"] .learning-hero-grid,html[data-style="memphis"] .learning-editor-grid { grid-template-columns:1fr; } html[data-style="memphis"] .learning-hero-art { min-height:270px; } }
 @media(max-width:600px) { html[data-style="memphis"] .learning-hero { padding:44px 0 50px; } html[data-style="memphis"] .learning-hero h1 { font-size:clamp(3rem,13vw,5rem); } html[data-style="memphis"] .learning-hero-art { min-height:230px; } html[data-style="memphis"] .learning-code-window { min-height:200px; } html[data-style="memphis"] .learning-code-window i { font-size:4rem; } html[data-style="memphis"] .learning-owner { flex-direction:column; align-items:flex-start; padding:22px; } html[data-style="memphis"] .learning-entry { grid-template-columns:1fr; } html[data-style="memphis"] .learning-entry-side { border-right:0; border-bottom:3px solid var(--learn-ink); padding:14px 20px; flex-direction:row; justify-content:space-between; } html[data-style="memphis"] .learning-entry-body { padding:22px; } }
-@media(prefers-reduced-motion:reduce) { html[data-style="memphis"] .learning-hero-copy,html[data-style="memphis"] .learning-hero-art { animation:none; } }
 /* The mobile field-note panel keeps its margins even after rotating into place. */
 @media (max-width: 600px) {
   html[data-style="memphis"] .learning-hero h1 { font-size: clamp(2.8rem,12vw,3.6rem); text-shadow: 2px 3px 0 var(--learn-shadow); }
