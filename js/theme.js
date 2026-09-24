@@ -111,6 +111,88 @@
     });
   }
 
+  /* 连续点击不能中断正在进行的跨页过渡：出站只执行第一次导航，
+     入站动画期间记下最后一次选择，动画结束后再用真实链接继续翻页。
+     修饰键、新标签、下载和站内锚点仍交由浏览器原生处理。 */
+  function initChapterNavigation() {
+    var leaving = false;
+    on(document, 'click', function (event) {
+      if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey ||
+          event.shiftKey || event.altKey) { return; }
+      var target = event.target;
+      var link = target && target.closest && target.closest('a[href]');
+      if (!link || link.hasAttribute('download') || (link.target && link.target !== '_self')) { return; }
+      var url;
+      try { url = new URL(link.href, location.href); } catch (e) { return; }
+      if (url.origin !== location.origin || !/\.html$/i.test(url.pathname)) { return; }
+      if (url.pathname === location.pathname && url.search === location.search) { return; }
+
+      if (document.documentElement.classList.contains('chapter-arriving')) {
+        event.preventDefault();
+        window.__chapterQueuedUrl = url.href;
+        return;
+      }
+      if (leaving) { event.preventDefault(); return; }
+      leaving = true;
+      // A blocked navigation (offline / canceled by another script) must not
+      // leave the current document unresponsive indefinitely.
+      setTimeout(function () { leaving = false; }, 4000);
+    }, true);
+    on(window, 'pageshow', function () { leaving = false; });
+  }
+
+  /* 常用章节在浏览器空闲时预取；悬停/聚焦时预取其他站内章节。
+     保留真实链接和浏览器历史，不在点击时隐藏页面，也不拦截导航。 */
+  function initChapterPrefetch() {
+    var connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+    if (connection && (connection.saveData || /^(slow-)?2g$/.test(connection.effectiveType || ''))) { return; }
+    var seen = new Set();
+    var current = new URL(location.href);
+    current.hash = '';
+
+    function warm(href) {
+      var url;
+      try { url = new URL(href, location.href); } catch (e) { return; }
+      if (url.origin !== location.origin || !/\.html$/i.test(url.pathname)) { return; }
+      url.hash = '';
+      if (url.href === current.href || seen.has(url.href)) { return; }
+      seen.add(url.href);
+      var hint = document.createElement('link');
+      hint.rel = 'prefetch';
+      hint.as = 'document';
+      hint.href = url.href;
+      document.head.appendChild(hint);
+    }
+
+    function warmTarget(event) {
+      var target = event.target;
+      var link = target && target.closest && target.closest('a[href]');
+      if (link && !link.hasAttribute('download') && (!link.target || link.target === '_self')) {
+        warm(link.href);
+      }
+    }
+    on(document, 'pointerover', warmTarget, { passive: true });
+    on(document, 'focusin', warmTarget);
+    on(document, 'touchstart', warmTarget, { passive: true });
+
+    function warmMainChapters() {
+      if (document.visibilityState !== 'visible') { return; }
+      ['index.html', 'projects.html', 'posts.html', 'learning.html', 'about.html'].forEach(warm);
+      // Deep pages need the same warm hand-off as the main navigation.
+      var here = current.pathname.split('/').pop();
+      if (here === 'projects.html') ['data-pipeline.html', 'law-design.html'].forEach(warm);
+      if (here === 'posts.html') warm('post.html');
+      if (here === 'learning.html') warm('learning-editor.html');
+      if (here === 'data-pipeline.html') warm('law-design.html');
+      if (here === 'law-design.html') warm('data-pipeline.html');
+    }
+    if ('requestIdleCallback' in window) {
+      requestIdleCallback(warmMainChapters, { timeout: 2500 });
+    } else {
+      setTimeout(warmMainChapters, 600);
+    }
+  }
+
   /* 即时跳转到元素(补偿吸顶 header 高度) */
   function jumpTo(el) {
     var header = document.getElementById('site-header');
@@ -545,6 +627,8 @@
   /* ============ 启动 ============ */
   function boot() {
     initNav();
+    initChapterNavigation();
+    initChapterPrefetch();
     initShareTools();
     initHeaderScroll();
     initBackToTop();

@@ -187,13 +187,23 @@ html[data-style="memphis"] .sidebar .side-card:not(:hover) { transform: none; }
   to { clip-path: inset(0 0 0 0); }
 }
 @keyframes chapter-arrive-left {
-  from { transform: translate3d(-96px,0,0) rotate(-1.2deg) scale(.975); }
+  from { transform: translate3d(-38px,0,0) rotate(-.35deg); }
   to { transform: none; }
 }
 @keyframes chapter-arrive-right {
-  from { transform: translate3d(96px,0,0) rotate(1.2deg) scale(.975); }
+  from { transform: translate3d(38px,0,0) rotate(.35deg); }
   to { transform: none; }
 }
+@keyframes chapter-panel-left {
+  from { clip-path: inset(0 100% 0 0); }
+  to { clip-path: inset(0 0 0 0); }
+}
+@keyframes chapter-panel-right {
+  from { clip-path: inset(0 0 0 100%); }
+  to { clip-path: inset(0 0 0 0); }
+}
+@keyframes chapter-shell-out { to { opacity: 0; } }
+@keyframes chapter-shell-in { from { opacity: 0; } to { opacity: 1; } }
 html[data-style="memphis"]::view-transition { background: #343432; }
 html[data-style="memphis"][data-ink="color"]::view-transition { background: #fff8e9; }
 /* Theme ripples still have their independent radial reveal. */
@@ -201,47 +211,72 @@ html:not(.ink-expanding):not(.ink-retracting)::view-transition-old(root) {
   animation: none;
 }
 html:not(.ink-expanding):not(.ink-retracting)::view-transition-new(root) {
-  animation: chapter-paper-in .48s cubic-bezier(.18,.75,.23,1) both;
+  animation: chapter-paper-in .56s cubic-bezier(.22,.78,.25,1) both;
 }
-html.chapter-arriving[data-style="memphis"]:not(.ink-morphing) .site-header { view-transition-name: chapter-shell; }
-html.chapter-arriving[data-style="memphis"]:not(.ink-morphing) :is(.hero-slide.is-active .hero-copy,.projects-hero-copy,.about-section .section-heading,.stream-section:has(.posts-layout) .section-heading,.learning-hero-copy,.search-intro .flux-container,.project-detail-intro .flux-container,.article-head .flux-container) { view-transition-name: chapter-copy; }
-html.chapter-arriving[data-style="memphis"]:not(.ink-morphing) :is(.hero-slide.is-active .hero-side-visual,.projects-action-panel,.about-intro,.learning-hero-art,.posts-layout,.article-head-media) { view-transition-name: chapter-art; }
+/* The header is the one genuinely shared panel. Keep it in the same place
+   rather than replacing its active link in a single frame. All other panels
+   are named only on arrival so unrelated titles never morph into each other. */
+html[data-style="memphis"]:not(.ink-morphing) .site-header { view-transition-name: chapter-shell; }
+html.chapter-arriving[data-style="memphis"]:not(.ink-morphing) :is(.hero-slide.is-active .hero-copy,.projects-hero-copy,.about-section .section-heading,.stream-section:has(.posts-layout) .section-heading,.learning-hero-copy,.search-intro .flux-container,.project-detail-intro .flux-container,.article-head .flux-container,.learning-editor-section .section-heading) { view-transition-name: chapter-copy; }
+html.chapter-arriving[data-style="memphis"]:not(.ink-morphing) :is(.hero-slide.is-active .hero-side-visual,.projects-action-panel,.about-intro,.learning-hero-art,.posts-layout,.article-head-media,.learning-editor-grid) { view-transition-name: chapter-art; }
 html.chapter-arriving[data-style="memphis"]:not(.ink-morphing) .about-stack,
 html.chapter-arriving[data-style="memphis"]:not(.ink-morphing) .article-aside { view-transition-name: chapter-side; }
 html.chapter-arriving[data-style="memphis"]:not(.ink-morphing) .project-switchboard,
-html.chapter-arriving[data-style="memphis"]:not(.ink-morphing) .article-main { view-transition-name: chapter-route; }
+html.chapter-arriving[data-style="memphis"]:not(.ink-morphing) .article-main,
+html.chapter-arriving[data-style="memphis"]:not(.ink-morphing) .search-results-section .flux-container { view-transition-name: chapter-route; }
 html.chapter-arriving[data-style="memphis"]:not(.ink-morphing) .project-detail-section .detail-route { view-transition-name: chapter-detail-route; }
 html.chapter-arriving[data-style="memphis"]:not(.ink-morphing) .project-detail-section .detail-grid { view-transition-name: chapter-detail-grid; }
-/* Only the arriving page names its panels: the old root is a complete frame,
-   never a set of scaled snapshots from unrelated sections. */
-html:not(.ink-morphing)::view-transition-group(chapter-shell),
-html:not(.ink-morphing)::view-transition-group(chapter-copy),
+/* Only the header is shared. The old root keeps all page-specific panels,
+   never scaled snapshots of unrelated sections. */
+html:not(.ink-morphing)::view-transition-group(chapter-shell) { animation: none; }
+html:not(.ink-morphing)::view-transition-group(chapter-copy) {
+  animation: chapter-panel-left .42s cubic-bezier(.22,.78,.25,1) both;
+}
 html:not(.ink-morphing)::view-transition-group(chapter-art),
 html:not(.ink-morphing)::view-transition-group(chapter-side),
 html:not(.ink-morphing)::view-transition-group(chapter-route),
 html:not(.ink-morphing)::view-transition-group(chapter-detail-route),
-html:not(.ink-morphing)::view-transition-group(chapter-detail-grid) { animation: none; }
-html:not(.ink-expanding):not(.ink-retracting)::view-transition-old(chapter-shell) { animation: none; opacity: 0; }
-html:not(.ink-expanding):not(.ink-retracting)::view-transition-new(chapter-shell) { animation: none; }
+html:not(.ink-morphing)::view-transition-group(chapter-detail-grid) {
+  animation: chapter-panel-right .44s cubic-bezier(.22,.78,.25,1) both;
+}
+html:not(.ink-expanding):not(.ink-retracting)::view-transition-group(chapter-shell) { z-index: 2; }
+html:not(.ink-expanding):not(.ink-retracting)::view-transition-old(chapter-shell) {
+  animation: chapter-shell-out .24s ease-in-out both;
+}
+html:not(.ink-expanding):not(.ink-retracting)::view-transition-new(chapter-shell) {
+  animation: chapter-shell-in .24s ease-in-out both;
+}
 html:not(.ink-expanding):not(.ink-retracting)::view-transition-new(chapter-copy) {
-  animation: chapter-arrive-left .58s .02s cubic-bezier(.15,.84,.23,1) both;
+  animation: chapter-arrive-left .52s cubic-bezier(.22,.78,.25,1) both;
 }
 html:not(.ink-expanding):not(.ink-retracting)::view-transition-new(chapter-art),
 html:not(.ink-expanding):not(.ink-retracting)::view-transition-new(chapter-detail-route) {
-  animation: chapter-arrive-right .62s .04s cubic-bezier(.15,.84,.23,1) both;
+  animation: chapter-arrive-right .54s cubic-bezier(.22,.78,.25,1) both;
 }
 html:not(.ink-expanding):not(.ink-retracting)::view-transition-new(chapter-side),
 html:not(.ink-expanding):not(.ink-retracting)::view-transition-new(chapter-route),
 html:not(.ink-expanding):not(.ink-retracting)::view-transition-new(chapter-detail-grid) {
-  animation: chapter-arrive-right .65s .06s cubic-bezier(.15,.84,.23,1) both;
+  animation: chapter-arrive-right .54s cubic-bezier(.22,.78,.25,1) both;
 }
 /* If cross-document transitions are unsupported, let the browser navigate
    normally. No pre-emptive opacity class and no second animation after paint. */
 @media (max-width:700px) {
-  @keyframes chapter-arrive-left { from { transform:translate3d(-42px,0,0); } to { transform:none; } }
-  @keyframes chapter-arrive-right { from { transform:translate3d(42px,0,0); } to { transform:none; } }
+  @keyframes chapter-arrive-left {
+    from { transform:translate3d(-22px,0,0); }
+    to { transform:none; }
+  }
+  @keyframes chapter-arrive-right {
+    from { transform:translate3d(22px,0,0); }
+    to { transform:none; }
+  }
 }
 @media (prefers-reduced-motion:reduce) {
+  html:not(.ink-morphing)::view-transition-group(chapter-copy),
+  html:not(.ink-morphing)::view-transition-group(chapter-art),
+  html:not(.ink-morphing)::view-transition-group(chapter-side),
+  html:not(.ink-morphing)::view-transition-group(chapter-route),
+  html:not(.ink-morphing)::view-transition-group(chapter-detail-route),
+  html:not(.ink-morphing)::view-transition-group(chapter-detail-grid),
   html:not(.ink-expanding):not(.ink-retracting)::view-transition-old(root),
   html:not(.ink-expanding):not(.ink-retracting)::view-transition-new(root),
   html:not(.ink-expanding):not(.ink-retracting)::view-transition-old(chapter-shell),
@@ -263,33 +298,6 @@ html:not(.ink-expanding):not(.ink-retracting)::view-transition-new(chapter-detai
 /* The cover is still on initial load. Only user-triggered carousel turns
    animate its speech/frame; otherwise navigation snapshots capture mid-slide. */
 html[data-style="memphis"] .hero-carousel:not(.is-turning) .hero-slide.is-active :is(.hero-side-visual,.hero-copy,.hero-actions) { animation: none; }
-/* If the browser skips native cross-document transitions (slow resource,
-   back/forward cache or unsupported browser), render the destination once.
-   A pagereveal-triggered fallback animation was restarting live content after
-   first paint and causing occasional flashes. */
-@media (max-width:700px) {
-  @keyframes chapter-arrive-left { from { opacity:1; transform:translate3d(-36px,0,0); } to { opacity:1; transform:none; } }
-  @keyframes chapter-arrive-right { from { opacity:1; transform:translate3d(36px,0,0); } to { opacity:1; transform:none; } }
-}
-@media (prefers-reduced-motion:reduce) {
-  html:not(.ink-expanding):not(.ink-retracting)::view-transition-old(root),
-  html:not(.ink-expanding):not(.ink-retracting)::view-transition-new(root),
-  html:not(.ink-expanding):not(.ink-retracting)::view-transition-old(chapter-shell),
-  html:not(.ink-expanding):not(.ink-retracting)::view-transition-new(chapter-shell),
-  html:not(.ink-expanding):not(.ink-retracting)::view-transition-old(chapter-copy),
-  html:not(.ink-expanding):not(.ink-retracting)::view-transition-new(chapter-copy),
-  html:not(.ink-expanding):not(.ink-retracting)::view-transition-old(chapter-art),
-  html:not(.ink-expanding):not(.ink-retracting)::view-transition-new(chapter-art),
-  html:not(.ink-expanding):not(.ink-retracting)::view-transition-old(chapter-side),
-  html:not(.ink-expanding):not(.ink-retracting)::view-transition-new(chapter-side),
-  html:not(.ink-expanding):not(.ink-retracting)::view-transition-old(chapter-route),
-  html:not(.ink-expanding):not(.ink-retracting)::view-transition-new(chapter-route),
-  html:not(.ink-expanding):not(.ink-retracting)::view-transition-old(chapter-detail-route),
-  html:not(.ink-expanding):not(.ink-retracting)::view-transition-new(chapter-detail-route),
-  html:not(.ink-expanding):not(.ink-retracting)::view-transition-old(chapter-detail-grid),
-  html:not(.ink-expanding):not(.ink-retracting)::view-transition-new(chapter-detail-grid) { animation-duration:.01ms !important; animation-delay:0ms !important; }
-}
-
 /* Theme changes update the current DOM and scroll position, never navigate. */
 /* A themed panel can change height while the two snapshots overlap. Don't
    let scroll anchoring move the reading position halfway through the ripple. */
