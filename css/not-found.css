@@ -98,3 +98,12 @@ html[data-style="memphis"] .lost-links a:focus-visible { outline: 3px solid var(
 @media (prefers-reduced-motion: reduce) {
   html[data-style="memphis"] .lost-links a { transition: none; }
 }
+
+/* Decorative 404 panel reacts without claiming to be another navigation link. */
+html[data-style="memphis"] .lost-visual { transition: box-shadow .24s ease; }
+@media (hover: hover) and (pointer: fine) {
+  html[data-style="memphis"] .lost-visual:hover { box-shadow: 15px 16px 0 var(--lost-ink); }
+}
+@media (prefers-reduced-motion: reduce) {
+  html[data-style="memphis"] .lost-visual { transition: none; }
+}

@@ -153,3 +153,23 @@ html[data-style="memphis"] .learning-code-window i {
   }
   html[data-style="memphis"] .learning-hero-art:hover .learning-code-window i { transform: none; }
 }
+
+/* The publishing invitation is a panel too, not one giant link. */
+html[data-style="memphis"] .learning-owner { transition: box-shadow .24s ease; }
+html[data-style="memphis"] .learning-empty-mark {
+  transition: transform .3s cubic-bezier(.2,.8,.25,1.15), opacity .3s ease;
+}
+@media (hover: hover) and (pointer: fine) {
+  html[data-style="memphis"] .learning-owner:hover,
+  html[data-style="memphis"] .learning-owner:focus-within {
+    box-shadow: 10px 10px 0 var(--learn-shadow);
+  }
+  html[data-style="memphis"] .learning-empty:hover .learning-empty-mark {
+    transform: rotate(14deg) scale(1.06);
+    opacity: .3;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  html[data-style="memphis"] :is(.learning-owner,.learning-empty-mark) { transition: none; }
+  html[data-style="memphis"] .learning-empty:hover .learning-empty-mark { transform: none; }
+}

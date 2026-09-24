@@ -8185,3 +8185,57 @@ html[data-style="memphis"] .project-gallery .gallery-open::after {
     .search-icon-btn:hover svg,.header-action:not(.ink-toggle):hover svg,
     .hero-arrow--prev:hover svg,.hero-arrow--next:hover svg) { transform: none !important; }
 }
+
+/* Response for the remaining reading panels. The surface acknowledges hover,
+   while only real links and buttons keep a pointer cursor and lift on press. */
+html[data-style="memphis"] :is(.project-switchboard,.detail-route,.empty-publications,
+  .projects-action-panel,.article-info,.empty-panel,.article-footer,
+  .comment-form-panel,.projects-disclosure) {
+  transition: box-shadow .24s ease, border-color .24s ease;
+}
+html[data-style="memphis"][data-ink="mono"] :is(.project-switchboard,.detail-route,
+  .empty-publications,.projects-action-panel,.article-info,.empty-panel,
+  .article-footer,.comment-form-panel,.projects-disclosure) { --feedback-edge: #292927; }
+html[data-style="memphis"][data-ink="mono"] .about-chip { --feedback-edge: #292927; }
+html[data-style="memphis"] .manga-panel {
+  transition: box-shadow .24s ease, filter .24s ease;
+}
+html[data-style="memphis"] :is(.project-route span,.about-chip) {
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+@media (hover: hover) and (pointer: fine) {
+  html[data-style="memphis"] :is(.project-switchboard,.detail-route,.empty-publications,
+    .projects-action-panel,.article-info,.empty-panel,.article-footer,
+    .comment-form-panel):hover,
+  html[data-style="memphis"] :is(.project-switchboard,.detail-route,.empty-publications,
+    .article-info,.empty-panel,.article-footer,.comment-form-panel):focus-within {
+    box-shadow: 11px 11px 0 var(--feedback-edge) !important;
+  }
+  html[data-style="memphis"] .stream-section .empty-publications:hover {
+    box-shadow: 11px 11px 0 var(--feedback-edge) !important;
+  }
+  html[data-style="memphis"] .projects-disclosure:hover {
+    box-shadow: 4px 4px 0 var(--feedback-edge);
+  }
+  html[data-style="memphis"] .manga-panel:hover {
+    filter: brightness(1.06);
+    box-shadow: 8px 9px 0 var(--feedback-edge);
+  }
+  html[data-style="memphis"] .project-route span:hover {
+    transform: translateY(-2px);
+    box-shadow: 3px 4px 0 var(--feedback-edge);
+  }
+  html[data-style="memphis"] .about-card .about-chip:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 3px 4px 0 var(--feedback-edge) !important;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  html[data-style="memphis"] :is(.project-switchboard,.detail-route,.empty-publications,
+    .projects-action-panel,.article-info,.empty-panel,.article-footer,
+    .comment-form-panel,.projects-disclosure,.manga-panel,.project-route span,.about-chip) {
+    transition: none !important;
+  }
+  html[data-style="memphis"] .project-route span:hover { transform: none; }
+  html[data-style="memphis"] .about-card .about-chip:hover { transform: none !important; }
+}
