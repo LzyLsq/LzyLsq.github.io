@@ -2,7 +2,7 @@
 <html lang="zh-CN" data-style="memphis" data-theme="dark" data-ink="mono">
 <head>
     <meta charset="UTF-8">
-    <meta name="theme-color" content="#292929">
+    <meta name="theme-color" content="#343432">
     <!-- 首屏前确定唯一画风：黑白暗色，彩色明亮。 -->
     <script>
     (function () {
@@ -11,10 +11,10 @@
       document.documentElement.classList.add('page-arriving');
       document.documentElement.dataset.ink = ink;
       document.documentElement.dataset.theme = ink === 'color' ? 'light' : 'dark';
-      document.querySelector('meta[name="theme-color"]').content = ink === 'color' ? '#fff8e9' : '#292929';
+      document.querySelector('meta[name="theme-color"]').content = ink === 'color' ? '#fff8e9' : '#343432';
     })();
     </script>
-    <style>html{background:#292929;color-scheme:dark}html[data-ink="color"]{background:#fff8e9;color-scheme:light}</style>
+    <style>html{background:#343432;color-scheme:dark}html[data-ink="color"]{background:#fff8e9;color-scheme:light}</style>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>LawDesign · 法律智能体平台 · Ryan</title>
     <meta name="description" content="Ryan 的 LawDesign 法律场景练习项目技术记录，包含 React、Flask、FastAPI、GraphRAG 与实时数据模块。">
@@ -52,7 +52,7 @@
     <link rel="stylesheet" href="css/style-notebook.css">
     <link rel="stylesheet" href="css/style-comic.css?v=20260923">
     <link rel="stylesheet" href="css/style-comic-upgrade.css">
-    <link rel="stylesheet" href="css/manga-editions.css?v=20260924b">
+    <link rel="stylesheet" href="css/manga-editions.css?v=20260924e">
     <link rel="stylesheet" href="css/project-gallery.css">
     <link rel="stylesheet" href="css/project-code.css">
 </head>
@@ -211,7 +211,7 @@
 </button>
 <script src="js/theme.js"></script>
 <script src="js/site-stats.js?v=20260923"></script>
-<script src="js/comic-mode.js?v=20260924b"></script>
+<script src="js/comic-mode.js?v=20260924c"></script>
 <script src="js/project-gallery.js"></script>
 <script src="js/project-code.js"></script>
 </body>

@@ -40,7 +40,7 @@
     root.dataset.ink = value;
     root.dataset.theme = value === 'color' ? 'light' : 'dark';
     var bar = document.querySelector('meta[name="theme-color"]');
-    if (bar) { bar.content = value === 'color' ? '#fff8e9' : '#292929'; }
+    if (bar) { bar.content = value === 'color' ? '#fff8e9' : '#343432'; }
     try { localStorage.setItem('ryan-comic-ink', value); } catch (e) {}
     sync();
   }
@@ -88,7 +88,7 @@
       root.dataset.ink = event.newValue === 'color' ? 'color' : 'mono';
       root.dataset.theme = root.dataset.ink === 'color' ? 'light' : 'dark';
       var bar = document.querySelector('meta[name="theme-color"]');
-      if (bar) { bar.content = root.dataset.ink === 'color' ? '#fff8e9' : '#292929'; }
+      if (bar) { bar.content = root.dataset.ink === 'color' ? '#fff8e9' : '#343432'; }
       sync();
     }
   });
