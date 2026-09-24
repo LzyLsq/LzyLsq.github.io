@@ -8,6 +8,7 @@
     (function () {
       var ink = 'mono';
       try { if (localStorage.getItem('ryan-comic-ink') === 'color') ink = 'color'; } catch (e) {}
+      document.documentElement.classList.add('page-arriving');
       document.documentElement.dataset.ink = ink;
       document.documentElement.dataset.theme = ink === 'color' ? 'light' : 'dark';
       document.querySelector('meta[name="theme-color"]').content = ink === 'color' ? '#f5faff' : '#202020';
@@ -86,9 +87,9 @@
     <link rel="stylesheet" href="css/sticky.css">
     <link rel="stylesheet" href="css/style-memphis.css">
     <link rel="stylesheet" href="css/style-notebook.css">
-    <link rel="stylesheet" href="css/style-comic.css">
+    <link rel="stylesheet" href="css/style-comic.css?v=20260923">
     <link rel="stylesheet" href="css/style-comic-upgrade.css">
-    <link rel="stylesheet" href="css/manga-editions.css">
+    <link rel="stylesheet" href="css/manga-editions.css?v=20260923">
 </head>
 <body class="theme-fluxgrid is-home">
 <a class="skip-link" href="#main-content">跳到主要内容</a>
@@ -151,10 +152,10 @@
       </div>
       <div class="hero-side-visual hero-side-visual--cover" aria-hidden="true">
         <div class="manga-spread">
-          <div class="manga-panel manga-panel--eyes"><img src="assets/images/ryan-manga-eyes.svg" alt="" width="500" height="260"></div>
-          <div class="manga-panel manga-panel--city"><img src="assets/images/ryan-manga-city.svg" alt="" width="420" height="330"></div>
-          <div class="manga-panel manga-panel--main"><img class="comic-cover-art comic-cover-art--mono" src="assets/images/ryan-manga-action.svg" alt="" width="920" height="680"><img class="comic-cover-art comic-cover-art--color" src="assets/images/ryan-manga-action-color.svg" alt="" width="920" height="680"></div>
-          <div class="manga-panel manga-panel--hands"><img src="assets/images/ryan-manga-hands.svg" alt="" width="560" height="340"></div>
+          <div class="manga-panel manga-panel--eyes"><img src="assets/images/code-detail.svg" alt="" width="500" height="260"></div>
+          <div class="manga-panel manga-panel--city"><img src="assets/images/project-flow.svg" alt="" width="420" height="330"></div>
+          <div class="manga-panel manga-panel--main"><img class="comic-cover-art comic-cover-art--mono" src="assets/images/code-workbench.svg" alt="" width="920" height="680"><img class="comic-cover-art comic-cover-art--color" src="assets/images/code-workbench.svg" alt="" width="920" height="680"></div>
+          <div class="manga-panel manga-panel--hands"><img src="assets/images/keyboard-notes.svg" alt="" width="560" height="340"></div>
           <div class="manga-panel manga-panel--burst"><span>继续!</span></div>
 
         </div>
@@ -242,7 +243,7 @@
     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 15l-6-6-6 6"/></svg>
 </button>
 <script src="js/theme.js"></script>
-<script src="js/site-stats.js"></script>
-<script src="js/comic-mode.js"></script>
+<script src="js/site-stats.js?v=20260923"></script>
+<script src="js/comic-mode.js?v=20260923"></script>
 </body>
 </html>

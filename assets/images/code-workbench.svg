@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 680" role="img" aria-label="开发工作台插画">
+<defs><pattern id="dots" width="18" height="18" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="2" fill="#213d66" opacity=".22"/></pattern><linearGradient id="screen" x2="1" y2="1"><stop stop-color="#162b50"/><stop offset="1" stop-color="#34538a"/></linearGradient></defs>
+<path fill="#f5c85d" d="M0 0h920v680H0z"/><path fill="url(#dots)" d="M0 0h920v680H0z"/>
+<g stroke="#172842" stroke-width="4" fill="none" opacity=".35"><path d="M0 60 920 460M0 105 920 505M0 150 920 550M0 195 920 595"/><path d="M690 0 920 230M745 0 920 175M800 0 920 120"/></g>
+<g transform="translate(84 64) rotate(-5 357 260)"><rect x="13" y="23" width="714" height="522" fill="#172842"/><rect width="714" height="522" rx="13" fill="#faf5e8" stroke="#172842" stroke-width="10"/><path d="M5 71h704" stroke="#172842" stroke-width="8"/><circle cx="35" cy="37" r="10" fill="#e45b76"/><circle cx="67" cy="37" r="10" fill="#f5bd53"/><circle cx="99" cy="37" r="10" fill="#46afbb"/><text x="148" y="45" font-family="monospace" font-size="21" font-weight="bold" fill="#172842">RYAN / DEV JOURNAL</text>
+<rect x="29" y="99" width="650" height="364" rx="7" fill="url(#screen)"/>
+<text x="65" y="149" font-family="monospace" font-size="22" fill="#7ad7db">01  // build something real</text>
+<text x="65" y="215" font-family="monospace" font-size="30" font-weight="bold" fill="#fff7da">func keepLearning() {</text>
+<text x="93" y="272" font-family="monospace" font-size="30" fill="#f6c65d">  idea → prototype</text>
+<text x="93" y="329" font-family="monospace" font-size="30" fill="#f78291">  notes → next step</text>
+<text x="65" y="386" font-family="monospace" font-size="30" font-weight="bold" fill="#fff7da">}</text>
+<path d="M65 428h415" stroke="#7ad7db" stroke-width="11" stroke-linecap="round"/>
+<path d="M29 482h650" stroke="#172842" stroke-width="4"/><text x="40" y="505" font-family="monospace" font-size="17" fill="#172842">iOS</text><text x="568" y="505" font-family="monospace" font-size="17" fill="#172842">FULL STACK ↗</text></g>
+<path fill="#e55976" stroke="#172842" stroke-width="7" d="m662 489 212 18-40 115-208-24z"/><text transform="translate(677 552) rotate(6)" font-family="sans-serif" font-size="31" font-weight="900" fill="#fff">WORK IN</text><text transform="translate(683 585) rotate(6)" font-family="sans-serif" font-size="30" font-weight="900" fill="#fff">PROGRESS</text>
+</svg>

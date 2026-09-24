@@ -3,6 +3,14 @@
 (function () {
   'use strict';
   var root = document.documentElement;
+  // Entrance motion belongs to navigation, not to the persistent page state.
+  // Clear it after the longest panel animation so hover transforms keep working.
+  if (root.classList.contains('page-arriving')) {
+    window.setTimeout(function () { root.classList.remove('page-arriving'); }, 920);
+  }
+  window.addEventListener('pageshow', function (event) {
+    if (event.persisted) { root.classList.remove('page-arriving'); }
+  });
   var toggle = document.querySelector('[data-ink-toggle]');
   if (!toggle) { return; }
   var running = false;
@@ -19,16 +27,6 @@
     if (bar) { bar.content = value === 'color' ? '#f5faff' : '#202020'; }
     try { localStorage.setItem('ryan-comic-ink', value); } catch (e) {}
     sync();
-  }
-  function splash(rect, retracting) {
-    var ring = document.createElement('span');
-    ring.className = 'ink-splash' + (retracting ? ' ink-splash--in' : '');
-    ring.style.left = (rect.left + rect.width / 2) + 'px';
-    ring.style.top = (rect.top + rect.height / 2) + 'px';
-    ring.setAttribute('aria-hidden', 'true');
-    document.body.appendChild(ring);
-    ring.addEventListener('animationend', function () { ring.remove(); }, { once: true });
-    window.setTimeout(function () { ring.remove(); }, 1800);
   }
   sync();
   toggle.addEventListener('click', function () {
@@ -48,12 +46,13 @@
     root.style.setProperty('--ink-x', x + 'px');
     root.style.setProperty('--ink-y', y + 'px');
     root.style.setProperty('--ink-radius', radius + 'px');
-    root.classList.toggle('ink-retracting', !toColor);
-    root.classList.toggle('ink-expanding', toColor);
-    toggle.classList.add('is-morphing');
-    splash(rect, !toColor);
     try {
-      var transition = document.startViewTransition(function () { setInk(next); });
+      var transition = document.startViewTransition(function () {
+        root.classList.toggle('ink-retracting', !toColor);
+        root.classList.toggle('ink-expanding', toColor);
+        toggle.classList.add('is-morphing');
+        setInk(next);
+      });
       transition.finished.catch(function () {}).finally(function () {
         root.classList.remove('ink-expanding', 'ink-retracting');
         toggle.classList.remove('is-morphing');

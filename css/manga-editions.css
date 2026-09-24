@@ -1,6 +1,6 @@
 @charset "UTF-8";
 /* One story, two print runs: unprinted ink on paper / cel-colored anime panels.
-   All artwork here is CSS-built; no external image or fabricated content. */
+   Developer-themed SVGs are original artwork; published content remains factual. */
 html[data-style="memphis"] {
   --panel-ink: #171717;
   --panel-paper: #faf9f5;
@@ -85,7 +85,7 @@ html[data-style="memphis"] .posts-layout .empty-publications {
 }
 html[data-style="memphis"] .posts-layout .empty-publications::before {
   content:""; display:block; position:absolute; z-index:0; top:0; right:0; width:44%; height:100%;
-  background:url('../assets/images/ryan-manga-eyes.svg') center/cover no-repeat;
+  background:url('../assets/images/code-detail.svg') center/cover no-repeat;
   clip-path:polygon(25% 0,100% 0,100% 100%,0 100%);
 }
 html[data-style="memphis"] .posts-layout .empty-publications > div { position:relative; z-index:1; max-width:46%; }
@@ -93,7 +93,7 @@ html[data-style="memphis"] .posts-layout .empty-publications h2 { color:var(--pa
 html[data-style="memphis"] .posts-layout .empty-publications p { color:#343434 !important; }
 html[data-style="memphis"][data-ink="mono"] .posts-layout .empty-publications::before { filter:grayscale(1) contrast(1.35); }
 html[data-style="memphis"][data-ink="color"] .posts-layout .empty-publications { background:#fff3dd !important; }
-html[data-style="memphis"][data-ink="color"] .posts-layout .empty-publications::before { background:#f8c361 url('../assets/images/ryan-manga-eyes-color.svg') center/cover no-repeat; filter:none; }
+html[data-style="memphis"][data-ink="color"] .posts-layout .empty-publications::before { background:#f8c361 url('../assets/images/code-detail.svg') center/cover no-repeat; filter:none; }
 html[data-style="memphis"][data-ink="color"] .posts-layout .empty-publications h2 { text-decoration:underline; text-decoration-color:#f17489; text-decoration-thickness:6px; text-underline-offset:5px; }
 html[data-style="memphis"] .posts-layout .empty-publications .button-primary { background:var(--panel-ink) !important; color:#fff !important; }
 html[data-style="memphis"][data-ink="color"] .posts-layout .empty-publications .button-primary { background:#c63e5b !important; }
@@ -113,4 +113,186 @@ html[data-style="memphis"][data-ink="mono"] .project-detail-intro { background:r
 }
 @media(prefers-reduced-motion:reduce) {
   html[data-style="memphis"] .destination-card,html[data-style="memphis"] .project-overview-grid .project-card { transition:none !important; }
+}
+
+/* The color print has no inherited greyscale ink on media, controls or accents. */
+html[data-style="memphis"][data-ink="color"] .manga-panel img,
+html[data-style="memphis"][data-ink="color"] .manga-panel--main img.comic-cover-art,
+html[data-style="memphis"][data-ink="color"] .projects-action-panel img,
+html[data-style="memphis"][data-ink="color"] .project-preview-strip img,
+html[data-style="memphis"][data-ink="color"] .project-gallery img,
+html[data-style="memphis"][data-ink="color"] .project-card-shot img,
+html[data-style="memphis"][data-ink="color"] .article-head-media img { filter: none !important; }
+html[data-style="memphis"][data-ink="color"] .code-dot { filter: none; }
+html[data-style="memphis"][data-ink="color"] .posts-layout .empty-publications::before {
+  background: #a7dfe0 url('../assets/images/code-detail.svg') center/cover no-repeat;
+  filter: none;
+}
+html[data-style="memphis"][data-ink="color"] .posts-layout .empty-publications .button-secondary {
+  background: #a7e2e2 !important; color: #142438 !important;
+}
+
+/* Site inventory: animated rings and bars are readings of published content,
+   not estimated visitors or growth over time. */
+.inventory-donut-layout { display: grid; grid-template-columns: minmax(180px,240px) minmax(150px,1fr); align-items: center; gap: clamp(12px,3vw,38px); }
+.inventory-donut-figure { position: relative; width: min(100%,240px); margin: 0 auto; }
+.inventory-donut { display: block; width: 100%; height: auto; transform: rotate(-90deg); }
+.inventory-donut circle { fill: none; stroke-width: 30; }
+.inventory-donut-track { stroke: var(--notebook-tint); }
+.inventory-donut-slice { transition: stroke-dasharray .9s cubic-bezier(.2,.8,.2,1); }
+.inventory-donut-slice-0 { stroke: #aaa; }
+.inventory-donut-slice-1 { stroke: #6d6d6d; }
+.inventory-donut-slice-2 { stroke: #292929; }
+html[data-ink="color"] .inventory-donut-slice-0 { stroke: #d64b67; }
+html[data-ink="color"] .inventory-donut-slice-1 { stroke: #e7a83e; }
+html[data-ink="color"] .inventory-donut-slice-2 { stroke: #299dac; }
+.inventory-donut-center { position: absolute; inset: 30%; display: flex; flex-direction: column; align-items: center; justify-content: center; color: var(--heading); white-space: nowrap; }
+.inventory-donut-center strong { font: 900 clamp(34px,5vw,53px)/1 var(--font-display),sans-serif; }
+.inventory-donut-center span { font-size: 11px; font-weight: 700; margin-top: 5px; }
+.inventory-donut-legend { list-style: none; padding: 0; margin: 0; display: grid; gap: 12px; }
+.inventory-donut-legend li { display: flex; gap: 14px; align-items: center; justify-content: space-between; color: var(--heading); font-weight: 700; }
+.inventory-donut-label::before { content: ""; display: inline-block; width: 13px; height: 13px; margin-right: 8px; border: 2px solid var(--heading); background: #aaa; transform: rotate(-8deg); }
+.inventory-donut-key-1 .inventory-donut-label::before { background: #6d6d6d; }
+.inventory-donut-key-2 .inventory-donut-label::before { background: #292929; }
+html[data-ink="color"] .inventory-donut-key-0 .inventory-donut-label::before { background: #d64b67; }
+html[data-ink="color"] .inventory-donut-key-1 .inventory-donut-label::before { background: #e7a83e; }
+html[data-ink="color"] .inventory-donut-key-2 .inventory-donut-label::before { background: #299dac; }
+.inventory-chart-fill { transform-box: fill-box; transform-origin: left center; transform: scaleX(0); transition: transform .85s cubic-bezier(.2,.8,.2,1); }
+.inventory-content.is-drawn .inventory-chart-fill { transform: scaleX(1); }
+@media(max-width:600px) { .inventory-donut-layout { grid-template-columns:1fr; } .inventory-donut-legend { grid-template-columns:repeat(3,minmax(0,1fr)); gap: 5px; } .inventory-donut-legend li { flex-direction:column; align-items:flex-start; font-size:11px; gap:3px; } }
+@media(prefers-reduced-motion:reduce) { .inventory-chart-fill,.inventory-donut-slice { transition:none !important; } }
+
+/* Ordinary links remain real documents (deep links/back/keyboard still work).
+   Supporting browsers bridge same-origin navigations; the headings and visual
+   panels themselves enter from opposite gutters only once per new document. */
+@view-transition { navigation: auto; }
+@keyframes chapter-arrive-left {
+  from { opacity: .2; transform: translate3d(-72px,10px,0) skewX(-3deg); }
+  to { opacity: 1; transform: translate3d(0,0,0) skewX(0); }
+}
+@keyframes chapter-arrive-right {
+  from { opacity: .2; transform: translate3d(72px,8px,0) skewX(3deg); }
+  to { opacity: 1; transform: translate3d(0,0,0) skewX(0); }
+}
+@keyframes chapter-page-new { from { opacity: .7; transform: translate3d(2vw,0,0); } to { opacity: 1; transform: none; } }
+@keyframes chapter-page-old { to { opacity: .8; transform: translate3d(-2vw,0,0); } }
+html:not(.ink-expanding):not(.ink-retracting)::view-transition-new(root) { animation: chapter-page-new .48s cubic-bezier(.16,.85,.2,1) both; }
+html:not(.ink-expanding):not(.ink-retracting)::view-transition-old(root) { animation: chapter-page-old .34s ease-in both; }
+html.page-arriving[data-style="memphis"] :is(.about-section .section-heading,.stream-section .section-heading,.projects-hero-copy,.project-detail-intro .flux-container,.search-intro .flux-container,.learning-hero-copy) {
+  animation: chapter-arrive-left .72s cubic-bezier(.12,.85,.18,1) both;
+}
+html.page-arriving[data-style="memphis"] :is(.about-intro,.posts-layout,.projects-action-panel,.learning-hero-art,.projects-overview-intro .projects-hero-visual) {
+  animation: chapter-arrive-right .78s .08s cubic-bezier(.12,.85,.18,1) both;
+}
+/* Theme changes update the current DOM and scroll position, never navigate. */
+html:is(.ink-expanding,.ink-retracting) .page-arriving,
+html:is(.ink-expanding,.ink-retracting) .inventory-content { animation: none; }
+@media (max-width:700px) {
+  @keyframes chapter-arrive-left { from { opacity:.35; transform:translate3d(-30px,0,0); } to { opacity:1; transform:none; } }
+  @keyframes chapter-arrive-right { from { opacity:.35; transform:translate3d(30px,0,0); } to { opacity:1; transform:none; } }
+}
+@media (prefers-reduced-motion:reduce) {
+  html.page-arriving[data-style="memphis"] :is(.about-section .section-heading,.stream-section .section-heading,.projects-hero-copy,.project-detail-intro .flux-container,.search-intro .flux-container,.learning-hero-copy,.about-intro,.posts-layout,.projects-action-panel,.learning-hero-art,.projects-overview-intro .projects-hero-visual) { animation:none !important; }
+  html:not(.ink-expanding):not(.ink-retracting)::view-transition-new(root),
+  html:not(.ink-expanding):not(.ink-retracting)::view-transition-old(root) { animation-duration:.01ms !important; }
+}
+
+/* The second and third opening panels were still using monochrome cutouts.
+   Let the actual project/developer artifacts carry the edition instead. */
+html[data-style="memphis"] .hero-slide:nth-child(2) .hero-side-visual::before {
+  background-image: url('../assets/images/project-flow.svg');
+  background-position: center;
+}
+html[data-style="memphis"] .hero-slide:nth-child(3) .hero-side-visual::before {
+  background-image: url('../assets/images/code-workbench.svg');
+  background-position: 65% center;
+}
+html[data-style="memphis"][data-ink="mono"] .hero-slide:not(:first-child) .hero-side-visual::before { filter: grayscale(1) contrast(1.15); }
+html[data-style="memphis"][data-ink="color"] .hero-slide:not(:first-child) .hero-side-visual::before { filter: none; background-color: #80cdd3; }
+html[data-style="memphis"][data-ink="color"] .hero-slide:nth-child(3) .hero-side-visual::before { background-color: #f8c266; }
+html[data-style="memphis"][data-ink="color"] .code-window {
+  background: #203653 !important; border-color: #172a43 !important;
+  box-shadow: 7px 8px 0 #172a43 !important;
+}
+html[data-style="memphis"][data-ink="color"] .code-window-top { background: #385676; border-bottom-color: #162940; }
+html[data-style="memphis"][data-ink="color"] .code-window pre { color: #fff2d4; }
+html[data-style="memphis"][data-ink="color"] .code-window .code-dot:nth-child(1) { background: #e65d7b; }
+html[data-style="memphis"][data-ink="color"] .code-window .code-dot:nth-child(2) { background: #f5c55e; }
+html[data-style="memphis"][data-ink="color"] .code-window .code-dot:nth-child(3) { background: #6dd3d2; }
+html[data-style="memphis"][data-ink="color"] .hero-slide:first-child .hero-surface::after { background: transparent; opacity: 0; }
+html[data-style="memphis"][data-ink="color"] .manga-panel img { background: transparent; }
+/* Pale editorial paper stays readable, but is no longer an untouched white
+   rectangle. Adjacent spreads alternate warm, cool and coral washes. */
+html[data-style="memphis"][data-ink="color"] .project-overview-grid .project-card:nth-child(1) {
+  background: linear-gradient(140deg,#d9f4f2 0 65%,#8bced5 65% 100%) !important;
+}
+html[data-style="memphis"][data-ink="color"] .project-overview-grid .project-card:nth-child(2) {
+  background: linear-gradient(140deg,#ffe4d8 0 65%,#f3a4b0 65% 100%) !important;
+}
+html[data-style="memphis"][data-ink="color"] .posts-layout .empty-publications {
+  background: linear-gradient(116deg,#fff1d1 0 58%,#f4bd65 58% 70%,#a9e1e2 70%) !important;
+}
+html[data-style="memphis"][data-ink="color"] :is(.about-intro,.about-stack,.about-next,.side-card,.featured-card) {
+  background: linear-gradient(138deg,#f1fafa 0 75%,#c4e9e8 75% 100%) !important;
+}
+html[data-style="memphis"][data-ink="color"] :is(.about-stack,.featured-card:nth-child(2n)) {
+  background: linear-gradient(138deg,#fff0dc 0 75%,#f6c4a4 75% 100%) !important;
+}
+html[data-style="memphis"][data-ink="color"] :is(.empty-panel,.page-banner-inner,.side-terminal) {
+  background: linear-gradient(135deg,#fff3df,#e0f6f4) !important;
+}
+
+/* Color is a complete print run, not just a tint on the cards. Keep real
+   screenshots and article copy legible, but paint the surrounding paper. */
+html[data-style="memphis"][data-ink="color"] .site-header {
+  background: linear-gradient(100deg,#f1fafa 0%,#fff5e3 62%,#ffe5e9 100%) !important;
+}
+html[data-style="memphis"][data-ink="color"] .nav-dropdown {
+  background: #fff0d7 !important; border-color: #1d2c49 !important;
+  box-shadow: 7px 7px 0 #1d2c49 !important;
+}
+html[data-style="memphis"][data-ink="color"] .stream-section .empty-publications {
+  background: linear-gradient(122deg,#fff2d1 0 69%,#f8c96d 69% 79%,#80d0d2 79% 100%) !important;
+  border: 3px solid #1d2c49 !important;
+  box-shadow: 7px 7px 0 #1d2c49 !important;
+}
+html[data-style="memphis"][data-ink="color"] .stream-section .empty-sticker {
+  background: #a9e5e5 !important; color: #1d2c49 !important;
+  border: 2px solid #1d2c49;
+}
+html[data-style="memphis"][data-ink="color"] .project-switchboard {
+  background: linear-gradient(135deg,#d9f4f2 0 72%,#f9c664 72% 100%) !important;
+  box-shadow: 7px 7px 0 #1d2c49 !important;
+}
+html[data-style="memphis"][data-ink="color"] .project-switchboard a:nth-of-type(1) {
+  background: #fff5df; border-color: #1d2c49;
+}
+html[data-style="memphis"][data-ink="color"] .project-switchboard a:nth-of-type(2) {
+  background: #ffe5e9; border-color: #1d2c49;
+}
+html[data-style="memphis"][data-ink="color"] .project-outro-card {
+  background: linear-gradient(115deg,#fff2d9 0 63%,#f8c96d 63% 69%,#c9efef 69%) !important;
+  border-color: #1d2c49 !important;
+  box-shadow: 7px 7px 0 #1d2c49 !important;
+}
+html[data-style="memphis"][data-ink="color"] .detail-route {
+  background: linear-gradient(115deg,#e0f5f4 0 72%,#f8d28b 72% 100%) !important;
+  border-color: #1d2c49 !important;
+  box-shadow: 7px 7px 0 #1d2c49 !important;
+}
+/* Reading surfaces get a quiet tint; the screenshots themselves stay true to
+   the owner's projects rather than receiving an artificial color filter. */
+html[data-style="memphis"][data-ink="color"] :is(.article-content,.article-info,.article-toc-panel) {
+  background: #fffbf1 !important;
+  border-color: #1d2c49 !important;
+}
+html[data-style="memphis"][data-ink="color"] .article-notice {
+  background: #e2f5f4 !important; border-left-color: #299dac !important;
+}
+html[data-style="memphis"][data-ink="color"] .project-gallery figure {
+  background: #e4f5f4 !important;
+}
+html[data-style="memphis"][data-ink="color"] .site-footer {
+  background: linear-gradient(110deg,#e8f8f7 0%,#fff6e5 55%,#ffe7e8 100%) !important;
+  border-top-color: #368b9d !important;
 }

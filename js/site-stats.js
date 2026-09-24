@@ -28,6 +28,7 @@
   var content = modal.querySelector('.inventory-content');
   var lastFocus = null;
   var requestId = 0;
+  var countFrame = 0;
 
   function getDoc(path) {
     return fetch(path, { cache: 'no-cache' }).then(function (res) {
@@ -99,17 +100,89 @@
     section.append(chart, element('p', 'inventory-chart-note', note));
     return section;
   }
+  function makeDonut(entries) {
+    var section = element('section', 'inventory-section inventory-donut-section', '');
+    section.append(element('h3', '', '公开内容占比'));
+    var total = entries.reduce(function (sum, item) { return sum + item.value; }, 0);
+    var ns = 'http://www.w3.org/2000/svg';
+    var ring = document.createElementNS(ns, 'svg');
+    ring.setAttribute('class', 'inventory-donut');
+    ring.setAttribute('viewBox', '0 0 240 240');
+    ring.setAttribute('role', 'img');
+    ring.setAttribute('aria-label', total ? entries.map(function (item) { return item.label + ' ' + item.value; }).join('，') : '暂无已发布内容');
+    var track = document.createElementNS(ns, 'circle');
+    track.setAttribute('class', 'inventory-donut-track');
+    track.setAttribute('cx', '120'); track.setAttribute('cy', '120'); track.setAttribute('r', '88');
+    ring.append(track);
+    var perimeter = 2 * Math.PI * 88, offset = 0;
+    entries.forEach(function (item, index) {
+      if (!item.value || !total) { return; }
+      var slice = document.createElementNS(ns, 'circle');
+      slice.setAttribute('class', 'inventory-donut-slice inventory-donut-slice-' + index);
+      slice.setAttribute('cx', '120'); slice.setAttribute('cy', '120'); slice.setAttribute('r', '88');
+      slice.setAttribute('stroke-dasharray', '0 ' + perimeter);
+      slice.setAttribute('stroke-dashoffset', String(-offset));
+      slice.dataset.target = String(perimeter * item.value / total);
+      slice.dataset.perimeter = String(perimeter);
+      offset += perimeter * item.value / total;
+      ring.append(slice);
+    });
+    var center = element('div', 'inventory-donut-center', '');
+    var number = element('strong', 'inventory-animated-number', '0'); number.dataset.target = String(total);
+    center.append(number, element('span', '', '条公开内容'));
+    var figure = element('div', 'inventory-donut-figure', ''); figure.append(ring, center);
+    var list = element('ul', 'inventory-donut-legend', '');
+    entries.forEach(function (item, index) {
+      var li = document.createElement('li'); li.className = 'inventory-donut-key inventory-donut-key-' + index;
+      li.append(element('span', 'inventory-donut-label', item.label), element('strong', '', String(item.value)));
+      list.append(li);
+    });
+    var layout = element('div', 'inventory-donut-layout', ''); layout.append(figure, list);
+    section.append(layout, element('p', 'inventory-chart-note', '只按已公开的项目、正式文章及学习记录分组；没有内容的分类不绘制扇区。'));
+    return section;
+  }
+  function animateCharts() {
+    var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var numbers = Array.from(content.querySelectorAll('.inventory-animated-number'));
+    var slices = Array.from(content.querySelectorAll('.inventory-donut-slice'));
+    if (reduced) {
+      numbers.forEach(function (node) { node.textContent = node.dataset.target; });
+      slices.forEach(function (node) { node.setAttribute('stroke-dasharray', node.dataset.target + ' ' + node.dataset.perimeter); });
+      content.classList.add('is-drawn');
+      return;
+    }
+    requestAnimationFrame(function () {
+      if (modal.hidden) { return; }
+      content.classList.add('is-drawn');
+      slices.forEach(function (node) { node.setAttribute('stroke-dasharray', node.dataset.target + ' ' + node.dataset.perimeter); });
+      var started = performance.now();
+      function tick(now) {
+        if (modal.hidden) { return; }
+        var progress = Math.min(1, (now - started) / 850);
+        var eased = 1 - Math.pow(1 - progress, 3);
+        numbers.forEach(function (node) { node.textContent = String(Math.round(Number(node.dataset.target) * eased)); });
+        if (progress < 1) { countFrame = requestAnimationFrame(tick); }
+      }
+      countFrame = requestAnimationFrame(tick);
+    });
+  }
   function render(data) {
     content.replaceChildren();
+    content.classList.remove('is-drawn');
     var counts = element('div', 'inventory-counts', '');
     [['项目记录', data.projects, 'projects.html'], ['正式文章', data.posts, 'posts.html'], ['学习记录', data.learning, 'learning.html']].forEach(function (entry) {
       var card = document.createElement('a');
       card.className = 'inventory-count'; card.href = entry[2];
-      card.append(element('span', 'inventory-count-number', String(entry[1])), element('span', 'inventory-count-label', entry[0] + ' ↗'));
+      var number = element('span', 'inventory-count-number inventory-animated-number', '0');
+      number.dataset.target = String(entry[1]);
+      card.append(number, element('span', 'inventory-count-label', entry[0] + ' ↗'));
       counts.append(card);
     });
     content.append(counts);
     /* Graphs use only counts derived from the currently published pages. */
+    content.append(makeDonut([
+      { label: '项目记录', value: data.projects }, { label: '正式文章', value: data.posts }, { label: '学习记录', value: data.learning }
+    ]));
     content.append(makeChart('公开内容数量', [
       { label: '项目记录', value: data.projects }, { label: '正式文章', value: data.posts }, { label: '学习记录', value: data.learning }
     ], '项目页与文章页的实际卡片数，以及已公开的学习记录数；没有发布则为 0。'));
@@ -127,11 +200,14 @@
     } else { routeSection.append(element('p', 'inventory-muted', '还没有填写项目路径。')); }
     content.append(routeSection);
     if (!data.posts) { content.append(element('p', 'inventory-muted', '文章尚未正式发布；发布后这里会从文章列表自动更新。')); }
+    content.append(element('p', 'inventory-chart-note', '数字从 0 展示只是入场动画，不表示历史涨幅。'));
+    animateCharts();
   }
   function close() {
     if (modal.hidden) { return; }
     modal.hidden = true;
     requestId++;
+    cancelAnimationFrame(countFrame);
     document.body.classList.remove('inventory-open');
     if (lastFocus && lastFocus.isConnected) { lastFocus.focus(); }
   }
