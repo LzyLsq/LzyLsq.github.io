@@ -20,15 +20,20 @@
     '<section class="inventory-dialog" role="dialog" aria-modal="true" aria-labelledby="inventory-title" tabindex="-1">' +
     '<header class="inventory-heading"><div><span class="inventory-kicker">RYAN / SITE INDEX</span><h2 id="inventory-title">本站数据</h2><p>这里展示本站公开内容的实时清单，不是访问量统计。</p></div>' +
     '<button class="inventory-close" type="button" data-close aria-label="关闭本站数据">×</button></header>' +
-    '<div class="inventory-content"><p class="inventory-status" role="status" aria-live="polite">正在读取站点内容…</p></div>' +
+    '<div class="inventory-feedback" role="status" aria-live="polite"></div>' +
+    '<div class="inventory-content"><p class="inventory-status">正在读取站点内容…</p></div>' +
     '<footer class="inventory-footnote">数据来自本站的项目页、文章页及公开学习记录；没有接入访客追踪，也不会估算阅读量。</footer>' +
     '</section>';
   document.body.appendChild(modal);
   var dialog = modal.querySelector('.inventory-dialog');
   var content = modal.querySelector('.inventory-content');
+  var feedback = modal.querySelector('.inventory-feedback');
   var lastFocus = null;
   var requestId = 0;
   var countFrame = 0;
+  var chartFrame = 0;
+  var closeTimer = 0;
+  var savedData = null;
 
   function getDoc(path) {
     return fetch(path, { cache: 'no-cache' }).then(function (res) {
@@ -51,8 +56,23 @@
         return { label: '项目 ' + String(index + 1).padStart(2, '0'), title: title ? title.textContent.trim() : '项目',
           count: card.querySelectorAll('.project-route span').length };
       });
-      return { projects: projectCards.length, posts: postCards.length, learning: docs[2].entries.length,
-        routes: Array.from(new Set(routes)), projectRoutes: projectRoutes };
+      // Only count a technology once per published project detail, even if a
+      // page mentions it repeatedly in prose or code snippets.
+      var detailPaths = projectCards.map(function (card) {
+        var link = card.querySelector('.project-title a[href]');
+        return link && link.getAttribute('href');
+      }).filter(function (path) { return path && /^[a-z0-9-]+\.html$/i.test(path); });
+      return Promise.all(detailPaths.map(getDoc)).then(function (details) {
+        var technologies = new Map();
+        details.forEach(function (detail) {
+          var names = new Set(Array.from(detail.querySelectorAll('.detail-stack .project-stack .project-tag'))
+            .map(function (node) { return node.textContent.trim(); }).filter(Boolean));
+          names.forEach(function (name) { technologies.set(name, (technologies.get(name) || 0) + 1); });
+        });
+        return { projects: projectCards.length, posts: postCards.length, learning: docs[2].entries.length,
+          routes: Array.from(new Set(routes)), projectRoutes: projectRoutes,
+          technologies: Array.from(technologies, function (entry) { return { label: entry[0], value: entry[1] }; }) };
+      });
     });
   }
   function element(tag, className, text) {
@@ -100,61 +120,160 @@
     section.append(chart, element('p', 'inventory-chart-note', note));
     return section;
   }
-  function makeDonut(entries) {
-    var section = element('section', 'inventory-section inventory-donut-section', '');
-    section.append(element('h3', '', '公开内容占比'));
+  function makePie(entries, title, note) {
+    var section = element('section', 'inventory-section inventory-pie-section', '');
+    section.append(element('h3', '', title));
     var total = entries.reduce(function (sum, item) { return sum + item.value; }, 0);
     var ns = 'http://www.w3.org/2000/svg';
-    var ring = document.createElementNS(ns, 'svg');
-    ring.setAttribute('class', 'inventory-donut');
-    ring.setAttribute('viewBox', '0 0 240 240');
-    ring.setAttribute('role', 'img');
-    ring.setAttribute('aria-label', total ? entries.map(function (item) { return item.label + ' ' + item.value; }).join('，') : '暂无已发布内容');
-    var track = document.createElementNS(ns, 'circle');
-    track.setAttribute('class', 'inventory-donut-track');
-    track.setAttribute('cx', '120'); track.setAttribute('cy', '120'); track.setAttribute('r', '88');
-    ring.append(track);
-    var perimeter = 2 * Math.PI * 88, offset = 0;
+    var pie = document.createElementNS(ns, 'svg');
+    pie.setAttribute('class', 'inventory-pie');
+    pie.setAttribute('viewBox', '0 0 240 240');
+    pie.setAttribute('role', 'img');
+    pie.setAttribute('aria-label', total ? title + '：' + entries.map(function (item) {
+      return item.label + ' ' + item.value + ' 次，占 ' + (item.value * 100 / total).toFixed(1) + '%';
+    }).join('，') : '暂无项目技术标签');
+    if (!total) {
+      var empty = document.createElementNS(ns, 'circle');
+      empty.setAttribute('cx', '120'); empty.setAttribute('cy', '120'); empty.setAttribute('r', '106');
+      empty.setAttribute('class', 'inventory-pie-empty'); pie.append(empty);
+    }
+    var offset = 0;
     entries.forEach(function (item, index) {
       if (!item.value || !total) { return; }
-      var slice = document.createElementNS(ns, 'circle');
-      slice.setAttribute('class', 'inventory-donut-slice inventory-donut-slice-' + index);
-      slice.setAttribute('cx', '120'); slice.setAttribute('cy', '120'); slice.setAttribute('r', '88');
-      slice.setAttribute('stroke-dasharray', '0 ' + perimeter);
-      slice.setAttribute('stroke-dashoffset', String(-offset));
-      slice.dataset.target = String(perimeter * item.value / total);
-      slice.dataset.perimeter = String(perimeter);
-      offset += perimeter * item.value / total;
-      ring.append(slice);
+      var start = -Math.PI / 2 + offset * Math.PI * 2 / total;
+      offset += item.value;
+      var end = -Math.PI / 2 + offset * Math.PI * 2 / total;
+      var slice = document.createElementNS(ns, 'path');
+      slice.setAttribute('class', 'inventory-pie-slice inventory-pie-slice-' + index);
+      if (item.value === total) {
+        slice.setAttribute('d', 'M 120 14 A 106 106 0 1 1 120 226 A 106 106 0 1 1 120 14 Z');
+      } else {
+        slice.setAttribute('d', 'M 120 120 L ' + (120 + 106 * Math.cos(start)).toFixed(3) + ' ' +
+          (120 + 106 * Math.sin(start)).toFixed(3) + ' A 106 106 0 ' +
+          (item.value / total > .5 ? 1 : 0) + ' 1 ' + (120 + 106 * Math.cos(end)).toFixed(3) + ' ' +
+          (120 + 106 * Math.sin(end)).toFixed(3) + ' Z');
+      }
+      pie.append(slice);
     });
-    var center = element('div', 'inventory-donut-center', '');
-    var number = element('strong', 'inventory-animated-number', '0'); number.dataset.target = String(total);
-    center.append(number, element('span', '', '条公开内容'));
-    var figure = element('div', 'inventory-donut-figure', ''); figure.append(ring, center);
-    var list = element('ul', 'inventory-donut-legend', '');
+    var figure = element('div', 'inventory-pie-figure', ''); figure.append(pie);
+    var legend = element('div', 'inventory-pie-legend', '');
+    legend.append(element('p', 'inventory-pie-total', total + ' 次技术列出'));
+    var list = element('ul', 'inventory-pie-keys', '');
     entries.forEach(function (item, index) {
-      var li = document.createElement('li'); li.className = 'inventory-donut-key inventory-donut-key-' + index;
-      li.append(element('span', 'inventory-donut-label', item.label), element('strong', '', String(item.value)));
+      var li = element('li', 'inventory-pie-key inventory-pie-key-' + index, '');
+      li.append(element('span', 'inventory-pie-label', item.label),
+        element('strong', '', item.value + ' 次 · ' + (total ? (item.value * 100 / total).toFixed(1) : '0.0') + '%'));
       list.append(li);
     });
-    var layout = element('div', 'inventory-donut-layout', ''); layout.append(figure, list);
-    section.append(layout, element('p', 'inventory-chart-note', '只按已公开的项目、正式文章及学习记录分组；没有内容的分类不绘制扇区。'));
+    legend.append(list);
+    var layout = element('div', 'inventory-pie-layout', ''); layout.append(figure, legend);
+    section.append(layout, element('p', 'inventory-chart-note', note));
+    return section;
+  }
+  function makeRadar(data) {
+    var section = element('section', 'inventory-section inventory-radar-section', '');
+    section.append(element('h3', '', '项目技术类型雷达图'));
+    var figure = element('div', 'inventory-radar-figure', '');
+    section.append(figure);
+    var ns = 'http://www.w3.org/2000/svg';
+    function svgNode(tag, attrs, text) {
+      var node = document.createElementNS(ns, tag);
+      Object.keys(attrs).forEach(function (key) { node.setAttribute(key, attrs[key]); });
+      if (text !== undefined) { node.textContent = text; }
+      return node;
+    }
+    function draw() {
+      // Explicit, inspectable grouping of tags that actually appear in the
+      // published project details. New tags are shown under “其他” until mapped.
+      var groups = [
+        { label: '编程语言', names: ['Python', 'Scala', 'TypeScript'] },
+        { label: '采集接入', names: ['Flume', 'Sqoop'] },
+        { label: '流处理', names: ['Kafka', 'Spark Streaming'] },
+        { label: '数据存储', names: ['Hive', 'HDFS', 'MySQL'] },
+        { label: '服务与检索', names: ['Flask', 'FastAPI', 'GraphRAG'] },
+        { label: '界面呈现', names: ['React', 'ECharts'] }
+      ];
+      var known = new Set(groups.flatMap(function (group) { return group.names; }));
+      var entries = groups.map(function (group) {
+        return { label: group.label, value: data.technologies.filter(function (item) {
+          return group.names.indexOf(item.label) !== -1;
+        }).reduce(function (sum, item) { return sum + item.value; }, 0) };
+      });
+      var other = data.technologies.filter(function (item) { return !known.has(item.label); });
+      if (other.length) {
+        entries.push({ label: '其他', value: other.reduce(function (sum, item) { return sum + item.value; }, 0) });
+      }
+      figure.classList.remove('is-drawn');
+      figure.replaceChildren();
+      if (!data.technologies.length) {
+        figure.append(element('p', 'inventory-muted', '项目详情页尚未列出技术标签。'));
+        return;
+      }
+      var max = Math.max(1, ...entries.map(function (entry) { return entry.value; }));
+      var centerX = 270, centerY = 178, radius = 110;
+      var chart = svgNode('svg', { class: 'inventory-radar', viewBox: '0 0 540 360', role: 'img',
+        'aria-label': '各技术类型在项目详情页列出的次数：' +
+          entries.map(function (entry) { return entry.label + ' ' + entry.value; }).join('，') });
+      function point(index, fraction) {
+        var angle = -Math.PI / 2 + index * Math.PI * 2 / entries.length;
+        return [centerX + radius * fraction * Math.cos(angle), centerY + radius * fraction * Math.sin(angle)];
+      }
+      function points(fraction) {
+        return entries.map(function (_, index) { return point(index, fraction).map(function (v) { return v.toFixed(1); }).join(','); }).join(' ');
+      }
+      [.25, .5, .75, 1].forEach(function (fraction) {
+        chart.append(svgNode('polygon', { points: points(fraction), class: 'inventory-radar-ring' }));
+      });
+      entries.forEach(function (entry, index) {
+        var edge = point(index, 1), label = point(index, 1.34);
+        chart.append(svgNode('line', { x1: centerX, y1: centerY, x2: edge[0], y2: edge[1], class: 'inventory-radar-axis' }));
+        var text = svgNode('text', { x: label[0], y: label[1] - 6, class: 'inventory-radar-label',
+          'text-anchor': label[0] < centerX - 20 ? 'end' : label[0] > centerX + 20 ? 'start' : 'middle' });
+        text.append(svgNode('tspan', { x: label[0] }, entry.label));
+        text.append(svgNode('tspan', { x: label[0], dy: 18, class: 'inventory-radar-value' }, String(entry.value)));
+        chart.append(text);
+      });
+      var plot = svgNode('g', { class: 'inventory-radar-data' });
+      plot.append(svgNode('polygon', { points: entries.map(function (entry, index) {
+        return point(index, entry.value / max).map(function (v) { return v.toFixed(1); }).join(',');
+      }).join(' '), class: 'inventory-radar-shape' }));
+      entries.forEach(function (entry, index) {
+        var pos = point(index, entry.value / max);
+        plot.append(svgNode('circle', { cx: pos[0], cy: pos[1], r: 4, class: 'inventory-radar-dot' }));
+      });
+      chart.append(plot);
+      var note = '按项目详情页“涉及的技术”标签归类；同一项目同一技术只计一次，刻度 0–' + max +
+        '。这是项目用到的技术类型分布，不是能力评分。' +
+        (other.length ? '其他：' + other.map(function (item) { return item.label; }).join('、') + '。' : '');
+      var values = element('ul', 'inventory-radar-values', '');
+      entries.forEach(function (entry) {
+        var item = document.createElement('li');
+        item.append(element('span', '', entry.label), element('strong', '', String(entry.value)));
+        values.append(item);
+      });
+      figure.append(chart, values, element('p', 'inventory-chart-note', note));
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        figure.classList.add('is-drawn');
+      } else {
+        requestAnimationFrame(function () {
+          if (figure.isConnected) { figure.classList.add('is-drawn'); }
+        });
+      }
+    }
+    draw();
     return section;
   }
   function animateCharts() {
     var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     var numbers = Array.from(content.querySelectorAll('.inventory-animated-number'));
-    var slices = Array.from(content.querySelectorAll('.inventory-donut-slice'));
     if (reduced) {
       numbers.forEach(function (node) { node.textContent = node.dataset.target; });
-      slices.forEach(function (node) { node.setAttribute('stroke-dasharray', node.dataset.target + ' ' + node.dataset.perimeter); });
       content.classList.add('is-drawn');
       return;
     }
-    requestAnimationFrame(function () {
-      if (modal.hidden) { return; }
+    chartFrame = requestAnimationFrame(function () {
+      if (modal.hidden || !modal.classList.contains('is-open')) { return; }
       content.classList.add('is-drawn');
-      slices.forEach(function (node) { node.setAttribute('stroke-dasharray', node.dataset.target + ' ' + node.dataset.perimeter); });
       var started = performance.now();
       function tick(now) {
         if (modal.hidden) { return; }
@@ -180,9 +299,18 @@
     });
     content.append(counts);
     /* Graphs use only counts derived from the currently published pages. */
-    content.append(makeDonut([
-      { label: '项目记录', value: data.projects }, { label: '正式文章', value: data.posts }, { label: '学习记录', value: data.learning }
-    ]));
+    content.append(makeRadar(data));
+    var technologyCounts = data.technologies.slice().sort(function (a, b) { return b.value - a.value; });
+    var common = technologyCounts.filter(function (entry) { return entry.value > 1; }).slice(0, 5);
+    if (!common.length) { common = technologyCounts.slice(0, 4); }
+    var remaining = technologyCounts.filter(function (entry) { return common.indexOf(entry) === -1; });
+    var technologySlices = common.slice();
+    if (remaining.length) {
+      technologySlices.push({ label: '其余 ' + remaining.length + ' 项', value: remaining.reduce(function (sum, entry) { return sum + entry.value; }, 0) });
+    }
+    content.append(makePie(technologySlices, '项目技术标签占比',
+      '每个项目对同一技术只计一次；扇区表示项目详情页所列技术标签的出现次数占比，不代表代码量或技能熟练度。' +
+      (remaining.length ? '其余项：' + remaining.map(function (entry) { return entry.label; }).join('、') + '。' : '')));
     content.append(makeChart('公开内容数量', [
       { label: '项目记录', value: data.projects }, { label: '正式文章', value: data.posts }, { label: '学习记录', value: data.learning }
     ], '项目页与文章页的实际卡片数，以及已公开的学习记录数；没有发布则为 0。'));
@@ -203,46 +331,83 @@
     content.append(element('p', 'inventory-chart-note', '数字从 0 展示只是入场动画，不表示历史涨幅。'));
     animateCharts();
   }
-  function close() {
-    if (modal.hidden) { return; }
-    modal.hidden = true;
-    requestId++;
+  function stopAnimation() {
+    cancelAnimationFrame(chartFrame);
     cancelAnimationFrame(countFrame);
+  }
+  function finishCharts() {
+    stopAnimation();
+    content.querySelectorAll('.inventory-animated-number').forEach(function (node) { node.textContent = node.dataset.target; });
+    content.classList.add('is-drawn');
+  }
+  function close() {
+    if (modal.hidden || !modal.classList.contains('is-open')) { return; }
+    modal.classList.remove('is-open');
+    modal.setAttribute('aria-hidden', 'true');
+    dialog.inert = true;
+    requestId++;
+    finishCharts();
     document.body.classList.remove('inventory-open');
     if (lastFocus && lastFocus.isConnected) { lastFocus.focus(); }
+    clearTimeout(closeTimer);
+    closeTimer = setTimeout(function () {
+      if (!modal.classList.contains('is-open')) { modal.hidden = true; }
+    }, window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 480);
   }
   function loadInventory() {
     var thisRequest = ++requestId;
-    content.setAttribute('aria-busy', 'true');
-    content.replaceChildren(element('p', 'inventory-status', '正在读取站点内容…'));
-    dialog.focus(); // Retrying removes the clicked button; keep keyboard focus inside the dialog.
+    if (savedData) {
+      feedback.textContent = '正在更新公开内容；当前显示上次读取的清单。';
+    } else {
+      content.setAttribute('aria-busy', 'true');
+      content.replaceChildren(element('p', 'inventory-status', '正在读取站点内容…'));
+    }
     readInventory().then(function (data) {
-      if (modal.hidden || thisRequest !== requestId) { return; }
+      if (modal.hidden || !modal.classList.contains('is-open') || thisRequest !== requestId) { return; }
+      var changed = !savedData || JSON.stringify(savedData) !== JSON.stringify(data);
       content.removeAttribute('aria-busy');
-      render(data);
+      if (changed) { stopAnimation(); render(data); }
+      savedData = data;
+      feedback.textContent = '';
     }).catch(function () {
-      if (modal.hidden || thisRequest !== requestId) { return; }
+      if (modal.hidden || !modal.classList.contains('is-open') || thisRequest !== requestId) { return; }
       content.removeAttribute('aria-busy');
-      var error = element('p', 'inventory-error', '暂时无法读取项目、文章或学习记录。请检查网络后重试。');
+      feedback.textContent = savedData ? '更新失败，当前显示上次读取的清单。' : '';
+      var error = element('p', 'inventory-error', savedData ? '暂时无法更新公开内容。' : '暂时无法读取或展示公开内容。请检查网络后重试。');
       error.setAttribute('role', 'alert');
       var retry = element('button', 'inventory-retry', '重新读取');
       retry.type = 'button';
       retry.addEventListener('click', loadInventory);
-      content.replaceChildren(error, retry);
+      if (savedData) {
+        feedback.replaceChildren(document.createTextNode('更新失败，当前显示上次读取的清单。 '), retry);
+      } else {
+        content.replaceChildren(error, retry);
+      }
       retry.focus();
     });
   }
   function open() {
+    if (modal.classList.contains('is-open')) { return; }
+    clearTimeout(closeTimer);
     lastFocus = document.activeElement;
     modal.hidden = false;
+    // The dialog opens from the header button and folds back into it.
+    var buttonRect = trigger.getBoundingClientRect();
+    modal.style.setProperty('--inventory-from-x', (buttonRect.left + buttonRect.width / 2 - innerWidth / 2) + 'px');
+    modal.style.setProperty('--inventory-from-y', (buttonRect.top + buttonRect.height / 2 - innerHeight / 2) + 'px');
+    modal.removeAttribute('aria-hidden');
+    dialog.inert = false;
     document.body.classList.add('inventory-open');
-    dialog.focus();
+    // Force a layout before changing the state so rapid close/reopen keeps transitioning.
+    void modal.offsetWidth;
+    modal.classList.add('is-open');
+    dialog.focus({ preventScroll: true });
     loadInventory();
   }
   trigger.addEventListener('click', open);
   modal.querySelectorAll('[data-close]').forEach(function (node) { node.addEventListener('click', close); });
   document.addEventListener('keydown', function (event) {
-    if (modal.hidden) { return; }
+    if (modal.hidden || !modal.classList.contains('is-open')) { return; }
     if (event.key === 'Escape') { close(); return; }
     if (event.key !== 'Tab') { return; }
     var focusables = Array.from(dialog.querySelectorAll('button, a[href]'));
