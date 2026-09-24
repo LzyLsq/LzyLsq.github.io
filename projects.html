@@ -2,7 +2,7 @@
 <html lang="zh-CN" data-style="memphis" data-theme="dark" data-ink="mono">
 <head>
     <meta charset="UTF-8">
-    <meta name="theme-color" content="#202020">
+    <meta name="theme-color" content="#292929">
     <!-- 首屏前确定唯一画风：黑白暗色，彩色明亮。 -->
     <script>
     (function () {
@@ -11,9 +11,10 @@
       document.documentElement.classList.add('page-arriving');
       document.documentElement.dataset.ink = ink;
       document.documentElement.dataset.theme = ink === 'color' ? 'light' : 'dark';
-      document.querySelector('meta[name="theme-color"]').content = ink === 'color' ? '#f5faff' : '#202020';
+      document.querySelector('meta[name="theme-color"]').content = ink === 'color' ? '#fff8e9' : '#292929';
     })();
     </script>
+    <style>html{background:#292929;color-scheme:dark}html[data-ink="color"]{background:#fff8e9;color-scheme:light}</style>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>代码人生 · Ryan</title>
     <meta name="description" content="Ryan 的两份练习项目：订单数据分析与推荐平台，以及 LawDesign 法律场景 AI 应用。仓库为私有，可阅读公开技术记录。">
@@ -52,7 +53,7 @@
     <link rel="stylesheet" href="css/style-notebook.css">
     <link rel="stylesheet" href="css/style-comic.css?v=20260923">
     <link rel="stylesheet" href="css/style-comic-upgrade.css">
-    <link rel="stylesheet" href="css/manga-editions.css?v=20260923">
+    <link rel="stylesheet" href="css/manga-editions.css?v=20260924">
     <link rel="stylesheet" href="css/project-gallery.css">
 </head>
 <body class="theme-fluxgrid">
@@ -174,6 +175,6 @@
 </button>
 <script src="js/theme.js"></script>
 <script src="js/site-stats.js?v=20260923"></script>
-<script src="js/comic-mode.js?v=20260923"></script>
+<script src="js/comic-mode.js?v=20260924"></script>
 </body>
 </html>
