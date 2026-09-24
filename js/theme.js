@@ -327,8 +327,17 @@
       var nextButton = $('[data-hero-next]', carousel);
       var dots = $$('[data-hero-dot]', carousel);
       var activeIndex = 0;
+      var turnTimer;
       // Keep the opening manga cover still until the visitor chooses a page.
-      var setActiveSlide = function (index) {
+      var setActiveSlide = function (index, userTurn) {
+        if (userTurn && (index + slides.length) % slides.length !== activeIndex) {
+          carousel.classList.remove('is-turning');
+          // Restart entrance animation for each deliberate turn, never on load.
+          void carousel.offsetWidth;
+          carousel.classList.add('is-turning');
+          window.clearTimeout(turnTimer);
+          turnTimer = window.setTimeout(function () { carousel.classList.remove('is-turning'); }, 750);
+        }
         activeIndex = (index + slides.length) % slides.length;
         slides.forEach(function (s, i) {
           var active = i === activeIndex;
@@ -341,10 +350,10 @@
           d.setAttribute('aria-current', i === activeIndex ? 'true' : 'false');
         });
       };
-      on(prevButton, 'click', function () { setActiveSlide(activeIndex - 1); });
-      on(nextButton, 'click', function () { setActiveSlide(activeIndex + 1); });
+      on(prevButton, 'click', function () { setActiveSlide(activeIndex - 1, true); });
+      on(nextButton, 'click', function () { setActiveSlide(activeIndex + 1, true); });
       dots.forEach(function (dot) {
-        on(dot, 'click', function () { setActiveSlide(Number(dot.getAttribute('data-hero-dot'))); });
+        on(dot, 'click', function () { setActiveSlide(Number(dot.getAttribute('data-hero-dot')), true); });
       });
       var touchStart = null;
       on(carousel, 'touchstart', function (e) {
@@ -356,7 +365,7 @@
         var vertical = e.changedTouches[0].clientY - touchStart.y;
         touchStart = null;
         if (Math.abs(distance) < 65 || Math.abs(distance) < Math.abs(vertical) * 1.2) { return; }
-        setActiveSlide(activeIndex + (distance < 0 ? 1 : -1));
+        setActiveSlide(activeIndex + (distance < 0 ? 1 : -1), true);
       }, { passive: true });
 
       setActiveSlide(0);

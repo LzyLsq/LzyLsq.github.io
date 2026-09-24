@@ -3,30 +3,7 @@
 (function () {
   'use strict';
   var root = document.documentElement;
-  // Native cross-document transitions snapshot this DOM. Do not animate the
-  // live panels before that snapshot: it would capture them mid-slide and
-  // slide the resulting image a second time. Fall back only when needed.
-  function clearArrival() {
-    root.classList.remove('page-arriving', 'page-view-transitioning', 'page-fallback-arriving');
-  }
-  if (root.classList.contains('page-arriving')) {
-    // Start the cleanup clock after reveal, not while styles/images are loading.
-    // Otherwise a slow destination can lose its entrance animation entirely.
-    if ('onpagereveal' in window) {
-      window.addEventListener('pagereveal', function (event) {
-        root.classList.add(event.viewTransition ? 'page-view-transitioning' : 'page-fallback-arriving');
-        window.setTimeout(clearArrival, 1600);
-      }, { once: true });
-    } else {
-      root.classList.add('page-fallback-arriving');
-      window.addEventListener('pageshow', function () {
-        window.setTimeout(clearArrival, 1600);
-      }, { once: true });
-    }
-  }
-  window.addEventListener('pageshow', function (event) {
-    if (event.persisted) { clearArrival(); }
-  });
+  // The inline <head> bootstraps cross-page arrival before the first paint.
   var toggle = document.querySelector('[data-ink-toggle]');
   if (!toggle) { return; }
   var running = false;
@@ -47,6 +24,10 @@
   sync();
   toggle.addEventListener('click', function () {
     if (running) { return; }
+    // If a visitor switches editions during fallback entrance, stop that
+    // entrance now; otherwise its remaining animation can restart after the
+    // color ripple and look like a second flash.
+    root.classList.remove('page-arriving', 'page-view-transitioning', 'page-fallback-arriving');
     var toColor = root.dataset.ink === 'mono';
     var next = toColor ? 'color' : 'mono';
     var rect = toggle.getBoundingClientRect();
