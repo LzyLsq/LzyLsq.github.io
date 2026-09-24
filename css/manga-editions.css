@@ -211,10 +211,6 @@ html[data-style="memphis"] .sidebar .side-card:not(:hover) { transform: none; }
    viewport clip-path forced full-page repaints on image-heavy details and
    occasionally exposed the transition canvas as a bright/dark flash. */
 @view-transition { navigation: auto; }
-@keyframes chapter-paper-in {
-  from { opacity: .88; transform: translate3d(8px,0,0); }
-  to { opacity: 1; transform: translate3d(0,0,0); }
-}
 @keyframes chapter-arrive-left {
   from { transform: translate3d(-38px,0,0) rotate(-.35deg); }
   to { transform: none; }
@@ -223,24 +219,21 @@ html[data-style="memphis"] .sidebar .side-card:not(:hover) { transform: none; }
   from { transform: translate3d(38px,0,0) rotate(.35deg); }
   to { transform: none; }
 }
-@keyframes chapter-panel-left {
-  from { clip-path: inset(0 100% 0 0); }
-  to { clip-path: inset(0 0 0 0); }
-}
-@keyframes chapter-panel-right {
-  from { clip-path: inset(0 0 0 100%); }
-  to { clip-path: inset(0 0 0 0); }
-}
-@keyframes chapter-shell-out { to { opacity: 0; } }
-@keyframes chapter-shell-in { from { opacity: 0; } to { opacity: 1; } }
 html[data-style="memphis"]::view-transition { background: #343432; }
 html[data-style="memphis"][data-ink="color"]::view-transition { background: #fff8e9; }
-/* Theme ripples still have their independent radial reveal. */
-html:not(.ink-expanding):not(.ink-retracting)::view-transition-old(root) {
+/* The UA's default plus-lighter blending and root crossfade briefly add
+   both full-page snapshots together. Keep the destination paper opaque and
+   above the outgoing frame; only the named panels should move. Do not apply
+   this rule to the same-document ink ripple. */
+html:not(.ink-morphing)::view-transition-group(root) { animation: none; }
+html:not(.ink-expanding):not(.ink-retracting)::view-transition-image-pair(root),
+html:not(.ink-morphing)::view-transition-image-pair(chapter-shell) { isolation: auto; }
+html:not(.ink-expanding):not(.ink-retracting)::view-transition-old(root),
+html:not(.ink-expanding):not(.ink-retracting)::view-transition-new(root),
+html:not(.ink-morphing)::view-transition-old(chapter-shell),
+html:not(.ink-morphing)::view-transition-new(chapter-shell) {
   animation: none;
-}
-html:not(.ink-expanding):not(.ink-retracting)::view-transition-new(root) {
-  animation: chapter-paper-in .56s cubic-bezier(.22,.78,.25,1) both;
+  mix-blend-mode: normal;
 }
 /* The header is the one genuinely shared panel. Keep it in the same place
    rather than replacing its active link in a single frame. All other panels
@@ -255,26 +248,16 @@ html.chapter-arriving[data-style="memphis"]:not(.ink-morphing) .article-main,
 html.chapter-arriving[data-style="memphis"]:not(.ink-morphing) .search-results-section .flux-container { view-transition-name: chapter-route; }
 html.chapter-arriving[data-style="memphis"]:not(.ink-morphing) .project-detail-section .detail-route { view-transition-name: chapter-detail-route; }
 html.chapter-arriving[data-style="memphis"]:not(.ink-morphing) .project-detail-section .detail-grid { view-transition-name: chapter-detail-grid; }
-/* Only the header is shared. The old root keeps all page-specific panels,
-   never scaled snapshots of unrelated sections. */
-html:not(.ink-morphing)::view-transition-group(chapter-shell) { animation: none; }
-html:not(.ink-morphing)::view-transition-group(chapter-copy) {
-  animation: chapter-panel-left .42s cubic-bezier(.22,.78,.25,1) both;
-}
+/* The destination geometry is already fixed. Moving each panel's snapshot
+   is enough; clipping the entire group repaints a large rectangle and may
+   expose the transition canvas on slower frames. */
+html:not(.ink-morphing)::view-transition-group(chapter-shell),
+html:not(.ink-morphing)::view-transition-group(chapter-copy),
 html:not(.ink-morphing)::view-transition-group(chapter-art),
 html:not(.ink-morphing)::view-transition-group(chapter-side),
 html:not(.ink-morphing)::view-transition-group(chapter-route),
 html:not(.ink-morphing)::view-transition-group(chapter-detail-route),
-html:not(.ink-morphing)::view-transition-group(chapter-detail-grid) {
-  animation: chapter-panel-right .44s cubic-bezier(.22,.78,.25,1) both;
-}
-html:not(.ink-expanding):not(.ink-retracting)::view-transition-group(chapter-shell) { z-index: 2; }
-html:not(.ink-expanding):not(.ink-retracting)::view-transition-old(chapter-shell) {
-  animation: chapter-shell-out .24s ease-in-out both;
-}
-html:not(.ink-expanding):not(.ink-retracting)::view-transition-new(chapter-shell) {
-  animation: chapter-shell-in .24s ease-in-out both;
-}
+html:not(.ink-morphing)::view-transition-group(chapter-detail-grid) { animation: none; }
 html:not(.ink-expanding):not(.ink-retracting)::view-transition-new(chapter-copy) {
   animation: chapter-arrive-left .52s cubic-bezier(.22,.78,.25,1) both;
 }
