@@ -43,7 +43,7 @@ html[data-style="memphis"] .gallery-dialog-bar,html[data-style="memphis"] .galle
 }
 html[data-style="memphis"] .gallery-dialog-bar { border-bottom:2px solid var(--heading); }
 html[data-style="memphis"] .gallery-dialog-bottom { border-top:2px solid var(--heading); }
-html[data-style="memphis"] .gallery-dialog-image { width:100%; min-height:0; max-height:calc(94dvh - 120px); object-fit:contain; background:#111; }
+html[data-style="memphis"] .gallery-dialog-image { width:100%; min-height:0; max-height:calc(94dvh - 120px); object-fit:contain; background:#111; touch-action:pan-y pinch-zoom; }
 html[data-style="memphis"][data-ink="mono"] .gallery-dialog-image { filter:grayscale(1) contrast(1.05); }
 html[data-style="memphis"] .gallery-dialog-caption { margin:0; text-align:center; line-height:1.4; }
 html[data-style="memphis"] .gallery-dialog button {

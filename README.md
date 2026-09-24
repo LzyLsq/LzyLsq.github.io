@@ -56,7 +56,7 @@ iOS 开发的静态个人网站，使用 HTML、CSS 和原生 JavaScript，无�
 - 个人资料：`index.html`、`about.html`、`posts.html`、`projects.html` 及各页页脚；联系方式还在导航的「更多」菜单及页眉邮件入口。
 - 全栈学习进度：公开内容在 `learning.html`，数据源是 `data/learning.json`。`learning-editor.html` 会读取现有 JSON、保留本机草稿并生成完整待提交文件；它不会在静态 GitHub Pages 上伪造“发布成功”，必须由仓库所有者把文件提交到 GitHub 后才会公开。空数据文件是有意保留的，不代表虚构的学习进度。
 - 图片：`assets/images/` 中的几何图是装饰素材；`assets/images/project/` 中的界面截图来自本人项目仓库，并注明为演示界面。
-- 页面交互：`js/theme.js`；本站数据：`js/site-stats.js`（数据从公开内容计算，计数入场不是历史涨幅）；站内搜索索引：`js/site-search.js`；项目图库：`js/project-gallery.js`；学习进度：`js/learning.js` 与 `js/learning-editor.js`。无外部 JavaScript 依赖。
+- 页面交互：`js/theme.js`；本站数据：`js/site-stats.js`（数据从公开内容计算，计数入场不是历史涨幅）；站内搜索索引：`js/site-search.js`；项目图库（按钮、键盘方向键与手机横向轻扫）：`js/project-gallery.js`；学习进度：`js/learning.js` 与 `js/learning-editor.js`。无外部 JavaScript 依赖。
 
 本地预览：
 

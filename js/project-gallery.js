@@ -26,6 +26,23 @@
   dialog.querySelector('.gallery-dialog-close').addEventListener('click', function () { dialog.close(); });
   dialog.querySelector('.gallery-dialog-prev').addEventListener('click', function () { show(index - 1); });
   dialog.querySelector('.gallery-dialog-next').addEventListener('click', function () { show(index + 1); });
+  // A horizontal swipe turns a page on touch screens; vertical movement still
+  // scrolls the dialog normally. Buttons and keyboard remain the primary controls.
+  var touchStart = null;
+  image.addEventListener('touchstart', function (event) {
+    if (event.touches.length !== 1) { touchStart = null; return; }
+    touchStart = { x: event.touches[0].clientX, y: event.touches[0].clientY };
+  }, { passive: true });
+  dialog.addEventListener('touchend', function (event) {
+    if (!touchStart || !dialog.open || !event.changedTouches.length) { return; }
+    var dx = event.changedTouches[0].clientX - touchStart.x;
+    var dy = event.changedTouches[0].clientY - touchStart.y;
+    touchStart = null;
+    if (Math.abs(dx) > 48 && Math.abs(dx) > Math.abs(dy) * 1.25) {
+      show(index + (dx < 0 ? 1 : -1));
+    }
+  }, { passive: true });
+  dialog.addEventListener('touchcancel', function () { touchStart = null; }, { passive: true });
   dialog.addEventListener('keydown', function (event) {
     if (event.key === 'ArrowLeft') { event.preventDefault(); show(index - 1); }
     if (event.key === 'ArrowRight') { event.preventDefault(); show(index + 1); }

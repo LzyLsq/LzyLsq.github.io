@@ -496,3 +496,14 @@ html[data-style="memphis"][data-ink="mono"] :is(.learning-empty,.learning-owner,
 html[data-style="memphis"][data-ink="mono"] .project-card-shot figcaption {
   background:#e4e4de; color:#282826; border-top:2px solid #343431;
 }
+
+/* On narrow screens the slide artwork is above the caption. Keep the
+   carousel controls in that artwork instead of covering the chapter label. */
+@media (max-width: 560px) {
+  html[data-style="memphis"] .hero-arrow {
+    top: clamp(110px, 36vw, 146px);
+  }
+}
+@media (max-width: 560px) and (hover: none) {
+  html[data-style="memphis"] .hero-arrow { opacity: 1; }
+}
