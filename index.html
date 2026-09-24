@@ -14,6 +14,17 @@
       document.querySelector('meta[name="theme-color"]').content = ink === 'color' ? '#fff8e9' : '#343432';
     })();
     </script>
+    <script>
+    /* The outgoing page stays a complete frame; only the arriving page lifts
+       speech and art panels out for their side entrance. */
+    addEventListener('pageswap', function () {
+      document.documentElement.classList.remove('chapter-arriving');
+    });
+    addEventListener('pagereveal', function (event) {
+      if (event.viewTransition) document.documentElement.classList.add('chapter-arriving');
+    });
+    </script>
+
     <style>html{background:#343432;color-scheme:dark}html[data-ink="color"]{background:#fff8e9;color-scheme:light}</style>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Ryan · iOS 开发</title>
@@ -33,7 +44,7 @@
     <link rel="shortcut icon" href="assets/favicon.svg">
     <link rel="apple-touch-icon" href="assets/favicon.svg">
 
-    <link rel="stylesheet" href="css/site-core.css?v=20260924f">
+    <link rel="stylesheet" href="css/site-core.css?v=20260924g">
     <script>
     /* 孟菲斯:给 hero 轮播标题尾部一段套色块(仿 Demo 的 hl-pink/hl-yellow) */
     (function () {

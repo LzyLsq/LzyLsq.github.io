@@ -102,10 +102,7 @@ button, input, textarea { font: inherit; }
 .site-main {
   padding-bottom: 48px;
   width: 100%;
-  transition: opacity 0.22s ease;
 }
-
-html.is-animating .site-main { opacity: 0; }
 
 .pjax-progress-bar {
   position: fixed;
