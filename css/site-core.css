@@ -8135,3 +8135,53 @@ html[data-style="memphis"] button:disabled { cursor: not-allowed; box-shadow: no
   html[data-style="memphis"] :is(.button,.sc-button,.project-actions .button,
     .project-switchboard a,.about-contact-item,.source-copy):active { transform: none !important; }
 }
+
+/* A panel answers the cursor through its inked details, not a perpetual page animation. */
+html[data-style="memphis"] :is(.destination-symbol,.project-index,.switchboard-index) {
+  transition: transform .34s cubic-bezier(.2,.8,.25,1.25);
+}
+html[data-style="memphis"] .project-switchboard a > span:last-child,
+html[data-style="memphis"] :is(.search-icon-btn,.header-action:not(.ink-toggle),.hero-arrow) svg,
+html[data-style="memphis"] .project-gallery .gallery-open::after {
+  transition: transform .28s cubic-bezier(.2,.8,.25,1.15);
+}
+@media (hover: hover) and (pointer: fine) {
+  html[data-style="memphis"] .destination-card:hover .destination-symbol {
+    transform: rotate(-8deg) scale(1.08) !important;
+  }
+  html[data-style="memphis"] .project-overview-grid .project-card:hover .project-index {
+    transform: rotate(-8deg) translateY(-3px) !important;
+  }
+  html[data-style="memphis"] .project-switchboard a:hover .switchboard-index {
+    transform: translateX(3px);
+  }
+  html[data-style="memphis"] .project-switchboard a:hover > span:last-child,
+  html[data-style="memphis"] .project-gallery .gallery-open:hover::after {
+    transform: translate(3px,-3px);
+  }
+  html[data-style="memphis"] .search-icon-btn:hover svg { transform: rotate(-12deg) scale(1.1); }
+  html[data-style="memphis"] .header-action:not(.ink-toggle):hover svg { transform: translateY(-2px); }
+  html[data-style="memphis"] .hero-arrow--prev:hover svg { transform: translateX(-3px); }
+  html[data-style="memphis"] .hero-arrow--next:hover svg { transform: translateX(3px); }
+}
+@media (min-width: 821px) and (hover: hover) and (pointer: fine) {
+  html[data-style="memphis"] .site-nav :is(a,.nav-link) {
+    transition: color .2s ease, border-color .2s ease, transform .2s cubic-bezier(.2,.8,.2,1);
+  }
+  html[data-style="memphis"] .site-nav :is(a,.nav-link):hover { transform: translateY(-2px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  html[data-style="memphis"] :is(.destination-symbol,.project-index,.switchboard-index,
+    .site-nav a,.site-nav .nav-link),
+  html[data-style="memphis"] .project-switchboard a > span:last-child,
+  html[data-style="memphis"] :is(.search-icon-btn,.header-action:not(.ink-toggle),.hero-arrow) svg,
+  html[data-style="memphis"] .project-gallery .gallery-open::after { transition: none !important; }
+  html[data-style="memphis"] :is(.destination-card:hover .destination-symbol,
+    .project-overview-grid .project-card:hover .project-index,
+    .project-switchboard a:hover .switchboard-index,
+    .project-switchboard a:hover > span:last-child,
+    .project-gallery .gallery-open:hover::after,
+    .site-nav :is(a,.nav-link):hover,
+    .search-icon-btn:hover svg,.header-action:not(.ink-toggle):hover svg,
+    .hero-arrow--prev:hover svg,.hero-arrow--next:hover svg) { transform: none !important; }
+}
