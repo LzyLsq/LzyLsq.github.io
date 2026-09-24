@@ -3,7 +3,7 @@
 (function () {
   'use strict';
   var root = document.documentElement;
-  // The inline <head> bootstraps cross-page arrival before the first paint.
+  // The inline <head> selects the saved theme before the first paint.
   var toggle = document.querySelector('[data-ink-toggle]');
   if (!toggle) { return; }
   var running = false;
@@ -24,10 +24,6 @@
   sync();
   toggle.addEventListener('click', function () {
     if (running) { return; }
-    // If a visitor switches editions during fallback entrance, stop that
-    // entrance now; otherwise its remaining animation can restart after the
-    // color ripple and look like a second flash.
-    root.classList.remove('page-arriving', 'page-view-transitioning', 'page-fallback-arriving');
     var toColor = root.dataset.ink === 'mono';
     var next = toColor ? 'color' : 'mono';
     var rect = toggle.getBoundingClientRect();

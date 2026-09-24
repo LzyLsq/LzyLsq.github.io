@@ -1,0 +1,6 @@
+/* Locally served Latin display faces. Chinese glyphs use the platform's
+   Chinese sans-serif fallback, so an external font fetch cannot shift text
+   halfway through a chapter transition. See assets/fonts/OFL-*.txt. */
+@font-face { font-family:"Archivo Black"; font-style:normal; font-weight:400; font-display:optional; src:url("../assets/fonts/archivo-black-latin.woff2") format("woff2"); }
+@font-face { font-family:"DM Sans"; font-style:normal; font-weight:400 700; font-display:optional; src:url("../assets/fonts/dm-sans-latin.woff2") format("woff2"); }
+@font-face { font-family:"JetBrains Mono"; font-style:normal; font-weight:400 500; font-display:optional; src:url("../assets/fonts/jetbrains-mono-latin.woff2") format("woff2"); }
