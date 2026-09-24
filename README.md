@@ -48,7 +48,7 @@ iOS 开发的静态个人网站，使用 HTML、CSS 和原生 JavaScript；部�
 4. 发布以后，删除 `posts.html` 中的 `[data-empty-publications]` 提示块，并更新文章页标题下方的空状态说明。若希望首页显示最新文章，也将 `index.html` 的 `.empty-publications` 换为真实文章预览。
 5. 若首页有新的轮播内容，记得在 `.hero-dots` 中添加对应 `data-hero-dot` 按钮；目前三张内容分别指向关于页、数据项目、AI 项目。
 
-两个项目源码仓库仍为私有，因此公开页面只展示非交互的「仓库暂未公开」状态，避免访客误点不可访问的链接；若将来公开源码，再把状态替换为对应的真实仓库链接。项目页的六张界面图来自各自仓库的 `docs/screenshots/`，本站在 `assets/images/project/` 留有副本，图内数字仅为项目演示内容，不是本站实时数据；访客仍可阅读公开的技术记录，或发邮件联系。项目内容要以实际代码和自己的更新为准，避免把规划中的链路写成已上线的成果。
+两个项目现在提供当前源码的公开快照：[数据项目](https://github.com/LzyLsq/flume-sqoop-source) 与 [LawDesign](https://github.com/LzyLsq/legal-design-source)。原仓库仍为私有，旧提交历史不公开；公开快照删除了旧凭据历史和不适宜公开的运行数据，首次配置应参考各仓库的 `PUBLIC_SNAPSHOT.md`。项目页的六张界面图来自各自仓库的 `docs/screenshots/`，本站在 `assets/images/project/` 留有副本，图内数字仅为项目演示内容，不是本站实时数据；访客仍可阅读公开的技术记录，或发邮件联系。项目内容要以实际代码和自己的更新为准，避免把规划中的链路写成已上线的成果。
 
 ## 外观与维护
 

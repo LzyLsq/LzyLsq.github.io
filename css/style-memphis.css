@@ -927,19 +927,6 @@ html[data-style="memphis"] .search-status {
 }
 html[data-style="memphis"] .search-status[hidden] { display: none !important; }
 
-/* 项目：私有仓库标注 */
-html[data-style="memphis"] .project-note {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 8px 12px;
-  font-size: 13px;
-  font-weight: 700;
-  color: var(--muted);
-  border: 2px dashed var(--border);
-  background: transparent;
-}
-
 /* 侧栏：最新文章容器 + 空态 + 变暗 */
 html[data-style="memphis"] .side-latest { margin-top: 14px; }
 html[data-style="memphis"] .side-empty {

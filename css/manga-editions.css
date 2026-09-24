@@ -529,20 +529,3 @@ html[data-style="memphis"][data-ink="mono"] .project-card-shot figcaption {
 @media (max-width: 560px) and (hover: none) {
   html[data-style="memphis"] .hero-arrow { opacity: 1; }
 }
-
-/* Private repositories are information, not dead-end buttons. Keep the
-   label in the same manga panel rhythm without implying it can be clicked. */
-html[data-style="memphis"] :is(.project-actions,.project-outro-actions) .project-note {
-  min-height: 38px;
-  padding: 7px 12px;
-  color: #242424;
-  background: #dcdcdc;
-  border: 2px dashed #707070;
-  line-height: 1.35;
-  cursor: default;
-}
-html[data-style="memphis"][data-ink="color"] :is(.project-actions,.project-outro-actions) .project-note {
-  color: #164d5a;
-  background: #e3f5ef;
-  border-color: #247e88;
-}

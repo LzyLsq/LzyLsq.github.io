@@ -33,7 +33,7 @@
     <link rel="shortcut icon" href="assets/favicon.svg">
     <link rel="apple-touch-icon" href="assets/favicon.svg">
 
-    <link rel="stylesheet" href="css/site-core.css?v=20260924b">
+    <link rel="stylesheet" href="css/site-core.css?v=20260924c">
 
     <link rel="stylesheet" href="css/project-gallery.css?v=20260924">
     <link rel="stylesheet" href="css/project-code.css">
@@ -92,12 +92,12 @@
         <span class="eyebrow">// PROJECT NOTE</span>
         <h1>LawDesign · 法律智能体平台</h1>
         <p class="project-detail-lede">围绕法律问答、合同审查与文书草拟，尝试组织前端和多个后端服务。这是一份技术练习记录，不是对外提供的法律服务。</p>
-        <div class="project-detail-meta"><span>练习项目</span><span>GitHub 私有仓库</span><span>技术记录 · 非上线说明</span></div>
+        <div class="project-detail-meta"><span>练习项目</span><span>公开源码快照</span><span>技术记录 · 非上线说明</span></div>
       </div></section>
       <section class="project-detail-section" aria-labelledby="path-heading"><div class="flux-container">
         <div class="section-heading"><h2 id="path-heading">技术路径</h2><p>按代码中的模块整理，不代表所有环节都已经稳定运行。</p></div>
         <div class="detail-route"><div class="route-label">问答与服务</div><ol class="route-steps"><li><strong>React 前端</strong><span>页面与交互</span></li><li><strong>Flask / FastAPI</strong><span>业务服务</span></li><li><strong>GraphRAG</strong><span>法律资料检索</span></li></ol><div class="route-label">风控链路</div><ol class="route-steps"><li><strong>Kafka</strong><span>数据入口</span></li><li><strong>Spark Streaming</strong><span>流处理</span></li><li><strong>风控看板</strong><span>结果展示</span></li></ol></div>
-        <div class="detail-grid"><article class="detail-panel"><span class="detail-number">01 / 结构</span><h3>多模块练习</h3><p>使用 monorepo 管理 React 前端、鉴权、合同数据、风险分析、诉讼文书与合同模板等服务。共用配置和服务脚手架整理在 shared 包中。</p></article><article class="detail-panel"><span class="detail-number">02 / 问答</span><h3>法律场景检索</h3><p>法律问答部分尝试以 FastAPI 提供 GraphRAG 检索接口；另外有案例分析模块，接入 Moonshot。它们是不同的练习模块，不等同于法律建议服务。</p></article><article class="detail-panel"><span class="detail-number">03 / 风控</span><h3>数据链路</h3><p>项目中还有 Kafka 生产者、Scala + Spark Streaming 流处理以及 Flask 风控看板模块，用来探索实时数据处理。</p></article><aside class="detail-panel detail-caveat"><span class="detail-number">说明</span><h3>当前状态</h3><p>这里介绍的是仓库的代码组织和技术方向。项目未作为公开服务提供；完整仓库仍为私有，此页仅展示少量真实代码节选。</p></aside></div>
+        <div class="detail-grid"><article class="detail-panel"><span class="detail-number">01 / 结构</span><h3>多模块练习</h3><p>使用 monorepo 管理 React 前端、鉴权、合同数据、风险分析、诉讼文书与合同模板等服务。共用配置和服务脚手架整理在 shared 包中。</p></article><article class="detail-panel"><span class="detail-number">02 / 问答</span><h3>法律场景检索</h3><p>法律问答部分尝试以 FastAPI 提供 GraphRAG 检索接口；另外有案例分析模块，接入 Moonshot。它们是不同的练习模块，不等同于法律建议服务。</p></article><article class="detail-panel"><span class="detail-number">03 / 风控</span><h3>数据链路</h3><p>项目中还有 Kafka 生产者、Scala + Spark Streaming 流处理以及 Flask 风控看板模块，用来探索实时数据处理。</p></article><aside class="detail-panel detail-caveat"><span class="detail-number">说明</span><h3>当前状态</h3><p>这里介绍的是仓库的代码组织和技术方向。项目未作为公开服务提供；公开源码是当前代码的整理快照，不包含私有仓库的旧提交历史；此页展示少量真实代码节选。</p></aside></div>
         <section class="project-source" aria-labelledby="source-heading">
           <div class="section-heading"><h2 id="source-heading">关键代码 · 源码节选</h2><p>从本地项目源码摘录的实际片段，仅供了解实现思路；省略了上下文，不能直接作为完整程序运行。</p></div>
           <div class="source-grid">
@@ -163,12 +163,12 @@
             </div>
           </article>
           </div>
-          <p class="source-footnote">完整仓库目前为私有；以上片段不包含运行配置、密钥或用户数据。</p>
+          <p class="source-footnote">公开快照不包含旧提交历史和运行密钥；以上片段用于说明技术路径。</p>
         </section>
         <section class="project-gallery" aria-labelledby="gallery-heading"><div class="section-heading"><h2 id="gallery-heading">项目界面</h2><p>选自项目仓库 README 的实际界面截图；截图内数字是项目演示内容，不是本站实时统计。</p></div><div class="project-gallery-grid"><figure><button class="gallery-open" type="button" aria-label="放大查看法律功能入口"><img src="assets/images/project/home-overview.jpg" alt="LegalMind 应用首页界面" loading="lazy" width="1200" height="700"></button><figcaption>法律功能入口</figcaption></figure><figure><button class="gallery-open" type="button" aria-label="放大查看文书检查界面"><img src="assets/images/project/document-review.jpg" alt="法律文书智能检测界面" loading="lazy" width="1200" height="700"></button><figcaption>文书检查界面</figcaption></figure><figure><button class="gallery-open" type="button" aria-label="放大查看合同风险可视化"><img src="assets/images/project/risk-visualization-dashboard.jpg" alt="合同风险数据大屏界面" loading="lazy" width="1200" height="700"></button><figcaption>合同风险可视化</figcaption></figure></div></section>
         <div class="detail-stack"><h2>涉及的技术</h2><div class="project-stack"><span class="project-tag">Python</span><span class="project-tag">Flask</span><span class="project-tag">FastAPI</span><span class="project-tag">React</span><span class="project-tag">TypeScript</span><span class="project-tag">GraphRAG</span><span class="project-tag">Kafka</span><span class="project-tag">Spark Streaming</span><span class="project-tag">MySQL</span></div></div>
       </div></section>
-      <section class="project-outro"><div class="flux-container"><div class="project-outro-card"><div><h2>继续看看？</h2><p>源码仓库暂未公开，此页保留了实际界面与关键代码节选；如果想了解实现细节，也欢迎发邮件交流。</p></div><div class="project-outro-actions"><a class="button button-primary" href="mailto:lzyryan5247@gmail.com?subject=LawDesign">邮件交流 →</a><span class="project-note">仓库暂未公开</span><a class="button button-secondary" href="data-pipeline.html">看数据项目 →</a><a class="button button-secondary" href="projects.html">返回项目总览 →</a></div></div></div></section>
+      <section class="project-outro"><div class="flux-container"><div class="project-outro-card"><div><h2>继续看看？</h2><p>当前源码已整理成公开快照；原仓库的旧提交历史仍为私有。这里也保留了界面与关键代码节选。</p></div><div class="project-outro-actions"><a class="button button-primary" href="mailto:lzyryan5247@gmail.com?subject=LawDesign">邮件交流 →</a><a class="button button-secondary" href="https://github.com/LzyLsq/legal-design-source" target="_blank" rel="noopener noreferrer">查看公开源码 ↗</a><a class="button button-secondary" href="data-pipeline.html">看数据项目 →</a><a class="button button-secondary" href="projects.html">返回项目总览 →</a></div></div></div></section>
     </main>
     <footer class="site-footer">
         <div class="flux-container footer-inner">

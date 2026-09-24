@@ -33,7 +33,7 @@
     <link rel="shortcut icon" href="assets/favicon.svg">
     <link rel="apple-touch-icon" href="assets/favicon.svg">
 
-    <link rel="stylesheet" href="css/site-core.css?v=20260924b">
+    <link rel="stylesheet" href="css/site-core.css?v=20260924c">
 
     <link rel="stylesheet" href="css/project-gallery.css?v=20260924">
     <link rel="stylesheet" href="css/project-code.css">
@@ -92,12 +92,12 @@
         <span class="eyebrow">// PROJECT NOTE</span>
         <h1>实时订单数据分析与推荐平台</h1>
         <p class="project-detail-lede">围绕模拟订单，练习实时处理、离线采集与推荐方法。这里记录代码中的结构和尝试，不把它描述成已经上线的服务。</p>
-        <div class="project-detail-meta"><span>练习项目</span><span>GitHub 私有仓库</span><span>技术记录 · 非上线说明</span></div>
+        <div class="project-detail-meta"><span>练习项目</span><span>公开源码快照</span><span>技术记录 · 非上线说明</span></div>
       </div></section>
       <section class="project-detail-section" aria-labelledby="path-heading"><div class="flux-container">
         <div class="section-heading"><h2 id="path-heading">技术路径</h2><p>按代码中的模块整理，不代表所有环节都已经稳定运行。</p></div>
         <div class="detail-route"><div class="route-label">实时处理</div><ol class="route-steps"><li><strong>模拟订单</strong><span>Python 生成数据</span></li><li><strong>Kafka</strong><span>消息上报</span></li><li><strong>Spark Streaming</strong><span>窗口聚合</span></li><li><strong>可视化</strong><span>WebSocket / ECharts</span></li></ol><div class="route-label">离线处理</div><ol class="route-steps"><li><strong>Kafka</strong><span>采集来源</span></li><li><strong>Flume → HDFS</strong><span>写入文件存储</span></li><li><strong>MySQL → Hive</strong><span>Sqoop 同步业务数据</span></li></ol></div>
-        <div class="detail-grid"><article class="detail-panel"><span class="detail-number">01 / 实时</span><h3>订单数据与实时展示</h3><p>使用 Python 模拟订单，经 Kafka 传递；Spark Streaming 对数据做窗口聚合，再将结果经 Kafka 发送给 Flask / WebSocket 展示层。ECharts 用来呈现图表。</p></article><article class="detail-panel"><span class="detail-number">02 / 离线</span><h3>采集与入仓</h3><p>自定义 Flume PollableSource 从 Kafka 读取并处理数据后写入 HDFS；Sqoop 将 MySQL 业务数据同步到 Hive，尝试用 Spark SQL / RDD 统计。</p></article><article class="detail-panel"><span class="detail-number">03 / 推荐</span><h3>推荐方法尝试</h3><p>练习 Item-Based 和 User-Based 协同过滤，使用余弦相似度 UDF，并在结果写入时考虑幂等 upsert。</p></article><aside class="detail-panel detail-caveat"><span class="detail-number">说明</span><h3>当前状态</h3><p>这是项目代码和思路的记录，不是线上产品。完整仓库仍为私有；此页只公开少量真实代码节选，也不把设计中的链路当作已验证的运行成果。</p></aside></div>
+        <div class="detail-grid"><article class="detail-panel"><span class="detail-number">01 / 实时</span><h3>订单数据与实时展示</h3><p>使用 Python 模拟订单，经 Kafka 传递；Spark Streaming 对数据做窗口聚合，再将结果经 Kafka 发送给 Flask / WebSocket 展示层。ECharts 用来呈现图表。</p></article><article class="detail-panel"><span class="detail-number">02 / 离线</span><h3>采集与入仓</h3><p>自定义 Flume PollableSource 从 Kafka 读取并处理数据后写入 HDFS；Sqoop 将 MySQL 业务数据同步到 Hive，尝试用 Spark SQL / RDD 统计。</p></article><article class="detail-panel"><span class="detail-number">03 / 推荐</span><h3>推荐方法尝试</h3><p>练习 Item-Based 和 User-Based 协同过滤，使用余弦相似度 UDF，并在结果写入时考虑幂等 upsert。</p></article><aside class="detail-panel detail-caveat"><span class="detail-number">说明</span><h3>当前状态</h3><p>这是项目代码和思路的记录，不是线上产品。公开源码是当前代码的整理快照，旧版本历史仍保留在私有仓库；也不把设计中的链路当作已验证的运行成果。</p></aside></div>
         <section class="project-source" aria-labelledby="source-heading">
           <div class="section-heading"><h2 id="source-heading">关键代码 · 源码节选</h2><p>从本地项目源码摘录的实际片段，仅供了解实现思路；省略了上下文，不能直接作为完整程序运行。</p></div>
           <div class="source-grid">
@@ -154,12 +154,12 @@
             </div>
           </article>
           </div>
-          <p class="source-footnote">完整仓库目前为私有；以上片段不包含运行配置、密钥或用户数据。</p>
+          <p class="source-footnote">公开快照不包含旧提交历史和运行密钥；以上片段用于说明技术路径。</p>
         </section>
         <section class="project-gallery" aria-labelledby="gallery-heading"><div class="section-heading"><h2 id="gallery-heading">项目界面</h2><p>选自项目仓库 README 的实际界面截图；截图内数字是项目演示内容，不是本站实时统计。</p></div><div class="project-gallery-grid"><figure><button class="gallery-open" type="button" aria-label="放大查看实时订单统计看板"><img src="assets/images/project/real-time-dashboard.jpg" alt="实时订单统计界面" loading="lazy" width="1200" height="700"></button><figcaption>实时订单统计看板</figcaption></figure><figure><button class="gallery-open" type="button" aria-label="放大查看订单趋势展示"><img src="assets/images/project/order-trends.jpg" alt="订单趋势图表界面" loading="lazy" width="1200" height="700"></button><figcaption>订单趋势展示</figcaption></figure><figure><button class="gallery-open" type="button" aria-label="放大查看推荐与分类检索"><img src="assets/images/project/recommendation-and-category-search.jpg" alt="推荐与分类查询界面" loading="lazy" width="1200" height="700"></button><figcaption>推荐与分类检索</figcaption></figure></div></section>
         <div class="detail-stack"><h2>涉及的技术</h2><div class="project-stack"><span class="project-tag">Python</span><span class="project-tag">Kafka</span><span class="project-tag">Spark Streaming</span><span class="project-tag">Scala</span><span class="project-tag">Flume</span><span class="project-tag">Sqoop</span><span class="project-tag">Hive</span><span class="project-tag">HDFS</span><span class="project-tag">Flask</span><span class="project-tag">ECharts</span></div></div>
       </div></section>
-      <section class="project-outro"><div class="flux-container"><div class="project-outro-card"><div><h2>继续看看？</h2><p>源码仓库暂未公开，此页保留了实际界面与关键代码节选；如果想了解实现细节，也欢迎发邮件交流。</p></div><div class="project-outro-actions"><a class="button button-primary" href="mailto:lzyryan5247@gmail.com?subject=Flume_Sqoop_Project">邮件交流 →</a><span class="project-note">仓库暂未公开</span><a class="button button-secondary" href="law-design.html">看 LawDesign →</a><a class="button button-secondary" href="projects.html">返回项目总览 →</a></div></div></div></section>
+      <section class="project-outro"><div class="flux-container"><div class="project-outro-card"><div><h2>继续看看？</h2><p>当前源码已整理成公开快照；原仓库的旧提交历史仍为私有。这里也保留了界面与关键代码节选。</p></div><div class="project-outro-actions"><a class="button button-primary" href="mailto:lzyryan5247@gmail.com?subject=Flume_Sqoop_Project">邮件交流 →</a><a class="button button-secondary" href="https://github.com/LzyLsq/flume-sqoop-source" target="_blank" rel="noopener noreferrer">查看公开源码 ↗</a><a class="button button-secondary" href="law-design.html">看 LawDesign →</a><a class="button button-secondary" href="projects.html">返回项目总览 →</a></div></div></div></section>
     </main>
     <footer class="site-footer">
         <div class="flux-container footer-inner">
