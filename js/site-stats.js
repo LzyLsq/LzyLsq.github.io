@@ -162,6 +162,9 @@
     var legend = element('div', 'inventory-pie-legend', '');
     legend.append(element('p', 'inventory-pie-total', entries.length + ' 项技术 · ' + total + ' 次列出'));
     var list = element('ul', 'inventory-pie-keys', '');
+    list.id = 'inventory-pie-keys';
+    var visibleEntries = 6;
+    if (entries.length > visibleEntries) { list.classList.add('is-collapsed'); }
     entries.forEach(function (item, index) {
       var li = element('li', 'inventory-pie-key inventory-pie-key-' + (index % 15), '');
       li.append(element('span', 'inventory-pie-label', item.label),
@@ -169,6 +172,19 @@
       list.append(li);
     });
     legend.append(list);
+    if (entries.length > visibleEntries) {
+      var toggle = element('button', 'inventory-pie-toggle', '展开全部 ' + entries.length + ' 项技术');
+      toggle.type = 'button';
+      toggle.setAttribute('aria-expanded', 'false');
+      toggle.setAttribute('aria-controls', list.id);
+      toggle.addEventListener('click', function () {
+        var expanded = toggle.getAttribute('aria-expanded') === 'true';
+        toggle.setAttribute('aria-expanded', String(!expanded));
+        list.classList.toggle('is-collapsed', expanded);
+        toggle.textContent = expanded ? '展开全部 ' + entries.length + ' 项技术' : '收起技术明细';
+      });
+      legend.append(toggle);
+    }
     var layout = element('div', 'inventory-pie-layout', ''); layout.append(figure, legend);
     section.append(layout, element('p', 'inventory-chart-note', note));
     return section;
