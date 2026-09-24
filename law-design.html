@@ -55,6 +55,7 @@
     <link rel="stylesheet" href="css/style-comic-upgrade.css">
     <link rel="stylesheet" href="css/manga-editions.css?v=20260924">
     <link rel="stylesheet" href="css/project-gallery.css">
+    <link rel="stylesheet" href="css/project-code.css">
 </head>
 <body class="theme-fluxgrid">
 <a class="skip-link" href="#main-content">跳到主要内容</a>
@@ -115,11 +116,78 @@
       <section class="project-detail-section" aria-labelledby="path-heading"><div class="flux-container">
         <div class="section-heading"><h2 id="path-heading">技术路径</h2><p>按代码中的模块整理，不代表所有环节都已经稳定运行。</p></div>
         <div class="detail-route"><div class="route-label">问答与服务</div><ol class="route-steps"><li><strong>React 前端</strong><span>页面与交互</span></li><li><strong>Flask / FastAPI</strong><span>业务服务</span></li><li><strong>GraphRAG</strong><span>法律资料检索</span></li></ol><div class="route-label">风控链路</div><ol class="route-steps"><li><strong>Kafka</strong><span>数据入口</span></li><li><strong>Spark Streaming</strong><span>流处理</span></li><li><strong>风控看板</strong><span>结果展示</span></li></ol></div>
-        <div class="detail-grid"><article class="detail-panel"><span class="detail-number">01 / 结构</span><h3>多模块练习</h3><p>使用 monorepo 管理 React 前端、鉴权、合同数据、风险分析、诉讼文书与合同模板等服务。共用配置和服务脚手架整理在 shared 包中。</p></article><article class="detail-panel"><span class="detail-number">02 / 问答</span><h3>法律场景检索</h3><p>法律问答部分尝试以 FastAPI 提供 GraphRAG 检索接口；另外有案例分析模块，接入 Moonshot。它们是不同的练习模块，不等同于法律建议服务。</p></article><article class="detail-panel"><span class="detail-number">03 / 风控</span><h3>数据链路</h3><p>项目中还有 Kafka 生产者、Scala + Spark Streaming 流处理以及 Flask 风控看板模块，用来探索实时数据处理。</p></article><aside class="detail-panel detail-caveat"><span class="detail-number">说明</span><h3>当前状态</h3><p>这里介绍的是仓库的代码组织和技术方向。项目未作为公开服务提供；源码暂时没有开放。</p></aside></div>
+        <div class="detail-grid"><article class="detail-panel"><span class="detail-number">01 / 结构</span><h3>多模块练习</h3><p>使用 monorepo 管理 React 前端、鉴权、合同数据、风险分析、诉讼文书与合同模板等服务。共用配置和服务脚手架整理在 shared 包中。</p></article><article class="detail-panel"><span class="detail-number">02 / 问答</span><h3>法律场景检索</h3><p>法律问答部分尝试以 FastAPI 提供 GraphRAG 检索接口；另外有案例分析模块，接入 Moonshot。它们是不同的练习模块，不等同于法律建议服务。</p></article><article class="detail-panel"><span class="detail-number">03 / 风控</span><h3>数据链路</h3><p>项目中还有 Kafka 生产者、Scala + Spark Streaming 流处理以及 Flask 风控看板模块，用来探索实时数据处理。</p></article><aside class="detail-panel detail-caveat"><span class="detail-number">说明</span><h3>当前状态</h3><p>这里介绍的是仓库的代码组织和技术方向。项目未作为公开服务提供；完整仓库仍为私有，此页仅展示少量真实代码节选。</p></aside></div>
+        <section class="project-source" aria-labelledby="source-heading">
+          <div class="section-heading"><h2 id="source-heading">关键代码 · 源码节选</h2><p>从本地项目源码摘录的实际片段，仅供了解实现思路；省略了上下文，不能直接作为完整程序运行。</p></div>
+          <div class="source-grid">
+          <article class="source-card">
+            <div class="source-card-head"><span class="source-index">节选 01</span><span class="source-language">Python · Flask</span></div>
+            <h3>服务脚手架与跨域白名单</h3>
+            <p>公共工厂方法从项目配置获取密钥和允许的来源；这里展示的是白名单装配方式，不展示具体的环境配置。</p>
+            <div class="source-window"><div class="source-window-bar"><span class="source-file">shared/web.py · L19–L32</span><button class="source-copy" type="button" aria-live="polite" aria-label="复制服务脚手架与跨域白名单代码">复制代码</button></div>
+              <pre tabindex="0"><code>def create_flask_app(import_name: str, *, cors: bool = True, **flask_kwargs):
+    &quot;&quot;&quot;创建一个标准化的 Flask 应用。
+
+    :param import_name: 传 ``__name__``，Flask 据此定位 templates / static。
+    :param cors: 是否启用 CORS 白名单。
+    &quot;&quot;&quot;
+    from flask import Flask
+    from flask_cors import CORS
+
+    app = Flask(import_name, **flask_kwargs)
+    app.secret_key = secret_key()
+    if cors:
+        CORS(app, resources={r&quot;/*&quot;: {&quot;origins&quot;: cors_origins()}})
+    return app</code></pre>
+            </div>
+          </article>
+          <article class="source-card">
+            <div class="source-card-head"><span class="source-index">节选 02</span><span class="source-language">Python · GraphRAG 练习</span></div>
+            <h3>本地与全局检索汇总</h3>
+            <p>分别调用已初始化的本地、全局搜索引擎，再整理两路响应。这段代码按顺序等待结果，并非并行检索，也不代表回答已获法律核验。</p>
+            <div class="source-window"><div class="source-window-bar"><span class="source-file">services/qa/ragtest/utils/main.py · L391–L400</span><button class="source-copy" type="button" aria-live="polite" aria-label="复制本地与全局检索汇总代码">复制代码</button></div>
+              <pre tabindex="0"><code>async def full_model_search(prompt: str):
+    local_result = await local_search_engine.asearch(prompt)
+    global_result = await global_search_engine.asearch(prompt)
+    # 格式化结果
+    formatted_result = &quot;#综合搜索结果:\n\n&quot;
+    formatted_result += &quot;##本地检索结果:\n&quot;
+    formatted_result += format_response(local_result.response) + &quot;\n\n&quot;
+    formatted_result += &quot;##全局检索结果:\n&quot;
+    formatted_result += format_response(global_result.response) + &quot;\n\n&quot;
+    return formatted_result</code></pre>
+            </div>
+          </article>
+          <article class="source-card">
+            <div class="source-card-head"><span class="source-index">节选 03</span><span class="source-language">Python · 规则评分</span></div>
+            <h3>合同风险规则权重</h3>
+            <p>部分评分函数：为合同金额、条款和信用评级等维度设定权重及初始分数。后续按字段赋分并加权计算；这些权重只是练习中的规则，不是专业法律判断。</p>
+            <div class="source-window"><div class="source-window-bar"><span class="source-file">services/risk_analysis/riskanalysis.py · L16–L31</span><button class="source-copy" type="button" aria-live="polite" aria-label="复制合同风险规则权重代码">复制代码</button></div>
+              <pre tabindex="0"><code>    # 定义权重
+    weights = {
+        &quot;amount_score&quot;: 0.2,
+        &quot;payment_score&quot;: 0.1,
+        &quot;performance_score&quot;: 0.1,
+        &quot;deliverables_score&quot;: 0.1,
+        &quot;breach_score&quot;: 0.1,
+        &quot;dispute_score&quot;: 0.1,
+        &quot;party_a_score&quot;: 0.1,
+        &quot;party_b_score&quot;: 0.1,
+        &quot;market_score&quot;: 0.05,
+        &quot;industry_score&quot;: 0.05
+    }
+
+    # 初始化分数
+    scores = {key: 0.0 for key in weights.keys()}</code></pre>
+            </div>
+          </article>
+          </div>
+          <p class="source-footnote">完整仓库目前为私有；以上片段不包含运行配置、密钥或用户数据。</p>
+        </section>
         <section class="project-gallery" aria-labelledby="gallery-heading"><div class="section-heading"><h2 id="gallery-heading">项目界面</h2><p>选自项目仓库 README 的实际界面截图；截图内数字是项目演示内容，不是本站实时统计。</p></div><div class="project-gallery-grid"><figure><button class="gallery-open" type="button" aria-label="放大查看法律功能入口"><img src="assets/images/project/home-overview.jpg" alt="LegalMind 应用首页界面" loading="lazy" width="1200" height="700"></button><figcaption>法律功能入口</figcaption></figure><figure><button class="gallery-open" type="button" aria-label="放大查看文书检查界面"><img src="assets/images/project/document-review.jpg" alt="法律文书智能检测界面" loading="lazy" width="1200" height="700"></button><figcaption>文书检查界面</figcaption></figure><figure><button class="gallery-open" type="button" aria-label="放大查看合同风险可视化"><img src="assets/images/project/risk-visualization-dashboard.jpg" alt="合同风险数据大屏界面" loading="lazy" width="1200" height="700"></button><figcaption>合同风险可视化</figcaption></figure></div></section>
         <div class="detail-stack"><h2>涉及的技术</h2><div class="project-stack"><span class="project-tag">Python</span><span class="project-tag">Flask</span><span class="project-tag">FastAPI</span><span class="project-tag">React</span><span class="project-tag">TypeScript</span><span class="project-tag">GraphRAG</span><span class="project-tag">Kafka</span><span class="project-tag">Spark Streaming</span><span class="project-tag">MySQL</span></div></div>
       </div></section>
-      <section class="project-outro"><div class="flux-container"><div class="project-outro-card"><div><h2>继续看看？</h2><p>仓库目前为私有，页面提供真实仓库入口；如果你对实现细节有兴趣，也可以发邮件交流。</p></div><div class="project-outro-actions"><a class="button button-primary" href="mailto:lzyryan5247@gmail.com?subject=LawDesign">邮件交流 →</a><a class="button button-secondary project-repo-link" href="https://github.com/LzyLsq/legalDesign" target="_blank" rel="noopener noreferrer">GitHub 仓库（私有）↗</a><a class="button button-secondary" href="data-pipeline.html">看数据项目 →</a><a class="button button-secondary" href="projects.html">返回项目总览 →</a></div></div></div></section>
+      <section class="project-outro"><div class="flux-container"><div class="project-outro-card"><div><h2>继续看看？</h2><p>仓库目前为私有，此页提供代码节选，仓库入口仅供参考（未获授权时无法访问）；如果你对实现细节有兴趣，也可以发邮件交流。</p></div><div class="project-outro-actions"><a class="button button-primary" href="mailto:lzyryan5247@gmail.com?subject=LawDesign">邮件交流 →</a><a class="button button-secondary project-repo-link" href="https://github.com/LzyLsq/legalDesign" target="_blank" rel="noopener noreferrer">GitHub 仓库（私有）↗</a><a class="button button-secondary" href="data-pipeline.html">看数据项目 →</a><a class="button button-secondary" href="projects.html">返回项目总览 →</a></div></div></div></section>
     </main>
     <footer class="site-footer">
         <div class="flux-container footer-inner">
@@ -146,5 +214,6 @@
 <script src="js/site-stats.js?v=20260923"></script>
 <script src="js/comic-mode.js?v=20260924"></script>
 <script src="js/project-gallery.js"></script>
+<script src="js/project-code.js"></script>
 </body>
 </html>

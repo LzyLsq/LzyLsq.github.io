@@ -1,0 +1,36 @@
+/* Source excerpts: a readable code folio within the two comic editions. */
+html[data-style="memphis"] .project-source { margin: clamp(48px, 7vw, 90px) 0 42px; }
+html[data-style="memphis"] .project-source .section-heading { margin-bottom: 26px; }
+html[data-style="memphis"] .source-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(18px, 2.5vw, 30px); }
+html[data-style="memphis"] .source-card {
+  min-width: 0; padding: clamp(18px, 2.5vw, 26px);
+  color: var(--heading); background: var(--m-surface);
+  border: 2px solid var(--panel-ink); box-shadow: 6px 6px 0 var(--panel-ink);
+  clip-path: polygon(0 0, calc(100% - 19px) 0, 100% 19px, 100% 100%, 0 100%);
+}
+html[data-style="memphis"] .source-card-head { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; align-items: center; font: 700 .76rem/1.4 "JetBrains Mono", monospace; }
+html[data-style="memphis"] .source-index { padding: 4px 8px; border: 2px solid currentColor; }
+html[data-style="memphis"] .source-card h3 { margin: 18px 0 8px; font-size: clamp(1.1rem, 1.5vw, 1.32rem); line-height: 1.35; color: var(--heading); }
+html[data-style="memphis"] .source-card > p { margin: 0 0 20px; color: var(--body); line-height: 1.75; overflow-wrap: anywhere; }
+html[data-style="memphis"] .source-window { max-width: 100%; min-width: 0; border: 2px solid var(--panel-ink); background: var(--source-paper); color: var(--source-ink); }
+html[data-style="memphis"] .source-window-bar { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 8px 10px; border-bottom: 2px solid var(--panel-ink); background: var(--source-bar); }
+html[data-style="memphis"] .source-file { min-width: 0; overflow-wrap: anywhere; font: 600 .74rem/1.55 "JetBrains Mono", monospace; }
+html[data-style="memphis"] .source-copy { flex: none; min-height: 36px; padding: 5px 10px; border: 2px solid var(--panel-ink); background: var(--source-paper); color: var(--source-ink); font: 700 .8rem/1.25 "Noto Sans SC", sans-serif; cursor: pointer; transition: transform .18s ease, background-color .18s ease; }
+html[data-style="memphis"] .source-copy:hover { transform: translate(-2px,-2px); background: var(--source-hover); }
+html[data-style="memphis"] .source-copy:focus-visible, html[data-style="memphis"] .source-window pre:focus-visible { outline: 3px solid var(--source-focus); outline-offset: 2px; }
+html[data-style="memphis"] .source-window pre { margin: 0; padding: 17px 16px 19px; max-width: 100%; overflow-x: auto; font: 500 .79rem/1.7 "JetBrains Mono", ui-monospace, monospace; tab-size: 2; scrollbar-color: var(--source-focus) transparent; }
+html[data-style="memphis"] .source-window code { font: inherit; white-space: pre; }
+html[data-style="memphis"] .source-footnote { margin: 24px 0 0; color: var(--body); font-size: .9rem; line-height: 1.7; }
+html[data-style="memphis"][data-ink="mono"] .project-source { --source-paper:#252525; --source-bar:#343434; --source-ink:#e3e0d9; --source-hover:#484848; --source-focus:#d2cfc7; }
+html[data-style="memphis"][data-ink="mono"] .source-card { border-color:#88847e; box-shadow:6px 6px 0 #161616; }
+html[data-style="memphis"][data-ink="mono"] .source-window, html[data-style="memphis"][data-ink="mono"] .source-window-bar, html[data-style="memphis"][data-ink="mono"] .source-copy { border-color:#96928c; }
+html[data-style="memphis"][data-ink="color"] .project-source { --source-paper:#202e4d; --source-bar:#334c6b; --source-ink:#f7f4ed; --source-hover:#3e6580; --source-focus:#e85f79; }
+html[data-style="memphis"][data-ink="color"] .source-card:nth-child(3n+1) { background:#dcf5f3; }
+html[data-style="memphis"][data-ink="color"] .source-card:nth-child(3n+2) { background:#ffe7e7; }
+html[data-style="memphis"][data-ink="color"] .source-card:nth-child(3n) { background:#fff0ce; }
+html[data-style="memphis"][data-ink="color"] .source-card:nth-child(3n+1) .source-index { background:#73d1d4; }
+html[data-style="memphis"][data-ink="color"] .source-card:nth-child(3n+2) .source-index { background:#f6a9b6; }
+html[data-style="memphis"][data-ink="color"] .source-card:nth-child(3n) .source-index { background:#f7d681; }
+@media(max-width:860px) { html[data-style="memphis"] .source-grid { grid-template-columns: 1fr; } }
+@media(max-width:500px) { html[data-style="memphis"] .source-window-bar { align-items: flex-start; flex-wrap: wrap; } html[data-style="memphis"] .source-window pre { padding: 12px; font-size: .74rem; } }
+@media(prefers-reduced-motion:reduce) { html[data-style="memphis"] .source-copy { transition:none; } }
