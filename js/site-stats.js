@@ -23,11 +23,12 @@
     '<div class="inventory-feedback" role="status" aria-live="polite"></div>' +
     '<div class="inventory-content"><p class="inventory-status">正在读取站点内容…</p></div>' +
     '<footer class="inventory-footnote">数据来自本站的项目页、文章页及公开学习记录；没有接入访客追踪，也不会估算阅读量。</footer>' +
-    '</section>';
+    '</section><div class="inventory-tooltip" aria-hidden="true" hidden></div>';
   document.body.appendChild(modal);
   var dialog = modal.querySelector('.inventory-dialog');
   var content = modal.querySelector('.inventory-content');
   var feedback = modal.querySelector('.inventory-feedback');
+  var tooltip = modal.querySelector('.inventory-tooltip');
   var lastFocus = null;
   var requestId = 0;
   var countFrame = 0;
@@ -58,19 +59,29 @@
       });
       // Only count a technology once per published project detail, even if a
       // page mentions it repeatedly in prose or code snippets.
-      var detailPaths = projectCards.map(function (card) {
+      var detailEntries = projectCards.map(function (card, index) {
         var link = card.querySelector('.project-title a[href]');
-        return link && link.getAttribute('href');
-      }).filter(function (path) { return path && /^[a-z0-9-]+\.html$/i.test(path); });
-      return Promise.all(detailPaths.map(getDoc)).then(function (details) {
+        return { card: card, route: projectRoutes[index], path: link && link.getAttribute('href') };
+      }).filter(function (entry) { return entry.path && /^[a-z0-9-]+\.html$/i.test(entry.path); });
+      return Promise.all(detailEntries.map(function (entry) { return getDoc(entry.path); })).then(function (details) {
         var technologies = new Map();
         details.forEach(function (detail) {
           var names = new Set(Array.from(detail.querySelectorAll('.detail-stack .project-stack .project-tag'))
             .map(function (node) { return node.textContent.trim(); }).filter(Boolean));
           names.forEach(function (name) { technologies.set(name, (technologies.get(name) || 0) + 1); });
         });
+        var materials = details.map(function (detail, index) {
+          var entry = detailEntries[index];
+          var source = entry.card.querySelector('.project-actions a[href^="https://github.com/"]');
+          return { title: entry.route.title, path: entry.path,
+            gallery: detail.querySelectorAll('.project-gallery-grid figure').length,
+            excerpts: detail.querySelectorAll('.project-source .source-card').length,
+            steps: detail.querySelectorAll('.detail-route .route-steps li').length,
+            modules: detail.querySelectorAll('.detail-grid .detail-panel:not(.detail-caveat)').length,
+            source: source ? source.href : '' };
+        });
         return { projects: projectCards.length, posts: postCards.length, learning: docs[2].entries.length,
-          routes: Array.from(new Set(routes)), projectRoutes: projectRoutes,
+          routes: Array.from(new Set(routes)), projectRoutes: projectRoutes, materials: materials,
           technologies: Array.from(technologies, function (entry) { return { label: entry[0], value: entry[1] }; }) };
       });
     });
@@ -104,7 +115,9 @@
     entries.forEach(function (entry, index) {
       var y = 24 + index * 63;
       var group = svgNode('g', { class: 'inventory-chart-row' });
-      group.append(svgNode('title', {}, (entry.title || entry.label) + '：' + entry.value));
+      group.setAttribute('data-chart-tip', (entry.title || entry.label) + '：' + entry.value + ' 个');
+      group.setAttribute('tabindex', '0');
+      group.setAttribute('aria-label', group.dataset.chartTip);
       group.append(svgNode('text', { x: 4, y: y + 22, class: 'inventory-chart-label' }, entry.label));
       group.append(svgNode('rect', { x: plotX, y: y, width: plotWidth, height: 31, class: 'inventory-chart-track' }));
       if (entry.value > 0) {
@@ -145,9 +158,10 @@
       var end = -Math.PI / 2 + offset * Math.PI * 2 / total;
       var slice = document.createElementNS(ns, 'path');
       slice.setAttribute('class', 'inventory-pie-slice inventory-pie-slice-' + (index % 15));
-      var tooltip = document.createElementNS(ns, 'title');
-      tooltip.textContent = item.label + '：' + item.value + ' 次（' + (item.value * 100 / total).toFixed(1) + '%）';
-      slice.append(tooltip);
+      slice.setAttribute('data-chart-tip', item.label + '：' + item.value + ' 次 · ' + (item.value * 100 / total).toFixed(1) + '%');
+      slice.setAttribute('tabindex', '0');
+      slice.setAttribute('role', 'img');
+      slice.setAttribute('aria-label', slice.dataset.chartTip);
       if (item.value === total) {
         slice.setAttribute('d', 'M 120 14 A 106 106 0 1 1 120 226 A 106 106 0 1 1 120 14 Z');
       } else {
@@ -167,6 +181,7 @@
     if (entries.length > visibleEntries) { list.classList.add('is-collapsed'); }
     entries.forEach(function (item, index) {
       var li = element('li', 'inventory-pie-key inventory-pie-key-' + (index % 15), '');
+      li.dataset.chartTip = item.label + '：' + item.value + ' 次 · ' + (total ? (item.value * 100 / total).toFixed(1) : '0.0') + '%';
       li.append(element('span', 'inventory-pie-label', item.label),
         element('strong', '', item.value + ' 次 · ' + (total ? (item.value * 100 / total).toFixed(1) : '0.0') + '%'));
       list.append(li);
@@ -189,11 +204,21 @@
     section.append(layout, element('p', 'inventory-chart-note', note));
     return section;
   }
-  function makeRadar(data) {
-    var section = element('section', 'inventory-section inventory-radar-section', '');
-    section.append(element('h3', '', '项目技术类型雷达图'));
-    var figure = element('div', 'inventory-radar-figure', '');
-    section.append(figure);
+  function makeMaterialsRadar(data) {
+    var section = element('section', 'inventory-section inventory-materials-section', '');
+    section.append(element('h3', '', '项目公开资料雷达图'));
+    if (!data.materials.length) {
+      section.append(element('p', 'inventory-muted', '还没有可展示的项目资料。'));
+      return section;
+    }
+    // Every axis is a count of published items, not a self-rated ability score.
+    var axes = [
+      { label: '界面截图', key: 'gallery', unit: '张' },
+      { label: '代码节选', key: 'excerpts', unit: '段' },
+      { label: '流程节点', key: 'steps', unit: '个' },
+      { label: '模块说明', key: 'modules', unit: '块' },
+      { label: '源码入口', key: 'source', unit: '个' }
+    ];
     var ns = 'http://www.w3.org/2000/svg';
     function svgNode(tag, attrs, text) {
       var node = document.createElementNS(ns, tag);
@@ -201,85 +226,62 @@
       if (text !== undefined) { node.textContent = text; }
       return node;
     }
-    function draw() {
-      // Explicit, inspectable grouping of tags that actually appear in the
-      // published project details. New tags are shown under “其他” until mapped.
-      var groups = [
-        { label: '编程语言', names: ['Python', 'Scala', 'TypeScript'] },
-        { label: '采集接入', names: ['Flume', 'Sqoop'] },
-        { label: '流处理', names: ['Kafka', 'Spark Streaming'] },
-        { label: '数据存储', names: ['Hive', 'HDFS', 'MySQL'] },
-        { label: '服务与检索', names: ['Flask', 'FastAPI', 'GraphRAG'] },
-        { label: '界面呈现', names: ['React', 'ECharts'] }
-      ];
-      var known = new Set(groups.flatMap(function (group) { return group.names; }));
-      var entries = groups.map(function (group) {
-        return { label: group.label, value: data.technologies.filter(function (item) {
-          return group.names.indexOf(item.label) !== -1;
-        }).reduce(function (sum, item) { return sum + item.value; }, 0) };
-      });
-      var other = data.technologies.filter(function (item) { return !known.has(item.label); });
-      if (other.length) {
-        entries.push({ label: '其他', value: other.reduce(function (sum, item) { return sum + item.value; }, 0) });
-      }
-      figure.classList.remove('is-drawn');
-      figure.replaceChildren();
-      if (!data.technologies.length) {
-        figure.append(element('p', 'inventory-muted', '项目详情页尚未列出技术标签。'));
-        return;
-      }
-      var max = Math.max(1, ...entries.map(function (entry) { return entry.value; }));
-      var centerX = 270, centerY = 178, radius = 110;
-      var chart = svgNode('svg', { class: 'inventory-radar', viewBox: '0 0 540 360', role: 'img',
-        'aria-label': '各技术类型在项目详情页列出的次数：' +
-          entries.map(function (entry) { return entry.label + ' ' + entry.value; }).join('，') });
-      function point(index, fraction) {
-        var angle = -Math.PI / 2 + index * Math.PI * 2 / entries.length;
-        return [centerX + radius * fraction * Math.cos(angle), centerY + radius * fraction * Math.sin(angle)];
-      }
-      function points(fraction) {
-        return entries.map(function (_, index) { return point(index, fraction).map(function (v) { return v.toFixed(1); }).join(','); }).join(' ');
-      }
-      [.25, .5, .75, 1].forEach(function (fraction) {
-        chart.append(svgNode('polygon', { points: points(fraction), class: 'inventory-radar-ring' }));
-      });
-      entries.forEach(function (entry, index) {
-        var edge = point(index, 1), label = point(index, 1.34);
-        chart.append(svgNode('line', { x1: centerX, y1: centerY, x2: edge[0], y2: edge[1], class: 'inventory-radar-axis' }));
-        var text = svgNode('text', { x: label[0], y: label[1] - 6, class: 'inventory-radar-label',
-          'text-anchor': label[0] < centerX - 20 ? 'end' : label[0] > centerX + 20 ? 'start' : 'middle' });
-        text.append(svgNode('tspan', { x: label[0] }, entry.label));
-        text.append(svgNode('tspan', { x: label[0], dy: 18, class: 'inventory-radar-value' }, String(entry.value)));
-        chart.append(text);
-      });
-      var plot = svgNode('g', { class: 'inventory-radar-data' });
-      plot.append(svgNode('polygon', { points: entries.map(function (entry, index) {
-        return point(index, entry.value / max).map(function (v) { return v.toFixed(1); }).join(',');
-      }).join(' '), class: 'inventory-radar-shape' }));
-      entries.forEach(function (entry, index) {
-        var pos = point(index, entry.value / max);
-        plot.append(svgNode('circle', { cx: pos[0], cy: pos[1], r: 4, class: 'inventory-radar-dot' }));
-      });
-      chart.append(plot);
-      var note = '按项目详情页“涉及的技术”标签归类；同一项目同一技术只计一次，刻度 0–' + max +
-        '。这是项目用到的技术类型分布，不是能力评分。' +
-        (other.length ? '其他：' + other.map(function (item) { return item.label; }).join('、') + '。' : '');
-      var values = element('ul', 'inventory-radar-values', '');
-      entries.forEach(function (entry) {
-        var item = document.createElement('li');
-        item.append(element('span', '', entry.label), element('strong', '', String(entry.value)));
-        values.append(item);
-      });
-      figure.append(chart, values, element('p', 'inventory-chart-note', note));
-      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-        figure.classList.add('is-drawn');
-      } else {
-        requestAnimationFrame(function () {
-          if (figure.isConnected) { figure.classList.add('is-drawn'); }
-        });
-      }
+    function value(project, axis) { return axis.key === 'source' ? Number(Boolean(project.source)) : project[axis.key]; }
+    var max = Math.max(1, ...data.materials.flatMap(function (project) {
+      return axes.map(function (axis) { return value(project, axis); });
+    }));
+    var chart = svgNode('svg', { class: 'inventory-material-radar', viewBox: '0 0 540 390', role: 'img',
+      'aria-label': '项目公开资料雷达图。' + data.materials.map(function (project) {
+        return project.title + '：' + axes.map(function (axis) { return axis.label + ' ' + value(project, axis) + axis.unit; }).join('，');
+      }).join('；') });
+    var centerX = 270, centerY = 189, radius = 112;
+    function point(index, fraction) {
+      var angle = -Math.PI / 2 + index * Math.PI * 2 / axes.length;
+      return [centerX + radius * fraction * Math.cos(angle), centerY + radius * fraction * Math.sin(angle)];
     }
-    draw();
+    function points(fraction) {
+      return axes.map(function (_, index) { return point(index, fraction).map(function (number) { return number.toFixed(1); }).join(','); }).join(' ');
+    }
+    [.25, .5, .75, 1].forEach(function (fraction) {
+      chart.append(svgNode('polygon', { points: points(fraction), class: 'inventory-material-ring' }));
+    });
+    axes.forEach(function (axis, index) {
+      var edge = point(index, 1), label = point(index, 1.32);
+      chart.append(svgNode('line', { x1: centerX, y1: centerY, x2: edge[0], y2: edge[1], class: 'inventory-material-axis' }));
+      chart.append(svgNode('text', { x: label[0], y: label[1] + 4, class: 'inventory-material-axis-label',
+        'text-anchor': label[0] < centerX - 20 ? 'end' : label[0] > centerX + 20 ? 'start' : 'middle' }, axis.label));
+    });
+    data.materials.forEach(function (project, index) {
+      var series = svgNode('g', { class: 'inventory-material-series inventory-material-series-' + (index % 2) });
+      var polygon = svgNode('polygon', { points: axes.map(function (axis, axisIndex) {
+        return point(axisIndex, value(project, axis) / max).map(function (number) { return number.toFixed(1); }).join(',');
+      }).join(' '), class: 'inventory-material-shape' });
+      polygon.setAttribute('data-chart-tip', project.title + '：' + axes.map(function (axis) {
+        return axis.label + ' ' + value(project, axis) + axis.unit;
+      }).join('，'));
+      series.append(polygon);
+      axes.forEach(function (axis, axisIndex) {
+        var coords = point(axisIndex, value(project, axis) / max);
+        var dot = svgNode('circle', { cx: coords[0] + (index ? 4 : -4), cy: coords[1], r: 6,
+          class: 'inventory-material-dot', tabindex: '0', role: 'img' });
+        dot.dataset.chartTip = project.title + ' · ' + axis.label + '：' + value(project, axis) + ' ' + axis.unit;
+        dot.setAttribute('aria-label', dot.dataset.chartTip);
+        series.append(dot);
+      });
+      chart.append(series);
+    });
+    var legend = element('div', 'inventory-material-legend', '');
+    data.materials.forEach(function (project, index) {
+      var link = document.createElement('a');
+      link.className = 'inventory-material-legend-item inventory-material-series-' + (index % 2);
+      link.href = project.path;
+      link.textContent = project.title + ' ↗';
+      link.dataset.chartTip = '打开 ' + project.title + ' 的项目记录';
+      legend.append(link);
+    });
+    section.append(chart, legend, element('p', 'inventory-chart-note',
+      '各轴为详情页实际列出的截图、代码节选、流程节点、模块说明和源码入口数量；共用 0–' + max +
+      ' 的统一径向刻度；各维单位见提示。悬停圆点可查看确切数字，不代表项目质量或个人能力。'));
     return section;
   }
   function animateCharts() {
@@ -318,7 +320,7 @@
     });
     content.append(counts);
     /* Graphs use only counts derived from the currently published pages. */
-    content.append(makeRadar(data));
+    content.append(makeMaterialsRadar(data));
     var technologyCounts = data.technologies.slice().sort(function (a, b) { return b.value - a.value; });
     content.append(makePie(technologyCounts, '项目技术标签占比',
       '列出每一种已公开的技术标签；每个项目对同一技术只计一次。扇区表示技术标签在项目详情页的出现次数占比，不代表代码量或技能熟练度。'));
@@ -352,6 +354,7 @@
     content.classList.add('is-drawn');
   }
   function close() {
+    tooltip.hidden = true;
     if (modal.hidden || !modal.classList.contains('is-open')) { return; }
     modal.classList.remove('is-open');
     modal.setAttribute('aria-hidden', 'true');
@@ -415,6 +418,41 @@
     dialog.focus({ preventScroll: true });
     loadInventory();
   }
+  function positionTooltip(x, y) {
+    var rect = tooltip.getBoundingClientRect();
+    tooltip.style.left = Math.max(10, Math.min(x + 14, innerWidth - rect.width - 10)) + 'px';
+    tooltip.style.top = Math.max(10, Math.min(y + 14, innerHeight - rect.height - 10)) + 'px';
+  }
+  function showTooltip(node, x, y) {
+    tooltip.textContent = node.dataset.chartTip;
+    tooltip.hidden = false;
+    positionTooltip(x, y);
+  }
+  content.addEventListener('pointerover', function (event) {
+    var node = event.target.closest('[data-chart-tip]');
+    if (node && event.pointerType !== 'touch') { showTooltip(node, event.clientX, event.clientY); }
+  });
+  content.addEventListener('pointermove', function (event) {
+    if (event.pointerType === 'touch') { return; }
+    var node = event.target.closest('[data-chart-tip]');
+    if (node) {
+      if (tooltip.hidden || tooltip.textContent !== node.dataset.chartTip) {
+        showTooltip(node, event.clientX, event.clientY);
+      } else { positionTooltip(event.clientX, event.clientY); }
+    } else { tooltip.hidden = true; }
+  });
+  content.addEventListener('pointerout', function (event) {
+    if (!event.relatedTarget || !event.relatedTarget.closest('[data-chart-tip]')) { tooltip.hidden = true; }
+  });
+  content.addEventListener('focusin', function (event) {
+    var node = event.target.closest('[data-chart-tip]');
+    if (node) {
+      var rect = node.getBoundingClientRect();
+      showTooltip(node, rect.left + rect.width / 2, rect.top + rect.height / 2);
+    }
+  });
+  content.addEventListener('focusout', function () { tooltip.hidden = true; });
+  content.addEventListener('scroll', function () { tooltip.hidden = true; }, { passive: true });
   trigger.addEventListener('click', open);
   modal.querySelectorAll('[data-close]').forEach(function (node) { node.addEventListener('click', close); });
   document.addEventListener('keydown', function (event) {

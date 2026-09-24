@@ -15,6 +15,20 @@
     })();
     </script>
     <script>
+    /* A real click may navigate without the browser's cross-document View
+       Transition. Mark only that destination for the same side entrance. */
+    var chapterKey = 'ryan-chapter-intent';
+    try {
+      var chapterIntent = JSON.parse(sessionStorage.getItem(chapterKey) || 'null');
+      sessionStorage.removeItem(chapterKey);
+      if (chapterIntent && chapterIntent.path === location.pathname + location.search &&
+          Date.now() - chapterIntent.at < 8000) {
+        document.documentElement.classList.add('chapter-fallback');
+      }
+    } catch (error) { /* Private storage restrictions: normal navigation. */ }
+    addEventListener('load', function () {
+      setTimeout(function () { document.documentElement.classList.remove('chapter-fallback'); }, 850);
+    });
     /* The outgoing page stays a complete frame; only the arriving page lifts
        speech and art panels out for their side entrance. */
     addEventListener('pageswap', function () {
@@ -23,6 +37,7 @@
     addEventListener('pagereveal', function (event) {
       if (!event.viewTransition) return;
       var root = document.documentElement;
+      root.classList.remove('chapter-fallback');
       root.classList.add('chapter-arriving');
       // Keep the next click until the current page-turn has landed. Remove
       // snapshot names afterwards so a later navigation starts from a clean page.
@@ -30,7 +45,15 @@
         root.classList.remove('chapter-arriving');
         var next = window.__chapterQueuedUrl;
         window.__chapterQueuedUrl = null;
-        if (next && next !== location.href) location.assign(next);
+        if (next && next !== location.href) {
+          try {
+            var queued = new URL(next);
+            sessionStorage.setItem(chapterKey, JSON.stringify({
+              path: queued.pathname + queued.search, at: Date.now()
+            }));
+          } catch (error) { /* Native navigation still works. */ }
+          location.assign(next);
+        }
       };
       event.viewTransition.finished.then(settle, settle);
     });
@@ -55,7 +78,7 @@
     <link rel="shortcut icon" href="assets/favicon.svg">
     <link rel="apple-touch-icon" href="assets/favicon.svg">
 
-    <link rel="stylesheet" href="css/site-core.css?v=20260924m">
+    <link rel="stylesheet" href="css/site-core.css?v=20260924n">
     <script>
     /* 孟菲斯:给 hero 轮播标题尾部一段套色块(仿 Demo 的 hl-pink/hl-yellow) */
     (function () {
@@ -246,8 +269,8 @@
 <button type="button" class="back-to-top" id="back-to-top" aria-label="回到顶部" data-no-swup>
     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 15l-6-6-6 6"/></svg>
 </button>
-<script src="js/theme.js?v=20260924c"></script>
-<script src="js/site-stats.js?v=20260924l"></script>
+<script src="js/theme.js?v=20260924d"></script>
+<script src="js/site-stats.js?v=20260924m"></script>
 <script src="js/comic-mode.js?v=20260924e"></script>
 </body>
 </html>

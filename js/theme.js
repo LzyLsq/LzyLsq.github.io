@@ -134,6 +134,9 @@
       }
       if (leaving) { event.preventDefault(); return; }
       leaving = true;
+      try { sessionStorage.setItem('ryan-chapter-intent', JSON.stringify({
+        path: url.pathname + url.search, at: Date.now()
+      })); } catch (error) { /* Storage can be disabled; native navigation still works. */ }
       // A blocked navigation (offline / canceled by another script) must not
       // leave the current document unresponsive indefinitely.
       setTimeout(function () { leaving = false; }, 4000);
