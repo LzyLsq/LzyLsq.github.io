@@ -8044,3 +8044,94 @@ html[data-style="memphis"][data-ink="mono"] .project-card-shot figcaption {
 @media (max-width: 560px) and (hover: none) {
   html[data-style="memphis"] .hero-arrow { opacity: 1; }
 }
+
+/* Interaction ink: a small, consistent response without repainting the page.
+   The dark edition keeps its controls monochrome; only its edition switch is colorful. */
+html[data-style="memphis"][data-ink="mono"] {
+  --feedback-accent: #dddcd5;
+  --feedback-edge: #e8e8e1;
+}
+html[data-style="memphis"][data-ink="color"] {
+  --feedback-accent: #d44065;
+  --feedback-edge: #203859;
+}
+html[data-style="memphis"][data-ink="mono"] :is(.destination-card,.project-overview-grid .project-card) {
+  --feedback-edge: #292927;
+  --feedback-accent: #484841;
+}
+html[data-style="memphis"] :is(
+  .destination-card,.project-overview-grid .project-card,.about-card,.detail-panel,
+  .site-search-result,.post-card,.featured-card,.side-card,.project-outro-card,
+  .detail-route,.article-toc-panel,.search-box,.source-card,.stats-card,
+  .project-gallery figure
+) { transition: transform .24s cubic-bezier(.2,.8,.2,1), box-shadow .24s ease, border-color .24s ease, background-color .24s ease; }
+html[data-style="memphis"] :is(.button,.sc-button,.project-switchboard a,.about-contact-item,.back-to-top,
+  .site-nav a,.site-nav button,.search-icon-btn,.source-copy,.gallery-dialog button,
+  .stats-modal-close,.inventory-close,.inventory-retry) {
+  transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease,
+    background-color .18s ease, color .18s ease, text-decoration-color .18s ease;
+}
+/* Cards containing actions are still articles, not giant clickable targets. */
+@media (hover: hover) and (pointer: fine) {
+  html[data-style="memphis"] :is(.destination-card,.project-overview-grid .project-card,
+    .site-search-result,.post-card,.featured-card):hover {
+    transform: translate(-3px,-3px) !important;
+    box-shadow: 11px 11px 0 var(--feedback-edge) !important;
+  }
+  html[data-style="memphis"] :is(.about-card,.detail-panel,.side-card,.project-outro-card,
+    .article-toc-panel):hover {
+    box-shadow: 5px 5px 0 var(--feedback-edge) !important;
+  }
+  html[data-style="memphis"] :is(.button,.sc-button,.project-actions .button):not(:disabled):hover {
+    transform: translate(-2px,-2px) !important;
+    box-shadow: 4px 4px 0 var(--feedback-edge) !important;
+  }
+  html[data-style="memphis"] :is(.site-nav a,.site-nav button,.article-toc a,
+    .tags-list a,.article-tags a,.site-footer a):hover {
+    text-decoration-color: currentColor;
+    text-underline-offset: .3em;
+  }
+  html[data-style="memphis"] .search-box:hover { border-color: var(--feedback-accent) !important; }
+  html[data-style="memphis"] :is(.source-card,.project-gallery figure,.stats-card):hover {
+    box-shadow: 7px 7px 0 var(--feedback-edge) !important;
+  }
+  html[data-style="memphis"] .hero-dot:not(.is-active):hover::after { transform: rotate(45deg) scale(1.25); background: var(--feedback-accent); }
+}
+html[data-style="memphis"] :is(.destination-card,.project-overview-grid .project-card,
+  .site-search-result,.post-card,.featured-card,.project-switchboard):focus-within {
+  box-shadow: 0 0 0 3px var(--feedback-accent), 7px 7px 0 var(--feedback-edge) !important;
+}
+html[data-style="memphis"] .search-box:focus-within {
+  border-color: var(--feedback-accent) !important;
+  box-shadow: 0 0 0 3px var(--feedback-accent) !important;
+}
+html[data-style="memphis"] :is(.button,.sc-button,.project-actions .button,
+  .project-switchboard a,.about-contact-item,.source-copy):not(:disabled):active {
+  transform: translate(1px,1px) !important;
+  box-shadow: 0 0 0 var(--feedback-edge) !important;
+}
+/* Focus is visible even on dark gutters and on the light paper inside panels. */
+html[data-style="memphis"] :is(a,button,input,textarea,select,summary,[tabindex]):focus-visible {
+  outline: 3px solid var(--feedback-accent) !important;
+  outline-offset: 3px;
+}
+html[data-style="memphis"][data-ink="mono"] :is(a,button,input,textarea,select,summary,[tabindex]):focus-visible {
+  outline-color: #dddcd5 !important;
+}
+html[data-style="memphis"][data-ink="mono"] :is(.destination-card,.project-overview-grid .project-card)
+  :is(a,button):focus-visible { outline-color: #292927 !important; }
+html[data-style="memphis"] :is(button,a)[aria-disabled="true"],
+html[data-style="memphis"] button:disabled { cursor: not-allowed; box-shadow: none !important; transform: none !important; }
+@media (prefers-reduced-motion: reduce) {
+  html[data-style="memphis"] :is(.destination-card,.project-overview-grid .project-card,.about-card,
+    .detail-panel,.site-search-result,.post-card,.featured-card,.side-card,.project-outro-card,
+    .article-toc-panel,.search-box,.source-card,.stats-card,.project-gallery figure,
+    .button,.sc-button,.project-switchboard a,.about-contact-item,
+    .back-to-top,.header-actions .header-action,.nav-toggle,.hero-arrow,.site-nav a,.site-nav button,
+    .search-icon-btn,.source-copy,.gallery-dialog button,
+    .stats-modal-close,.inventory-close,.inventory-retry) { transition: none !important; }
+  html[data-style="memphis"] :is(.destination-card,.project-overview-grid .project-card,
+    .site-search-result,.post-card,.featured-card,.button,.sc-button,.project-actions .button):hover,
+  html[data-style="memphis"] :is(.button,.sc-button,.project-actions .button,
+    .project-switchboard a,.about-contact-item,.source-copy):active { transform: none !important; }
+}
