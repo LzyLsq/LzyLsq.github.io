@@ -144,7 +144,10 @@
       offset += item.value;
       var end = -Math.PI / 2 + offset * Math.PI * 2 / total;
       var slice = document.createElementNS(ns, 'path');
-      slice.setAttribute('class', 'inventory-pie-slice inventory-pie-slice-' + index);
+      slice.setAttribute('class', 'inventory-pie-slice inventory-pie-slice-' + (index % 15));
+      var tooltip = document.createElementNS(ns, 'title');
+      tooltip.textContent = item.label + '：' + item.value + ' 次（' + (item.value * 100 / total).toFixed(1) + '%）';
+      slice.append(tooltip);
       if (item.value === total) {
         slice.setAttribute('d', 'M 120 14 A 106 106 0 1 1 120 226 A 106 106 0 1 1 120 14 Z');
       } else {
@@ -157,10 +160,10 @@
     });
     var figure = element('div', 'inventory-pie-figure', ''); figure.append(pie);
     var legend = element('div', 'inventory-pie-legend', '');
-    legend.append(element('p', 'inventory-pie-total', total + ' 次技术列出'));
+    legend.append(element('p', 'inventory-pie-total', entries.length + ' 项技术 · ' + total + ' 次列出'));
     var list = element('ul', 'inventory-pie-keys', '');
     entries.forEach(function (item, index) {
-      var li = element('li', 'inventory-pie-key inventory-pie-key-' + index, '');
+      var li = element('li', 'inventory-pie-key inventory-pie-key-' + (index % 15), '');
       li.append(element('span', 'inventory-pie-label', item.label),
         element('strong', '', item.value + ' 次 · ' + (total ? (item.value * 100 / total).toFixed(1) : '0.0') + '%'));
       list.append(li);
@@ -301,16 +304,8 @@
     /* Graphs use only counts derived from the currently published pages. */
     content.append(makeRadar(data));
     var technologyCounts = data.technologies.slice().sort(function (a, b) { return b.value - a.value; });
-    var common = technologyCounts.filter(function (entry) { return entry.value > 1; }).slice(0, 5);
-    if (!common.length) { common = technologyCounts.slice(0, 4); }
-    var remaining = technologyCounts.filter(function (entry) { return common.indexOf(entry) === -1; });
-    var technologySlices = common.slice();
-    if (remaining.length) {
-      technologySlices.push({ label: '其余 ' + remaining.length + ' 项', value: remaining.reduce(function (sum, entry) { return sum + entry.value; }, 0) });
-    }
-    content.append(makePie(technologySlices, '项目技术标签占比',
-      '每个项目对同一技术只计一次；扇区表示项目详情页所列技术标签的出现次数占比，不代表代码量或技能熟练度。' +
-      (remaining.length ? '其余项：' + remaining.map(function (entry) { return entry.label; }).join('、') + '。' : '')));
+    content.append(makePie(technologyCounts, '项目技术标签占比',
+      '列出每一种已公开的技术标签；每个项目对同一技术只计一次。扇区表示技术标签在项目详情页的出现次数占比，不代表代码量或技能熟练度。'));
     content.append(makeChart('公开内容数量', [
       { label: '项目记录', value: data.projects }, { label: '正式文章', value: data.posts }, { label: '学习记录', value: data.learning }
     ], '项目页与文章页的实际卡片数，以及已公开的学习记录数；没有发布则为 0。'));
