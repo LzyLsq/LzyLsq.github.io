@@ -11,6 +11,7 @@ iOS 开发的静态个人网站，使用 HTML、CSS 和原生 JavaScript，无�
 | `index.html` | 首页导览、轮播入口与写作空状态 |
 | `projects.html` | 两个练习项目的总览与独立详情入口 |
 | `search.html` | 搜索站内实际页面及已发布文章（不收录排版示例） |
+| `404.html` | GitHub Pages 自定义迷路页，可返回实际页面或站内搜索；保持真实的 404 状态码 |
 | `data-pipeline.html` | 订单数据分析与推荐练习的技术路径 |
 | `law-design.html` | LawDesign 练习的技术路径 |
 | `posts.html` | 文章列表／搜索；目前诚实显示空状态 |

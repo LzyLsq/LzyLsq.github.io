@@ -455,3 +455,15 @@ html[data-style="memphis"][data-ink="color"] ::selection { color: #142438; backg
   }
 }
 /* A private diary gets a clear entry without inventing public metrics. */
+/* A whole fingertip-sized hit area, not just a visual 36px arrow. */
+@media (max-width: 768px) {
+  html[data-style="memphis"] .hero-arrow {
+    min-width: 44px; min-height: 44px; transform: translateY(-50%);
+  }
+  html[data-style="memphis"] .hero-arrow:is(:hover,:focus-visible) {
+    transform: translate(-1px, calc(-50% - 1px));
+  }
+  html[data-style="memphis"] .hero-arrow:active {
+    transform: translate(2px, calc(-50% + 2px));
+  }
+}
