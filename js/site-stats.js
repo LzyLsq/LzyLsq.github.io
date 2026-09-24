@@ -211,20 +211,33 @@
     document.body.classList.remove('inventory-open');
     if (lastFocus && lastFocus.isConnected) { lastFocus.focus(); }
   }
+  function loadInventory() {
+    var thisRequest = ++requestId;
+    content.setAttribute('aria-busy', 'true');
+    content.replaceChildren(element('p', 'inventory-status', '正在读取站点内容…'));
+    dialog.focus(); // Retrying removes the clicked button; keep keyboard focus inside the dialog.
+    readInventory().then(function (data) {
+      if (modal.hidden || thisRequest !== requestId) { return; }
+      content.removeAttribute('aria-busy');
+      render(data);
+    }).catch(function () {
+      if (modal.hidden || thisRequest !== requestId) { return; }
+      content.removeAttribute('aria-busy');
+      var error = element('p', 'inventory-error', '暂时无法读取项目、文章或学习记录。请检查网络后重试。');
+      error.setAttribute('role', 'alert');
+      var retry = element('button', 'inventory-retry', '重新读取');
+      retry.type = 'button';
+      retry.addEventListener('click', loadInventory);
+      content.replaceChildren(error, retry);
+      retry.focus();
+    });
+  }
   function open() {
     lastFocus = document.activeElement;
     modal.hidden = false;
     document.body.classList.add('inventory-open');
     dialog.focus();
-    var thisRequest = ++requestId;
-    content.replaceChildren(element('p', 'inventory-status', '正在读取站点内容…'));
-    readInventory().then(function (data) {
-      if (!modal.hidden && thisRequest === requestId) { render(data); }
-    }).catch(function () {
-      if (!modal.hidden && thisRequest === requestId) {
-        content.replaceChildren(element('p', 'inventory-error', '暂时无法读取项目、文章或学习记录。请检查网络后重试。'));
-      }
-    });
+    loadInventory();
   }
   trigger.addEventListener('click', open);
   modal.querySelectorAll('[data-close]').forEach(function (node) { node.addEventListener('click', close); });

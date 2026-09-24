@@ -318,6 +318,9 @@ body.inventory-open { overflow: hidden; }
 .inventory-route-chip { border: 1px solid var(--border); border-radius: 7px; background: var(--notebook-tint); color: var(--body); padding: 5px 9px; font: 600 12px/1.4 var(--font); }
 .inventory-muted,.inventory-error,.inventory-status { color: var(--muted); font-size: 13px; line-height: 1.7; }
 .inventory-error { color: var(--notebook-accent); }
+.inventory-retry { margin-top: 12px; padding: 8px 14px; border: 1px solid var(--border); border-radius: 8px; background: var(--notebook-tint); color: var(--heading); font: 700 13px/1.4 var(--font); cursor: pointer; }
+.inventory-retry:hover { border-color: var(--m-purple); background: var(--m-surface-2); }
+.inventory-retry:focus-visible { outline: 3px solid var(--m-purple); outline-offset: 3px; }
 .inventory-footnote { border-top: 1px solid var(--border); padding: 14px 28px 18px; color: var(--muted); font-size: 12px; line-height: 1.6; }
 @media (max-width: 820px) { html[data-style="memphis"] .stats-trigger { width: 36px; padding: 0; justify-content: center; } html[data-style="memphis"] .stats-trigger span { display: none; } }
 @media (max-width: 560px) { .inventory-heading,.inventory-content { padding: 20px; } .inventory-footnote { padding: 14px 20px; } }
