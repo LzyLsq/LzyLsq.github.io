@@ -3,18 +3,29 @@
 (function () {
   'use strict';
   var root = document.documentElement;
-  // Entrance motion belongs to navigation, not to the persistent page state.
-  // Clear it after the longest panel animation so hover transforms keep working.
+  // Native cross-document transitions snapshot this DOM. Do not animate the
+  // live panels before that snapshot: it would capture them mid-slide and
+  // slide the resulting image a second time. Fall back only when needed.
+  function clearArrival() {
+    root.classList.remove('page-arriving', 'page-view-transitioning', 'page-fallback-arriving');
+  }
   if (root.classList.contains('page-arriving')) {
-    // Cross-document View Transitions animate the snapshots; do not also
-    // animate the real DOM beneath them (it doubles the fade into darkness).
-    window.addEventListener('pagereveal', function (event) {
-      if (event.viewTransition) { root.classList.add('page-view-transitioning'); }
-    });
-    window.setTimeout(function () { root.classList.remove('page-arriving', 'page-view-transitioning'); }, 1600);
+    // Start the cleanup clock after reveal, not while styles/images are loading.
+    // Otherwise a slow destination can lose its entrance animation entirely.
+    if ('onpagereveal' in window) {
+      window.addEventListener('pagereveal', function (event) {
+        root.classList.add(event.viewTransition ? 'page-view-transitioning' : 'page-fallback-arriving');
+        window.setTimeout(clearArrival, 1600);
+      }, { once: true });
+    } else {
+      root.classList.add('page-fallback-arriving');
+      window.addEventListener('pageshow', function () {
+        window.setTimeout(clearArrival, 1600);
+      }, { once: true });
+    }
   }
   window.addEventListener('pageshow', function (event) {
-    if (event.persisted) { root.classList.remove('page-arriving', 'page-view-transitioning'); }
+    if (event.persisted) { clearArrival(); }
   });
   var toggle = document.querySelector('[data-ink-toggle]');
   if (!toggle) { return; }
