@@ -7729,20 +7729,31 @@ html[data-style="memphis"] .sidebar .side-card:not(:hover) { transform: none; }
    viewport clip-path forced full-page repaints on image-heavy details and
    occasionally exposed the transition canvas as a bright/dark flash. */
 @view-transition { navigation: auto; }
+@keyframes chapter-paper-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes chapter-header-out {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+@keyframes chapter-header-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
 @keyframes chapter-arrive-left {
-  from { transform: translate3d(-38px,0,0) rotate(-.35deg); }
-  to { transform: none; }
+  from { opacity: 0; transform: translate3d(-72px,0,0) rotate(-.35deg); }
+  to { opacity: 1; transform: none; }
 }
 @keyframes chapter-arrive-right {
-  from { transform: translate3d(38px,0,0) rotate(.35deg); }
-  to { transform: none; }
+  from { opacity: 0; transform: translate3d(72px,0,0) rotate(.35deg); }
+  to { opacity: 1; transform: none; }
 }
 html[data-style="memphis"]::view-transition { background: #343432; }
 html[data-style="memphis"][data-ink="color"]::view-transition { background: #fff8e9; }
-/* The UA's default plus-lighter blending and root crossfade briefly add
-   both full-page snapshots together. Keep the destination paper opaque and
-   above the outgoing frame; only the named panels should move. Do not apply
-   this rule to the same-document ink ripple. */
+/* Keep the old chapter visible until the new paper gradually covers it.
+   Normal blending avoids a light flash where two snapshots overlap. These
+   cross-document rules never apply to the same-document ink ripple. */
 html:not(.ink-morphing)::view-transition-group(root) { animation: none; }
 html:not(.ink-expanding):not(.ink-retracting)::view-transition-image-pair(root),
 html:not(.ink-morphing)::view-transition-image-pair(chapter-shell) { isolation: auto; }
@@ -7752,6 +7763,15 @@ html:not(.ink-morphing)::view-transition-old(chapter-shell),
 html:not(.ink-morphing)::view-transition-new(chapter-shell) {
   animation: none;
   mix-blend-mode: normal;
+}
+html:not(.ink-expanding):not(.ink-retracting)::view-transition-new(root) {
+  animation: chapter-paper-in .96s cubic-bezier(.37,0,.28,1) both;
+}
+html:not(.ink-morphing)::view-transition-old(chapter-shell) {
+  animation: chapter-header-out .84s ease-in-out both;
+}
+html:not(.ink-morphing)::view-transition-new(chapter-shell) {
+  animation: chapter-header-in .84s ease-in-out both;
 }
 /* The header is the one genuinely shared panel. Keep it in the same place
    rather than replacing its active link in a single frame. All other panels
@@ -7777,16 +7797,16 @@ html:not(.ink-morphing)::view-transition-group(chapter-route),
 html:not(.ink-morphing)::view-transition-group(chapter-detail-route),
 html:not(.ink-morphing)::view-transition-group(chapter-detail-grid) { animation: none; }
 html:not(.ink-expanding):not(.ink-retracting)::view-transition-new(chapter-copy) {
-  animation: chapter-arrive-left .52s cubic-bezier(.22,.78,.25,1) both;
+  animation: chapter-arrive-left 1.06s cubic-bezier(.42,.04,.27,1) both;
 }
 html:not(.ink-expanding):not(.ink-retracting)::view-transition-new(chapter-art),
 html:not(.ink-expanding):not(.ink-retracting)::view-transition-new(chapter-detail-route) {
-  animation: chapter-arrive-right .54s cubic-bezier(.22,.78,.25,1) both;
+  animation: chapter-arrive-right 1.10s cubic-bezier(.42,.04,.27,1) both;
 }
 html:not(.ink-expanding):not(.ink-retracting)::view-transition-new(chapter-side),
 html:not(.ink-expanding):not(.ink-retracting)::view-transition-new(chapter-route),
 html:not(.ink-expanding):not(.ink-retracting)::view-transition-new(chapter-detail-grid) {
-  animation: chapter-arrive-right .54s cubic-bezier(.22,.78,.25,1) both;
+  animation: chapter-arrive-right 1.10s cubic-bezier(.42,.04,.27,1) both;
 }
 /* Same-document fallback for a click when the browser skipped cross-document
    View Transitions. Theme paper stays painted; only panels translate. */
@@ -7795,24 +7815,24 @@ html.chapter-fallback[data-style="memphis"]:not(.ink-morphing) :is(
   .stream-section:has(.posts-layout) .section-heading,.learning-hero-copy,
   .search-intro .flux-container,.project-detail-intro .flux-container,
   .article-head .flux-container,.learning-editor-section .section-heading
-) { animation: chapter-arrive-left .62s cubic-bezier(.22,.78,.25,1) both; }
+) { animation: chapter-arrive-left 1.06s cubic-bezier(.42,.04,.27,1) both; }
 html.chapter-fallback[data-style="memphis"]:not(.ink-morphing) :is(
   .hero-slide.is-active .hero-side-visual,.projects-action-panel,.about-intro,
   .learning-hero-art,.posts-layout,.article-head-media,.learning-editor-grid,
   .about-stack,.article-aside,.project-switchboard,.article-main,
   .search-results-section .flux-container,.project-detail-section .detail-route,
   .project-detail-section .detail-grid
-) { animation: chapter-arrive-right .64s cubic-bezier(.22,.78,.25,1) both; }
+) { animation: chapter-arrive-right 1.10s cubic-bezier(.42,.04,.27,1) both; }
 /* If cross-document transitions are unsupported, let the browser navigate
    normally. No pre-emptive opacity class and no second animation after paint. */
 @media (max-width:700px) {
   @keyframes chapter-arrive-left {
-    from { transform:translate3d(-22px,0,0); }
-    to { transform:none; }
+    from { opacity:0; transform:translate3d(-36px,0,0); }
+    to { opacity:1; transform:none; }
   }
   @keyframes chapter-arrive-right {
-    from { transform:translate3d(22px,0,0); }
-    to { transform:none; }
+    from { opacity:0; transform:translate3d(36px,0,0); }
+    to { opacity:1; transform:none; }
   }
 }
 @media (prefers-reduced-motion:reduce) {
