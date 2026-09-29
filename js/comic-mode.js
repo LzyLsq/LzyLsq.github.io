@@ -62,7 +62,7 @@
   });
   window.addEventListener('storage', function (event) {
     if (event.key === 'ryan-comic-ink') {
-      root.dataset.ink = event.newValue === 'color' ? 'color' : 'mono';
+      root.dataset.ink = event.newValue === 'mono' ? 'mono' : 'color';
       root.dataset.theme = root.dataset.ink === 'color' ? 'light' : 'dark';
       var bar = document.querySelector('meta[name="theme-color"]');
       if (bar) { bar.content = root.dataset.ink === 'color' ? '#fff8e9' : '#343432'; }
