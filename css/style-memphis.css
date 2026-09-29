@@ -57,7 +57,6 @@ html[data-style="memphis"] {
 }
 
 /* ---------- 2. 全局底：波点纸 + 关闭粒子 ---------- */
-html[data-style="memphis"] #particle-bg { display: none !important; }
 
 html[data-style="memphis"] body {
   font-family: var(--font);

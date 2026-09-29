@@ -144,8 +144,8 @@
     on(window, 'pageshow', function () { leaving = false; });
   }
 
-  /* 常用章节在浏览器空闲时预取；悬停/聚焦时预取其他站内章节。
-     保留真实链接和浏览器历史，不在点击时隐藏页面，也不拦截导航。 */
+  /* 空闲时仅预取相邻章节，其他站内章节在悬停/聚焦/触摸时预取。
+     避免每次进入页面都抢先请求整站，但保留用户意图预取和真实跨页转场。 */
   function initChapterPrefetch() {
     var connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
     if (connection && (connection.saveData || /^(slow-)?2g$/.test(connection.effectiveType || ''))) { return; }
@@ -180,14 +180,21 @@
 
     function warmMainChapters() {
       if (document.visibilityState !== 'visible') { return; }
-      ['index.html', 'projects.html', 'posts.html', 'learning.html', 'about.html'].forEach(warm);
-      // Deep pages need the same warm hand-off as the main navigation.
-      var here = current.pathname.split('/').pop();
-      if (here === 'projects.html') ['data-pipeline.html', 'law-design.html'].forEach(warm);
-      if (here === 'posts.html') warm('post.html');
-      if (here === 'learning.html') warm('learning-editor.html');
-      if (here === 'data-pipeline.html') warm('law-design.html');
-      if (here === 'law-design.html') warm('data-pipeline.html');
+      var here = current.pathname.split('/').pop() || 'index.html';
+      var nearby = {
+        'index.html': ['projects.html', 'about.html'],
+        'projects.html': ['index.html', 'data-pipeline.html'],
+        'posts.html': ['projects.html', 'learning.html'],
+        'learning.html': ['posts.html', 'about.html'],
+        'about.html': ['learning.html', 'index.html'],
+        'data-pipeline.html': ['projects.html', 'law-design.html'],
+        'law-design.html': ['projects.html', 'data-pipeline.html'],
+        'post.html': ['posts.html'],
+        'learning-editor.html': ['learning.html'],
+        'search.html': ['posts.html'],
+        '404.html': ['index.html']
+      };
+      (nearby[here] || []).forEach(warm);
     }
     if ('requestIdleCallback' in window) {
       requestIdleCallback(warmMainChapters, { timeout: 2500 });
@@ -521,41 +528,56 @@
     document.body.appendChild(progress);
     var progressBar = $('span', progress);
 
-    var updateProgress = function () {
-      var headerHeight = header ? header.getBoundingClientRect().height : 0;
-      progress.style.setProperty('--reading-progress-top', Math.round(headerHeight) + 'px');
-      var rect = content.getBoundingClientRect();
-      var start = window.pageYOffset + rect.top - headerHeight;
-      var end = start + content.offsetHeight - window.innerHeight + headerHeight;
-      var ratio = end > start ? (window.pageYOffset - start) / (end - start) : 1;
-      ratio = Math.max(0, Math.min(1, ratio));
-      progressBar.style.transform = 'scaleX(' + ratio + ')';
-      progress.setAttribute('aria-valuenow', String(Math.round(ratio * 100)));
-    };
-    updateProgress();
-    on(window, 'scroll', updateProgress, { passive: true });
-    on(window, 'resize', updateProgress);
-
     var tocLinks = $$('.article-toc a[href^="#"]');
     var tocItems = tocLinks.map(function (link) {
       return { link: link, target: document.getElementById((link.getAttribute('href') || '').slice(1)) };
     }).filter(function (item) { return !!item.target; });
-    var updateToc = function () {
-      if (!tocItems.length) { return; }
+    var frame = 0;
+    var lastPercent = -1;
+    var lastActive = null;
+    var lastHeaderHeight = -1;
+    function updateReading() {
+      frame = 0;
+      // Read all geometry before writing any style or class to avoid a forced
+      // layout between the progress indicator and the table of contents.
       var headerHeight = header ? header.getBoundingClientRect().height : 0;
+      var rect = content.getBoundingClientRect();
+      var scrollY = window.pageYOffset;
+      var contentHeight = content.offsetHeight;
       var active = tocItems[0];
       tocItems.forEach(function (item) {
         if (item.target.getBoundingClientRect().top <= headerHeight + 120) { active = item; }
       });
-      tocItems.forEach(function (item) {
-        var selected = item === active;
-        item.link.classList.toggle('is-active', selected);
-        if (selected) { item.link.setAttribute('aria-current', 'location'); }
-        else { item.link.removeAttribute('aria-current'); }
-      });
-    };
-    updateToc();
-    on(window, 'scroll', updateToc, { passive: true });
+      var start = scrollY + rect.top - headerHeight;
+      var end = start + contentHeight - window.innerHeight + headerHeight;
+      var ratio = end > start ? (scrollY - start) / (end - start) : 1;
+      ratio = Math.max(0, Math.min(1, ratio));
+      var percent = Math.round(ratio * 100);
+      if (headerHeight !== lastHeaderHeight) {
+        progress.style.setProperty('--reading-progress-top', Math.round(headerHeight) + 'px');
+        lastHeaderHeight = headerHeight;
+      }
+      progressBar.style.transform = 'scaleX(' + ratio + ')';
+      if (percent !== lastPercent) {
+        progress.setAttribute('aria-valuenow', String(percent));
+        lastPercent = percent;
+      }
+      if (active && active !== lastActive) {
+        tocItems.forEach(function (item) {
+          var selected = item === active;
+          item.link.classList.toggle('is-active', selected);
+          if (selected) { item.link.setAttribute('aria-current', 'location'); }
+          else { item.link.removeAttribute('aria-current'); }
+        });
+        lastActive = active;
+      }
+    }
+    function scheduleReading() {
+      if (!frame) { frame = requestAnimationFrame(updateReading); }
+    }
+    updateReading();
+    on(window, 'scroll', scheduleReading, { passive: true });
+    on(window, 'resize', scheduleReading);
 
     $$('pre', content).forEach(function (pre) {
       if ($('.code-bar', pre)) { return; }

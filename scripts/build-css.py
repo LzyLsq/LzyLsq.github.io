@@ -9,8 +9,8 @@ import sys
 ROOT = Path(__file__).resolve().parents[1]
 SOURCES = (
     "fonts", "style", "layout", "pages", "article", "footer", "responsive",
-    "particle", "theme-light", "shortcodes", "github", "lock", "music",
-    "sticky", "style-memphis", "style-notebook", "style-comic",
+    "particle", "theme-light", "shortcodes",
+    "style-memphis", "style-notebook", "style-comic",
     "style-comic-upgrade", "manga-editions",
 )
 OUTPUT = ROOT / "css/site-core.css"
